@@ -1,0 +1,41 @@
+.pixel {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.user_code {
+    transition: width .5s ease-in-out;
+    width: clamp(100px, 70vw, 400px);
+}
+
+.pixel-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    --far: calc(100% - 2em);
+
+    clip-path: polygon(
+        0em 2em, 
+        2em 2em, 
+        2em 0%, 
+        var(--far) 0%, 
+        var(--far) 2em, 
+        100% 2em, 
+        100%  var(--far), 
+        var(--far)  var(--far), 
+        var(--far) 100%, 
+        2em 100%, 
+        2em  var(--far), 
+        0%  var(--far)
+    );
+
+    background-color: #000000;
+    color: #fff;
+    transition: padding .5s ease-out;
+    padding: clamp(10px, 10vmin, 200px);
+    pointer-events: all;
+}
+
+.pixel-button-large{
+    padding: clamp(10px, 15vmin, 200px);
+}

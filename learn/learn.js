@@ -9,3 +9,14 @@ pfp.button.addEventListener('click', () =>{
 
 // somehow users need to be able to run the code they make without malicous software breaking servers. (this website uses firebase)
 
+const canvas = document.getElementById('learn-screen');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
