@@ -8,15 +8,15 @@ export class Collapsable{
     }
     hide(){
         this.hidden = true;
-        for (elem in this.elements){
-            elem.classList.add("hide")
-        }
+        this.elements.forEach(elem => {
+            elem.classList.add("hide");
+        });
     }
     show(){
         this.hidden = false;
-        for (elem in this.elements){
-            elem.classList.add("show")
-        }
+        this.elements.forEach(elem => {
+            elem.classList.remove("hide");
+        });
     }
     toggle(){
         this.hidden ? this.show() : this.hide()

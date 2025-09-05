@@ -4,7 +4,7 @@
 
 console.log("project");
 
-htmlGen = 
+let htmlGen = 
 `
 <body>
     <template>
@@ -13,10 +13,12 @@ htmlGen =
 </body>
 `
 
-function display(htmlString=htmlGen, document=document){
-    document.createElement(htmlString)
+export class Display{
+    constructor(document, htmlString=htmlGen){
+        console.log("display");
+        document.createElement("<p>general text</p>");
+    }
 }
 
-display()
 
 //learn

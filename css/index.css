@@ -1,1 +1,14 @@
 
+#welcome {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	color: white;
+	font-size: 20px;
+	text-shadow:
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+}
+
