@@ -5,17 +5,18 @@
 console.log("project");
 
 let htmlGen = `
-<button id="dropdown-button">
-    <img src="components/art/yellow - toggle arrow up.png" alt="">
-</button>
+<p>hello hello hello</p>
 `;
 
 export class Display{
-    constructor(document, htmlString=htmlGen){
+    constructor(document, parent, htmlString=htmlGen){
         console.log('yea display');
         let template = document.createElement('template');
         template.innerHTML = htmlString.trim();
+        this.content = template.content;
+        parent.appendChild(this.content);
 
+        console.log(this.content.firstElementChild);
         return template.content.firstElementChild;
     }
 
