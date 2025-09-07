@@ -5,7 +5,11 @@
 console.log("project");
 
 let htmlGen = `
-<p>hello hello hello</p>
+    <div id="learn-project-">
+        <p>title!</p>
+        <textarea name="user-code" id="user-code-" placeholder="code here..."></textarea>
+        <button name="run-button">run</button>
+    </div>
 `;
 
 export class Display{
