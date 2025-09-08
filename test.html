@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/pyodide@0.28.2/pyodide.min.js"></script>
+    <script src="./scripts/pyrun.js" type="module"></script>
     <title>Document</title>
 </head>
 <body>
     
-    <div id="learn-project-">
+    <div name="learn-project" id="learn-project-">
         <p>title!</p>
         <textarea name="user-code" id="user-code-" placeholder="code here..."></textarea>
         <button name="run-button">run</button>
+        <p name="output" id="output-">output</p>
     </div>
 
 
