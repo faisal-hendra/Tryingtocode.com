@@ -3,24 +3,28 @@
 //this is for running user code, user side
 window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/';
 
-console.log("run");
-
 let pyodide = null;
 async function initPyodide(){
     pyodide = await loadPyodide();
+    pyRun('print("hello world")');
 }
 initPyodide();
 
 export function runUserCode(code){
-    console.log("run")
     return pyRun(code);
 } 
 
 async function pyRun(code){
     try{
-        let result = await pyodide.runPythonAsync(code);
-        console.log(result);
-        return result;
+        console.log('run');
+
+        let output = '';
+        pyodide.setStdout({batched: (str) => output += str});
+
+        await pyodide.runPythonAsync(code);
+
+        console.log('ran with result: ' + output);
+        return output;
     }
     catch (error){
         console.log("Error running py code: ", error);

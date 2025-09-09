@@ -33,13 +33,43 @@
     pointer-events: all;
 }
 
-.center .pixel-button{
-    align-content: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .pixel-button-large{
     padding: clamp(10px, 15vmin, 200px);
 }
+
+.project {
+}
+
+#user-code {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none; /* remove resize handle */
+
+    height: 50vh;
+    width: 80vw;
+
+    font-size: large;
+    line-height: 30px;
+
+    color: white;
+    background-color: transparent;
+
+    /* Simulated lined paper background */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #333333,            /* line color */
+        #333333 1px,        /* line thickness */
+        #1a1a1a 1px,        /* start of background color */
+        #1a1a1a 30px        /* match the line height exactly */
+    );
+
+    background-attachment: local;
+}
+

@@ -4,8 +4,6 @@ import { runUserCode } from "./pyrun.js";
 
 //general use
 
-console.log("project");
-
 let htmlGen = `
     <div id="learn-project" class="project center">
         <p>title!</p>
@@ -26,15 +24,24 @@ export class Display{
 
         parent.appendChild(this.content);
         this.run_button = this.projectEl.querySelector('[name="run-button"]');
+        this.output = this.projectEl.querySelector('[name="output"]');
 
         console.log(this.content.firstElementChild);
         //return template.content.firstElementChild;
+
+        this.code = this.projectEl.querySelector('[name="user-code"]');
+        this.run_button.addEventListener('click', async () => {
+            let value = this.code.value;
+            console.log(value);
+            await this.displayUserCode(value);
+        });
     }
 
     async displayUserCode(code){
         let result = await runUserCode(code);
         //this.content.querySelector('[name="output"]').textContent = result;
         console.log(result);
+        this.output.textContent = result;
         return result;
         
     }
