@@ -43,18 +43,15 @@
 }
 
 #user-code {
-    font-family: 'Courier New', Courier, monospace;
     border: none;
     outline: none;
     resize: none;
     height: 100%; /* match parent height */
-    width: 80vw;
+    width: 50vw;
     overflow-y: auto;
     box-sizing: border-box;
     font-size: large;
     line-height: 30px;
-    color: white;
-    background: transparent;
 
     /* Simulated lined paper background */
     background-image: repeating-linear-gradient(
@@ -69,7 +66,7 @@
 }
 
 .line-numbers {
-    font-family: 'Courier New', Courier, monospace;
+    
     text-align: center;
     justify-self: unset;
     user-select: none;
@@ -78,9 +75,8 @@
     height: 100%;
     overflow: hidden; /* hides scrollbar */
     box-sizing: border-box;
-    background: #222;
-    color: #888;
-
+    
+ 
     background-image: repeating-linear-gradient(
         to bottom,
         #333333,
@@ -88,6 +84,7 @@
         #1a1a1a 1px,
         #1a1a1a 30px
     );
+    background-attachment: local;
 }
 
 #learn-project{
