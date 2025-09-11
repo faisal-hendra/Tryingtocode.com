@@ -47,7 +47,7 @@
     outline: none;
     resize: none;
     height: 100%; /* match parent height */
-    width: 50vw;
+    width: 35vw;
     overflow-y: auto;
     box-sizing: border-box;
     font-size: large;
@@ -75,6 +75,7 @@
     height: 100%;
     overflow: hidden; /* hides scrollbar */
     box-sizing: border-box;
+    padding-bottom: 5px;
     
  
     background-image: repeating-linear-gradient(
@@ -105,4 +106,49 @@
     align-items: flex-start;
     background: transparent;
     height: 50vh; /* match textarea height */
+}
+
+
+.output {
+    background-color: #1a1a1a;
+    color: #fff;
+    user-select: none;
+    height: 50vh;
+    width: 50vw;
+    padding-left: 10px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    white-space: pre-wrap; /* Preserve whitespace and wrap as needed */
+    word-wrap: break-word; /* Break long words to fit within the container */
+        background-image: repeating-linear-gradient(
+        to bottom,
+        #333333,            /* line color */
+        #333333 1px,        /* line thickness */
+        #1a1a1a 1px,        /* start of background color */
+        #1a1a1a 30px        /* match the line height exactly */
+        
+    );
+    overflow-y: auto;
+    box-sizing: border-box;
+    font-size: large;
+    line-height: 30px;
+    resize: none;
+    border: none;
+
+    
+
+    background-attachment: local;
+    
+
+}
+
+.input-output {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+.output:active, .output:focus {
+    outline: none;
+    border: none;
 }

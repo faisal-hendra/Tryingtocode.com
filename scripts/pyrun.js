@@ -7,6 +7,9 @@ let pyodide = null;
 async function initPyodide(){
     pyodide = await loadPyodide();
     pyRun('print("hello world")');
+    
+    // register it so Python sees it as "input"
+    pyodide.globals.set("input", jsInput);
 }
 initPyodide();
 
@@ -34,3 +37,10 @@ async function pyRun(code){
     return false;
 }
 
+//  this code is for input()
+//    \/ TEMPORARY FIX \/
+
+// define a custom input bridge
+function jsInput(promptText) {
+    return window.prompt(promptText); // simple case
+}

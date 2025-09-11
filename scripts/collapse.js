@@ -1,7 +1,6 @@
 //An element that is collapsable from a toggle button, and toggles elements
 export class Collapsable{
     constructor(parent, elements, images=[]){
-        //this.parent.src = 'components/art/yellow - toggle arrow up.png';
         this.hidden = true;
         this.parent = parent;
         this.elements = elements;
