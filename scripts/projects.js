@@ -1,6 +1,7 @@
 //for use as a rect for editable projects
 
 import { runUserCode } from "./pyrun.js";
+import { CodeArea } from "./codearea.js";
 
 //general use
 
@@ -20,6 +21,7 @@ let htmlGen =
             </div>
             <p class="project-title">Hello World Project:</p>
         </div>
+        <div class=""></div>
         <div class="input-output">
             <div class="code-editor">
                 <div class="line-numbers"></div>
@@ -43,9 +45,8 @@ export class Display {
         //this.projectJSON = projectJSON;
         //this.setAttributes();
 
-        this.code = this.textarea;
         this.run_button.addEventListener('click', async () => {
-            let value = this.code.value;
+            let value = this.textarea.value;
             await this.displayUserCode(value);
         });
 
@@ -73,6 +74,7 @@ export class Display {
 
         this.content = template.content;
         this.projectEl = template.content.firstElementChild;
+        this.codeArea = new CodeArea();
         parent.appendChild(this.content);
     }
 
