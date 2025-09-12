@@ -3,12 +3,32 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	justify-content: center;
+	flex-wrap: inherit;
+	text-align: center;
 	color: white;
 	font-size: 20px;
 	text-shadow:
-    -2px -2px 0 #000,  
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000;
+		-4px -4px 0 #000,  
+		 4px -4px 0 #000,
+		-4px  4px 0 #000,
+		 4px  4px 0 #000 ;
+
+}
+
+#welcome h1 {
+	text-shadow:
+		-4px -4px 0 #000,  
+		 4px -4px 0 #000,
+		-4px  4px 0 #000,
+		 4px  4px 0 #000 ;
+}
+
+#welcome p {
+	text-shadow: 
+		-2px -2px 0 #000,  
+		 2px -2px 0 #000,
+		-2px  2px 0 #000,
+		 2px  2px 0 #000 ;
 }
 
