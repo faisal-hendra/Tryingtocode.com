@@ -3,7 +3,6 @@
 }
 
 .user_code {
-    transition: all .5s ease-in-out;
     width: clamp(100px, 70vw, 400px);
 }
 
@@ -22,7 +21,6 @@
 }
 
 .project:hover {
-    transition: all 1s ease-in-out;
     box-shadow: 0 4px 16px #0006;
 }
 
@@ -57,7 +55,6 @@
     padding: clamp(10px, 15vmin, 200px);
 } */
 #user-code {
-    transition: all 1s ease-in-out;
     border: none;
     outline: none;
     resize: none;
@@ -81,7 +78,6 @@
 }
 
 .line-numbers {
-    transition: all 1s ease-in-out;
     text-align: center;
     justify-self: unset;
     user-select: none;
@@ -104,13 +100,11 @@
 }
 
 #learn-project {
-    transition: all 1s ease-in-out;
     display: flex;
     flex-direction: column;
 }
 
 .run-code {
-    transition: all 1s ease-in-out;
     width: fit-content;
     font-size: large;
     margin-top: 10px;
@@ -119,7 +113,6 @@
 }
 
 .code-editor {
-    transition: all 1s ease-in-out;
     display: flex;
     align-items: flex-start;
     background: transparent;
@@ -154,7 +147,6 @@
     resize: none;
     border: none;
 
-    transition: all 1s ease-in-out;
 
     background-attachment: local;
     
@@ -166,7 +158,6 @@
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    transition: all 1s ease-in-out;
 }
 .output:active, .output:focus {
     outline: none;
@@ -199,8 +190,8 @@
 
 .project {
     transition:
-        max-height 0.6s cubic-bezier(.4,2,.3,1),
-        max-width 0.6s cubic-bezier(.4,2,.3,1),
+        max-height 0.6s cubic-bezier(.4,1,.3,1),
+        max-width 0.6s cubic-bezier(.4,1.5,.3,1),
         opacity 0.3s ease,
         box-shadow 0.3s ease;
     max-height: 600px;
@@ -208,6 +199,17 @@
     opacity: 1;
     box-shadow: 0 4px 16px #0006;
     overflow: hidden;
+}
+
+.gone {
+    transition: max-height 0 ease-in-out !important;
+    max-width: 0 !important;
+    max-height: 0 !important;  /* shrink height */
+    padding: 0 !important;     /* remove padding */
+    margin: 0 !important;      /* remove margins */
+    opacity: 0 !important;     /* fade out */
+    pointer-events: none;      /* disable interactions */
+    overflow: hidden;          /* hide content */
 }
 
 .project.minimized {

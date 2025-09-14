@@ -35,10 +35,18 @@ export class Display {
         this.createElements(document, parent, htmlString);
         this.findElements();
 
+        this.min = true;
+
         this.closeButton.addEventListener('click', () => {
+            
             console.log('close button clicked');
             this.toggleElements();
         });
+        this.projectEl.addEventListener('click', async () => {
+            console.log('main clicked');
+            this.toggleElements();
+        })
+
         this.rewindButton.addEventListener('click', () => {
             console.log('rewind button clicked');
             this.codeArea.indentText(5, this.projectJSON.code);
@@ -51,19 +59,14 @@ export class Display {
             await this.displayUserCode(value);
         });
 
-        
-
         this.textareaSize = textareaSize;
         this.codeArea.indentText(textareaSize);
 
-        this.lastLineCount = 1; // Track previous line count
+        this.lastLineCount = 1;
 
         this.setupTextarea();
         this.setAttributes();
 
-        this.getInput().then(inp = () => {
-            console.log(inp);
-        });
     }
 
     createElements(document, parent, htmlString){
@@ -90,7 +93,7 @@ export class Display {
     }    
 
     setAttributes(){
-        console.log(this.projectJSON.code);
+        //console.log(this.projectJSON.code);
         let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.indentText(5 + addAmm, this.projectJSON.code);
         this.title.innerHTML = this.projectJSON.title;
@@ -98,24 +101,31 @@ export class Display {
     }
 
     async getInput(){
+        this.old = this.output.value;
+        this.output.disabled = false;
         return new Promise (resolve => {
             const handler = (e) => {
             console.log(e.key);
             if (e.key === "Enter") {
-                e.preventDefault(); // stops newline from appearing
-                this.textarea.removeEventListener("keydown", handler);
+                e.preventDefault();
+                this.output.removeEventListener("keydown", handler);
                 this.output.disabled = true; 
-                resolve(this.textarea.value);
+                resolve(this.output.value.slice(this.old.length));
+            }
+            if(e.key === "Backspace"){
+                e.preventDefault();
             }
         }
-        this.textarea.addEventListener("keydown", handler);
-        this.output.disabled = false;
+        this.output.addEventListener("keydown", handler);
         });
     }
 
     toggleElements(value=false){ // false = stop showing this project
+        console.log(this.min);
         this.toggleClass("minimized", this.projectEl);
         this.toggleClass("notminimized", this.projectEl);
+        window.currentDisplay = this;
+        this.projectEl.dispatchEvent(new Event('toggleElements'));
     }
 
     toggleClass(className, element){
@@ -127,6 +137,7 @@ export class Display {
     }
 
     async displayUserCode(code){
+        this.output.value = "";
         let result = await runUserCode(code);
         this.output.value = result;
         return result;
@@ -140,6 +151,7 @@ export class Display {
         };
 
         this.textarea.addEventListener('input', updateLineNumbers);
+
         this.textarea.addEventListener('scroll', () => {
             this.lineNumbers.scrollTop = this.textarea.scrollTop;
         });

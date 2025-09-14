@@ -8,7 +8,9 @@ async function initPyodide(){
     pyodide = await loadPyodide();
     
     // register it so Python sees it as "input"
-    pyodide.globals.set("input", jsInput);
+    pyodide.globals.set("input", getInput);
+
+
 }
 initPyodide();
 
@@ -20,26 +22,51 @@ async function pyRun(code){
     try{
         console.log('run');
 
+        //I need to await jsInput if an input is required before continuing:
+
+        const asyncCode = addAwaitToInput(code);
+
+
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
-        await pyodide.runPythonAsync(code);
+        await pyodide.runPythonAsync(`
+import asyncio
+async def main():
+    ${asyncCode.replace(/\n/g, '\n    ')}
+asyncio.run(main())
+        `);
 
         console.log('ran with result: ' + output);
         return output;
+
     }
     catch (error){
         console.log("Error running py code: ", error);
         return error;
     }
-    console.log("the impossible just happened!!!? (uhm talk to a developer rn this is weird)")
+    console.log("the impossible just happened!!!? (uhm talk to a developer RN this is weird)")
     return false;
 }
 
-//  this code is for input()
-//    \/ TEMPORARY FIX \/
+function getInput(promptText = ""){
 
-// define a custom input bridge
-function jsInput(promptText) {
-    return window.prompt(promptText); // simple case
+
+
+    if(window.currentDisplay.output) {
+        window.currentDisplay.output.value += promptText;
+        window.currentDisplay.output.value += "\n";
+    }
+
+    console.log(window.currentDisplay);
+    console.log("gonna get input");
+
+    return window.currentDisplay.getInput();
 }
+
+function addAwaitToInput(code) {
+    // This will replace all standalone input( with await input(
+    // Note: naive, will break if input is inside strings or comments
+    return code.replace(/\binput\s*\(/g, 'await input(');
+}
+

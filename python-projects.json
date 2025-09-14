@@ -26,23 +26,23 @@
             "instruction": ""
         },
         "6": {
-            "title": "",
-            "code": "",
+            "title": "Taking inputs",
+            "code": "#try typing whatever you want >\n\ni = input('type here: ')\nprint(i)",
             "instruction": ""
         },
         "7": {
-            "title": "",
-            "code": "",
+            "title": "Adding inputs",
+            "code": "i = input('i: ')\nprint('')\nj = input('j: ')\n\nprint(i + j)",
             "instruction": ""
         },
         "8": {
-            "title": "",
-            "code": "",
+            "title": "DIY",
+            "code": "#try getting player input, and do something with it:",
             "instruction": ""
         },
         "9": {
-            "title": "",
-            "code": "",
+            "title": "First Function",
+            "code": "#we can make our own functions!\n#print() and input() are functions\n\ndef my_function():\n print('function!')\n\n#to call this function, say \nmy_function()",
             "instruction": ""
         },
         "10": {
