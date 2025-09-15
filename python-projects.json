@@ -46,18 +46,18 @@
             "instruction": ""
         },
         "10": {
-            "title": "",
-            "code": "",
+            "title": "Functions 2",
+            "code": "#make a function:\n",
             "instruction": ""
         },
         "11": {
-            "title": "",
-            "code": "",
+            "title": "Loops",
+            "code": "for i in range(10):\n print(i)\n\n#make the loop go to 100",
             "instruction": ""
         },
         "12": {
-            "title": "",
-            "code": "",
+            "title": "Parameters",
+            "code": "def my_function(parameter):\n print(parameter)\n\nmy_function('hello world')",
             "instruction": ""
         },
         "13": {
