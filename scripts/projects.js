@@ -29,7 +29,7 @@ let htmlGen =
 
 
 export class Display {
-    constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 5, toggled=false) { // default to 5 lines
+    constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1, toggled=false) { // default to 5 lines
         this.toggled = toggled;
 
         this.createElements(document, parent, htmlString);
@@ -37,19 +37,21 @@ export class Display {
 
         this.min = true;
 
-        this.closeButton.addEventListener('click', () => {
-            
+        this.closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             console.log('close button clicked');
             this.toggleElements();
         });
         this.projectEl.addEventListener('click', async () => {
+            if (this.projectEl.classList.contains('minimized')) {
             console.log('main clicked');
             this.toggleElements();
+            }
         })
 
         this.rewindButton.addEventListener('click', () => {
             console.log('rewind button clicked');
-            this.codeArea.indentText(5, this.projectJSON.code);
+            this.codeArea.indentText(1, this.projectJSON.code);
         });
 
         this.projectJSON = projectJSON;
@@ -64,7 +66,6 @@ export class Display {
 
         this.lastLineCount = 1;
 
-        this.setupTextarea();
         this.setAttributes();
 
     }
@@ -144,6 +145,8 @@ export class Display {
     }
     
     setupTextarea(){
+        console.log(this.textarea.value);
+
         const updateLineNumbers = () => {
             const lines = this.textarea.value.split('\n').length;
             this.lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
@@ -155,6 +158,8 @@ export class Display {
         this.textarea.addEventListener('scroll', () => {
             this.lineNumbers.scrollTop = this.textarea.scrollTop;
         });
+        
+
         updateLineNumbers();
     }
 }

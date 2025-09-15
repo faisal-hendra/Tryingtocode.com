@@ -29,6 +29,7 @@ function loadProject(this_project){
         display.projectEl.addEventListener('toggleElements', () => {
             toggleAboveProjects(this_project);
         })
+        display.setupTextarea();
     });
 }
 
