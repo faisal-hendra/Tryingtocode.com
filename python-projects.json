@@ -12,102 +12,107 @@
         },
         "3": {
             "title": "Adding",
-            "code": "print(1 + 1)\n\nx = 1\ny = 1\n\nprint(x + y)",
+            "code": "x = 1\ny = 1\n\nprint(x + y)",
             "instruction": ""
         },
         "4": {
-            "title": "Variable words",
-            "code": "#this is a comment (it shows us stuff but the computer ignores comments)\n\n#this variable is a word:\nx = 'hello'\n#try printing x:\nprint()",
-            "instruction": "make x = bye and then print it"
+            "title": "Comments",
+            "code": "#this is a comment\n\n#comments don't actually do anything\n#they are just for developers\n\n",
+            "instruction": ""
         },
         "5": {
+            "title": "Variable words",
+            "code": "#this variable is a word:\nx = 'hello'\n#try printing x:\nprint()",
+            "instruction": "make x = bye and then print it"
+        },
+        "6": {
             "title": "Variable words adding",
             "code": "#you can add words together\n\nx = 'apple and '\ny = 'orange '\n\nprint(x + y)\n\n#what if you try adding x + x + y + y?",
             "instruction": ""
         },
-        "6": {
+        "7": {
             "title": "Taking inputs",
             "code": "#try typing whatever you want >\n\ni = input('type here: ')\nprint(i)",
             "instruction": ""
         },
-        "7": {
+        "8": {
             "title": "Adding inputs",
             "code": "i = input('i: ')\nprint('')\nj = input('j: ')\n\nprint(i + j)",
             "instruction": ""
         },
-        "8": {
+        "9": {
             "title": "DIY",
-            "code": "#try getting player input, and do something with it:",
+            "code": "#try getting player input, and do something with it:\n\ni = input)\n\nprint)",
             "instruction": ""
         },
-        "9": {
+        "10": {
             "title": "First Function",
             "code": "#we can make our own functions!\n#print() and input() are functions\n\ndef my_function():\n print('function!')\n\n#to call this function, say \nmy_function()",
             "instruction": ""
         },
-        "10": {
+        "11": {
             "title": "Functions 2",
             "code": "#make a function:\n",
             "instruction": ""
         },
-        "11": {
+        "12": {
             "title": "Loops",
             "code": "for i in range(10):\n print(i)\n\n#make the loop go to 100",
             "instruction": ""
         },
-        "12": {
+        "13": {
             "title": "Parameters",
             "code": "def my_function(parameter):\n print(parameter)\n\nmy_function('hello world')",
             "instruction": ""
         },
-        "13": {
-            "title": "",
-            "code": "",
-            "instruction": ""
-        },
         "14": {
-            "title": "",
-            "code": "",
+            "title": "print(f)",
+            "code": "#print(f'') lets you print variables:\n\nx = 0\nprint(f'x is {x}')\n\n#make sure to use {}",
             "instruction": ""
         },
         "15": {
-            "title": "",
-            "code": "",
+            "title": "Functions 3",
+            "code": "def my_print(number):\n print(f'the number is {number}')\n\nfor i in range(2, 11):\n my_print(i)",
             "instruction": ""
         },
         "16": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "17": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "18": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "19": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "20": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "21": {
             "title": "",
-            "code": "",
+            "code": "a",
             "instruction": ""
         },
         "22": {
             "title": "",
-            "code": "",
+            "code": "a",
+            "instruction": ""
+        },
+        "23": {
+            "title": "",
+            "code": "a",
             "instruction": ""
         }
     }

@@ -34,6 +34,7 @@ async function pyRun(code){
 import asyncio
 async def main():
     ${asyncCode.replace(/\n/g, '\n    ')}
+    pass
 asyncio.run(main())
         `);
 
@@ -43,7 +44,41 @@ asyncio.run(main())
     }
     catch (error){
         console.log("Error running py code: ", error);
-        return error;
+
+        if (error instanceof Error && typeof error.message === "string") {
+            const lines = error.message.split('\n');
+            const relevantLines = [];
+
+            // Go through lines from bottom up
+            for (let i = lines.length - 1; i >= 0; i--) {
+                let line = lines[i].trim();
+                if (!line) continue;
+
+                // Skip internal Pyodide files except <exec>
+                if (line.startsWith('File "/lib/python')) continue;
+
+                // Adjust line numbers for wrapper
+                const match = line.match(/line (\d+)/);
+                if (match) {
+                    const originalLine = parseInt(match[1], 10);
+                    const adjustedLine = originalLine - 3; // wrapper lines
+                    line = line.replace(`line ${originalLine}`, `line ${adjustedLine}`);
+                }
+
+                // Replace <exec> with <python>
+                line = line.replace(/<exec>/g, "<python>");
+
+                relevantLines.unshift(line);
+
+                // Stop after capturing the main exception line and one line of context
+                if (/^\w+Error:/.test(line) || /^\w+Warning:/.test(line)) break;
+            }
+
+            relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
+            return relevantLines.join('\n');
+}
+
+return "Unknown error - Look around in your code for clues";
     }
     console.log("the impossible just happened!!!? (uhm talk to a developer RN this is weird)")
     return false;
