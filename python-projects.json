@@ -13,37 +13,37 @@
         "3": {
             "title": "Adding",
             "code": "x = 1\ny = 1\n\nprint(x + y)",
-            "instruction": ""
+            "instruction": "make it equal 10"
         },
         "4": {
             "title": "Comments",
             "code": "#this is a comment\n\n#comments don't actually do anything\n#they are just for developers\n\n",
-            "instruction": ""
+            "instruction": "try running this to see what happens"
         },
         "5": {
             "title": "Variable words",
-            "code": "#this variable is a word:\nx = 'hello'\n#try printing x:\nprint()",
+            "code": "#this variable is a word:\nx = 'hello'\n\n#try printing x:\nprint()",
             "instruction": "make x = bye and then print it"
         },
         "6": {
             "title": "Variable words adding",
-            "code": "#you can add words together\n\nx = 'apple and '\ny = 'orange '\n\nprint(x + y)\n\n#what if you try adding x + x + y + y?",
-            "instruction": ""
+            "code": "#you can add words together\n\nx = 'apple and '\ny = 'orange '\n\nprint(x + y)",
+            "instruction": "what if you try adding x + x + y + y?"
         },
         "7": {
             "title": "Taking inputs",
             "code": "#try typing whatever you want >\n\ni = input('type here: ')\nprint(i)",
-            "instruction": ""
+            "instruction": "input() takes the input of whatever you type in the output box"
         },
         "8": {
             "title": "Adding inputs",
             "code": "i = input('i: ')\nprint('')\nj = input('j: ')\n\nprint(i + j)",
-            "instruction": ""
+            "instruction": "you can add inputs together:"
         },
         "9": {
             "title": "DIY",
             "code": "#try getting player input, and do something with it:\n\ni = input)\n\nprint)",
-            "instruction": ""
+            "instruction": "if you need an idea, maybe ask the user if they like cookies"
         },
         "10": {
             "title": "First Function",
@@ -76,9 +76,9 @@
             "instruction": ""
         },
         "16": {
-            "title": "",
-            "code": "a",
-            "instruction": ""
+            "title": "If this: then that",
+            "code": "#= sets a value\n#== checks if it is a value\n\nx='banana'\n\nif x == 'apple':\n print('if statement worked!')",
+            "instruction": "make this check if x is 'banana'"
         },
         "17": {
             "title": "",

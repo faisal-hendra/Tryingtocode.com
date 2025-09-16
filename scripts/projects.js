@@ -18,6 +18,7 @@ let htmlGen =
             <button class="project-restart-button">
                 <img id="reset-img" src="./components/art/rewind icon - stroke.png">
             </button>
+            <p class="instructions">instructions<!p>
             </div>
             <p class="project-title">Hello World Project:</p>
         </div>
