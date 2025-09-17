@@ -18,10 +18,10 @@ let htmlGen =
             <button class="project-restart-button">
                 <img id="reset-img" src="./components/art/rewind icon - stroke.png">
             </button>
-            <p class="instructions">instructions<!p>
             </div>
-            <p class="project-title">Hello World Project:</p>
+            <p class="project-title" id="project-title">Hello World Project:</p>
         </div>
+        <p class="instructions">instructions<!p>
         <div class="player-input-parent"></div>
         <button name="run-button" class="run-code">run</button>
     </div>
@@ -148,7 +148,6 @@ export class Display {
     }
     
     setupTextarea(){
-        console.log(this.textarea.value);
 
         const updateLineNumbers = () => {
             const lines = this.textarea.value.split('\n').length;

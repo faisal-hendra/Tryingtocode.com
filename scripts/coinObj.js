@@ -30,13 +30,15 @@ export class CoinObj{
     }
 
     RenderImage(ctx, sprite, frames=1, index=0){
+        let image = new Image();
+        image.src = sprite;
 
         let spriteWidth = sprite.width / frames;
         let spriteHeight = sprite.height;
         let frameOffset = spriteWidth * index;
         ctx.drawImage(
-            sprite,
-            frameOffset, 0,   // source x, y
+            image,
+            frameOffset, 0,                  // source x, y
             spriteWidth, spriteHeight,       // source width, height
             this.x_pos, this.y_pos,          // destination x, y
             spriteWidth, spriteHeight        // destination width, height

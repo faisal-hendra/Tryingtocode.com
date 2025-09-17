@@ -1,71 +1,24 @@
-.pixel {
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.user_code {
-    width: clamp(100px, 70vw, 400px);
-}
-
-
 #project-parent {
     display: flex;
     align-self: start;
     gap: 16px;
     padding: 16px;
     background: #222;
-    border-radius: 8px;
     box-sizing: border-box;
     margin: 16px;
     flex-wrap: wrap;
     justify-content: left;
 }
 
-.project:hover {
-    box-shadow: 0 4px 16px #0006;
-}
-
-/* .pixel-button {
-    position: absolute;
-    --far: calc(100% - 2em);
-
-    clip-path: polygon(
-        0em 2em, 
-        2em 2em, 
-        2em 0%, 
-        var(--far) 0%, 
-        var(--far) 2em, 
-        100% 2em, 
-        100%  var(--far), 
-        var(--far)  var(--far), 
-        var(--far) 100%, 
-        2em 100%, 
-        2em  var(--far), 
-        0%  var(--far)
-    );
-
-    background-color: #000000;
-    color: #fff;
-    transition: padding .5s ease-out;
-    padding: clamp(10px, 10vmin, 200px);
-    pointer-events: all;
-} */
-
-
-/* .pixel-button-large{
-    padding: clamp(10px, 15vmin, 200px);
-} */
 #user-code {
     border: none;
     outline: none;
     resize: none;
-    height: 100%; /* match parent height */
+    height: 100%;
     width: 50vw;
-    overflow-y: auto;
-    box-sizing: border-box;
     font-size: large;
     line-height: 30px;
 
-    /* Simulated lined paper background */
     background-image: repeating-linear-gradient(
         to bottom,
         #333333,            /* line color */
@@ -191,7 +144,7 @@
 .project {
     transition:
         max-height 0.5s cubic-bezier(.4,1,.3,1),
-        max-width 0.5s cubic-bezier(.4,1.5,.3,1),
+        max-width 0.5s cubic-bezier(.4,1,.3,1),
         opacity 0.3s ease,
         box-shadow 0.3s ease;
     max-height: 700px;
@@ -216,13 +169,16 @@
 }
 
 .project.minimized {
+    align-self: center;
     max-height: 200px;
-    max-width: 300px;
+    max-width: 16.6vw;
+    max-width: 32%;
+    flex: auto;
     opacity: 0.7;
     box-shadow: 0 2px 8px #0004;
 }
 
-.project.minimized p, .project.minimized textarea{
+.project.minimized p:not(#project-title), .project.minimized textarea, .project.minimized .input-output{
     visibility: hidden;
 }
 
