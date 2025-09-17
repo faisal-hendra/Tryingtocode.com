@@ -1,7 +1,9 @@
 //for use in learn.html
 import { Display } from "./projects.js";
+import { getCoin } from "./coin.js";
 
 let loadProjects = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
+
 
 let toggleAboveProjects = (index) => {
     console.log(projects.slice(0, index - 1));
@@ -17,7 +19,6 @@ const loadProjectJSON = async (index) => {
     return json["projects"][index];
 };
 
-//let projectJSON = loadProjectJSON();
 let parent = document.getElementById('project-parent');
 let projects = [];
 let display;

@@ -1,4 +1,4 @@
-class coinObj{
+export class CoinObj{
     constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0){
         this.go_to = go_to;
 
@@ -15,7 +15,7 @@ class coinObj{
         this.y_pos += this.y_vel * speed; 
     }
 
-    gravitate(go_to=null, drag=1){
+    gravitate(go_to, drag=1){
         const gt_rect = go_to.getBoundingClientRect();
         const absolute_gt_x = gt_rect.left + window.scrollX;
         const absolute_gt_y = gt_rect.top + window.scrollY;
@@ -27,6 +27,21 @@ class coinObj{
 
         this.x_vel += normalized_vector[0] / drag;
         this.y_vel += normalized_vector[1] / drag;
+    }
+
+    RenderImage(ctx, sprite, frames=1, index=0){
+
+        let spriteWidth = sprite.width / frames;
+        let spriteHeight = sprite.height;
+        let frameOffset = spriteWidth * index;
+        ctx.drawImage(
+            sprite,
+            frameOffset, 0,   // source x, y
+            spriteWidth, spriteHeight,       // source width, height
+            this.x_pos, this.y_pos,          // destination x, y
+            spriteWidth, spriteHeight        // destination width, height
+        );
+        
     }
 }
 
@@ -50,4 +65,4 @@ function normalizeNumbers(num1, num2) {
     const normalized_num2 = (num2 - min_value) / (max_value - min_value);
   
     return [normalized_num1, normalized_num2];
-  }
+}

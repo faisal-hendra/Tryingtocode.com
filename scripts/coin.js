@@ -1,8 +1,24 @@
-userCoins = 0;
+import { CoinObj } from "./coinObj";
 
-function getCoin(amm, counter=null, string = ''){
-    userCoins += amm;
+
+let userCoins = localStorage.getItem("coin") || "0";
+localStorage.setItem("coin", userCoins);
+
+let counter = document.getElementById("coin-counter");
+
+console.log(userCoins);
+getCoin(1, counter);
+
+export function getCoin(amm, counter, startString = ''){
+    new CoinObj(counter);
+
+    changeNumber(amm);
+}
+
+function changeNumber(amm){
+    let currentCoins = String(parseInt(localStorage.getItem("coin")) + amm);
+    localStorage.setItem("coin", currentCoins);
     if (counter != null){
-        counter.value = string + string(amm);
+        counter.value = startString + currentCoins;
     }
 }

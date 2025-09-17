@@ -100,7 +100,7 @@ export class Display {
         let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.indentText(5 + addAmm, this.projectJSON.code);
         this.title.innerHTML = this.projectJSON.title;
-        this.instructions.innerHTML = 'instructions: ' + this.projectJSON.instruction;
+        this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
         this.output.disabled = true;
     }
 
@@ -165,6 +165,7 @@ export class Display {
 
         updateLineNumbers();
     }
+
 }
 
 
