@@ -59,7 +59,13 @@ export class Display {
 
         this.run_button.addEventListener('click', async () => {
             let value = this.textarea.value;
-            await this.displayUserCode(value);
+            let userCode = await this.displayUserCode(value);
+            if(userCode == this.projectJSON.returns){
+                console.log("WOW");
+            }
+            else{
+                console.log("user code was " + userCode + " || But the code should've been " + this.projectJSON.returns);
+            }
         });
 
         this.textareaSize = textareaSize;

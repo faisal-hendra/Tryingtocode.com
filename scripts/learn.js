@@ -12,7 +12,6 @@ let toggleAboveProjects = (index) => {
     })
 }
 
-
 const loadProjectJSON = async (index) => {
     const response = await fetch('../python-projects.json');
     const json = await response.json();
@@ -31,11 +30,10 @@ function loadProject(this_project){
             toggleAboveProjects(this_project);
         })
         display.setupTextarea();
+        let title = document.getElementById("main-content")
     });
 }
 
 loadProjects.forEach(index => {
     loadProject(index);
 });
-
-

@@ -1,3 +1,5 @@
+
+
 export class CoinObj{
     constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0){
         this.go_to = go_to;
@@ -6,19 +8,23 @@ export class CoinObj{
         this.y_pos = y_pos;
         this.x_vel = x_vel;
         this.y_vel = y_vel;
+
+        this.dead = 0;
     }
 
     tick(speed=1){
-        this.gravitate(this.go_to);
+        this.gravitate(this.go_to, 10);
 
         this.x_pos += this.x_vel * speed;
         this.y_pos += this.y_vel * speed; 
     }
 
-    gravitate(go_to, drag=1){
-        const gt_rect = go_to.getBoundingClientRect();
-        const absolute_gt_x = gt_rect.left + window.scrollX;
-        const absolute_gt_y = gt_rect.top + window.scrollY;
+    gravitate(go_to, drag=1, min_dist=5){
+        //const gt_rect = go_to.getBoundingClientRect();
+        //const absolute_gt_x = getAbsolutePosition(go_to).x;
+        //const absolute_gt_y = getAbsolutePosition(go_to).y;
+        const absolute_gt_x = 0;
+        const absolute_gt_y = 0;
 
         let x_dist = absolute_gt_x - this.x_pos;
         let y_dist = absolute_gt_y - this.y_pos;
@@ -27,24 +33,51 @@ export class CoinObj{
 
         this.x_vel += normalized_vector[0] / drag;
         this.y_vel += normalized_vector[1] / drag;
+        this.x_vel /= (1 + (drag / 2000))
+        this.y_vel /= (1 + (drag / 2000))
+
+        //console.log(distance(this.x_pos, this.y_pos, absolute_gt_x, absolute_gt_y));
+
+        if(distance(this.x_pos, this.y_pos, absolute_gt_x, absolute_gt_y) > min_dist && this.dead !== 0){
+            this.DestroyGive(1);
+        } else if(this.dead === 0 && distance(this.x_pos, this.y_pos, absolute_gt_x, absolute_gt_y) < min_dist){
+            this.dead = false;
+        }
+    }
+
+    DestroyGive(amm){
+        this.dead = true;
     }
 
     RenderImage(ctx, sprite, frames=1, index=0){
         let image = new Image();
         image.src = sprite;
 
-        let spriteWidth = sprite.width / frames;
-        let spriteHeight = sprite.height;
+        let spriteWidth = image.width / frames;
+        let spriteHeight = image.height;
         let frameOffset = spriteWidth * index;
+        let sizeMultiplier = .25;
         ctx.drawImage(
             image,
             frameOffset, 0,                  // source x, y
             spriteWidth, spriteHeight,       // source width, height
             this.x_pos, this.y_pos,          // destination x, y
-            spriteWidth, spriteHeight        // destination width, height
+            spriteWidth * sizeMultiplier, spriteHeight * sizeMultiplier       // destination width, height
         );
         
     }
+}
+
+function getAbsolutePosition(el) {
+    const rect = el.getBoundingClientRect();
+    return {
+        x: rect.left + window.scrollX,
+        y: rect.top + window.scrollY
+    };
+}
+
+function distance(x1, y1, x2, y2) {
+    return Math.hypot(x2 - x1, y2 - y1);
 }
 
 function normalizeVector(x, y) {

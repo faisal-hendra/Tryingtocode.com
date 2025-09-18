@@ -3,52 +3,62 @@
         "1": {
             "title": "Hello World",
             "code": "print('helloworld')",
-            "instruction": "Make it show hello world"
+            "instruction": "Make it show hello world",
+            "returns": "hello world\n"
         },
         "2": {
             "title": "Variable",
             "code": "x = 1\nprint(x)",
-            "instruction": "x = 1. Make it equal 2."
+            "instruction": "x = 1. Make it equal 2.",
+            "returns": "2\n"
         },
         "3": {
             "title": "Adding",
             "code": "x = 1\ny = 1\n\nprint(x + y)",
-            "instruction": "make it equal 10"
+            "instruction": "make it equal 10",
+            "returns": "10\n"
         },
         "4": {
             "title": "Comments",
             "code": "#this is a comment\n\n#comments don't actually do anything\n#they are just for developers\n\n",
-            "instruction": "try running this to see what happens"
+            "instruction": "try running this to see what happens",
+            "returns": "\n"
         },
         "5": {
             "title": "Variable words",
             "code": "#this variable is a word:\nx = 'hello'\n\n#try printing x:\nprint()",
-            "instruction": "make x = bye and then print it"
+            "instruction": "make x = bye and then print it",
+            "returns": "bye\n"
         },
         "6": {
             "title": "Variable words adding",
             "code": "#you can add words together\n\nx = 'apple and '\ny = 'orange '\n\nprint(x + y)",
-            "instruction": "what if you try adding x + x + y + y?"
+            "instruction": "what if you try adding x + x + y + y?",
+            "returns": "apple and apple and orange orange \n"
         },
         "7": {
             "title": "Taking inputs",
             "code": "#try typing whatever you want >\n\ni = input('type here: ')\nprint(i)",
-            "instruction": "input() takes the input of whatever you type in the output box"
+            "instruction": "input() takes the input of whatever you type in the output box",
+            "returns": "*\n"
         },
         "8": {
             "title": "Adding inputs",
             "code": "i = input('i: ')\nprint('')\nj = input('j: ')\n\nprint(i + j)",
-            "instruction": "you can add inputs together:"
+            "instruction": "you can add inputs together:",
+            "returns": "*\n"
         },
         "9": {
             "title": "DIY",
             "code": "#try getting player input, and do something with it:\n\ni = input)\n\nprint)",
-            "instruction": "if you need an idea, maybe ask the user if they like cookies"
+            "instruction": "if you need an idea, maybe ask the user if they like cookies",
+            "returns": "*\n"
         },
         "10": {
             "title": "First Function",
             "code": "#we can make our own functions!\n#print() and input() are functions\n\ndef my_function():\n print('function!')\n\n#to call this function, say \nmy_function()",
-            "instruction": "make my_function print something else"
+            "instruction": "make my_function print something else",
+            "returns": "*\n"
         },
         "11": {
             "title": "Functions 2",
