@@ -1,7 +1,7 @@
 
 
 export class CoinObj{
-    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0){
+    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null){
         this.go_to = go_to;
 
         this.x_pos = x_pos;
@@ -10,6 +10,10 @@ export class CoinObj{
         this.y_vel = y_vel;
 
         this.dead = 0;
+
+        this.canvas = canvas;
+        this.originalCanvasWidth = 192;
+        this.originalCanvasHeight = 108;
     }
 
     tick(speed=1){
@@ -33,8 +37,8 @@ export class CoinObj{
 
         this.x_vel += normalized_vector[0] / drag;
         this.y_vel += normalized_vector[1] / drag;
-        this.x_vel /= (1 + (drag / 2000))
-        this.y_vel /= (1 + (drag / 2000))
+        this.x_vel /= (1 + (drag / 2000));
+        this.y_vel /= (1 + (drag / 2000));
 
         //console.log(distance(this.x_pos, this.y_pos, absolute_gt_x, absolute_gt_y));
 
@@ -57,12 +61,14 @@ export class CoinObj{
         let spriteHeight = image.height;
         let frameOffset = spriteWidth * index;
         let sizeMultiplier = .25;
+
+        
         ctx.drawImage(
             image,
             frameOffset, 0,                  // source x, y
             spriteWidth, spriteHeight,       // source width, height
             this.x_pos, this.y_pos,          // destination x, y
-            spriteWidth * sizeMultiplier, spriteHeight * sizeMultiplier       // destination width, height
+            spriteWidth * sizeMultiplier * (this.canvas.width / this.originalCanvasWidth), spriteHeight * sizeMultiplier * (this.canvas.height / this.originalCanvasHeight)       // destination width, height
         );
         
     }

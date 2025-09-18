@@ -15,6 +15,10 @@ const coinImgSrc = '../components/art/ttc coin icon.png';
 
 let objects = []
 
+let title = document.getElementById("main-title");
+window.addEventListener('getCoin', () => {
+    getCoin(0, null, title);
+})
 //getCoin(1, counter);
     
 window.requestAnimationFrame(draw);
@@ -24,7 +28,7 @@ function draw(sizeX=30, sizeY=300) {
 
     objects.forEach(element => {
         element.RenderImage(ctx, coinImgSrc);
-        element.tick(.01);
+        element.tick(.1);
         element.gravitate(counter);
         let gt_rect = counter.getBoundingClientRect();
         if(element.dead === true){
@@ -37,12 +41,13 @@ function draw(sizeX=30, sizeY=300) {
 }
 
 export function getCoin(amm, counter, startElementPos, startString = ''){
-    let coinObj = new CoinObj(counter, startElementPos.getBoundingClientRect().left + window.scrollX, startElementPos.getBoundingClientRect().top + window.scrollY, Math.random() * 10, Math.random() * 10);
+    let coinObj = new CoinObj(counter, startElementPos.getBoundingClientRect().left + window.scrollX, startElementPos.getBoundingClientRect().top + window.scrollY, Math.random() * 10, Math.random() * 10, canvas);
     objects.push(coinObj)
 
     changeNumber(amm);
 }
 
+changeNumber(0)
 function changeNumber(amm, startString=''){
     let currentCoins = String(parseInt(localStorage.getItem("coin")) + amm);
     localStorage.setItem("coin", currentCoins);

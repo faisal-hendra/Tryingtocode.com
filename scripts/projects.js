@@ -27,7 +27,7 @@ let htmlGen =
     </div>
 `;
 
-
+let getCoin = new CustomEvent("getCoin");
 
 export class Display {
     constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1, toggled=false) { // default to 5 lines
@@ -56,12 +56,12 @@ export class Display {
         });
 
         this.projectJSON = projectJSON;
-
         this.run_button.addEventListener('click', async () => {
             let value = this.textarea.value;
             let userCode = await this.displayUserCode(value);
             if(userCode == this.projectJSON.returns){
                 console.log("WOW");
+                window.dispatchEvent(getCoin);
             }
             else{
                 console.log("user code was " + userCode + " || But the code should've been " + this.projectJSON.returns);
