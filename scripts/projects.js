@@ -7,7 +7,7 @@ import { CodeArea } from "./codearea.js";
 
 let htmlGen = 
 `
-    <div id="learn-project" class="project center minimized pixel-font">
+    <div id="learn-project" class="project minimized pixel-font">
         <div class="top-bar">
             <div class="button">
             <button class="project-close-button">

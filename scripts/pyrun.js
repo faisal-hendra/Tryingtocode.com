@@ -74,9 +74,8 @@ asyncio.run(main())
 
             relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
             return relevantLines.join('\n');
-}
-
-return "Unknown error - Look around in your code for clues";
+        }
+        return "Unknown error - Look around in your code for clues";
     }
     console.log("the impossible just happened!!!? (uhm talk to a developer RN this is weird)")
     return false;

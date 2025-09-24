@@ -1,5 +1,3 @@
-
-
 export class CoinObj{
     constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null, originalCanvasWidth=1, originalCanvasHeight=1){
         this.go_to = go_to;
@@ -20,15 +18,14 @@ export class CoinObj{
         this.gravitate(this.go_to, 10);
 
         this.x_pos += this.x_vel * speed;
-        this.y_pos += this.y_vel * speed; 
+        this.y_pos += this.y_vel * speed;
     }
 
     gravitate(go_to, drag=1, min_dist=5){
-        const gt_rect = go_to.getBoundingClientRect();
         const absolute_gt = domToCanvas(this.canvas, getAbsolutePosition(go_to));
 
-        let x_dist = absolute_gt[0] - this.x_pos;
-        let y_dist = absolute_gt[1] - this.y_pos;
+        let x_dist = absolute_gt.x - this.x_pos;
+        let y_dist = absolute_gt.y - this.y_pos;
 
         let normalized_vector = normalizeVector(x_dist, y_dist);
 
@@ -37,9 +34,10 @@ export class CoinObj{
         this.x_vel /= (1 + (drag / 2000));
         this.y_vel /= (1 + (drag / 2000));
 
-        if(distance(this.x_pos, this.y_pos, absolute_gt[0], absolute_gt[1]) > min_dist && this.dead !== 0){
+
+        if(distance(this.x_pos, this.y_pos, absolute_gt.x, absolute_gt.y) > min_dist && this.dead !== 0){
             this.DestroyGive(1);
-        } else if(this.dead === 0 && distance(this.x_pos, this.y_pos, absolute_gt[0], absolute_gt[1]) < min_dist){
+        } else if(this.dead === 0 && distance(this.x_pos, this.y_pos, absolute_gt.x, absolute_gt.y) < min_dist){
             this.dead = false;
         }
     }
@@ -57,13 +55,15 @@ export class CoinObj{
         let frameOffset = spriteWidth * index;
         let sizeMultiplier = .25;
 
-        
+        let destination = [this.x_pos * (this.canvas.width / this.originalCanvasWidth), this.y_pos * (this.canvas.width / this.originalCanvasWidth)]
+        let destinationSize = [spriteWidth * sizeMultiplier * (this.canvas.width / this.originalCanvasWidth), spriteHeight * sizeMultiplier * (this.canvas.height / this.originalCanvasHeight)];
+
         ctx.drawImage(
             image,
             frameOffset, 0,                  // source x, y
             spriteWidth, spriteHeight,       // source width, height
-            this.x_pos * (this.canvas.width / this.originalCanvasWidth), this.y_pos * (this.canvas.width / this.originalCanvasWidth),          // destination x, y
-            spriteWidth * sizeMultiplier * (this.canvas.width / this.originalCanvasWidth), spriteHeight * sizeMultiplier * (this.canvas.height / this.originalCanvasHeight)       // destination width, height
+            destination[0], destination[1],  // destination x, y
+            destinationSize[0], destinationSize[1]  // destination width, height
         );
     }
 }
