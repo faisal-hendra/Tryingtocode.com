@@ -32,3 +32,7 @@ Hey developer! Read these to know what you should fix:
 - project.js input() has a temporary fix 
 - 3
 - TTC
+
+- toggle not working in projects
+- 8
+- TTC

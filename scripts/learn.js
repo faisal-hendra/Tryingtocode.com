@@ -6,10 +6,14 @@ let loadProjects = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12
 let finishedProjects = localStorage.getItem("finished") || "";
 localStorage.setItem("finished", finishedProjects);
 
-let toggleAboveProjects = (index) => {
+let toggleAboveProjects = (index, add) => {
     console.log(projects.slice(0, index - 1));
     projects.slice(0, index - 1).forEach(element => {
-        element.toggleClass("gone", element.projectEl);
+        if (add == true){
+            element.projectEl.classList.add("gone");
+        }else{
+            element.projectEl.classList.remove("gone");
+        }
     })
 }
 
@@ -28,7 +32,8 @@ function loadProject(this_project){
         display = new Display(document, parent, JSON);
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', () => {
-            toggleAboveProjects(this_project);
+            let shouldShow = display.projectEl.classList.contains('gone')
+            toggleAboveProjects(this_project, shouldShow);
         })
         display.setupTextarea();
         let title = document.getElementById("main-content")

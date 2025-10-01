@@ -21,7 +21,7 @@ export class CoinObj{
         this.y_pos += this.y_vel * speed;
     }
 
-    gravitate(go_to, drag=1, min_dist=5){
+    gravitate(go_to, drag=1, min_dist=50){
         const absolute_gt = domToCanvas(this.canvas, getAbsolutePosition(go_to));
 
         let x_dist = absolute_gt.x - this.x_pos;
@@ -95,8 +95,8 @@ function domToCanvas(canvas, dom) {
 
     // Translate into canvas space
     return {
-        x: (dom[0] - rect.left) * scaleX,
-        y: (dom[1] - rect.top) * scaleY
+        x: (dom.x - rect.left) * scaleX,
+        y: (dom.y - rect.top) * scaleY
     };
 }
 function normalizeNumbers(num1, num2) {
