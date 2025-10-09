@@ -3,7 +3,7 @@ import { Display } from "./projects.js";
 import "./coin.js";
 
 let learnProjects = localStorage.getItem("projects") || "";
-localStorage.setItem("learnProjects", learnProjects);
+localStorage.setItem("projects", learnProjects);
 
 
 let loadProjects = Array.from({length: 21}, (_, i) => i + 1);
@@ -15,12 +15,12 @@ let toggleAboveProjects = (index, add) => {
     console.log(add.shouldShow)
     projects.slice(0, index - 1).forEach(element => {
         if (add.shouldShow == true){
-            console.log("it is adding it")
+            console.log("it is adding it");
             element.projectEl.classList.add("gone");
             element.projectEl.classList.remove("notminimized");
             element.projectEl.classList.add("minimized");
         }else{
-            console.log("it is subtracting it")
+            console.log("it is subtracting it");
             element.projectEl.classList.remove("gone");
         }
     })
@@ -41,7 +41,7 @@ let saveProject = (this_proj) => {
         } 
         new_val += value_list.join(":") + ";"
     });
-    localStorage.setItem("learnProjects", new_val)
+    localStorage.setItem("projects", new_val)
 };
 
 let getProject = (title) => {
@@ -51,7 +51,7 @@ let getProject = (title) => {
     } 
     else{
         let project_list = current.split(";");
-        project_list.forEach(value, () => {
+        project_list.forEach(value => {
             let value_list = value.split(":");
             if(value_list[0] == title){
                 return value;
