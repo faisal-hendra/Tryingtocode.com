@@ -27,7 +27,7 @@ let htmlGen =
     </div>
 `;
 
-let getCoin = new CustomEvent("getCoin");
+let correctCode = new CustomEvent("correctCode");
 
 export class Display {
     constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false) { 
@@ -61,7 +61,7 @@ export class Display {
             let value = this.textarea.value;
             let userCode = await this.displayUserCode(value);
             if(userCode == this.projectJSON.returns){
-                window.dispatchEvent(getCoin);
+                window.dispatchEvent(correctCode);
             }
             else{
                 console.log("user code was " + userCode + " || But the code should've been " + this.projectJSON.returns);
@@ -132,30 +132,27 @@ export class Display {
 
     toggleElements(value=false){ // false = stop showing this project
         window.currentDisplay = this;
-        console.log(this.min);
         if (this.projectEl.classList.contains("minimized")) {
-            this.projectEl.classList.remove("minimized");
-            this.projectEl.classList.add("notminimized");
-            console.log('false')
-            this.projectEl.dispatchEvent(
-                new CustomEvent('toggleElements', {
-                    detail: { shouldShow: true }
-                }
-            )
-            );
+            this.editClass("minimized", false);
+            this.editClass("notminimized", true);
         } else {
-            this.projectEl.classList.remove("notminimized");
-            this.projectEl.classList.add("minimized");
-            console.log('true')
-            this.projectEl.dispatchEvent(
-                new CustomEvent('toggleElements', {
-                    detail: { shouldShow: false }
-                }
-            )
-            );
+            this.editClass("minimized", true);
+            this.editClass("notminimized", false);
         }
-        
-        
+        this.projectEl.dispatchEvent(
+            new CustomEvent('toggleElements', {
+                detail: { shouldShow: this.projectEl.classList.contains("notminimized") }
+            }
+        )
+        );
+    }
+
+    editClass(className, set){
+        if(set){
+            this.projectEl.classList.add(className)
+        } else{
+            this.projectEl.classList.remove(className)
+        }
     }
 
     toggleClass(className, element){
@@ -174,7 +171,6 @@ export class Display {
     }
     
     setupTextarea(){
-
         const updateLineNumbers = () => {
             const lines = this.textarea.value.split('\n').length;
             this.lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
@@ -187,11 +183,7 @@ export class Display {
             this.lineNumbers.scrollTop = this.textarea.scrollTop;
         });
         
-
         updateLineNumbers();
     }
 
 }
-
-
-//learn

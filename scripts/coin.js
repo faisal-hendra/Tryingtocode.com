@@ -19,7 +19,7 @@ const coinImgSrc = '../components/art/ttc coin icon.png';
 let objects = []
 
 let title = document.getElementById("main-title");
-window.addEventListener('getCoin', () => {
+window.addEventListener('correctCode', () => {
     getCoin(5, counter, title);
 })
     

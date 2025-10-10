@@ -2,8 +2,8 @@
 import { Display } from "./projects.js";
 import "./coin.js";
 
-let learnProjects = localStorage.getItem("projects") || "";
-localStorage.setItem("projects", learnProjects);
+if (localStorage.getItem("projects") == '') {localStorage.setItem("projects", "{}")}
+
 
 
 let loadProjects = Array.from({length: 21}, (_, i) => i + 1);
@@ -15,13 +15,11 @@ let toggleAboveProjects = (index, add) => {
     console.log(add.shouldShow)
     projects.slice(0, index - 1).forEach(element => {
         if (add.shouldShow == true){
-            console.log("it is adding it");
-            element.projectEl.classList.add("gone");
-            element.projectEl.classList.remove("notminimized");
-            element.projectEl.classList.add("minimized");
+            element.editClass("gone", true);
+            element.editClass("notminimized", false);
+            element.editClass("minimized", true);
         }else{
-            console.log("it is subtracting it");
-            element.projectEl.classList.remove("gone");
+            element.editClass("gone", false);
         }
     })
 }
@@ -39,6 +37,9 @@ let getProject = (title) => {
     return projects[title] || null;
 };
 
+window.addEventListener('correctCode', () => {
+    //code = window.active --- MAKE THIS ---
+})
 // saveProject("helloworld:print('hello1')");
 // saveProject("helloworld2:print('hello2')");
 // let proj = getProject("helloworld");
@@ -67,8 +68,6 @@ function loadProject(this_project){
         let title = document.getElementById("main-content")
     });
 }
-
-
 
 loadProjects.forEach(index => {
     loadProject(index);

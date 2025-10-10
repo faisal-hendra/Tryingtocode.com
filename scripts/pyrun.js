@@ -82,9 +82,6 @@ asyncio.run(main())
 }
 
 function getInput(promptText = ""){
-
-
-
     if(window.currentDisplay.output) {
         window.currentDisplay.output.value += promptText;
         window.currentDisplay.output.value += "\n";
