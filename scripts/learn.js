@@ -26,44 +26,23 @@ let toggleAboveProjects = (index, add) => {
     })
 }
 
+// Save or update a project
 let saveProject = (this_proj) => {
-    let current = localStorage.getItem("projects") || this_proj
-    let project_list = current.split(";");
-    let x = 0;
-    let new_val = "";
-    project_list.forEach(value => {
-        let value_list = value.split(":");
-        let this_proj_list = value.split(":")
-        x++;
-        if (value_list[0] == this_proj_list[0]){
-            value_list[1] = this_proj_list[1];
-        }
-        new_val += value_list.join(":") + ";";
-    });
-    localStorage.setItem("projects", new_val);
+    const [title, content] = this_proj.split(":");
+    let projects = JSON.parse(localStorage.getItem("projects") || "{}");
+    projects[title] = content;
+    localStorage.setItem("projects", JSON.stringify(projects));
 };
 
 let getProject = (title) => {
-    let current = localStorage.getItem("projects") || ""
-    if(current == ""){
-        return null
-    } 
-    else{
-        let project_list = current.split(";");
-        project_list.forEach(value => {
-            let value_list = value.split(":");
-            if(value_list[0] == title){
-                return value;
-            }
-        });
-    }
-    return null
+    const projects = JSON.parse(localStorage.getItem("projects") || "{}");
+    return projects[title] || null;
 };
 
-saveProject("helloworld:print('hello')");
-saveProject("helloworld2:print('hello2')");
-let proj = getProject("helloworld");
-console.log(proj);
+// saveProject("helloworld:print('hello1')");
+// saveProject("helloworld2:print('hello2')");
+// let proj = getProject("helloworld");
+// console.log(proj);
 
 const loadProjectJSON = async (index) => {
     const response = await fetch('../python-projects.json');
