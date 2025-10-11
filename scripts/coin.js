@@ -10,9 +10,6 @@ console.log(userCoins);
 
 let canvas = document.getElementById('render-canvas');
 let ctx = canvas.getContext('2d');
-//PROBLEM HERE
-const ogCanvasWidth = canvas.width;
-const ogCanvasHeight = canvas.height;
 
 const coinImgSrc = '../components/art/ttc coin icon.png';
 
@@ -43,7 +40,13 @@ function draw(sizeX=30, sizeY=300) {
 
 export function getCoin(amm, go_to, startElementPos, startString = ''){
     for (let index = 0; index < amm; index++) {
-        let coinObj = new CoinObj(go_to, startElementPos.getBoundingClientRect().left + window.scrollX, startElementPos.getBoundingClientRect().top + window.scrollY, Math.random() * 10, Math.random() * 10, canvas, ogCanvasWidth, ogCanvasHeight);
+        let coinObj = new CoinObj(
+            go_to, 
+            startElementPos.getBoundingClientRect().left + window.scrollX, 
+            startElementPos.getBoundingClientRect().top + window.scrollY, 
+            Math.random() * 10, 
+            Math.random() * 10, canvas
+        );
         objects.push(coinObj);
     }
 }

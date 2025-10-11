@@ -1,5 +1,5 @@
 export class CoinObj{
-    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null, originalCanvasWidth=1, originalCanvasHeight=1){
+    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null){
         this.go_to = go_to;
 
         this.x_pos = x_pos;
@@ -10,8 +10,10 @@ export class CoinObj{
         this.dead = 0;
 
         this.canvas = canvas;
-        this.originalCanvasWidth = originalCanvasWidth;
-        this.originalCanvasHeight = originalCanvasHeight;
+        if (canvas) {
+            this.originalCanvasWidth = canvas.width;
+            this.originalCanvasHeight = canvas.height;
+        }
     }
 
     tick(speed=1){
