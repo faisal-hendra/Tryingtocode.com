@@ -11,8 +11,6 @@ let finishedProjects = localStorage.getItem("finished") || "";
 localStorage.setItem("finished", finishedProjects);
 
 let toggleAboveProjects = (index, add) => {
-    console.log(projects.slice(0, index - 1));
-    console.log(add.shouldShow)
     projects.slice(0, index - 1).forEach(element => {
         if (add.shouldShow == true){
             element.editClass("gone", true);
@@ -38,12 +36,11 @@ let getProject = (title) => {
 };
 
 window.addEventListener('correctCode', () => {
-    //code = window.active --- MAKE THIS ---
+    let title = window.currentDisplay.title.innerHTML;
+    let code = window.currentDisplay.textarea.value;
+    saveProject(title + ":" + code);
+    console.log(getProject(title));
 })
-// saveProject("helloworld:print('hello1')");
-// saveProject("helloworld2:print('hello2')");
-// let proj = getProject("helloworld");
-// console.log(proj);
 
 const loadProjectJSON = async (index) => {
     const response = await fetch('../python-projects.json');
@@ -55,17 +52,24 @@ let parent = document.getElementById('project-parent');
 let projects = [];
 let display;
 
+let mainProj = true;
 function loadProject(this_project){
     loadProjectJSON(this_project).then(JSON => {
         display = new Display(document, parent, JSON);
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', (shouldShow) => {
-            console.log("This is shouldShow: ")
-            console.log(shouldShow.detail.shouldShow)
             toggleAboveProjects(this_project, shouldShow.detail);
         })
         display.setupTextarea();
         let title = document.getElementById("main-content")
+        console.log(JSON.title)
+        let code = getProject(JSON.title);
+        if(code){
+            display.codeArea.indentText(5 + display.addAmm, code);
+        } else if(mainProj){
+            mainProj = false;
+            display.toggleElements()
+        }
     });
 }
 

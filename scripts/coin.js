@@ -45,7 +45,8 @@ export function getCoin(amm, go_to, startElementPos, startString = ''){
             startElementPos.getBoundingClientRect().left + window.scrollX, 
             startElementPos.getBoundingClientRect().top + window.scrollY, 
             Math.random() * 10, 
-            Math.random() * 10, canvas
+            Math.random() * 10, 
+            canvas
         );
         objects.push(coinObj);
     }

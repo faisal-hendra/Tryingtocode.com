@@ -19,3 +19,7 @@ Hey developer! Read these to know what you should fix:
 - in general.css, learn.css, output should go under input code (and shrink?) when on mobile
 - 8
 - dean
+
+- in project.js lines are not updated properly, meaning that sometimes the player will see 7 lines but can only click 3
+- 5
+- ttc

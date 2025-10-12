@@ -22,7 +22,7 @@
             "title": "Comments",
             "code": "#this is a comment\n\n#comments don't actually do anything\n#they are just for developers\n\n",
             "instruction": "try running this to see what happens",
-            "returns": "\n"
+            "returns": ""
         },
         "5": {
             "title": "Variable words",
@@ -40,19 +40,19 @@
             "title": "Taking inputs",
             "code": "#try typing whatever you want >\n\ni = input('type here: ')\nprint(i)",
             "instruction": "input() takes the input of whatever you type in the output box",
-            "returns": "*\n"
+            "returns": "*"
         },
         "8": {
             "title": "Adding inputs",
             "code": "i = input('i: ')\nprint('')\nj = input('j: ')\n\nprint(i + j)",
             "instruction": "you can add inputs together:",
-            "returns": "*\n"
+            "returns": "*"
         },
         "9": {
             "title": "DIY",
             "code": "#try getting player input, and do something with it:\n\ni = input)\n\nprint)",
             "instruction": "if you need an idea, maybe ask the user if they like cookies",
-            "returns": "*\n"
+            "returns": "*"
         },
         "10": {
             "title": "First Function",

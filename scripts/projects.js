@@ -30,7 +30,7 @@ let htmlGen =
 let correctCode = new CustomEvent("correctCode");
 
 export class Display {
-    constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false) { 
+    constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false, _code=null) { 
         this.toggled = toggled;
 
         this.createElements(document, parent, htmlString);
@@ -75,6 +75,9 @@ export class Display {
 
         this.setAttributes();
 
+        if(_code != null){
+            this.codeArea.indentText(5 + addAmm, _code);
+        }
     }
 
     createElements(document, parent, htmlString){
@@ -105,7 +108,8 @@ export class Display {
         //console.log(this.projectJSON.code);
         let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.indentText(5 + addAmm, this.projectJSON.code);
-        this.title.innerHTML = this.projectJSON.title;
+        let title = this.projectJSON.title;
+        this.title.innerHTML = title;
         this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
         this.output.disabled = true;
     }
@@ -126,7 +130,7 @@ export class Display {
                 e.preventDefault();
             }
         }
-        this.output.addEventListener("keydown", handler);
+            this.output.addEventListener("keydown", handler);
         });
     }
 
@@ -148,19 +152,11 @@ export class Display {
     }
 
     editClass(className, set){
-        if(set){
-            this.projectEl.classList.add(className)
-        } else{
-            this.projectEl.classList.remove(className)
-        }
+        this.projectEl.classList.toggle(className, set);
     }
 
     toggleClass(className, element){
-        if(element.classList.contains(className)){
-            element.classList.remove(className);
-        } else{
-            element.classList.add(className);
-        }
+        element.classList.toggle(className);
     }
 
     async displayUserCode(code){

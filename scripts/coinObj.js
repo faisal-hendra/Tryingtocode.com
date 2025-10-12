@@ -62,9 +62,9 @@ export class CoinObj{
 
         ctx.drawImage(
             image,
-            frameOffset, 0,                  // source x, y
-            spriteWidth, spriteHeight,       // source width, height
-            destination[0], destination[1],  // destination x, y
+            frameOffset, 0,                         // source x, y
+            spriteWidth, spriteHeight,              // source width, height
+            destination[0], destination[1],         // destination x, y
             destinationSize[0], destinationSize[1]  // destination width, height
         );
     }
@@ -100,19 +100,4 @@ function domToCanvas(canvas, dom) {
         x: (dom.x - rect.left) * scaleX,
         y: (dom.y - rect.top) * scaleY
     };
-}
-function normalizeNumbers(num1, num2) {
-    const min_value = Math.min(num1, num2);
-    const max_value = Math.max(num1, num2);
-  
-    if (max_value === min_value) {
-      // If both numbers are the same, they normalize to 0 (or 0.5 if you prefer a midpoint)
-      // For normalization to [0,1], if min === max, all values become 0.
-      return [0, 0];
-    }
-  
-    const normalized_num1 = (num1 - min_value) / (max_value - min_value);
-    const normalized_num2 = (num2 - min_value) / (max_value - min_value);
-  
-    return [normalized_num1, normalized_num2];
 }

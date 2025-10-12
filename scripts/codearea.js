@@ -9,8 +9,6 @@ const AREAHTML =
     <textarea name="output" id="output" class="output pixel-font">output</textarea>
 </div>
 `
-
-//
 export class CodeArea{
     constructor(document, parent, codeAreaHTML=AREAHTML, lineNumber=1){
         let template = document.createElement('template');
