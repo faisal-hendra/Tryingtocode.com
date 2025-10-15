@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyABP5ADKcI2zC2ZdQ3pSUkuc1wmwBIbcwo",
@@ -50,3 +52,25 @@ function authChanged(){
         }
     });
 }
+
+function anonSign(){
+    signInAnonymously(auth).then((id) => {
+        console.log("Signed in anonymously");
+
+        let user = auth.currentUser;
+        let uid = user.uid
+        console.log("user is: " + uid);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
+
+setPersistence(auth, browserLocalPersistence).then(() => {
+    console.log("Persistence set to local");
+}).catch((error) => {
+    console.error(error);
+});
+
+
+anonSign();

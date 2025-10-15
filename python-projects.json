@@ -26,7 +26,7 @@
         },
         "5": {
             "title": "Variable words",
-            "code": "#this variable is a word:\nx = 'hello'\n\n#try printing x:\nprint()",
+            "code": "x = 'hello'\n\n#try printing x:\nprint()",
             "instruction": "make x = bye and then print it",
             "returns": "bye\n"
         },

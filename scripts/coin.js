@@ -8,19 +8,28 @@ let counter = document.getElementById("coin-counter");
 
 console.log(userCoins);
 
+changeNumber(0)
+
 let canvas = document.getElementById('render-canvas');
-let ctx = canvas.getContext('2d');
+let ctx;
 
 const coinImgSrc = '../components/art/ttc coin icon.png';
+let objects;
 
-let objects = []
+let title;
+if(canvas){
+    ctx = canvas.getContext('2d');
 
-let title = document.getElementById("main-title");
-window.addEventListener('correctCode', (details) => {
-    getCoin(details.detail.value, counter, title);
-})
+    title = document.getElementById("main-title");
+
+    window.addEventListener('correctCode', (details) => {
+        getCoin(details.detail.value, counter, title);
+    });
     
-window.requestAnimationFrame(draw);
+    window.requestAnimationFrame(draw);
+}
+
+    
 
 function draw(sizeX=30, sizeY=300) {
     ctx.clearRect(0, 0, sizeX, sizeY);
@@ -52,8 +61,7 @@ export function getCoin(amm, go_to, startElementPos, startString = ''){
     }
 }
 
-changeNumber(0)
-function changeNumber(amm, startString=''){
+export function changeNumber(amm, startString=''){
     let currentCoins = String(parseInt(localStorage.getItem("coin")) + amm);
     localStorage.setItem("coin", currentCoins);
     if (counter != null){

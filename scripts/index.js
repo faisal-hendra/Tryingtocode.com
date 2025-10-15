@@ -1,6 +1,7 @@
 //for use in index.html
 import { SignIn as SI } from "./signin.js";
 import { createEmail } from '../firebase.js';
+import { getCoin } from "./coin.js";
 
 let signInParent = document.getElementById("sign-in-holder");
 let signIn = new SI(document, signInParent)
@@ -11,5 +12,9 @@ signIn.toggleButton(toggleSigninup);
 
 signIn.submit.addEventListener("click", (e) => {
     e.preventDefault();
-    createEmail(signIn.user.value, signIn.password.value);
+    if(signIn.password.value != null){
+        createEmail(signIn.user.value, signIn.password.value);
+    }
 });
+
+getCoin(0);
