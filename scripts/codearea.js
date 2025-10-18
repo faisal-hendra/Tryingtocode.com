@@ -30,7 +30,7 @@ export class CodeArea{
             }
         });
 
-        this.lineNumber = lineNumber
+        this.lineNumber = lineNumber;
     }
 
     createText(value){

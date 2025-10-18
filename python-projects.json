@@ -170,6 +170,12 @@
             "code" : "def add(num1, num2):\n return num1 + num2\n\nprint(a = add(1, 5))\n\nprint",
             "instruction": "fix the bug",
             "returns": "*\n"
+        },
+        "5":{
+            "title": "spot the bug 2",
+            "code" : "def add(num1, num2):\n return num1 + num2\n\nprint(a = add(1, 5))\n\nprint",
+            "instruction": "fix the bug",
+            "returns": "*\n"
         }
     }
 }

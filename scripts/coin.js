@@ -1,12 +1,9 @@
 import { CoinObj } from "./coinObj.js";
 
-
 let userCoins = localStorage.getItem("coin") || "0";
 localStorage.setItem("coin", userCoins);
 
 let counter = document.getElementById("coin-counter");
-
-console.log(userCoins);
 
 changeNumber(0)
 
@@ -19,21 +16,15 @@ let objects;
 let title;
 if(canvas){
     ctx = canvas.getContext('2d');
-
     title = document.getElementById("main-title");
-
     window.addEventListener('correctCode', (details) => {
         getCoin(details.detail.value, counter, title);
     });
-    
     window.requestAnimationFrame(draw);
 }
 
-    
-
 function draw(sizeX=30, sizeY=300) {
     ctx.clearRect(0, 0, sizeX, sizeY);
-
     objects.forEach(element => {
         element.RenderImage(ctx, coinImgSrc);
         element.tick(.1);
@@ -41,7 +32,7 @@ function draw(sizeX=30, sizeY=300) {
         let gt_rect = counter.getBoundingClientRect();
         if(element.dead === true){
             objects = objects.filter(e => e !== element);
-            changeNumber(1)
+            changeNumber(1);
         }
     });
     window.requestAnimationFrame(draw);
