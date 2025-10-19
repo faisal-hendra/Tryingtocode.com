@@ -141,17 +141,17 @@ export class Display {
         window.currentDisplay = this;
         if (value) {
             this.editClass("minimized", false);
-            this.editClass("notminimized", true);
+            this.editClass("first", true);
         } else {
             this.editClass("minimized", true);
-            this.editClass("notminimized", false);
+            this.editClass("first", false);
         }
-        this.projectEl.dispatchEvent(
-            new CustomEvent('toggleElements', {
-                detail: { shouldShow: this.projectEl.classList.contains("notminimized") }
-            }
-        )
-        );
+        // this.projectEl.dispatchEvent(
+        //     new CustomEvent('toggleElements', {
+        //         detail: { shouldShow: this.projectEl.classList.contains("notminimized") }
+        //     }
+        // )
+        // );
     }
 
     editClass(className, set){
