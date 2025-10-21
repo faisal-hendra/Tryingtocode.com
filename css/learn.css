@@ -1,14 +1,4 @@
-#project-parent {
-    display: flex;
-    align-self: start;
-    gap: 16px;
-    padding: 16px;
-    background: #222;
-    box-sizing: border-box;
-    margin: 16px;
-    flex-wrap: wrap;
-    justify-content: left;
-}
+
 
 #user-code {
     border: none;
@@ -138,51 +128,63 @@
     height: 30px;
 }
 
-.project {
+.instructions{
     position: relative;
+    left: 0%;
+    text-align: center;
+}
+
+#project-parent {
+    display: flex;
+    flex-direction: row;
+    align-self: start;
+    gap: 16px;
+    padding: 16px;
+    background: #222;
+    box-sizing: border-box;
+    margin: 16px;
+    flex-wrap: wrap;
+    justify-content: left;
+    
+    grid-auto-rows: min-content;
+}
+
+.project {
+    position: inherit;
     transition:
         max-height 0.5s cubic-bezier(.4,1,.3,1),
-        flex-basis 0.6s cubic-bezier(.4,1,.3,1),
+        flex-basis 0.4s cubic-bezier(.4,1,.3,1),
         width 0.6s cubic-bezier(.4,1,.3,1),
         opacity 0.3s ease,
         box-shadow 0.3s ease;
+    -webkit-transition: cubic-bezier(0.39, 0.575, 0.565, 1) all ease-in-out;
     max-height: 700px;
-    width: 100%;
     opacity: 1;
     box-shadow: 0 4px 16px #0006;
     overflow: hidden;
     display: block;
-    flex: 0 1 100%;
+    flex: 1 1 100%;
 }
 
-.first {
-    position: inherit;
+/* .first {
     order: -1;
+} */
 
-}
-
-/* .gone {
-    max-width: 0 !important;
-    max-height: 0 !important;
+.gone {
+    max-height: 0px !important;
     padding: 0 !important;
     margin: 0 !important;
-    opacity: 0 !important;
+    border: 0 !important;
+    opacity: 1 !important;
     pointer-events: none;
     overflow: hidden !important;
-    min-width: 0 !important;
-    min-height: 0;
+    flex: 0 0 0 !important;
 }
 
-.gone p{
+/* .gone p{
     color: #00000000;
 } */
     
-@media screen and (max-width = 1080){
-    .project.minimized {
-        flex: 0 0 50%
-    }
-    
-}
 
 
 .project.minimized {
@@ -190,9 +192,20 @@
     max-height: 200px;
     opacity: 0.7;
     box-shadow: 0 2px 8px #0004;
+    flex: 0 1 32%;
 }
 
-.project.minimized p:not(#project-title), .project.minimized textarea, .project.minimized .input-output{
+.project.minimized p:not(#project-title), .project.minimized textarea,  .project.minimized .run-code, .project.minimized .button{
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.project.notminimized p:not(#project-title), .project.notminimized textarea,  .project.notminimized .run-code, .project.notminimized .button{
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.project.minimized .input-output {
     visibility: hidden;
 }
 

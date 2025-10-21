@@ -1,13 +1,10 @@
 
-    def main():
-    	def my_print(number):
- print(f'the number is {number}')
+def main():
+ [' d', ' e', ' f', '  ', ' m', ' y', ' _', ' p', ' r', ' i', ' n', ' t', ' (', ' n', ' u', ' m', ' b', ' e', ' r', ' )', ' :', ' \n', '  ', ' p', ' r', ' i', ' n', ' t', ' (', ' f', " '", ' t', ' h', ' e', '  ', ' n', ' u', ' m', ' b', ' e', ' r', '  ', ' i', ' s', '  ', ' {', ' n', ' u', ' m', ' b', ' e', ' r', ' }', " '", ' )', ' \n', ' \n', ' f', ' o', ' r', '  ', ' i', '  ', ' i', ' n', '  ', ' r', ' a', ' n', ' g', ' e', ' (', ' 2', ' ,', '  ', ' 1', ' 1', ' )', ' :', ' \n', '  ', ' m', ' y', ' _', ' p', ' r', ' i', ' n', ' t', ' (', ' i', ' )']
+ pass
 
-for i in range(2, 11):
- my_print(i)
-
-    def correct(code, output):
-    	awnsers = ['the number is 3
+def correct(code, output):
+ awnsers = ['the number is 3
 the number is 4
 the number is 5
 the number is 6
@@ -105,14 +102,14 @@ the number is 97
 the number is 98
 the number is 99
 ']
-    	include = ['']
-    	found = {word: False for word in include}
-    	for line in code.splitlines():
-    		stripped = line.split('#')[0]
-    		for word in include:
-    			if word in stripped:
-    				found[word] = True
-    	if not all(found.values()):
-    		return False
-    	return output in awnsers
+ include = ['']
+ found = {word: False for word in include}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     

@@ -1,20 +1,19 @@
 
-    def main():
-    	pets = ['cat', 'dog', 'snake']
+def main():
+ [' p', ' e', ' t', ' s', '  ', ' =', '  ', ' [', " '", ' c', ' a', ' t', " '", ' ,', '  ', " '", ' d', ' o', ' g', " '", ' ,', '  ', " '", ' s', ' n', ' a', ' k', ' e', " '", ' ]', ' \n', ' \n', ' p', ' r', ' i', ' n', ' t', ' (', ' p', ' e', ' t', ' s', ' [', ' 0', ' ]', ' )']
+ pass
 
-print(pets[0])
-
-    def correct(code, output):
-    	awnsers = ['dog
+def correct(code, output):
+ awnsers = ['dog
 ']
-    	include = ['']
-    	found = {word: False for word in include}
-    	for line in code.splitlines():
-    		stripped = line.split('#')[0]
-    		for word in include:
-    			if word in stripped:
-    				found[word] = True
-    	if not all(found.values()):
-    		return False
-    	return output in awnsers
+ include = ['']
+ found = {word: False for word in include}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     

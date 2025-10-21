@@ -48,22 +48,24 @@ new_lesson = {
 }
 
 def code_string(lesson=new_lesson):
+    indent_lessons = [f" {les}" for les in lesson['code']]
     code_string = f"""
-    def main():
-    \t{lesson['code']}
+def main():
+ {indent_lessons}
+ pass
 
-    def correct(code, output):
-    \tawnsers = ['{lesson["returns"]}']
-    \tinclude = ['{lesson['includes']}']
-    \tfound = {{word: False for word in include}}
-    \tfor line in code.splitlines():
-    \t\tstripped = line.split('#')[0]
-    \t\tfor word in include:
-    \t\t\tif word in stripped:
-    \t\t\t\tfound[word] = True
-    \tif not all(found.values()):
-    \t\treturn False
-    \treturn output in awnsers
+def correct(code, output):
+ awnsers = ['{lesson["returns"]}']
+ include = ['{lesson['includes']}']
+ found = {{word: False for word in include}}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     """
     return code_string
 

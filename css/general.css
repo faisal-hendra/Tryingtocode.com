@@ -156,8 +156,8 @@ body {
     }
 }
 
-textarea::selection{
-    background-color: #28282899;
+::selection{
+    background-color: #fbff0099;
 }
 
 ::-webkit-scrollbar {

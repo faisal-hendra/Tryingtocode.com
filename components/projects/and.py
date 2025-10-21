@@ -1,23 +1,19 @@
 
-    def main():
-    	x = 1
-y = 1
-if x == 1 and y == 1:
- print('x and y are one')
-else:
- print('x and y are not one')
+def main():
+ [' x', '  ', ' =', '  ', ' 1', ' \n', ' y', '  ', ' =', '  ', ' 1', ' \n', ' i', ' f', '  ', ' x', '  ', ' =', ' =', '  ', ' 1', '  ', ' a', ' n', ' d', '  ', ' y', '  ', ' =', ' =', '  ', ' 1', ' :', ' \n', '  ', ' p', ' r', ' i', ' n', ' t', ' (', " '", ' x', '  ', ' a', ' n', ' d', '  ', ' y', '  ', ' a', ' r', ' e', '  ', ' o', ' n', ' e', " '", ' )', ' \n', ' e', ' l', ' s', ' e', ' :', ' \n', '  ', ' p', ' r', ' i', ' n', ' t', ' (', " '", ' x', '  ', ' a', ' n', ' d', '  ', ' y', '  ', ' a', ' r', ' e', '  ', ' n', ' o', ' t', '  ', ' o', ' n', ' e', " '", ' )']
+ pass
 
-    def correct(code, output):
-    	awnsers = ['x and y are not one
+def correct(code, output):
+ awnsers = ['x and y are not one
 ']
-    	include = ['']
-    	found = {word: False for word in include}
-    	for line in code.splitlines():
-    		stripped = line.split('#')[0]
-    		for word in include:
-    			if word in stripped:
-    				found[word] = True
-    	if not all(found.values()):
-    		return False
-    	return output in awnsers
+ include = ['']
+ found = {word: False for word in include}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     

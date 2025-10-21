@@ -124,7 +124,8 @@
             "title": "using libraries",
             "code": "import time\n\ntime.sleep(1)\n\nprint('waited one second')",
             "instruction": "make it wait 2 seconds instead",
-            "returns": "*\n"
+            "returns": "*\n",
+            "includes": "time.sleep(2)"
         },
         "22": {
             "title": "Arrays",

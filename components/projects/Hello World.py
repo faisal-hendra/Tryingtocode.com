@@ -1,18 +1,19 @@
 
-    def main():
-    	print('helloworld')
+def main():
+ [' p', ' r', ' i', ' n', ' t', ' (', " '", ' h', ' e', ' l', ' l', ' o', ' w', ' o', ' r', ' l', ' d', " '", ' )']
+ pass
 
-    def correct(code, output):
-    	awnsers = ['hello world
+def correct(code, output):
+ awnsers = ['hello world
 ']
-    	include = ['']
-    	found = {word: False for word in include}
-    	for line in code.splitlines():
-    		stripped = line.split('#')[0]
-    		for word in include:
-    			if word in stripped:
-    				found[word] = True
-    	if not all(found.values()):
-    		return False
-    	return output in awnsers
+ include = ['']
+ found = {word: False for word in include}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     

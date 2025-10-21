@@ -1,16 +1,16 @@
 const htmlGen =  
 `
-<div id="sign-in" class="pixel-font center">
+<div id="sign-in" class="pixel-font center si-container">
     <form action="">
-        <h1>sign in</h1>
-        <div class="input-box">
+        <h1 class="si-title">sign in</h1>
+        <div class="input-box si-input-container">
             <input id="username" type="text" placeholder="Username (required)" required>
         </div>
-        <div class="input-box">
+        <div class="input-box si-output-container">
             <input id="password" type="text" placeholder="Password">
         </div>
     </form>
-    <button id="submit-button">submit</button>
+    <button id="submit-button" class="si-submit">submit</button>
 </div>
 `
 

@@ -1,12 +1,10 @@
 
-    def main():
-    	for i in range(10):
- print(i)
+def main():
+ [' f', ' o', ' r', '  ', ' i', '  ', ' i', ' n', '  ', ' r', ' a', ' n', ' g', ' e', ' (', ' 1', ' 0', ' )', ' :', ' \n', '  ', ' p', ' r', ' i', ' n', ' t', ' (', ' i', ' )', ' \n', ' \n', ' #', ' m', ' a', ' k', ' e', '  ', ' t', ' h', ' e', '  ', ' l', ' o', ' o', ' p', '  ', ' g', ' o', '  ', ' t', ' o', '  ', ' 1', ' 0', ' 0']
+ pass
 
-#make the loop go to 100
-
-    def correct(code, output):
-    	awnsers = ['0
+def correct(code, output):
+ awnsers = ['''0
 1
 2
 3
@@ -106,15 +104,15 @@
 97
 98
 99
-']
-    	include = ['']
-    	found = {word: False for word in include}
-    	for line in code.splitlines():
-    		stripped = line.split('#')[0]
-    		for word in include:
-    			if word in stripped:
-    				found[word] = True
-    	if not all(found.values()):
-    		return False
-    	return output in awnsers
+''']
+ include = ['']
+ found = {word: False for word in include}
+ for line in code.splitlines():
+  stripped = line.split('#')[0]
+  for word in include:
+   if word in stripped:
+    found[word] = True
+ if not all(found.values()):
+  return False
+ return output in awnsers
     

@@ -40,3 +40,36 @@
 .gone{
 	display: none;
 }
+
+.si-container{
+	position: absolute;
+	top: 0;
+  	left: 0;
+	transition: width .3s ease-in-out, height .3s ease-in-out;
+	width: 100vw;
+	height: 100vh;
+	border: rgba(0, 0, 0, 0.281);
+	border-radius: 100px;
+	border-style: dashed;
+	background-color: #000a;
+}
+
+.si-title{
+	position: relative;
+	left: 0%;
+	text-align: center;
+}
+
+.si-submit{
+	position: relative;
+	left: 50%;
+	text-align: center;
+
+}
+
+.big-icon{
+	position: relative;
+	background-color: #0000;
+	padding: 0%;
+	width: 100%;
+}
