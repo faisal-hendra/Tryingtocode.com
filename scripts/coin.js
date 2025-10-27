@@ -1,4 +1,5 @@
 import { CoinObj } from "./coinObj.js";
+import { setUserDatapoint } from "../firebase.js";
 
 let userCoins = localStorage.getItem("coin") || "0";
 localStorage.setItem("coin", userCoins);
@@ -57,5 +58,8 @@ export function changeNumber(amm, startString=''){
     localStorage.setItem("coin", currentCoins);
     if (counter != null){
         counter.innerHTML = startString + currentCoins;
+    }
+    if(window.user){
+        window.user
     }
 }

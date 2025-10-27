@@ -21,4 +21,5 @@ def correct(code, output):
  if not all(found.values()):
   return False
  return output in awnsers
-    
+
+print(correct())

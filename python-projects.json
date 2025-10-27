@@ -91,7 +91,7 @@
             "returns": "the number is 3\nthe number is 4\nthe number is 5\nthe number is 6\nthe number is 7\nthe number is 8\nthe number is 9\nthe number is 10\nthe number is 11\nthe number is 12\nthe number is 13\nthe number is 14\nthe number is 15\nthe number is 16\nthe number is 17\nthe number is 18\nthe number is 19\nthe number is 20\nthe number is 21\nthe number is 22\nthe number is 23\nthe number is 24\nthe number is 25\nthe number is 26\nthe number is 27\nthe number is 28\nthe number is 29\nthe number is 30\nthe number is 31\nthe number is 32\nthe number is 33\nthe number is 34\nthe number is 35\nthe number is 36\nthe number is 37\nthe number is 38\nthe number is 39\nthe number is 40\nthe number is 41\nthe number is 42\nthe number is 43\nthe number is 44\nthe number is 45\nthe number is 46\nthe number is 47\nthe number is 48\nthe number is 49\nthe number is 50\nthe number is 51\nthe number is 52\nthe number is 53\nthe number is 54\nthe number is 55\nthe number is 56\nthe number is 57\nthe number is 58\nthe number is 59\nthe number is 60\nthe number is 61\nthe number is 62\nthe number is 63\nthe number is 64\nthe number is 65\nthe number is 66\nthe number is 67\nthe number is 68\nthe number is 69\nthe number is 70\nthe number is 71\nthe number is 72\nthe number is 73\nthe number is 74\nthe number is 75\nthe number is 76\nthe number is 77\nthe number is 78\nthe number is 79\nthe number is 80\nthe number is 81\nthe number is 82\nthe number is 83\nthe number is 84\nthe number is 85\nthe number is 86\nthe number is 87\nthe number is 88\nthe number is 89\nthe number is 90\nthe number is 91\nthe number is 92\nthe number is 93\nthe number is 94\nthe number is 95\nthe number is 96\nthe number is 97\nthe number is 98\nthe number is 99\n"
         },
         "16": {
-            "title": "If this: then that",
+            "title": "If then",
             "code": "#= sets a value\n#== checks if it is a value\n\nx='banana'\n\nif x == 'apple':\n print('if statement worked!')",
             "instruction": "make this check if x is 'banana'",
             "returns": "*\n"
@@ -103,7 +103,7 @@
             "returns": "apple is good\n"
         },
         "18": {
-            "title": "If then",
+            "title": "If then 2",
             "code": "x = 1\nif x == 1:\n print('x is one')\nelse:\n print('x is not one')",
             "instruction": "make it so x is not 1",
             "returns": "*\n"
@@ -145,6 +145,12 @@
             "instruction": "make it print dog",
             "returns": "dog\n"
         }
+        "25": {
+            "title": "Elif",
+            "code": "x = 1\nif (x == 2):\n print('x is two')\nelif(x == 1):\n print('x = 1')\nelse:\n print('nah man')",
+            "instruction": "make x != 1",
+            "returns": "x is two\n"
+        }
     },
 
     "possibilities": {
@@ -167,14 +173,14 @@
             "returns": "*\n"
         },
         "4":{
-            "title": "spot the bug 2",
+            "title": "spot the bug 4",
             "code" : "def add(num1, num2):\n return num1 + num2\n\nprint(a = add(1, 5))\n\nprint",
             "instruction": "fix the bug",
             "returns": "*\n"
         },
         "5":{
-            "title": "spot the bug 2",
-            "code" : "def add(num1, num2):\n return num1 + num2\n\nprint(a = add(1, 5))\n\nprint",
+            "title": "spot the bug 5",
+            "code" : "def add(num1, num2):\n return num1 - (-num2)\n\na = add('1', '5')\n\nprint(a)",
             "instruction": "fix the bug",
             "returns": "*\n"
         }

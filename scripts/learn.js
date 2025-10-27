@@ -3,7 +3,7 @@ import { Display } from "./projects.js";
 import "./coin.js";
 import { setUserDatapoint } from "../firebase.js";
 
-if (localStorage.getItem("projects") == '') {localStorage.setItem("projects", "{}")}
+if (localStorage.getItem("projects") == '') {localStorage.setItem("projects", window.user.projects || "{}")}
 
 let loadProjects = Array.from({length: 21}, (_, i) => i + 1);
 
@@ -11,10 +11,9 @@ const SECTIONS = ["python - unit 1", "python - unit 2"];
 
 if (localStorage.getItem("section") == "") {localStorage.setItem("section"), SECTIONS[0]};
 
-
 window.addEventListener("user_made", () => {
-    localStorage.setItem("projects", window.user)
     const user = window.user
+    localStorage.setItem("projects", user.projects || "{}")
 });
 
 let toggleAboveProjects = (index, add) => {
@@ -36,7 +35,7 @@ let saveProject = (this_proj) => {
     projects[title] = content;
     localStorage.setItem("projects", JSON.stringify(projects));
     if(user){
-        setUserDatapoint(projects=projects)
+        setUserDatapoint(projects=projects);
     }
 };
 
@@ -49,8 +48,8 @@ window.addEventListener('correctCode', (details) => {
     let title = window.currentDisplay.title.innerHTML;
     let code = window.currentDisplay.textarea.value;
     saveProject(title + ":" + code);
-    console.log(details.detail.value)
-})
+    console.log(details.detail.value);
+});
 
 const loadProjectJSON = async (index) => {
     const response = await fetch('../python-projects.json');
@@ -73,7 +72,7 @@ function loadProject(this_project){
             toggleAboveProjects(this_project, shouldShow.detail);
         })
         display.setupTextarea();
-        let title = document.getElementById("main-content")
+        let title = document.getElementById("main-content");
         let code = getProject(JSON.title);
         if(code){
             display.reward = 0;

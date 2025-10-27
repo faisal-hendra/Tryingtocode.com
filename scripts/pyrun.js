@@ -1,6 +1,6 @@
 //pyrun.js 
 //make sure <script src="https://cdn.jsdelivr.net/npm/pyodide@0.28.2/pyodide.min.js"></script> is in html
-//this is for running user code, user side
+//this is for running user code, user side, safely
 window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/';
 
 let pyodide = null;
@@ -16,11 +16,9 @@ export function runUserCode(code){
 
 async function pyRun(code){
     try{
-
         //I need to await jsInput if an input is required before continuing:
 
         const asyncCode = addAwaitToInput(code);
-
 
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
@@ -90,8 +88,8 @@ function getInput(promptText = ""){
 }
 
 function addAwaitToInput(code) {
-    // This will replace all standalone input( with await input(
-    // Note: naive, will break if input is inside strings or comments
+    //This will replace all standalone input( with await input(
+    //naive, will break if input is inside strings or comments
     return code.replace(/\binput\s*\(/g, 'await input(');
 }
 
