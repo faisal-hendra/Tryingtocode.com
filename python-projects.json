@@ -144,7 +144,7 @@
             "code": "pets = ['cat', 'dog', 'snake']\n\nprint(pets[0])",
             "instruction": "make it print dog",
             "returns": "dog\n"
-        }
+        },
         "25": {
             "title": "Elif",
             "code": "x = 1\nif (x == 2):\n print('x is two')\nelif(x == 1):\n print('x = 1')\nelse:\n print('nah man')",

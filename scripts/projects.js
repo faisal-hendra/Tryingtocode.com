@@ -7,7 +7,7 @@ import { CodeArea } from "./codearea.js";
 
 let htmlGen = 
 `
-    <div id="learn-project" class="project minimized pixel-font">
+    <div id="learn-project" class="project mini pixel-font">
         <div class="top-bar">
             <div class="button">
             <button class="project-close-button">
@@ -66,7 +66,7 @@ export class Display {
         });
 
         this.projectEl.addEventListener('click', async () => {
-            if (this.projectEl.classList.contains('minimized')) {
+            if (this.projectEl.classList.contains('mini')) {
                 this.toggleElements(true);
             }
         })
@@ -143,19 +143,26 @@ export class Display {
 
     toggleElements(value=false){ // false = stop showing this project
         window.currentDisplay = this;
-        if (value) {
-            this.editClass("minimized", false);
-            this.editClass("notminimized", true);
-        } else {
-            this.editClass("minimized", true);
-            this.editClass("notminimized", false);
-        }
+
+        this.editClass("mini", !value);
+        this.editClass("notmini", value);
+        
         this.projectEl.dispatchEvent(
             new CustomEvent('toggleElements', {
-                detail: { shouldShow: this.projectEl.classList.contains("notminimized") }
+                detail: { shouldShow: this.projectEl.classList.contains("notmini") }
             }
         )
         );
+    }
+
+    //make small
+    minimize(){
+        
+    }
+
+    //make totally invisible
+    hide(){
+
     }
 
     editClass(className, set){

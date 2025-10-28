@@ -3,13 +3,21 @@ import { Display } from "./projects.js";
 import "./coin.js";
 import { setUserDatapoint } from "../firebase.js";
 
-if (localStorage.getItem("projects") == '') {localStorage.setItem("projects", window.user.projects || "{}")}
+let loadProjects = Array.from({length: 21}, (_, i) => i + 1); //just get the first 21 lessons
+const sections = ["python - unit 1", "python - unit 2"]; //temporary way of defining sections
 
-let loadProjects = Array.from({length: 21}, (_, i) => i + 1);
+let parent = document.getElementById('project-parent');
+let projects = [];
+let mainProj = true;
 
-const SECTIONS = ["python - unit 1", "python - unit 2"];
+function localStore(name, value, defaultValue=""){
+    if (localStorage.getItem(name) == ''){
+        localStorage.setItem(name, value || defaultValue)
+    }
+}
 
-if (localStorage.getItem("section") == "") {localStorage.setItem("section"), SECTIONS[0]};
+localStore("projects", window.user.projects, "{}");
+localStore("section", sections[0]);
 
 window.addEventListener("user_made", () => {
     const user = window.user
@@ -20,8 +28,8 @@ let toggleAboveProjects = (index, add) => {
     projects.slice(0, index - 1).forEach(element => {
         if (add.shouldShow == true){
             element.editClass("gone", true);
-            element.editClass("notminimized", false);
-            element.editClass("minimized", true);
+            element.editClass("notmini", false);
+            element.editClass("mini", true);
         }else{
             element.editClass("gone", false);
         }
@@ -57,16 +65,9 @@ const loadProjectJSON = async (index) => {
     return json["projects"][index];
 };
 
-
-
-let parent = document.getElementById('project-parent');
-let projects = [];
-let display;
-
-let mainProj = true;
 function loadProject(this_project){
     loadProjectJSON(this_project).then(JSON => {
-        display = new Display(document, parent, JSON);
+        const display = new Display(document, parent, JSON);
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', (shouldShow) => {
             toggleAboveProjects(this_project, shouldShow.detail);

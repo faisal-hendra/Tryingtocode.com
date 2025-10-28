@@ -1,14 +1,7 @@
-//pyrun.js 
-//make sure <script src="https://cdn.jsdelivr.net/npm/pyodide@0.28.2/pyodide.min.js"></script> is in html
-//this is for running user code, user side, safely
 window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/';
 
-let pyodide = null;
-async function initPyodide(){
-    pyodide = await loadPyodide();
-    pyodide.globals.set("input", getInput);
-}
-initPyodide();
+let pyodide = await loadPyodide();
+pyodide.globals.set("input", getInput);
 
 export function runUserCode(code){
     return pyRun(code);
