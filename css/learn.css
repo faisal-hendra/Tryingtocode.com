@@ -187,7 +187,7 @@
     
 
 
-.project.minimized {
+.project.mini {
     align-self: center;
     max-height: 200px;
     opacity: 0.7;
@@ -195,20 +195,20 @@
     flex: 0 1 32%;
 }
 
-.project.minimized p:not(#project-title), .project.minimized textarea,  .project.minimized .run-code, .project.minimized .button{
+.project.mini p:not(#project-title), .project.mini textarea,  .project.mini .run-code, .project.mini .button{
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
 }
 
-.project.notminimized p:not(#project-title), .project.notminimized textarea,  .project.notminimized .run-code, .project.notminimized .button{
+.project.notmini p:not(#project-title), .project.notmini textarea,  .project.notmini .run-code, .project.notmini .button{
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
 }
 
-.project.minimized .input-output {
+.project.mini .input-output {
     visibility: hidden;
 }
 
-.project.minimized:hover {
+.project.mini:hover {
     opacity: 1;
 }

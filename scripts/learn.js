@@ -11,27 +11,30 @@ let projects = [];
 let mainProj = true;
 
 function localStore(name, value, defaultValue=""){
-    if (localStorage.getItem(name) == ''){
+    let currentValue = localStorage.getItem(name)
+
+    if (currentValue === '' || currentValue === null){
         localStorage.setItem(name, value || defaultValue)
     }
+
+    return localStorage.getItem(name)
 }
 
-localStore("projects", window.user.projects, "{}");
+localStore("projects", '');
 localStore("section", sections[0]);
 
 window.addEventListener("user_made", () => {
     const user = window.user
-    localStorage.setItem("projects", user.projects || "{}")
+    localStore("projects", user.projects || "{}")
 });
 
 let toggleAboveProjects = (index, add) => {
-    projects.slice(0, index - 1).forEach(element => {
-        if (add.shouldShow == true){
-            element.editClass("gone", true);
-            element.editClass("notmini", false);
-            element.editClass("mini", true);
+    let aboveProjects = projects.slice(0, index - 1)
+    aboveProjects.forEach(element => {
+        if (add.shouldShow === true){
+            element.hide();
         }else{
-            element.editClass("gone", false);
+            element.minimize();
         }
     })
 }
@@ -65,7 +68,7 @@ const loadProjectJSON = async (index) => {
     return json["projects"][index];
 };
 
-function loadProject(this_project){
+let loadProject = (this_project, defaultReward=5) => {
     loadProjectJSON(this_project).then(JSON => {
         const display = new Display(document, parent, JSON);
         projects.push(display);
@@ -79,7 +82,7 @@ function loadProject(this_project){
             display.reward = 0;
             display.codeArea.createText(code);
         } else if(mainProj){
-            display.reward = 5;
+            display.reward = defaultReward;
             mainProj = false;
             display.toggleElements(true);
             console.log("main is " + display.title.innerHTML);

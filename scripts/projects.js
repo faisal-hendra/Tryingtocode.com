@@ -22,7 +22,7 @@ let htmlGen =
             <p class="project-title" id="project-title">Hello World Project:</p>
         </div>
         <p class="instructions">instructions</p>
-        <div class="player-input-parent"></div>
+        <div class="codeAreaParent"></div>
         <button name="run-button" class="run-code" class="output pixel-font">run</button>
     </div>
 `;
@@ -97,25 +97,28 @@ export class Display {
         this.projectEl = template.content.firstElementChild;
         parent.appendChild(this.content);
 
-        this.inputParent = this.projectEl.querySelector('[class="player-input-parent"]');
+        this.codeAreaParent = this.projectEl.querySelector('[class="codeAreaParent"]');
 
-        this.codeArea = new CodeArea(document, this.inputParent);
+        this.codeArea = new CodeArea(document, this.codeAreaParent);
     }
 
     findElements(){
-        this.run_button = this.projectEl.querySelector('[name="run-button"]');
-        this.output = this.projectEl.querySelector('[name="output"]');
+        const query = (_name_) => {return this.projectEl.querySelector(_name_);}
+
+        this.run_button = query('[name="run-button"]');
+        this.output = query('[name="output"]');
         this.textarea = this.codeArea.textarea;
-        this.lineNumbers = this.projectEl.querySelector(".line-numbers");
-        this.closeButton = this.projectEl.querySelector(".project-close-button");
-        this.rewindButton = this.projectEl.querySelector(".project-restart-button");
-        this.title = this.projectEl.querySelector(".project-title");
-        this.instructions = this.projectEl.querySelector(".instructions");
+        this.lineNumbers = query(".line-numbers");
+        this.closeButton = query(".project-close-button");
+        this.rewindButton = query(".project-restart-button");
+        this.title = query(".project-title");
+        this.instructions = query(".instructions");
     }    
 
     setAttributes(){
         let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.createText(this.projectJSON.code);
+        this.codeArea.editPresses(() => this.updateLineNumbers())
         let title = this.projectJSON.title;
         this.title.innerHTML = title;
         this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
@@ -156,13 +159,17 @@ export class Display {
     }
 
     //make small
-    minimize(){
-        
+    minimize(element=this){
+        element.editClass("gone", false);
+        element.editClass("notmini", false);
+        element.editClass("mini", true);
     }
 
     //make totally invisible
-    hide(){
-
+    hide(element=this){
+        element.editClass("gone", true);
+        element.editClass("notmini", false);
+        element.editClass("mini", true);
     }
 
     editClass(className, set){
@@ -181,21 +188,20 @@ export class Display {
     }
     
     setupTextarea(){
-        const updateLineNumbers = () => {
-            const lines = this.textarea.value.split('\n').length;
-            this.lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
-            this.lastLineCount = lines;
-        };
-
-        this.textarea.addEventListener('input', updateLineNumbers);
+        this.textarea.addEventListener('input', () => this.updateLineNumbers());
 
         this.textarea.addEventListener('scroll', () => {
             this.lineNumbers.scrollTop = this.textarea.scrollTop;
         });
         
-        updateLineNumbers();
+        this.updateLineNumbers();
     }
 
+    updateLineNumbers(){
+        const lines = this.textarea.value.split('\n').length;
+        this.lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
+        this.lastLineCount = lines;
+    }
 }
 
 function setupRunButton(display){

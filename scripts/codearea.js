@@ -10,7 +10,7 @@ const AREAHTML =
 </div>
 `
 export class CodeArea{
-    constructor(document, parent, codeAreaHTML=AREAHTML, lineNumber=1){
+    constructor(document, parent, codeAreaHTML=AREAHTML, lineAmm=1){
         let template = document.createElement('template');
 
         template.innerHTML = codeAreaHTML.trim();
@@ -20,28 +20,37 @@ export class CodeArea{
 
         this.textarea = this.projectEl.querySelector('textarea[name=user-code]');
 
+        this.lineAmm = lineAmm;
+    }
+
+    //called by project.js 
+    editPresses(call, tab=" "){
         this.textarea.addEventListener('keydown', function(event) {
             if (event.keyCode === 9) {
                 event.preventDefault();
                 let start = this.selectionStart;
                 let end = this.selectionEnd;
-                this.value = this.value.substring(0, start) + " " + this.value.substring(end);
+                this.value = this.value.substring(0, start) + tab + this.value.substring(end);
                 this.selectionStart = this.selectionEnd = start + 1;
             }
+            if (event.keyCode === 13){
+                let end = this.selectionEnd;
+                let end_value = this.value.substring(end - 1, end);
+                if(end_value === ":"){
+                    let start = this.selectionStart;
+                    event.preventDefault();
+                    this.value = this.value.substring(0, start) + "\n" + tab + this.value.substring(end);
+                }
+            }
+            call();
         });
-
-        this.lineNumber = lineNumber;
     }
 
     createText(value){
         this.textarea.value = value;
-        for (let index = 0; index < this.lineNumber - 1; index++) {
+        for (let index = 0; index < this.lineAmm - 1; index++) {
             this.textarea.value += "\n";
         }
         return this.textarea.value.split("\n").length;
-    }
-
-    returnValues(){
-        return this.content;
     }
 }
