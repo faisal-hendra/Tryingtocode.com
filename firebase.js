@@ -26,7 +26,7 @@ function anon(auth){
 }
 
 export async function createEmail(email, password){
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
         const user = userCredential.user;
         alert("creating account...");
         return user;
@@ -85,14 +85,33 @@ export async function initUserData(user){
 }
 
 export async function setUserDatapoint(email=null, displayName=null, coins=null, projects=null){
-    const userRef = doc(db, "users", window.user.id)
+    if (!window.user) return console.warn("No user yet");
+    
+    const userRef = doc(db, "users", window.user.uid)
     const updatedSnap = await getDoc(userRef);
+    const data = updatedSnap.data() || {};
+
+    //console.log("data: ", data.email, data.displayName, data.coins, data.projects);
+    //console.log("function: ", email, displayName, coins, projects);
+    console.log("data projects: ", projects);
+    console.log("data projects: ", Object.keys(JSON.parse(projects)).length);
+
+
+    let saveProjectList = {}
+    if(data.length > Object.keys(JSON.parse(projects)).length) {
+        saveProjectList = data.projects;
+    } else if (projects != null){
+        saveProjectList = JSON.parse(projects);
+    }
+
+    //console.log("choice", saveProjectList);
+
     await setDoc(userRef, {
-        email: email || updatedSnap.email,
-        displayName: displayName || updatedSnap.displayName,
-        coins: coins || updatedSnap.coins,
-        projects: projects || updatedSnap.projects
-    });
+        email: email ?? data.email ?? null,
+        displayName: displayName ?? data.displayName ?? "guest",
+        coins: coins ?? data.coins ?? 0,
+        projects: saveProjectList ?? {}
+    }, { merge: true });
 }
 
 onAuthStateChanged(auth, async (user) => {
