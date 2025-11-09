@@ -23,7 +23,7 @@ let htmlGen =
         </div>
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>
-        <button name="run-button" class="run-code" class="output pixel-font">run</button>
+        <button name="run-button" class="run-code run-button"><img src="./components/art/play button 1 - big.png"></img></button>
     </div>
 `;
 
@@ -33,22 +33,24 @@ let correctCode = new CustomEvent("correctCode", {
     }
 });
 
-async function isCorrectCode(code, output, JSON){
-    if(JSON.returns != "*/n" && output == JSON.returns){
-        return true;
-    }
+async function isCorrectCode(code, output, JSON, blankOutput="*"){
     let correct = false;
 
-    let checkerCode = await fetch(`./projects/python - unit 1/${JSON.title}.json`);
-    //const checkerJSON = await checkerCode.json();
-
-    correct = await runUserCode(checkerCode);
-
-    correct = runUserCode(checkerCode);
-    if(correct){
-        return true;
+    //if we care about the output (blankOutput if we don't), we run this:
+    if(!JSON.returns.includes(blankOutput) && output == JSON.returns){
+        correct = true;
     }
-    return false;
+
+    //if we need to care about the actual code content, we will run this:
+    if(JSON.includes !== "" && JSON.includes !== null){
+        code.split("\n").forEach(line => {
+            if(line.includes(JSON.includes)){
+                correct = true;
+            }
+        });
+    }
+    
+    return correct;
 }
 
 export class Display {

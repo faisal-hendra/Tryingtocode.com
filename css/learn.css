@@ -166,10 +166,6 @@
     flex: 1 1 100%;
 }
 
-/* .first {
-    order: -1;
-} */
-
 .gone {
     max-height: 0px !important;
     padding: 0 !important;
@@ -180,11 +176,6 @@
     overflow: hidden !important;
     flex: 0 0 0 !important;
 }
-
-/* .gone p{
-    color: #00000000;
-} */
-    
 
 
 .project.mini {
@@ -211,4 +202,22 @@
 
 .project.mini:hover {
     opacity: 1;
+}
+
+
+.run-button {
+    border: #00000000;
+    border-radius: 0%;
+    background: none;
+}
+
+.run-button:active {
+    border: #000000;
+    border-radius: 10%;
+    background:fixed;
+    transform: translateY(10px);
+}
+
+.run-button:hover:not(:active) {
+    transform: translateY(-1px);
 }

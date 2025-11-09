@@ -45,7 +45,7 @@ let saveProject = (this_proj) => {
     let projects = JSON.parse(localStorage.getItem("projects") || "{}");
     projects[title] = content;
     localStorage.setItem("projects", JSON.stringify(projects));
-    if(user){
+    if(user && projects !== "{}"){
         setUserDatapoint(projects=projects);
     }
 };

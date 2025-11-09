@@ -51,7 +51,7 @@
         "9": {
             "title": "DIY",
             "code": "#try getting player input, and do something with it:\n\ni = input)\n\nprint)",
-            "instruction": "if you need an idea, maybe ask the user if they like cookies",
+            "instruction": "",
             "returns": "*"
         },
         "10": {
