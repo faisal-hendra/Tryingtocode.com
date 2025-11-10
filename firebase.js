@@ -93,9 +93,8 @@ export async function setUserDatapoint(email=null, displayName=null, coins=null,
 
     //console.log("data: ", data.email, data.displayName, data.coins, data.projects);
     //console.log("function: ", email, displayName, coins, projects);
-    console.log("data projects: ", projects);
-    console.log("data projects: ", Object.keys(JSON.parse(projects)).length);
-
+    //console.log("data projects: ", projects);
+    //console.log("data projects: ", Object.keys(JSON.parse(projects)).length);
 
     let saveProjectList = {}
     if(data.length > Object.keys(JSON.parse(projects)).length) {
@@ -103,8 +102,6 @@ export async function setUserDatapoint(email=null, displayName=null, coins=null,
     } else if (projects != null){
         saveProjectList = JSON.parse(projects);
     }
-
-    //console.log("choice", saveProjectList);
 
     await setDoc(userRef, {
         email: email ?? data.email ?? null,

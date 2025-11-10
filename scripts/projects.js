@@ -27,7 +27,7 @@ let htmlGen =
     </div>
 `;
 
-let correctCode = new CustomEvent("correctCode", {
+var correctCode = new CustomEvent("correctCode", {
     detail: {
         value: 5
     }
@@ -37,19 +37,27 @@ async function isCorrectCode(code, output, JSON, blankOutput="*"){
     let correct = false;
 
     //if we care about the output (blankOutput if we don't), we run this:
-    if(!JSON.returns.includes(blankOutput) && output == JSON.returns){
+    if(JSON.returns.includes(blankOutput) || output == JSON.returns){
         correct = true;
     }
 
-    //if we need to care about the actual code content, we will run this:
+    //if we care about code content, run this:
     if(JSON.includes !== "" && JSON.includes !== null){
         code.split("\n").forEach(line => {
-            if(line.includes(JSON.includes)){
-                correct = true;
+            JSONAnd = "&&&";
+            correct = false;
+            JSON.includes.split(JSONAnd).forEach(){
+                if(line.includes(JSON.includes)){
+                    correct = true;
+                }
+            }
+            if(!correct){
+                return false;
             }
         });
     }
     
+    console.log("it was correct? ", correct)
     return correct;
 }
 
@@ -206,21 +214,34 @@ export class Display {
     }
 }
 
+function rewardPlayer(display){
+    console.log("reward, ", display.reward);
+
+    if(display.reward !== 0 && display.reward !== null){
+        console.log("reward 2");
+        correctCode = new CustomEvent("correctCode", {
+            detail: {
+                value: (display.reward !== undefined) ? display.reward : 5
+            }
+        });
+            
+        window.dispatchEvent(correctCode);
+        display.reward = 0;
+    }
+}
+
 function setupRunButton(display){
     display.run_button.addEventListener('click', async () => {
         let value = display.textarea.value;
         let codeReturn = await display.displayUserCode(value);
-        if(isCorrectCode(value, codeReturn, display.projectJSON)){
-            correctCode = new CustomEvent("correctCode", {
-                detail: {
-                    value: (display.reward !== undefined) ? display.reward : 5
-                }
-            });
-            window.dispatchEvent(correctCode);
-            display.reward = 0;
-        }
-        else{
-            console.log("user code was " + codeReturn + " || But the code should've been " + display.projectJSON.returns);
-        }
+        correctCode = isCorrectCode(value, codeReturn, display.projectJSON).then((output) => {
+            if(output){
+                rewardPlayer(display);
+            }
+            else{
+                console.log("user code was " + codeReturn + " || But the code should've been " + display.projectJSON.returns);
+            }
+        });
+        
     });
 }

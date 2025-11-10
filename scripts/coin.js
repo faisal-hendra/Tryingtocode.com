@@ -19,6 +19,7 @@ if(canvas){
     ctx = canvas.getContext('2d');
     title = document.getElementById("main-title");
     window.addEventListener('correctCode', (details) => {
+        console.log(details);
         getCoin(details.detail.value, counter, title);
     });
     window.requestAnimationFrame(draw);
