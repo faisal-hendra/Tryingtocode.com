@@ -3,16 +3,20 @@ import { Display } from "./projects.js";
 import "./coin.js";
 import { setUserDatapoint } from "../firebase.js";
 
-let beginnerPythonProjects = Array.from({length: 4}, (_, i) => [i + 1, "beginner"]);
-let mainPythonProjects = Array.from({length: 21}, (_, i) => [i + 1, "projects"]); //just get the first 21 lessons
-let loadProjects = beginnerPythonProjects + mainPythonProjects;
-console.log(loadProjects);
+let beginnerPythonProjects = Array.from({length: 5}, (_, i) => [i + 1, "beginner"]);
+let mainPythonProjects = Array.from({length: 25}, (_, i) => [i + 1, "projects"]); //just get the first 21 lessons
+let loadProjects = beginnerPythonProjects.concat(mainPythonProjects);
 const sections = ["python - unit 1", "python - unit 2"]; //temporary way of defining sections
 const DEFAULTREWARD = 5;
 
 let parent = document.getElementById('project-parent');
 let projects = [];
 let mainProj = true;
+
+window.resetStats = () => {
+    localStorage.setItem("projects", "{}");
+    localStorage.removeItem("coin");
+}
 
 function localStore(name, value, defaultValue=""){
     let currentValue = localStorage.getItem(name)
@@ -21,7 +25,7 @@ function localStore(name, value, defaultValue=""){
         localStorage.setItem(name, value || defaultValue)
     }
 
-    return localStorage.getItem(name)
+    return localStorage.getItem(name);
 }
 
 localStore("projects", '');
@@ -73,13 +77,13 @@ const loadProjectJSON = async (index, section="projects") => {
     return json[section][index];
 };
 
-let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects") => {
+let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects", projectIndex=0) => {
     loadProjectJSON(this_project, section).then(JSON => {
         const display = new Display(document, parent, JSON);
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', (shouldShow) => {
-            toggleAboveProjects(this_project, shouldShow.detail);
-        })
+            toggleAboveProjects(projectIndex, shouldShow.detail);
+        });
         display.setupTextarea();
         let title = document.getElementById("main-content");
         let code = getProject(JSON.title);
@@ -96,6 +100,12 @@ let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects"
     });
 }
 
-for (let item of loadProjects){
-    loadProject(item[0], DEFAULTREWARD, item[1]);
+let loadProjectsFunction = (projectsList) => {
+    let projectIndex = 0;
+    for (let item of projectsList){
+        projectIndex++;
+        loadProject(item[0], DEFAULTREWARD, item[1], projectIndex);
+    }
 }
+
+loadProjectsFunction(loadProjects)

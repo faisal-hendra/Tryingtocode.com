@@ -41,13 +41,15 @@ def delete_lesson(filename, index):
 
 # new lesson to be made \/
 new_lesson = {
-    "section": "python - unit 1",
-    "title": "New Concept",
-    "code": "print('new lesson')",
-    "instruction": "Try this new step!",
-    "returns": "the user should make it return this",
-    "includes": "print"
+    "section": "python unit 1",
+    "title": "Two Inputs",
+    "code": "input('this is input one: ') input('this is input two: ')",
+    "instruction": "run and enter (press enter in the output box) both inputs",
+    "returns": "*",
+    "includes": "input("
 }
+
+insert_lesson('python-projects.json', 10, new_lesson)
 
 def code_string(lesson=new_lesson):
     indent_lessons = [f" {les}" for les in lesson['code'].splitlines()]
@@ -79,6 +81,7 @@ def correct(code, output):
 
 #create new lesson at index 1
 #insert_lesson('python-projects.json', 1, new_lesson)
+
 
 #delete lesson at index 1
 #delete_lesson('python-projects.json', 1)

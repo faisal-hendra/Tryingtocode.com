@@ -1,3 +1,5 @@
+let ogDemensions = [window.screen.availWidth, window.screen.availHeight];
+
 export class CoinObj{
     constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null){
         this.go_to = go_to;
@@ -49,6 +51,7 @@ export class CoinObj{
     }
 
     RenderImage(ctx, sprite, frames=1, index=0){
+        ctx.imageSmoothingEnabled = false;
         let image = new Image();
         image.src = sprite;
 
@@ -57,15 +60,17 @@ export class CoinObj{
         let frameOffset = spriteWidth * index;
         let sizeMultiplier = .25;
 
-        let destination = [this.x_pos * (this.canvas.width / this.originalCanvasWidth), this.y_pos * (this.canvas.width / this.originalCanvasWidth)]
-        let destinationSize = [spriteWidth * sizeMultiplier * (this.canvas.width / this.originalCanvasWidth), spriteHeight * sizeMultiplier * (this.canvas.height / this.originalCanvasHeight)];
+        let destination = [this.x_pos, this.y_pos];
+        let size = 10;
+        let scaledWidth = (ogDemensions[0] / window.innerWidth) * size; 
+        let scaledHeight = (ogDemensions[1] / window.innerHeight) * size;
 
         ctx.drawImage(
             image,
             frameOffset, 0,                         // source x, y
             spriteWidth, spriteHeight,              // source width, height
             destination[0], destination[1],         // destination x, y
-            destinationSize[0], destinationSize[1]  // destination width, height
+            scaledWidth, scaledHeight               // destination width, height
         );
     }
 }

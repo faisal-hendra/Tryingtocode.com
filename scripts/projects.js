@@ -169,7 +169,7 @@ export class Display {
                     resolve(this.output.value.slice(this.old.length));
                 }
                 if(e.key === "Backspace"){
-                    e.preventDefault();
+                    
                 }
             }
             this.output.addEventListener("keydown", handler);
@@ -238,7 +238,14 @@ export class Display {
 
 function rewardPlayer(display){
     console.log("reward, ", display.reward);
-
+    console.error("get rid of below")
+    correctCode = new CustomEvent("correctCode", {
+            detail: {
+                value: 5
+            }
+        });
+    window.dispatchEvent(correctCode);
+    console.error("get rid of above")
     if(display.reward !== 0 && display.reward !== null){
         console.log("reward 2");
         correctCode = new CustomEvent("correctCode", {
@@ -268,3 +275,4 @@ function setupRunButton(display){
         
     });
 }
+

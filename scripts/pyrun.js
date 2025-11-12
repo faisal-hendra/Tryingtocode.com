@@ -16,13 +16,7 @@ async function pyRun(code){
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
-        await pyodide.runPythonAsync(`
-import asyncio
-async def main():
-    ${asyncCode.replace(/\n/g, '\n    ')}
-    pass
-asyncio.run(main())
-        `);
+        await pyodide.runPythonAsync(asyncCode);
 
         return output;
 
