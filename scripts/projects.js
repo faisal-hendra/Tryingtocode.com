@@ -2,6 +2,7 @@
 
 import { runUserCode } from "./pyrun.js";
 import { CodeArea } from "./codearea.js";
+import { getTree } from "./pyrun.js";
 
 //general use
 
@@ -59,6 +60,19 @@ function checkInclusion(code, JSON, splitJSON="&&&"){
     return true;
 }
 
+function hasPrintCall(astNode) {
+    if (astNode.type === "Call" && astNode.func && astNode.func.id === "print") {
+        return true;
+    }
+    if (astNode.body) {
+        return astNode.body.some(hasPrintCall);
+    }
+    if (Array.isArray(astNode)) {
+        return astNode.some(hasPrintCall);
+    }
+    return false;
+}
+
 async function isCorrectCode(code, output, JSON, blankOutput="*"){
     let correct = false;
 
@@ -71,6 +85,12 @@ async function isCorrectCode(code, output, JSON, blankOutput="*"){
 
     //in this case we know that the code is incorrect
     if(careAboutOutput && !correctOutput) {return false;}
+
+    let codeTree = await getTree(code);
+    console.log("code tree: ", codeTree, hasPrintCall(codeTree));
+    for(key of codeTree.keys()){
+        console.log(key);
+    }
 
     //if we care about code content, run this:
     if(JSON.includes != null){
@@ -238,13 +258,13 @@ export class Display {
 
 function rewardPlayer(display){
     console.log("reward, ", display.reward);
-    console.error("get rid of below")
+    /*console.error("get rid of below")
     correctCode = new CustomEvent("correctCode", {
             detail: {
                 value: 5
             }
         });
-    window.dispatchEvent(correctCode);
+    window.dispatchEvent(correctCode);*/
     console.error("get rid of above")
     if(display.reward !== 0 && display.reward !== null){
         console.log("reward 2");

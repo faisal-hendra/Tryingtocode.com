@@ -16,6 +16,7 @@ export class CoinObj{
             this.originalCanvasWidth = canvas.width;
             this.originalCanvasHeight = canvas.height;
         }
+        this.image = new Image();
     }
 
     tick(speed=1){
@@ -52,11 +53,10 @@ export class CoinObj{
 
     RenderImage(ctx, sprite, frames=1, index=0){
         ctx.imageSmoothingEnabled = false;
-        let image = new Image();
-        image.src = sprite;
+        this.image.src = sprite;
 
-        let spriteWidth = image.width / frames;
-        let spriteHeight = image.height;
+        let spriteWidth = this.image.width / frames;
+        let spriteHeight = this.image.height;
         let frameOffset = spriteWidth * index;
         let sizeMultiplier = .25;
 
@@ -66,7 +66,7 @@ export class CoinObj{
         let scaledHeight = (ogDemensions[1] / window.innerHeight) * size;
 
         ctx.drawImage(
-            image,
+            this.image,
             frameOffset, 0,                         // source x, y
             spriteWidth, spriteHeight,              // source width, height
             destination[0], destination[1],         // destination x, y

@@ -260,5 +260,16 @@
             "returns": "*",
             "includes": "input("
         }
+    },
+    "beginner-2": {
+        "1": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*"
+        }
     }
 }

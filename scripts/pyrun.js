@@ -11,12 +11,12 @@ async function pyRun(code){
     try{
         //I need to await jsInput if an input is required before continuing:
 
-        const asyncCode = addAwaitToInput(code);
-
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
-        await pyodide.runPythonAsync(asyncCode);
+        for (let line of code.split("\n")){
+            await pyodide.runPythonAsync(line);
+        }
 
         return output;
 
@@ -74,9 +74,28 @@ function getInput(promptText = ""){
     return window.currentDisplay.getInput();
 }
 
-function addAwaitToInput(code) {
-    //This will replace all standalone input( with await input(
-    //naive, will break if input is inside strings or comments
-    return code.replace(/\binput\s*\(/g, 'await input(');
+export async function getTree(code){
+    let tree = await pyodide.runPythonAsync(`
+        import ast, json
+
+        def ast_to_dict(node):
+            if isinstance(node, ast.AST):
+                result = {"type": type(node).__name__}
+                for field in node._fields:
+                    result[field] = ast_to_dict(getattr(node, field))
+                return result
+            elif isinstance(node, list):
+                return [ast_to_dict(n) for n in node]
+            else:
+                return node
+
+        tree = ast_to_dict(ast.parse("""${code}"""))
+        json.dumps(tree)
+    `);
+    tree = JSON.parse(tree);
+    return tree;
 }
 
+async function serverRun(code){
+    
+}
