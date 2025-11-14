@@ -7,6 +7,10 @@ export function runUserCode(code){
     return pyRun(code);
 } 
 
+async function simplePyRun(code){
+    return await pyodide.runPythonAsync(code);
+}
+
 async function pyRun(code){
     try{
         //I need to await jsInput if an input is required before continuing:
@@ -22,6 +26,11 @@ async function pyRun(code){
 
     }
     catch (error){
+        try{
+            return await simplePyRun()
+        }
+        catch{
+
         console.log("Error running py code: ", error);
 
         if (error instanceof Error && typeof error.message === "string") {
@@ -55,11 +64,12 @@ async function pyRun(code){
 
             relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
             return relevantLines.join('\n');
-        }
+        }}
         return "Unknown error - Look around in your code for clues";
     }
     console.log("the impossible just happened!!!? (uhm talk to a developer RN this is weird)")
     return false;
+
 }
 
 function getInput(promptText = ""){
@@ -97,5 +107,5 @@ export async function getTree(code){
 }
 
 async function serverRun(code){
-    
+    //new code here
 }
