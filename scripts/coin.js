@@ -9,23 +9,11 @@ let counter = document.getElementById("coin-counter");
 changeNumber(0)
 
 let canvas = document.getElementById('render-canvas');
-let ctx;
 
 const coinImgSrc = '../components/art/ttc coin icon.png';
 let objects = [];
 
-let title;
-if(canvas){
-    ctx = canvas.getContext('2d');
-    title = document.getElementById("main-title");
-    window.addEventListener('correctCode', (details) => {
-        console.log(details);
-        getCoin(details.detail.value, counter, title);
-    });
-    window.requestAnimationFrame(draw);
-}
-
-function draw(sizeX=30, sizeY=300) {
+let draw = (sizeX=30, sizeY=300) => {
     ctx.clearRect(0, 0, sizeX, sizeY);
     objects.forEach(element => {
         element.RenderImage(ctx, coinImgSrc);
@@ -40,14 +28,25 @@ function draw(sizeX=30, sizeY=300) {
     window.requestAnimationFrame(draw);
 }
 
+if(canvas){
+    var ctx = canvas.getContext('2d');
+    var title = document.getElementById("main-title");
+    window.addEventListener('correctCode', (details) => {
+        console.log(details);
+        getCoin(details.detail.value, counter, title);
+    });
+    window.requestAnimationFrame(draw);
+}
+
 export function getCoin(amm, go_to, startElementPos, startString = ''){
     for (let index = 0; index < amm; index++) {
+        let clientRect = startElementPos.getBoundingClientRect();
         let coinObj = new CoinObj(
-            go_to, 
-            startElementPos.getBoundingClientRect().left + window.scrollX, 
-            startElementPos.getBoundingClientRect().top + window.scrollY, 
-            Math.random() * 10, 
-            Math.random() * 10, 
+            go_to,
+            clientRect.left + window.scrollX,
+            clientRect.top + window.scrollY,
+            Math.random() * 10,
+            Math.random() * 10,
             canvas
         );
         objects.push(coinObj);
@@ -62,5 +61,6 @@ export function changeNumber(amm, startString=''){
     }
     if(window.user){
         window.user
+        console.error("do something here? I don't remember what.");
     }
 }

@@ -75,6 +75,36 @@ export class CoinObj{
     }
 }
 
+class SpriteImage{
+    constructor(ctx, sprite, image){
+        this.ctx = ctx;
+        this.sprite = sprite;
+        this.image = image;
+    }
+
+    RenderImage(position_x=0, position_y=0, frames=1, index=0){
+        this.ctx.imageSmoothingEnabled = false;
+
+        let spriteWidth = this.image.width / frames;
+        let spriteHeight = this.image.height;
+        let frameOffset = spriteWidth * index;
+        let sizeMultiplier = .25;
+
+        let destination = [this.x_pos, this.y_pos];
+        let size = 10;
+        let scaledWidth = (ogDemensions[0] / window.innerWidth) * size; 
+        let scaledHeight = (ogDemensions[1] / window.innerHeight) * size;
+
+        ctx.drawImage(
+            this.image,
+            frameOffset, 0,                         // source x, y
+            spriteWidth, spriteHeight,              // source width, height
+            destination[0], destination[1],         // destination x, y
+            scaledWidth, scaledHeight               // destination width, height
+        );
+    }
+}
+
 function getAbsolutePosition(el) {
     const rect = el.getBoundingClientRect();
     return {

@@ -4,12 +4,31 @@ let pyodide = await loadPyodide();
 pyodide.globals.set("input", getInput);
 
 export function runUserCode(code){
-    return pyRun(code);
+    let wrappedCode = makeWrapper(code);
+    return pyRun(wrappedCode);
 } 
 
 async function simplePyRun(code){
-    return await pyodide.runPythonAsync(code);
+    let output;
+    for (let line of code.split("\n")){
+        output.push(await pyodide.runPythonAsync(line));
+    }
+    return output;
 }
+
+let makeWrapper = (code) => {
+    const wrapper = `
+import asyncio
+async def SUPERMAIN():
+    ${code}
+    pass
+asyncio.run(SUPERMAIN())
+`   ;
+
+    return wrapper;
+}
+
+
 
 async function pyRun(code){
     try{
@@ -18,9 +37,8 @@ async function pyRun(code){
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
-        for (let line of code.split("\n")){
-            await pyodide.runPythonAsync(line);
-        }
+        await pyodide.runPythonAsync(code);
+        console.log("output: ", output, " wrappedcode = ", code);
 
         return output;
 

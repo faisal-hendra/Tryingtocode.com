@@ -88,9 +88,9 @@ async function isCorrectCode(code, output, JSON, blankOutput="*"){
 
     let codeTree = await getTree(code);
     console.log("code tree: ", codeTree, hasPrintCall(codeTree));
-    for(key of codeTree.keys()){
+    /*for(key of codeTree.keys()){
         console.log(key);
-    }
+    }*/
 
     //if we care about code content, run this:
     if(JSON.includes != null){
