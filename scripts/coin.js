@@ -49,7 +49,7 @@ export function getCoin(amm, go_to, startElementPos, startString = ''){
             Math.random() * 10,
             canvas,
             ctx,
-
+            coinImgSrc
         );
         objects.push(coinObj);
     }
