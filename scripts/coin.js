@@ -6,7 +6,7 @@ localStorage.setItem("coin", userCoins);
 
 let counter = document.getElementById("coin-counter");
 
-changeNumber(0)
+changeNumber(0);
 
 let canvas = document.getElementById('render-canvas');
 
@@ -16,7 +16,7 @@ let objects = [];
 let draw = (sizeX=30, sizeY=300) => {
     ctx.clearRect(0, 0, sizeX, sizeY);
     objects.forEach(element => {
-        element.RenderImage(ctx, coinImgSrc);
+        element.spriteImage.RenderImage(ctx, coinImgSrc);
         element.tick(.1);
         element.gravitate(counter);
         let gt_rect = counter.getBoundingClientRect();
@@ -47,7 +47,9 @@ export function getCoin(amm, go_to, startElementPos, startString = ''){
             clientRect.top + window.scrollY,
             Math.random() * 10,
             Math.random() * 10,
-            canvas
+            canvas,
+            ctx,
+
         );
         objects.push(coinObj);
     }

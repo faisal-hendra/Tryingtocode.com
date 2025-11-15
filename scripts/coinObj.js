@@ -1,7 +1,7 @@
 let ogDemensions = [window.screen.availWidth, window.screen.availHeight];
 
 export class CoinObj{
-    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null){
+    constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null, ctx=null, sprite=null){
         this.go_to = go_to;
 
         this.x_pos = x_pos;
@@ -17,6 +17,7 @@ export class CoinObj{
             this.originalCanvasHeight = canvas.height;
         }
         this.image = new Image();
+        this.spriteImage = new SpriteImage(ctx, image);
     }
 
     tick(speed=1){
@@ -51,9 +52,12 @@ export class CoinObj{
         this.dead = true;
     }
 
-    RenderImage(ctx, sprite, frames=1, index=0){
-        ctx.imageSmoothingEnabled = false;
-        this.image.src = sprite;
+    RenderImage(sprite, frames=1, index=0){
+        //ctx.imageSmoothingEnabled = false;
+
+        this.spriteImage.RenderImage(this.x_pos, this.y_pos);
+
+        /*this.image.src = sprite;
 
         let spriteWidth = this.image.width / frames;
         let spriteHeight = this.image.height;
@@ -71,14 +75,13 @@ export class CoinObj{
             spriteWidth, spriteHeight,              // source width, height
             destination[0], destination[1],         // destination x, y
             scaledWidth, scaledHeight               // destination width, height
-        );
+        );*/
     }
 }
 
 class SpriteImage{
-    constructor(ctx, sprite, image){
+    constructor(ctx, image){
         this.ctx = ctx;
-        this.sprite = sprite;
         this.image = image;
     }
 
