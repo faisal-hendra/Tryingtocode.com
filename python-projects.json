@@ -63,10 +63,10 @@
         "6": {
             "title": "Variable 1",
             "code": "x = 1\n",
-            "instruction": "",
-            "output-includes": "",
+            "instruction": "make x equal 2",
+            "output-includes": "*",
             "output-discludes": "*",
-            "code-includes": "*",
+            "code-includes": "x = 2",
             "code-discludes": "*",
             "failure-shows": "*"
         },

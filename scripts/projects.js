@@ -365,12 +365,12 @@ function setupRunButton(display){
         let output = await display.displayUserCode(value);
         let json = display.projectJSON;
         console.log(json);
-        correctCode = isCorrectCode(value, json, output).then((output) => {
-            if(output){
+        correctCode = isCorrectCode(value, json, output).then((correct) => {
+            if(correct){
                 rewardPlayer(display);
             }
             else{
-                console.log("user code was " + codeReturn + " || But the code should've been " + display.projectJSON["output-includes"]);
+                console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
             }
         });
         

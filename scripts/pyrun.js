@@ -3,11 +3,19 @@ window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/';
 let pyodide = await loadPyodide();
 pyodide.globals.set("input", getInput);
 
-export function runUserCode(code){
-    let checkAsync;
-    code = makeAsync(code);
-    printTree(code);
-    return pyRun(code);
+export async function runUserCode(code){
+    console.log('code is ', code);
+    let tree = await getTree(code);
+    console.log(tree);
+    let isAsync = checkAsync(tree);
+    //printTree(tree);
+    if (isAsync === true){
+        code = makeAsync(code);
+        let tree = await getTree(code);
+        printTree(tree);
+    }
+    console.log('new code is ', code);
+    return await pyRun(code);
 } 
 
 let printTree = async (code) => {
@@ -17,7 +25,7 @@ let printTree = async (code) => {
 }
 
 async function simplePyRun(code){
-    let output;
+    let output = [];
     for (let line of code.split("\n")){
         output.push(await pyodide.runPythonAsync(line));
     }
@@ -28,11 +36,15 @@ let checkBody = (body, functionName) => {
     let elements = [];
     body.forEach(key => {
         const element = key;
+        console.log('element id: ', element?.value?.func?.id);
         if(element?.value?.func?.id == functionName){
             elements.push(element);
         }
         if(element?.body != undefined){
-            elements.push(checkBody(element.body));
+            let bodyElements = checkBody(element.body)
+            bodyElements.forEach(subElement => {
+                elements.push(subElement);
+            });
         }
     });
     return elements;
@@ -48,18 +60,20 @@ let checkElementFor = (element, functionName="print") => {
     if(body != null){
         console.log("body: ", body);
         elements.push(checkBody(body, functionName));
+        console.log("element list: ", elements);
     }
 
     const functions = element?.func;
     console.log("functions ",functions);
 
-    return elements
+    return elements;
 }
 
 let checkAsync = (tree) => {
     console.log("tree is ", tree);
-
-    return checkElementFor(tree, "input") != null;
+    const asyncElems = checkElementFor(tree, "input");
+    console.log("async elems", asyncElems);
+    return asyncElems.length > 0 && asyncElems[0] != [];
 }
 
 let makeAsync = (code) => {
@@ -95,7 +109,7 @@ async function pyRun(code){
     }
     catch (error){
         try{
-            return await simplePyRun()
+            return await simplePyRun(code);
         }
         catch (simpleError){
             console.log("Error running py code: ", error);
