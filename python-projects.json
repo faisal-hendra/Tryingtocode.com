@@ -23,7 +23,7 @@
         "2": {
             "title": "Edit 1",
             "code": "print('you  it!')",
-            "instruction": "make it into: print('you did it!')",
+            "instruction": "make the code: print('you did it!')",
             "output-includes": "you did it!",
             "output-discludes": "*",
             "code-includes": "print('you did it!')",
@@ -33,7 +33,7 @@
         "3": {
             "title": "Run 2",
             "code": "#this won't show anything",
-            "instruction": "Run it (the green button)",
+            "instruction": "Run the code (the green button)",
             "output-includes": "*",
             "output-discludes": "**",
             "code-includes": "#",
@@ -59,6 +59,26 @@
             "code-includes": "*",
             "code-discludes": "*",
             "failure-shows": "(check the last lesson)"
+        },
+        "6": {
+            "title": "Variable 1",
+            "code": "x = 1\n",
+            "instruction": "",
+            "output-includes": "",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "7": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
         }
     }
 }

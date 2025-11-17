@@ -12,6 +12,7 @@
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 2rem;
+    --sidebar-width: 10rem
 }
 
 
@@ -98,7 +99,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
 	height: 100%;
-	width: max(10rem, 8vw);
+	width: var(--sidebar-width);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -110,7 +111,7 @@ body {
 }
 
 .main-content {
-	margin-left: max(9rem, 8vw);
+	margin-left: var(--sidebar-width);
 	padding: 20px;
 	z-index: var(--z-base);
 }
@@ -184,10 +185,6 @@ canvas{
     image-rendering: crisp-edges;
 }
 
-.center{
-    position: absolute;
-    right: 50%;
-}
 
 .image-button{
     color: #0000;
@@ -195,4 +192,5 @@ canvas{
     border-radius: 0px;
     border-color: #0000;
     cursor: pointer;
+    width: 150px;
 }

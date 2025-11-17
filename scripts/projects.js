@@ -125,10 +125,11 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
     }
 
     if(whole === '**') { /* any */ 
-        if (checkInclusion(oppositeParts, '')){
-            console.log('this is true if the opposite has anything at all');
+        if (parts == ""){
+            console.log('this is true if it has nothing');
+            return null;
         }
-        return true;
+        return false;
     }
 
     const partsSplit = '\n'
@@ -138,25 +139,18 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
     for (let index = 0; index < whole.split("&&&").length; index++) {
         const element = whole.split("&&&")[index];
         pass = false;
-        console.log("element: ", element, "parts: ", parts);
         parts.split(partsSplit).forEach(part => {
-            console.log("element: ", element, "part: ", part, " loop");
-            if((part).includes(element) && part != ""){
-                console.log("element is: ", element, " part is the same as element: ", part, true);
+            if((part.toLowerCase()).includes(element.toLowerCase()) && part != ""){
                 pass = true;
                 part = 'pass';
             }
         });
         if(pass == false){
-            console.log("return false");
             pass = false;
             break;
         }
         pass = true;
     }
-
-    console.log(parts);
-    console.log("pass through: ", pass);
     return pass;
 }
 
@@ -165,21 +159,26 @@ let isCorrectCode = async (code, json, output) => {
         return false;
     }
 
-    console.log('output is: ', output, 'output something is'.includes('output  is'));
-
     let tree = await getTree(code);
 
     let O = [json['output-includes'], json['output-discludes']];
     let C = [json['code-includes'], json['code-discludes']];
 
-    let OI = checkInclusion(output, O[0], O[1]) || true;
-    let OD = !checkInclusion(output, O[1], O[0]) || true;
-    let CI = checkInclusion(code, C[0], C[1]) || true;
-    let CD = !checkInclusion(code, C[1], C[0]) || true;
+    let OI = checkInclusion(output, O[0], O[1]);
+    let OD = !checkInclusion(output, O[1], O[0]);
+    let CI = checkInclusion(code, C[0], C[1]);
+    let CD = !checkInclusion(code, C[1], C[0]);
     
-    console.log(OI, ' OI ', OD, ' OD ', CI, ' CI ', CD, 'CD');
+    //console.log(OI, ' OI ', OD, ' OD ', CI, ' CI ', CD, 'CD');
 
-    return true;
+    let result = true;
+    [OI, OD, CI, CD].forEach(element => {
+        if(element === false){
+            result = false;
+        }
+    });
+
+    return result;
 }
 
 export class Display {
@@ -371,7 +370,7 @@ function setupRunButton(display){
                 rewardPlayer(display);
             }
             else{
-                console.log("user code was " + codeReturn + " || But the code should've been " + display.projectJSON.returns);
+                console.log("user code was " + codeReturn + " || But the code should've been " + display.projectJSON["output-includes"]);
             }
         });
         
