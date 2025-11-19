@@ -161,12 +161,12 @@
             "failure-shows": "*"
         },
         "16": {
-            "title": "",
-            "code": "",
-            "instruction": "",
-            "output-includes": "*",
+            "title": "Print 3",
+            "code": "x = 1\n\n",
+            "instruction": "print x",
+            "output-includes": "1",
             "output-discludes": "*",
-            "code-includes": "*",
+            "code-includes": "x = 1&&&print(x)",
             "code-discludes": "*",
             "failure-shows": "*"
         }
