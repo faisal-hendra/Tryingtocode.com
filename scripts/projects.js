@@ -48,14 +48,6 @@ var correctCode = new CustomEvent("correctCode", {
 
 const BLANK = '*';
 
-let errorCode = output => {
-    console.log('error check not finished');
-    if(output == 'error'){
-        return true;
-    }
-    return false;
-}
-
 let normalizeText = (text) => { /* make text similar to allow flexible player input */
     return text.toLowerCase().replaceAll(" ", "").replaceAll("'", `"`);
 }
@@ -82,14 +74,16 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
 
     console.log("ONLY SHOW ONCE!");
     console.log("SKIPS is ", skips);
+    console.log("compare: ", allParts, element);
     for (let index = 0; index < splitWhole.length; index++) {
         const element = splitWhole[index];
         pass = false;
         console.log("INDEX = ", index);
         console.log('stuff: ', index, allParts, whole);
+        console.log("compare: ", allParts, element);
         for(let part = 0; part < allParts.length; part++){
-            console.log(skips, part);
-            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != "" && !skips.includes(part)){
+            console.log("compare: ", allParts[part], element);
+            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != ""/* && !skips.includes(part)*/){
                 pass = true;
                 skips.push(part);
                 console.log("pass true");
@@ -107,14 +101,12 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
 }
 
 let isCorrectCode = async (code, json, output) => {
-    if (errorCode(output)){
-        return false;
-    }
-
     let tree = await getTree(code);
 
     let O = [json['output-includes'], json['output-discludes']];
     let C = [json['code-includes'], json['code-discludes']];
+
+    console.log(code);
 
     let OI = checkInclusion(output, O[0], O[1]);
     let OD = !checkInclusion(output, O[1], O[0]);
@@ -125,6 +117,7 @@ let isCorrectCode = async (code, json, output) => {
 
     let result = true;
     [OI, OD, CI, CD].forEach(element => {
+        console.log(element);
         if(element === false){
             result = false;
         }
@@ -271,7 +264,6 @@ export class Display {
     async displayUserCode(code){
         this.output.value = "";
         let result = await runUserCode(code);
-        console.log("the rusult in project turned into: ", result[1]);
         this.output.value = result[1];
         return result;
     }
@@ -302,7 +294,7 @@ function rewardPlayer(display){
             }
         });
     window.dispatchEvent(correctCode);*/
-    console.error("get rid of above")
+    console.error("get rid of above");
     if(display.reward !== 0 && display.reward !== null){
         console.log("reward 2");
         correctCode = new CustomEvent("correctCode", {
@@ -323,16 +315,41 @@ function setupRunButton(display){
         let output = await display.displayUserCode(value);
         console.log('output in project 2: ', output);
         let json = display.projectJSON;
-        console.log(json);
+        console.log(json, output[1]);
+        console.log("workd");
         correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
+            console.log("results: ", passed, output, output[0]);
             if(passed && output[0]){
                 rewardPlayer(display);
             }
             else{
-                console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
+                //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
+                //logDescrepensy(output, value, json);
             }
         });
         
     });
+}
+
+function logDescrepensy(output, code, json){
+    let CI = [json["code-includes"], code];
+    let CD = [json["code-discludes"], code];
+    let OI = [json["output-includes"], output[1]];
+    let OD = [json["output-discludes"], output[1]];
+
+    let properties = [CI, CD, OI, OD];
+
+    for (let index = 0; index < properties.length; index++) {
+        const element = properties[index];
+        if(element[0] != element[1]){
+            console.log("!");
+            console.log("!(potential) discrepensy found!");
+            console.log("factor 1: ");
+            console.log(element[0]);
+            console.log("factor 2: ")
+            console.log(element[1]);
+            console.log("!");
+        }
+    }
 }
 

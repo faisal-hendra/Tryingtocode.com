@@ -32,7 +32,6 @@ let checkBody = (body, functionName) => {
     let elements = [];
     body.forEach(key => {
         const element = key;
-        console.log('element id: ', element?.value?.func?.id);
         if(element?.value?.func?.id == functionName){
             elements.push(element);
         }
@@ -65,17 +64,12 @@ let checkElementFor = (element, functionName="print") => {
     }
 
     const functions = element?.func;
-    console.log("functions: ", functions);
-    console.log("elements: ", elements);
-
-    console.log(isUndefinedArray(elements));
+    
     if(!isUndefinedArray(elements)){console.log("RETURNED!"); return elements;}
 }
 
 let checkAsync = (tree) => {
-    console.log("tree is ", tree);
     const asyncElems = checkElementFor(tree, "input");
-    console.log("async elems", asyncElems);
     return !isUndefinedArray(asyncElems) && asyncElems != undefined;
 }
 
@@ -106,8 +100,6 @@ async function pyRun(code){
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
         await pyodide.runPythonAsync(code);
-
-        console.log("output is, in pyrun, ", output);
 
         return [true, output];
 
