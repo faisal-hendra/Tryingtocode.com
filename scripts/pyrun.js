@@ -114,12 +114,12 @@ async function pyRun(code){
 
         console.log("output is, in pyrun, ", output);
 
-        return output;
+        return [true, output];
 
     }
     catch (error){
         try{
-            return await simplePyRun(code);
+            return [true, await simplePyRun(code)];
         }
         catch (simpleError){
             console.log("Error running py code: ", error);
@@ -154,9 +154,9 @@ async function pyRun(code){
                 }
 
                 relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
-                return relevantLines.join('\n');
+                return [true, relevantLines.join('\n')];
         }}
-        return "Unknown error - Look around in your code for clues";
+        return [true, "Unknown error - Look around in your code for clues"];
     }
     console.log("the impossible just happened!!!?")
     return false;

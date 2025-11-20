@@ -26,6 +26,7 @@ let htmlGen =
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>
         <button name="run-button" class="run-code run-button"><img src="./components/art/play button 1 - big.png"></img></button>
+        <button name="next-button" class="next-project" id="next-button"></button>
     </div>
 `;
 
@@ -35,73 +36,8 @@ var correctCode = new CustomEvent("correctCode", {
     }
 });
 
-/*function checkInclusion(code, JSON, splitJSON="&&&"){
-    //if 2 things should be true, use JSONAnd
-    splitJSON = splitJSON;
-    //loop through things that need to be included
-    for (let JSONline of JSON.includes.split(splitJSON)){
-        let correct = false;
-        code.split("\n").forEach(line => {
-            if(line.includes(JSONline)){
-                correct = true;
-            }
-            if(line.includes("#") && !JSONline.includes("#")){
-                //player has commented something... hmmmm
-                console.error("think of something to check if this is a problem!");
-            }
-        });
-        //keep going unless one of the neccisary lines is never included
-        if(!correct){
-            console.log("something was wrong...")
-            return false;
-        }
-    }
-    //if it hasn't returned false already, then it must be true
-    return true;
-}
+/*
 
-function hasPrintCall(astNode) {
-    if (astNode.type === "Call" && astNode.func && astNode.func.id === "print") {
-        return true;
-    }
-    if (astNode.body) {
-        return astNode.body.some(hasPrintCall);
-    }
-    if (Array.isArray(astNode)) {
-        return astNode.some(hasPrintCall);
-    }
-    return false;
-}
-
-async function isCorrectCode(code, output, JSON, blankOutput="*"){
-    let correct = false;
-
-    //if we don't care about the output, or if the output is correct, then it's good 👍
-    let careAboutOutput = !JSON.returns.includes(blankOutput);
-    let correctOutput = (output == JSON.returns);
-    if(!careAboutOutput || correctOutput){
-        correct = true;
-    }
-
-    //in this case we know that the code is incorrect
-    if(careAboutOutput && !correctOutput) {return false;}
-
-    let codeTree = await getTree(code);
-    console.log("code tree: ", codeTree, hasPrintCall(codeTree));
-    /*for(key of codeTree.keys()){
-        console.log(key);
-    }*//*
-
-    //if we care about code content, run this:
-    if(JSON.includes != null){
-        correct = checkInclusion(code, JSON, "&&&");
-        console.log("It was correct: ", checkInclusion(code, JSON, "&&&"));
-    }
-    
-    console.log("it was correct? ", correct);
-    return correct;
-}
- 
 "output-includes": "",
 "output-discludes": "*",
 "code-includes": "*",
@@ -109,6 +45,7 @@ async function isCorrectCode(code, output, JSON, blankOutput="*"){
 "failure-shows": "*"
 
 */
+
 const BLANK = '*';
 
 let errorCode = output => {
@@ -139,16 +76,19 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
 
     let pass;
 
+    const allParts = parts.split(partsSplit);
+    var skips = [];
+
     for (let index = 0; index < whole.split("&&&").length; index++) {
         const element = whole.split("&&&")[index];
         pass = false;
         console.log(parts, whole);
-        parts.split(partsSplit).forEach(part => {
-            if((normalizeText(part).includes(normalizeText(element))) && part != ""){
+        for(let part = 0; part < allParts.length; parts++){
+            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != "" && !skips.includes(parts)){
                 pass = true;
-                part = 'pass';
+                skips.push(parts);
             }
-        });
+        }
         if(pass == false){
             pass = false;
             break;
@@ -203,7 +143,11 @@ export class Display {
             if (this.projectEl.classList.contains('mini')) {
                 this.toggleElements(true);
             }
-        })
+        });
+
+        this.nextButton.addEventListener('click', () => {
+
+        });
 
         this.rewindButton.addEventListener('click', () => {
             this.codeArea.createText(this.projectJSON.code);
@@ -248,6 +192,7 @@ export class Display {
         this.title = query(".project-title");
         this.instructions = query(".instructions");
         this.completedIcon = query(".completed-icon");
+        this.nextButton = query(".next-project");
     }    
 
     setAttributes(){
@@ -318,8 +263,8 @@ export class Display {
     async displayUserCode(code){
         this.output.value = "";
         let result = await runUserCode(code);
-        console.log("the rusult in project turned into: ", result);
-        this.output.value = result;
+        console.log("the rusult in project turned into: ", result[1]);
+        this.output.value = result[1];
         return result;
     }
     
@@ -371,8 +316,8 @@ function setupRunButton(display){
         console.log('output in project 2: ', output);
         let json = display.projectJSON;
         console.log(json);
-        correctCode = isCorrectCode(value, json, output).then((passed) => {
-            if(passed){
+        correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
+            if(passed && output[0]){
                 rewardPlayer(display);
             }
             else{
