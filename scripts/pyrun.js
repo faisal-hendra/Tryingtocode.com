@@ -58,15 +58,10 @@ function isUndefinedArray(list) {
 
 let checkElementFor = (element, functionName="print") => {
     let elements = [];
-    
-    console.log("element ", element);
-    console.log("functionName ", functionName);
 
     const body = element?.body;
     if(body != null){
-        console.log("body: ", body);
         elements.push(checkBody(body, functionName));
-        console.log("element list: ", elements);
     }
 
     const functions = element?.func;

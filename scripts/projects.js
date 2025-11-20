@@ -61,7 +61,7 @@ let normalizeText = (text) => { /* make text similar to allow flexible player in
 }
 
 let checkInclusion = (parts, whole, oppositeParts='*') => {
-    if((whole !== BLANK || whole !== "") && parts == undefined) {return false;}
+    if((whole !== BLANK && whole !== "") || parts == undefined) {return false;}
     if(whole === BLANK){ return null; }
 
     if(whole === '**') { /* any */ 
@@ -77,24 +77,32 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
     let pass;
 
     const allParts = parts.split(partsSplit);
-    var skips = [];
+    let skips = [];
+    const splitWhole = whole.split("&&&");
 
-    for (let index = 0; index < whole.split("&&&").length; index++) {
-        const element = whole.split("&&&")[index];
+    console.log("ONLY SHOW ONCE!");
+    console.log("SKIPS is ", skips);
+    for (let index = 0; index < splitWhole.length; index++) {
+        const element = splitWhole[index];
         pass = false;
-        console.log(parts, whole);
-        for(let part = 0; part < allParts.length; parts++){
-            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != "" && !skips.includes(parts)){
+        console.log("INDEX = ", index);
+        console.log('stuff: ', index, allParts, whole);
+        for(let part = 0; part < allParts.length; part++){
+            console.log(skips, part);
+            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != "" && !skips.includes(part)){
                 pass = true;
-                skips.push(parts);
+                skips.push(part);
+                console.log("pass true");
             }
         }
         if(pass == false){
             pass = false;
+            console.log("pass false");
             break;
         }
         pass = true;
     }
+    console.log("passed false");
     return pass;
 }
 
