@@ -231,6 +231,46 @@
             "failure-shows": "*"
         },
         "23": {
+            "title": "Functions 1",
+            "code": "def function_name():\n print('you ran the function')\n\nfunction_name()",
+            "instruction": "Don't run the function",
+            "output-includes": "*",
+            "output-discludes": "you ran the function",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "24": {
+            "title": "Functions 2",
+            "code": "def function_name():\n print('you ran the function')\n\nfor i in range(10):\n function_name()",
+            "instruction": "Run the function 20 times",
+            "output-includes": "you ran the function",
+            "output-discludes": "*",
+            "code-includes": "for i in range(20)",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "25": {
+            "title": "Functions 3",
+            "code": "def function_name():\n print('you ran the function')\n\nnew_name()",
+            "instruction": "Change function_name to be new_name",
+            "output-includes": "you ran the function",
+            "output-discludes": "*",
+            "code-includes": "def new_name",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "26": {
+            "title": "",
+            "code": "#Functions need def. Then a name. Then ():\n\n#def hello():\n #pass",
+            "instruction": "Make and run a function that prints hello",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "27": {
             "title": "",
             "code": "",
             "instruction": "",
@@ -240,7 +280,47 @@
             "code-discludes": "*",
             "failure-shows": "*"
         },
-        "2x": {
+        "28": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "29": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "30": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "31": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "3x": {
             "title": "",
             "code": "",
             "instruction": "",

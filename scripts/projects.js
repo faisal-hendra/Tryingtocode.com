@@ -53,7 +53,7 @@ let normalizeText = (text) => { /* make text similar to allow flexible player in
 }
 
 let checkInclusion = (parts, whole, oppositeParts='*') => {
-    if((whole !== BLANK && whole !== "") || parts == undefined) {return false;}
+    if((whole !== BLANK && whole !== "") && parts == undefined) {return false;}
     if(whole === BLANK){ return null; }
 
     if(whole === '**') { /* any */ 
@@ -70,33 +70,31 @@ let checkInclusion = (parts, whole, oppositeParts='*') => {
 
     const allParts = parts.split(partsSplit);
     let skips = [];
+    skips.length = 0;
     const splitWhole = whole.split("&&&");
 
-    console.log("ONLY SHOW ONCE!");
-    console.log("SKIPS is ", skips);
-    console.log("compare: ", allParts, element);
     for (let index = 0; index < splitWhole.length; index++) {
         const element = splitWhole[index];
         pass = false;
-        console.log("INDEX = ", index);
-        console.log('stuff: ', index, allParts, whole);
-        console.log("compare: ", allParts, element);
+        console.log(skips, parts);
         for(let part = 0; part < allParts.length; part++){
-            console.log("compare: ", allParts[part], element);
-            if((normalizeText(allParts[part]).includes(normalizeText(element))) && allParts[part] != ""/* && !skips.includes(part)*/){
+            if (skips.includes(part)){
+                continue;
+            }
+            let currentPart = allParts[part];
+            if(
+                normalizeText(currentPart).includes(normalizeText(element)) && 
+                currentPart != "")
+            {
+                console.log(skips, currentPart);
                 pass = true;
                 skips.push(part);
-                console.log("pass true");
+                break;
             }
         }
-        if(pass == false){
-            pass = false;
-            console.log("pass false");
-            break;
-        }
-        pass = true;
+        if(pass == false){ break;}
     }
-    console.log("passed false");
+    console.log("passed ", pass);
     return pass;
 }
 
