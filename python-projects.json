@@ -341,6 +341,16 @@
             "code-discludes": "*",
             "failure-shows": "*"
         },
+        "34": {
+            "title": "Class 0",
+            "code": "class dog():\n name = 'dog'\n\ndog_1 = dog()\nprint(dog_1.name)",
+            "instruction": "Run the code",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
         "35": {
             "title": "Class 1",
             "code": "class dog:\n pass\n\nPete = dog()",
@@ -352,36 +362,136 @@
             "failure-shows": "*"
         },
         "36": {
-            "title": "",
-            "code": "",
-            "instruction": "",
+            "title": "Class 2",
+            "code": "class dog:\n print('dog made')\n\n#Pete is an instance\nPete = dog()",
+            "instruction": "Change Petes name",
             "output-includes": "*",
             "output-discludes": "*",
-            "code-includes": "*",
-            "code-discludes": "*",
+            "code-includes": "dog()&&&class",
+            "code-discludes": "Pete",
             "failure-shows": "*"
         },
         "37": {
-            "title": "",
-            "code": "",
-            "instruction": "",
-            "output-includes": "*",
+            "title": "Class 3",
+            "code": "class dog:\n def __init__(self):\n  print('dog made')\n",
+            "instruction": "Change the code to include an instance of a dog",
+            "output-includes": "dog made",
             "output-discludes": "*",
-            "code-includes": "*",
+            "code-includes": "=dog()",
             "code-discludes": "*",
             "failure-shows": "*"
         },
         "38": {
-            "title": "",
-            "code": "",
-            "instruction": "",
-            "output-includes": "*",
+            "title": "Class 4",
+            "code": "class dog:\n def __init__(self, name):\n  self.name = name\n\nPete = dog('Pete')\nname = Pete.name\nprint(name)",
+            "instruction": "Print Petes name",
+            "output-includes": "Pete",
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
             "failure-shows": "*"
         },
         "39": {
+            "title": "Class 5",
+            "code": "class animal:\n def __init__(self, type):\n  self.type = type\n\nanimals = [animal('cat'), animal('dog')]\nprint(animals[0].type)",
+            "instruction": "Print the second animals type",
+            "output-includes": "dog",
+            "output-discludes": "*",
+            "code-includes": "animal[1]",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "40": {
+            "title": "Class 6",
+            "code": "class animal:\n def __init__(self, type, name):\n  \n  self.type = type\n  self.name = name\n\nPete = animal('dog', 'Pete')\n\n\n",
+            "instruction": "Print Petes name and type",
+            "output-includes": "dog&&&Pete",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "41": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "42": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "43": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "44": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "45": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "46": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "47": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "48": {
+            "title": "",
+            "code": "",
+            "instruction": "",
+            "output-includes": "*",
+            "output-discludes": "*",
+            "code-includes": "*",
+            "code-discludes": "*",
+            "failure-shows": "*"
+        },
+        "49": {
             "title": "",
             "code": "",
             "instruction": "",
