@@ -483,9 +483,9 @@
         },
         "48": {
             "title": "Functions 9",
-            "code": "DEFAULT_WORDS = []\ndef print_words(*words=DEFAULT_WORDS):\n for word in words:\n  print(word)\n\ndef run_twice(function):\n function()\n function()\n\nrun_twice(print_words)",
-            "instruction": "",
-            "output-includes": "*",
+            "code": "def print_words(*words=['hello', 'world']):\n for word in words:\n  print(word)\n\ndef run_twice(function):\n function()\n function()\n\nrun_twice(print_words)",
+            "instruction": "Print each word four times",
+            "output-includes": "hello&&&hello&&&hello&&&hello&&&world&&&wolrd&&&world&&&world",
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
@@ -493,11 +493,11 @@
         },
         "49": {
             "title": "Functions 10",
-            "code": "def ",
-            "instruction": "",
+            "code": "",
+            "instruction": "Make a function",
             "output-includes": "*",
             "output-discludes": "*",
-            "code-includes": "*",
+            "code-includes": "def&&&():",
             "code-discludes": "*",
             "failure-shows": "*"
         },

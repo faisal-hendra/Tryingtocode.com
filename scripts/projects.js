@@ -32,7 +32,7 @@ let htmlGen =
 
 var correctCode = new CustomEvent("correctCode", {
     detail: {
-        value: 5
+        value: 5 //how many coins to give the user
     }
 });
 
@@ -85,7 +85,7 @@ export class Display {
         template.innerHTML = htmlString.trim();
 
         this.content = template.content;
-        this.projectEl = template.content.firstElementChild;
+        this.projectEl = this.content.firstElementChild;
         parent.appendChild(this.content);
 
         this.codeAreaParent = this.projectEl.querySelector('[class="codeAreaParent"]');
@@ -164,6 +164,7 @@ export class Display {
         element.editClass("gone", true);
         element.editClass("notmini", false);
         element.editClass("mini", true);
+
     }
 
     editClass(className, set){
