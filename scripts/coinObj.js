@@ -40,7 +40,6 @@ export class CoinObj{
         this.x_vel /= (1 + (drag / 2000));
         this.y_vel /= (1 + (drag / 2000));
 
-
         if(distance(this.x_pos, this.y_pos, absolute_gt.x, absolute_gt.y) > min_dist && this.dead !== 0){
             this.DestroyGive(1);
         } else if(this.dead === 0 && distance(this.x_pos, this.y_pos, absolute_gt.x, absolute_gt.y) < min_dist){

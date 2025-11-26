@@ -39,6 +39,7 @@ var correctCode = new CustomEvent("correctCode", {
 
 export class Display {
     constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false, code=null) { 
+        this.canRun = false; //can't run when I am first made
         this.toggled = toggled;
 
         this.createElements(document, parent, htmlString);
@@ -110,7 +111,7 @@ export class Display {
     setAttributes(){
         let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.createText(this.projectJSON.code);
-        this.codeArea.editPresses(() => this.updateLineNumbers())
+        this.codeArea.editPresses(() => this.updateLineNumbers());
         let title = this.projectJSON.title;
         this.title.innerHTML = title;
         this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
@@ -141,15 +142,15 @@ export class Display {
 
         this.editClass("mini", !value);
         this.editClass("notmini", value);
-        this.runButton.disabled = !value;
+        //this.runButton.disabled = !value;
+        this.canRun = value;
         this.rewindButton.disabled = !value;
         
         this.projectEl.dispatchEvent(
             new CustomEvent('toggleElements', {
                 detail: { shouldShow: this.projectEl.classList.contains("notmini") }
             }
-        )
-        );
+        ));
     }
 
     //make small
@@ -180,7 +181,7 @@ export class Display {
         this.output.value = result[1];
         return result;
     }
-    
+
     setupTextarea(){
         this.textarea.addEventListener('input', () => this.updateLineNumbers());
 
@@ -224,23 +225,28 @@ function rewardPlayer(display){
 
 function setupRunButton(display){
     display.runButton.addEventListener('click', async () => {
-        let value = display.textarea.value;
-        let output = await display.displayUserCode(value);
-        console.log('output in project 2: ', output);
-        let json = display.projectJSON;
-        console.log(json, output[1]);
-        console.log("workd");
-        correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
-            console.log("results: ", passed, output, output[0]);
-            if(passed && output[0]){
-                rewardPlayer(display);
-            }
-            else{
-                //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
-                //logDescrepensy(output, value, json);
-            }
-        });
-        
+        if(!display.canRun){
+            console.log("SHOULDN'T HAVE RUN")
+        }
+        else{
+            console.log('PAY ATTENTION!', display.canRun, display);
+            let value = display.textarea.value;
+            let output = await display.displayUserCode(value);
+            console.log('output in project 2: ', output);
+            let json = display.projectJSON;
+            console.log(json, output[1]);
+            console.log("workd");
+            correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
+                console.log("results: ", passed, output, output[0]);
+                if(passed && output[0]){
+                    rewardPlayer(display);
+                }
+                else{
+                    //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
+                    //logDescrepensy(output, value, json);
+                }
+            });
+        }
     });
 }
 
