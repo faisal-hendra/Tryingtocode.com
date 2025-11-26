@@ -142,7 +142,6 @@ export class Display {
 
         this.editClass("mini", !value);
         this.editClass("notmini", value);
-        //this.runButton.disabled = !value;
         this.canRun = value;
         this.rewindButton.disabled = !value;
         
