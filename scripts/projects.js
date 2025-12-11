@@ -82,6 +82,7 @@ export class Display {
 
     openProject(relativeIndex=0){
         if(relativeIndex == 0) {/* do not change index */ return; }
+        
     }
 
     createElements(document, parent, htmlString){

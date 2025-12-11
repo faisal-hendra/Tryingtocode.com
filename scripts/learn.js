@@ -19,12 +19,12 @@ window.resetStats = () => {
 function localStore(name, value, defaultValue=""){
     let currentValue = localStorage.getItem(name);
 
-    let isNaught = value => {
+    let isBlank = value => {
         return value === '' || value === null || value === defaultValue || value === '{}';
     }
 
-    if (isNaught(currentValue)){
-        if(isNaught(value)){
+    if (isBlank(currentValue)){
+        if(isBlank(value)){
             localStorage.setItem(name, defaultValue);
         } else{
             localStorage.setItem(name, value);
@@ -34,12 +34,54 @@ function localStore(name, value, defaultValue=""){
     return localStorage.getItem(name);
 }
 
-localStore("projects", '');
-//localStore("section", sections[0]);
+function setStat(name, priorityValue, otherValue, defaultValue=""){
+    let setToValue; 
+
+    let isBlank = value => {
+        let blankValues = ["", null, defaultValue, "{}"];
+        blankValues.forEach(element => {
+            if(element === value){
+                return true;
+            }
+        });
+        return false;
+    }
+
+    let decidePriority = (priority, other) => {
+        if(!isBlank(priority)){
+            return priority;
+        }
+        if(!isBlank(other)){
+            return other;
+        }
+        return null;
+    }
+
+    const priority = decidePriority(priorityValue, otherValue);
+    if(priority === null){
+        setToValue = defaultValue;
+    } else{
+        setToValue = priority;
+    }
+    
+    localStorage.setItem(name, setToValue); //THIS IS THE FINAL DECISION
+}
+
+function setStats(names, priorityValues, otherValues, defaultValue=""){
+    for (let index = 0; index < names.length; index++) {
+        const name = names[index];
+        const priorityValue = priorityValues[index];
+        const otherValue = otherValues[index];
+        setStat(name, priorityValue, otherValue, defaultValue);
+    }
+}
+
+setStat("projects", '');
+//setStat("section", sections[0]);
 
 window.addEventListener("user_made", () => {
     const user = window.user;
-    localStore("projects", user.projects || "{}");
+    setStat("projects", user.projects || "{}");
     setUserDatapoint();
 });
 
@@ -80,7 +122,8 @@ window.addEventListener('correctCode', (details) => {
 
 window.addEventListener('changeOpen', (details) => {
     let currentProject = window.currentDisplay;
-    //let nextProject = 
+    //let nextProject = allProjects
+
 });
 
 const loadProjectJSON = async (index, section="projects") => {
