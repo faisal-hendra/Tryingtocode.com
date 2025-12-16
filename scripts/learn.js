@@ -7,7 +7,7 @@ let loadProjects = Array.from({length: 50}, (_, i) => [i + 1, "beginner-2"]);
 const DEFAULTREWARD = 5;
 
 let parent = document.getElementById('project-parent');
-let projects = [];
+var projects = [];
 let mainProj = true;
 
 //for debug purposes, a function to reset player stats
@@ -120,10 +120,23 @@ window.addEventListener('correctCode', (details) => {
     console.log(details.detail.value);
 });
 
-window.addEventListener('changeOpen', (details) => {
-    let currentProject = window.currentDisplay;
-    //let nextProject = allProjects
+let openProjectAtIndex = index => {
+    if(projects[index]){
+        toggleAboveProjects(index, {shouldShow: true});
+        console.log(projects[index]);
+        projects[index].toggleElements(true);
+    }
+}
 
+//this allows the next project button to work
+window.addEventListener('changeOpen', (details) => { //details requires relativeIndex (0 for no change), currentIndex (index of currently open project)
+    let relativeIndex = details.detail.relativeIndex;
+    let currentIndex = details.detail.index;
+    let newIndex = relativeIndex + currentIndex - 1; //-1 because of indexs starting at 0 vs projects starting at 1
+
+    console.log("CHANGE OPEN!", details, relativeIndex, currentIndex, newIndex);
+
+    openProjectAtIndex(newIndex);
 });
 
 const loadProjectJSON = async (index, section="projects") => {
@@ -134,7 +147,7 @@ const loadProjectJSON = async (index, section="projects") => {
 
 let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects", projectIndex=0) => {
     loadProjectJSON(this_project, section).then(JSON => {
-        const display = new Display(document, parent, JSON);
+        const display = new Display(document, parent, JSON, projectIndex);
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', (shouldShow) => {
             toggleAboveProjects(projectIndex, shouldShow.detail);

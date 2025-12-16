@@ -26,7 +26,7 @@ let htmlGen =
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>
         <button name="run-button" class="run-code run-button"><img src="./components/art/play button 1 - big.png"></img></button>
-        <button name="next-button" class="next-project" id="next-button"></button>
+        <button name="next-button" class="next-project" id="next-button"><img src="./components/art/arrow - 1.png"></button>
     </div>
 `;
 
@@ -38,18 +38,18 @@ var correctCode = new CustomEvent("correctCode", {
 
 
 export class Display {
-    constructor(document, parent, projectJSON, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false, code=null) { 
-        this.canRun = false; //can't run when I am first made
-        this.toggled = toggled;
+    constructor(document, parent, projectJSON, index=0, htmlString = htmlGen, textareaSize = 1 /*default to 1 line*/, toggled=false, code=null) { 
+        this.canRun = false; //can't run when I am first made 
+        this.toggled = toggled; 
 
-        this.createElements(document, parent, htmlString);
-        this.findElements();
+        this.createElements(document, parent, htmlString); 
+        this.findElements(); 
+ 
+        this.min = true; 
 
-        this.min = true;
-
-        this.closeButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleElements(false);
+        this.closeButton.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            this.toggleElements(false); 
         });
 
         this.projectEl.addEventListener('click', async () => {
@@ -78,11 +78,14 @@ export class Display {
         this.setAttributes();
 
         this.reward = 5;
+        this.index = index;
     }
 
     openProject(relativeIndex=0){
         if(relativeIndex == 0) {/* do not change index */ return; }
         
+        var changeOpenProject = new CustomEvent("changeOpen", {detail: {relativeIndex: relativeIndex, index: this.index}});
+        window.dispatchEvent(changeOpenProject);
     }
 
     createElements(document, parent, htmlString){

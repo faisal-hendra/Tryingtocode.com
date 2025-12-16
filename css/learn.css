@@ -31,7 +31,6 @@
     box-sizing: border-box;
     padding-bottom: 5px;
     
- 
     background-image: repeating-linear-gradient(
         to bottom,
         #333333,
@@ -47,28 +46,24 @@
     flex-direction: column;
 }
 
-.run-code {
-    width: fit-content;
-    font-size: large;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
+
+
+:root{
+    --code-height: 20vw;
 }
 
 .code-editor {
     display: flex;
     align-items: flex-start;
     background: transparent;
-    height: 50vh; /* match textarea height */
-
+    height: var(--code-height); /* match textarea height */
 }
 
 
 .output {
-
     color: #fff;
     user-select: none;
-    height: 50vh;
+    height: var(--code-height);;
     width: 30vw;
     padding-left: 10px;
     overflow-y: auto;
@@ -223,4 +218,23 @@
 
 .run-button:hover:not(:active) {
     transform: translateY(-1px);
+}
+
+.run-code {
+    width: fit-content;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.next-project {
+    border-radius: 0%;
+    width: 50%;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #00000000;
+    border-color: #00000000;
 }

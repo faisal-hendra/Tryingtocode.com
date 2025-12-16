@@ -7,18 +7,9 @@ export let normalizeText = (text) => { /* make text similar to allow flexible pl
     return text.toLowerCase().replaceAll(" ", "").replaceAll("'", `"`);
 }
 
-/*
-
-"output-includes": "",
-"output-discludes": "*",
-"code-includes": "*",
-"code-discludes": "*",
-"failure-shows": "*"
-
-*/
-
 export let checkInclusion = (parts, whole, oppositeParts='*') => {
-    if((whole !== BLANK && whole !== "") && parts == undefined) {return false;}
+    let expectsValue = whole !== BLANK && whole !== "";
+    if((expectsValue && parts == undefined)) {return false;}
     if(whole === BLANK){ return null; }
 
     if(whole === '**') { /* any */ 
@@ -30,9 +21,7 @@ export let checkInclusion = (parts, whole, oppositeParts='*') => {
     }
 
     const partsSplit = '\n';
-
     let pass;
-
     const allParts = parts.split(partsSplit);
     let skips = [];
     skips.length = 0;
@@ -68,20 +57,18 @@ export let isCorrectCode = async (code, json, output) => {
     console.log("the error could be here. Here are a ton of paramaters to be looking at:", code, json, output);
     let tree = await getTree(code);
 
-    let O = [json['output-includes'], json['output-discludes']];
-    let C = [json['code-includes'], json['code-discludes']];
+    let Output = [json['output-includes'], json['output-discludes']];
+    let Code = [json['code-includes'], json['code-discludes']];
 
     console.log(code, tree);
 
-    let OI = checkInclusion(output, O[0], O[1]);
-    let OD = !checkInclusion(output, O[1], O[0]);
-    let CI = checkInclusion(code, C[0], C[1]);
-    let CD = !checkInclusion(code, C[1], C[0]);
-    
-    //console.log(OI, ' OI ', OD, ' OD ', CI, ' CI ', CD, 'CD');
+    let OutpuIncluded = checkInclusion(output, Output[0], Output[1]);
+    let OutpuDiscluded = !checkInclusion(output, Output[1], Output[0]);
+    let CodeIncluded = checkInclusion(code, Code[0], Code[1]);
+    let CodeDiscluded = !checkInclusion(code, Code[1], Code[0]);
 
     let result = true;
-    [OI, OD, CI, CD].forEach(element => {
+    [OutpuIncluded, OutpuDiscluded, CodeIncluded, CodeDiscluded].forEach(element => {
         console.log(element);
         if(element === false){
             result = false;
