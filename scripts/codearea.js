@@ -24,14 +24,14 @@ export class CodeArea{
     }
 
     //called by project.js 
-    editPresses(call, tab=" "){
+    editPresses(call, tab="   "){
         this.textarea.addEventListener('keydown', function(event) {
             if (event.keyCode === 9) { //tab is space instead
                 event.preventDefault();
                 let start = this.selectionStart;
                 let end = this.selectionEnd;
                 this.value = this.value.substring(0, start) + tab + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start + 1;
+                this.selectionStart = this.selectionEnd = start + tab.length;
             }
             if (event.keyCode === 13){ //make (): have an indent next line
                 let end = this.selectionEnd;
