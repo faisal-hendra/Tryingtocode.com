@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../components/art/ttc coin icon.png">
     <title>Trying to Code</title>
-    <link rel="stylesheet" href="./css/learn.css">
-    <link rel="stylesheet" href="./css/general.css">
+
+    <link rel="stylesheet" href="./css/learn.css">   <!--LEARN,   FOR THIS PAGE-->
+    <link rel="stylesheet" href="./css/general.css"> <!--GENERAL, FOR ALL PAGES-->
+
     <script src="./scripts/collapse.js" type="module"></script>
     <script src="./scripts/learn.js" type="module"></script>
     <script src="./scripts/general.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pyodide@0.28.2/pyodide.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/pyodide@0.28.2/pyodide.min.js"></script>                  <!--Piodide import-->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!--Font import-->
 </head>
 <body>
     <canvas id="render-canvas"></canvas>
     <div class="sidebar">
-        <a href="index.html" title="Home"  class="logo" id="home-icon">
-            <img src="components/art/ttc coin icon.png" alt="Coin logo">
+        <a href="index.html" title="Home" class="logo" id="home-icon">
+            <img src="components/art/ttc coin icon.png" alt="Logo" style="width: max(6rem, 5vw); height: max(6rem, 5vw);">
         </a>
-        <button id="dropdown-button" class="dropdown-button">
-            <img src="components/art/yellow - toggle arrow up.png" alt="" id="toggle-button" >
+        <button id="dropdown-button" class="dropdown--button">
+            <img class="dropdown--button--img" src="components/art/yellow - toggle arrow up.png" alt="drop" id="toggle-button" >
         </button>
         <div class="dropdown">
-            <ul>
-                <li><a href="index.html" title="Home">
-                    <img src="components/art/clean icon - 9.png" alt="House Icon">
+            <ul class="dropdown--list">
+                <li class="dropdown--element"><a href="index.html" title="Home">
+                    <img class="dropdown--image" src="components/art/clean icon - 9.png" alt="Home">
                 </a></li>
-                <li><a href="learn.html" title="Learn">
-                    <img src="components/art/clean icon - 10.png" alt="blue book with L on it">
+                <li class="dropdown--element"><a href="learn.html" title="Learn">
+                    <img class="dropdown--image" src="components/art/clean icon - 10.png" alt="Learn">
                 </a></li>
-                <!--li><a href="test.html" title="Test">
-                    <img src="components/art/test icon - 4.png" alt="bottle with blue liquid">
-                </a></li-->
-                <!--li><a href="store.html" title="Test">
-                    <img src="components/art/bottle.png" alt="bottle with blue liquid">
-                    <img src="components/art/store icon 4.png" alt="store icon">
-                </a></li-->
+                <li class="dropdown--element"><a href="store.html" title="Shop">
+                    <img class="dropdown--image" src="components/art/store icon 4.png" alt="Shop">
+                </a></li>
             </ul>
         </div>
-        <p id="coin-counter" class="pixel-font">10</p>
+        <p id="coin-counter" class="main-font">10</p>
     </div>
 
     <div class="main-content" id="main-content">
         <header>
-            <h1 class="main-title pixel-font" id="main-title">Project Based Learning</h1>
-            <p class="pixel-font">Complete projects to earn coins!</p>
+            <h1 class="main-title main-font" id="main-title">Project Based Learning</h1>
+            <p class="main-font">Complete projects to earn coins!</p>
         </header>
         <canvas class="js-screen" id="learn-screen">
             <!--shows coins-->
         </canvas>
         <div id="project-parent" autocapitalize="off">
-            <!-- this is where it gets inserted -->
+            <!-- projects insert here -->
         </div>
     </div>
 </body>

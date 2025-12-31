@@ -1,3 +1,20 @@
+/*------------------------------------*\
+    #CONTENTS
+\*------------------------------------*/
+/*
+*SETTINGS
+**Root . . . . . . . Globally available variables
+
+*GENERIC
+**Body . . . . . . . Sets Page Attributes
+**Sidebar  . . . . . (Or topbar if on mobile)
+**Main-Content . . . Everything but Sidebar 
+
+**/
+
+/*------------------------------------*\
+    #SETTINGS
+\*------------------------------------*/
 :root {
     --palette-serika-1: #525146;
     --palette-serika-2: #d8d6c3;
@@ -12,84 +29,15 @@
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 2rem;
-    --sidebar-width: 10rem
+    --sidebar-width: 10rem;
 }
 
-
+/*------------------------------------*\
+    #GENERIC
+\*------------------------------------*/
 body {
     background-color: var(--palette-serika-5);
     overflow-x: hidden; /*this gets rid of horizontal bar*/
-}
-
-.dropdown-button{
-    cursor: pointer;
-    z-index: var(--z-sidebar);
-    position: relative;
-    background: none;
-    border: none; 
-}
-
-.dropdown-button img {
-    width: max(5rem, 4vw);
-    image-rendering: pixelated;
-}
-
-.dropdown-button:hover{
-    filter: brightness(125%);
-}
-
-.pixel-font {
-    font-family: 'Press Start 2P', monospace;
-    font-weight: 200;
-    color: white;
-    text-shadow:
-       -1px -1px 0 #000,  
-        1px -1px 0 #000,
-       -1px  1px 0 #000,
-        1px  1px 0 #000;
-}
-
-.dropdown{
-    background-color: #28282850;
-    z-index: var(--z-dropdown);
-    width: 7rem;
-}
-
-.dropdown ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.dropdown ul li {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-
-.dropdown ul li img {
-    width: 5rem;
-    height: 5rem;
-    image-rendering: pixelated;
-}
-
-.js-screen{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: var(--z-overlay); 
-}
-
-.hide{
-    display: none;
 }
 
 .sidebar {
@@ -106,7 +54,6 @@ body {
     padding-top: 20px;
 	z-index: var(--z-base);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-    
 }
 
 .main-content {
@@ -114,6 +61,116 @@ body {
 	padding: 20px;
 	z-index: var(--z-base);
 }
+
+/*------------------------------------*\
+    #TOOLS
+\*------------------------------------*/
+.main-font {
+    font-family: 'Press Start 2P', monospace;
+    font-weight: 200;
+    color: white;
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px  1px 0 #000,
+        1px  1px 0 #000;
+}
+
+.main-font--pixel-alternative {
+    font-family: monospace;
+    font-weight: 200;
+    font-size: large;
+    color: white;
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px  1px 0 #000,
+        1px  1px 0 #000;
+}
+
+.js-screen{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: var(--z-overlay); 
+}
+
+.hide{
+    display: none;
+}
+
+/*------------------------------------*\
+    #DROPDOWN
+\*------------------------------------*/
+.dropdown--button{
+    cursor: pointer;
+    z-index: var(--z-sidebar);
+    position: relative;
+    background: none;
+    border: none; 
+}
+
+.dropdown--button--img {
+    width: max(5rem, 4vw);
+    image-rendering: pixelated;
+}
+
+.dropdown--button:hover{
+    filter: brightness(125%);
+}
+
+.dropdown{
+    background-color: #28282850;
+    z-index: var(--z-dropdown);
+    width: 7rem;
+}
+
+.dropdown--list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown--element {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dropdown--image {
+    width: 5rem;
+    height: 5rem;
+    image-rendering: pixelated;
+}
+
+/*------------------------------------*\
+    #DEFAULTS
+\*------------------------------------*/
+::selection{
+    background-color: #fbff0099;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(171, 161, 161);
+}
+
+
 
 .logo img {
     width: max(6rem, 5vw);
@@ -156,22 +213,7 @@ body {
     }
 }
 
-::selection{
-    background-color: #fbff0099;
-}
 
-::-webkit-scrollbar {
-    width: 15px;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: rgb(171, 161, 161);
-}
 
 canvas{
     position: absolute;
@@ -183,7 +225,6 @@ canvas{
     z-index: 100 !important;
     image-rendering: crisp-edges;
 }
-
 
 .image-button{
     color: #0000;

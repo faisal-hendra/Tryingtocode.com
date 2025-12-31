@@ -1,11 +1,9 @@
-
-
-#user-code {
+.codearea {
     border: none;
     outline: none;
     resize: none;
     height: 100%;
-    width: 50vw;
+    width: var(--code-width);
     min-width: 5px;
     font-size: large;
     line-height: 30px;
@@ -26,8 +24,8 @@
     justify-self: unset;
     user-select: none;
     line-height: 30px;
-    min-width: 2em;
-    height: 100%;
+    min-width: var(--label-width);
+    height: var(--code-height);
     overflow: hidden; /* hides scrollbar */
     box-sizing: border-box;
     padding-bottom: 5px;
@@ -42,15 +40,44 @@
     background-attachment: local;
 }
 
+.lines{
+    
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #333333,
+        #333333 1px,
+        #1a1a1a 1px, 
+        #1a1a1a 30px       
+    );
+    background-attachment: local;
+}
+
+.output {
+    color: #fff;
+    user-select: none;
+    height: var(--code-height);
+    width: 30vw;
+    padding-left: 10px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    white-space: pre-wrap; /* Preserve whitespace and wrap as needed */
+    word-wrap: break-word; /* Break long words to fit within the container */
+    font-size: large;
+    line-height: 30px;
+    
+    resize: none;
+    border: none;
+}
+
 #learn-project {
     display: flex;
     flex-direction: column;
 }
 
-
-
 :root{
+    --label-width: 2em;
     --code-height: 20vw;
+    --code-width: 50vw;
 }
 
 .code-editor {
@@ -61,41 +88,18 @@
 }
 
 
-.output {
-    color: #fff;
-    user-select: none;
-    height: var(--code-height);;
-    width: 30vw;
-    padding-left: 10px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    white-space: pre-wrap; /* Preserve whitespace and wrap as needed */
-    word-wrap: break-word; /* Break long words to fit within the container */
-        background-image: repeating-linear-gradient(
-        to bottom,
-        #333333,            /* line color */
-        #333333 1px,        /* line thickness */
-        #1a1a1a 1px,        /* start of background color */
-        #1a1a1a 30px        /* match the line height exactly */
-        
-    );
-    font-size: large;
-    line-height: 30px;
-    resize: none;
-    border: none;
 
-    background-attachment: local;
+@media screen and (max-width: 50em) {
+    .input-output {
+        flex-direction: column !important;
+    }
+    .output {
+        width: calc(var(--code-width) + var(--label-width)) !important;
+    }
 }
 
 .input-output {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-}
-.output:active, .output:focus {
-    outline: none;
-    border: none;
+    align-content: center;
 }
 
 .top-bar {
@@ -103,6 +107,14 @@
     flex-direction: row;
     justify-content: left;
 }
+
+
+
+.output:active, .output:focus {
+    outline: none;
+    border: none;
+}
+
 
 .button {
     padding-right: 20px;

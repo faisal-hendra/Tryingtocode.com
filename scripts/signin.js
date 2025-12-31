@@ -1,13 +1,13 @@
 const htmlGen =  
 `
-<div id="sign-in" class="pixel-font center si-container">
+<div id="sign-in" class="main-font center si-container">
     <form action="">
         <h1 class="si-title">sign in</h1>
         <div class="input-box si-input-container">
             <input id="username" type="text" placeholder="Username (required)" class="si-input" required>
         </div>
         <div class="input-box si-output-container">
-            <input id="password" type="text" placeholder="Password" class="si-output">
+            <input type="password" id="password" type="text" placeholder="Password" class="si-output" required minlength="4">
         </div>
     </form>
     <div class="si-button-flexbox">

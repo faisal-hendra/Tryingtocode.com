@@ -1,12 +1,12 @@
 //output and input area for user code
 const AREAHTML = 
 `
-<div class="input-output pixel-font">
+<div class="top-bar input-output main-font">
     <div class="code-editor">
-        <div class="line-numbers"></div>
-        <textarea class="pixel-font codearea" name="user-code" id="user-code" placeholder="code here..."></textarea>
+        <div class="line-numbers lines"></div>
+        <textarea class="main-font codearea" name="user-code" id="user-code" placeholder="code here..."></textarea>
     </div>
-    <textarea name="output" id="output" class="output pixel-font">output</textarea>
+    <textarea name="output" id="output" class="lines output main-font">output</textarea>
 </div>
 `
 export class CodeArea{

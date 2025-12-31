@@ -8,7 +8,7 @@ import { isCorrectCode } from  "./checkCode.js";
 
 let htmlGen = 
 `
-    <div id="learn-project" class="project mini pixel-font">
+    <div id="learn-project" class="project mini main-font">
         <div class="top-bar">
             <div class="button">
             <button class="project-close-button" title="close project">
