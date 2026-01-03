@@ -20,12 +20,9 @@ let dropdown = new Toggle(dropdownButton, dropdownElements, "hide");
 let parentImage = dropdownButton.querySelector('img')
 
 let parentFunction = () => {
-    let frame = dropdown.isOff(dropdownElements[0]) ? 1 : 0;
+    console.log(dropdown.effectedElements[0], dropdown.isOff(dropdown.effectedElements[0]));
+    let frame = dropdown.isOff(dropdown.effectedElements[0]) ? 1 : 0;
     parentImage.src = art[frame];
 }
 
 dropdown.addEvent(parentFunction);
-
-dropdown.parent.addEventListener('click', () =>{
-    dropdown.toggle();
-});

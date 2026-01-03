@@ -76,7 +76,7 @@ export class Toggle{
     }
 
     isOff(effectedElement){
-        return effectedElement.classList.contains(this.toggleClass);
+        return effectedElement.classList.contains(this.primaryClass);
     }
 }
 
