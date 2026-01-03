@@ -1,29 +1,79 @@
 //used for things such as sign in toggle button, and sidebar toggle
-export class toggle{
+export class Toggle{
     constructor(toggleButton, effectedElement, toggleClass, transitionedElement=null, animatedElement=null){
-        this.toggleButton = toggleButton;
+        this.toggleElement = toggleElement;
         this.effectedElement = effectedElement;
+        this.primaryClass = primaryClass;
+        this.goneClass = "gone";
+
+        this.transitionedElement = transitionedElement;
+        this.animatedElement = animatedElement;
+        this.toggleButton = toggleButton;
+
+        this.initializeLogic();
     }
 
-    toggleButton(button, toggleClass){
-        button.addEventListener("click", () => {
-            this.toggle(this.parent)
+    initializeLogic(){
+        this.toggleEventFilled = () => {this.toggle();}
+        this.triggerGoneFilled = () => {this.goneEvent();}
 
-            let off = this.parent.classList.contains("slow-hide")
+        this.addEvent(this.toggleEventFilled);
+        this.addEvent(this.triggerGoneFilled);
 
-            if(hiding){
+        this.toggle();
+    }
 
-                const toggleEventListener = () => { 
-                    this.parent.classList.toggle("gone"); 
-                    console.log("should be gone");
-                    this.parent.removeEventListener('transitionend', toggleEventListener);
-                }
+    addEvent(event, button=this.toggleButton){
+        button.addEventListener("click", event);
+    }
 
-                this.parent.addEventListener('transitionend', toggleEventListener); 
-            }else{
+    toggle(button=this.toggleButton, toggleClass=this.toggleClass){
+        this.toggle(this.parent)
+
+        let off = this.parent.classList.contains("slow-hide")
+
+        if(hiding){
+
+            const toggleEventListener = () => { 
                 this.parent.classList.toggle("gone"); 
+                console.log("should be gone");
+                this.parent.removeEventListener('transitionend', toggleEventListener);
             }
-        });
+
+            this.parent.addEventListener('transitionend', toggleEventListener); 
+        }else{
+            this.parent.classList.toggle("gone"); 
+        }
+    }
+
+    goneEvent(){
+        let stopEvent = (this.transitionedElement == null) && (this.animatedElement == null);
+
+        if(stopEvent){
+            this.toggleButton.removeEventListener("click", this.goneEvent);
+            return;
+        }
+
+        let goneClass = this.goneClass;
+        let isOff = this.effectedElement.classList.contains(this.toggleClass);
+        
+        if(isOff){
+            let addTempListener = (typeend, effectedElement=null) => {
+                if(effectedElement == null) {console.log("null element");return;}
+                
+                const goneListener = () => {
+                    effectedElement.classList.toggle(goneClass);
+                    effectedElement.removeEventListener(typeend, toggleEventListener);
+                }
+                effectedElement.addEventListener(typeend, toggleEventListener);
+            }
+        }
+        if(!isOff){
+            let effectedElements = [this.transitionedElement, this.animatedElement];
+            effectedElements.forEach(element => {
+                element.classList.toggle(goneClass);
+            });
+        }
     }
 }
 
