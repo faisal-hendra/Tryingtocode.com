@@ -3,6 +3,8 @@ import { Display } from "./projects.js";
 import "./coin.js";
 import { setUserDatapoint } from "../firebase.js";
 
+console.log("learn is at least going");
+
 let loadProjects = Array.from({length: 50}, (_, i) => [i + 1, "beginner-2"]);
 const DEFAULTREWARD = 5;
 

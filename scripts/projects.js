@@ -2,7 +2,7 @@
 
 import { runUserCode } from "./pyrun.js";
 import { CodeArea } from "./code-area.js";
-import { isCorrectCode } from  "./checkCode.js";
+import { isCorrectCode } from  "./check-code.js";
 
 //general use
 
@@ -38,10 +38,12 @@ var correctCode = new CustomEvent("correctCode", {
     }
 });
 
+console.log("loaded project.js");
 
 export class Display {
     constructor(document, parent, projectJSON, index=0, htmlString = htmlGen, 
         textareaSize = 1, toggled=false, code=null) { 
+        console.log("created display");
         this.canRun = false; //can't run when I am first made 
         this.toggled = toggled; 
 
@@ -253,14 +255,14 @@ function setupRunButton(display){
                 }
                 else{
                     //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
-                    //logDescrepensy(output, value, json);
+                    //logDiscrepancy(output, value, json);
                 }
             });
         }
     });
 }
 
-function logDescrepensy(output, code, json){
+function logDiscrepancy(output, code, json){
     let CI = [json["code-includes"], code];
     let CD = [json["code-discludes"], code];
     let OI = [json["output-includes"], output[1]];
