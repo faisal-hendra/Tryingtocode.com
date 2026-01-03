@@ -1,9 +1,9 @@
 //used for things such as sign in toggle button, and sidebar toggle
 export class Toggle{
-    constructor(toggleButton, effectedElement, primaryClass, secondaryClass=null, transitionedElement=null, animatedElement=null){
+    constructor(toggleButton, effectedElements, primaryClass, secondaryClass=null, transitionedElement=null, animatedElement=null){
         console.log("made");
         
-        this.effectedElement = effectedElement;
+        this.effectedElements = ensureArray(effectedElements);
         this.primaryClass = primaryClass;
         this.secondaryClass = secondaryClass;
         this.goneClass = "gone";
@@ -30,10 +30,12 @@ export class Toggle{
     }
 
     toggleEvent(primaryClass=this.primaryClass, secondaryClass=this.secondaryClass){
-        let secondaryValue = this.effectedElement.classList.contains(primaryClass);
+        this.effectedElements.forEach(effectedElement => {
+            let secondaryValue = effectedElement.classList.contains(primaryClass);
 
-        this.effectedElement.classList.toggle(primaryClass);
-        this.effectedElement.classList.toggle(secondaryClass, secondaryValue);
+            effectedElement.classList.toggle(primaryClass);
+            effectedElement.classList.toggle(secondaryClass, secondaryValue);
+        });
     }
 
     goneEvent(){
@@ -45,7 +47,14 @@ export class Toggle{
         }
 
         let goneClass = this.goneClass;
-        let isOff = this.effectedElement.classList.contains(this.toggleClass);
+
+        this.effectedElements.forEach(effectedElement => {
+            this.goneToggleEvent(effectedElement);
+        });
+    }
+
+    goneToggleEvent(effectedElement=null){
+        let isOff = effectedElement.classList.contains(this.toggleClass);
         
         if(isOff){
             let addTempListener = (typeend, effectedElement=null) => {
@@ -65,6 +74,16 @@ export class Toggle{
             });
         }
     }
+}
+
+let ensureArray = (variable) => {
+  if (Array.isArray(variable)) {
+    // Variable is already an array, return it as is
+    return variable;
+  } else {
+    // Variable is not an array, wrap it in one
+    return [variable];
+  }
 }
 
 //An element that is collapsable from a toggle button, and toggles elements
