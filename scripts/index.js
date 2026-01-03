@@ -1,5 +1,5 @@
 //for use in index.html
-import { SignIn as SI } from "./signin.js";
+import { SignIn } from "./signin.js";
 import { signInUp } from '../firebase.js';
 import { getCoin } from "./coin.js";
 import { Toggle } from "./tools.js";
@@ -8,7 +8,7 @@ console.log("work 0");
 
 let signInParent = document.getElementById("sign-in-holder");
 let toggleSigninup = document.getElementById("toggle-signinup");
-let signIn = new SI(document, signInParent);
+let signIn = new SignIn(document, signInParent);
 let toggle = new Toggle(toggleSigninup, signInParent, "slow-hide", "sign-in");
 toggle.addEvent(toggle.toggleEvent, signIn.exit);
 
