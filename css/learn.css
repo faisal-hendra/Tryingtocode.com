@@ -78,7 +78,7 @@
     position: absolute;
 }
 
-.project.notmini p:not(#project-title), .project.notmini textarea,  .project.notmini .run-code, .project.notmini .button{
+.project p:not(#project-title), .project textarea,  .project .run-code, .project .button{
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
 }

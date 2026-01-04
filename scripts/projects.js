@@ -161,13 +161,12 @@ export class Display {
         window.currentDisplay = this;
 
         this.editClass("mini", !value);
-        this.editClass("notmini", value);
         this.canRun = value;
         this.rewindButton.disabled = !value;
         
         this.projectEl.dispatchEvent(
             new CustomEvent('toggleElements', {
-                detail: { shouldShow: this.projectEl.classList.contains("notmini") }
+                detail: { shouldShow: !this.projectEl.classList.contains("mini") }
             }
         ));
     }
@@ -175,7 +174,6 @@ export class Display {
     //make small
     minimize(element=this){
         element.editClass("gone", false);
-        element.editClass("notmini", false);
         element.editClass("mini", true);
         element.editClass("gone-anim-over", false);
     }
@@ -183,7 +181,6 @@ export class Display {
     //make totally invisible
     hide(element=this){
         element.editClass("gone", true);
-        element.editClass("notmini", false);
         element.editClass("mini", true);
     }
 
