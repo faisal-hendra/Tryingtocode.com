@@ -18,15 +18,22 @@ export let changeSetting = (setting, value) => {
     })
 }
 
-var isPixel = true;
+/*var isPixel = true;
 export let updateSettings = (document) => {
     isPixel = !isPixel;
     document.querySelectorAll('*').forEach(element => {
         element.classList.toggle("main-font", isPixel);
         element.classList.toggle("pixel-alt", !isPixel);
     });
-}
+}*/
+
+//make below \/\/
+
+/**
+export let updateSettings = (setting) =>
 
 let updateSettingsButton = document.getElementById("change-setting");
-let filledSettings = () => {updateSettings(document);}
+let filledSettings = () => {updateSettings(playerSettings[0]);}
 updateSettingsButton.addEventListener("click", filledSettings);
+ */
+

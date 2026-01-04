@@ -3,9 +3,6 @@ import { SignIn } from "./signin.js";
 import { signInUp } from '../firebase.js';
 import { getCoin } from "./coin.js";
 import { Toggle } from "./tools.js";
-import "./settings.js";
-import { updateSettings } from "./settings.js";
-
 
 console.log("work 0");
 

@@ -11,40 +11,24 @@ Hey developer! Read these to know what you should fix:
 
 ]
 
-- in learn.html, project.js, auto tabbing isn't a thing
-- 7
+- in learn.html, project.js, auto tabbing isn't perfect
+- 8
 - TTC
 
-- in general.css, learn.css, project.js, style reworking for projects + close button + redo button (shrink)
-- 6
+- in learn.css, title and subtitle aren't properly alligned to the project list
+- 7
 - mostly dean
 
-- in general.css, learn.css, output should go under input code (and shrink?) when on mobile
-- 10
-- dean
-
-- in project.js lines are not updated properly, meaning that sometimes the player will see 7 lines but can only click 3
-- 5
-- ttc
-
-- in learn.css - projects, the mission: "..." is covered when you open a project
-- 6
-- dean
-
-- css not organized
+- js files need to be optimised and cleaned
 - 4
 - TTC
 
-- js files need to be optimised and cleaned
+- save system needs to be reworked
 - 1
 - TTC
 
-- save system needs to be reworked
-- 2
-- TTC
-
-- sign in looks bad
-- 3
+- sign in looks mid, needs icons and polish
+- 5
 - TTC
 
 - Create creation page, in order to allow users to make their own learning projects. Support saving, publishing, and internal use
@@ -55,3 +39,6 @@ Hey developer! Read these to know what you should fix:
 - 5
 - TTC
 
+- Make a footer
+- 7
+- TTC
