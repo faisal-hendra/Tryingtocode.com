@@ -57,24 +57,22 @@ export class Display {
     initializeDisplay(){
         this.findElements(); 
 
-        
-
-        this.projectEl.addEventListener('click', async () => {
+        let toggleEvent = async () => {
             if (this.projectEl.classList.contains('mini')) {
                 this.toggleElements(true);
             }
-        });
+        }
+
+        this.projectEl.addEventListener('click', toggleEvent);
 
         this.initButtons();
 
         this.codeArea.createText("\n");
-
         this.lastLineCount = 1;
 
         this.setAttributes();
 
         this.reward = 5;
-
         this.countTimeOpen();
     }
 
@@ -185,7 +183,7 @@ export class Display {
         element.editClass("mini", true);
     }
 
-    editClass(className, set){
+    editClass(className, set=undefined){
         this.projectEl.classList.toggle(className, set);
     }
 

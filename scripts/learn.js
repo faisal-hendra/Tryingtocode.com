@@ -5,18 +5,24 @@ import { setUserDatapoint } from "../firebase.js";
 
 console.log("learn is at least going");
 
-let loadProjects = Array.from({length: 50}, (_, i) => [i + 1, "beginner-2"]);
-const DEFAULTREWARD = 5;
+let loadIndices = Array.from({length: 50}, (_, i) => [i + 1, "beginner-2"]);
+const DEFAULT_REWARD = 5;
 
-let parent = document.getElementById('project-parent');
 var projects = [];
-let mainProj = true;
 
 //for debug purposes, a function to reset player stats
 window.resetStats = () => {
+    console.log("reseting stats")
     localStorage.setItem("projects", "{}");
     localStorage.removeItem("coin");
 }
+
+document.addEventListener("keydown", (event) => {
+    if(!event.ctrlKey){ return;}
+    if((event.key === 'q' || event.key === 'Q')){
+        window.resetStats();
+    }
+});
 
 function localStore(name, value, defaultValue=""){
     let currentValue = localStorage.getItem(name);
@@ -147,9 +153,12 @@ const loadProjectJSON = async (index, section="projects") => {
     return json[section][index];
 };
 
-let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects", projectIndex=0) => {
-    loadProjectJSON(this_project, section).then(JSON => {
-        const display = new Display(document, parent, JSON, projectIndex);
+let loadProject = async (this_project, defaultReward=DEFAULT_REWARD, section="projects", projectIndex=0) => {
+    console.log("load");
+    return loadProjectJSON(this_project, section).then(JSON => {
+        const projectParent = document.getElementById('project-parent');
+        var display = new Display(document, projectParent, JSON, projectIndex);
+
         projects.push(display);
         display.projectEl.addEventListener('toggleElements', (shouldShow) => {
             toggleAboveProjects(projectIndex, shouldShow.detail);
@@ -161,21 +170,36 @@ let loadProject = (this_project, defaultReward=DEFAULTREWARD, section="projects"
             display.reward = 0;
             display.codeArea.createText(code);
             display.completedIcon.classList.remove("hide");
-        } else if(mainProj){
+        } /*else if(mainProj){
             display.reward = defaultReward;
             mainProj = false;
             display.toggleElements(true);
             console.log("main is " + display.title.innerHTML);
-        }
+        }*/
     });
 }
 
-let loadProjectsFunction = (projectsList) => {
+let getMainProject = (projects) => {
+    console.log(projects);
+    for (const element in projects) {
+        console.log(element);
+        if(!("code" in element)){
+            return element;
+        }
+    }
+    return null;
+}
+
+let loadProjectsFunction = async (projectsList) => {
     let projectIndex = 0;
+    let projectList = [];
     for (let item of projectsList){
         projectIndex++;
-        loadProject(item[0], DEFAULTREWARD, item[1], projectIndex);
+        loadProject(item[0], DEFAULT_REWARD, item[1], projectIndex).then(new_project => {
+            projectList.push(new_project);
+            //console.log(getMainProject(projectList));
+        });
     }
 }
 
-loadProjectsFunction(loadProjects)
+loadProjectsFunction(loadIndices);

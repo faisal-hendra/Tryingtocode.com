@@ -84,27 +84,58 @@ export async function initUserData(user){
     }
 }
 
+let defualtValues = {
+    email: null,
+    displayName: "guest",
+    coins: 0,
+    projects: {}
+};
 //Somehow, we need to merge the data of what we have online, and on site.
-export async function setUserDatapoint(email=null, displayName=null, coins=null, projects=null){
+export let setUserDatapoint = async (email=null, displayName=null, coins=null, projects=null) => {
     if (!window.user) return console.warn("No user yet");
     
     const userRef = doc(db, "users", window.user.uid);
     const updatedSnap = await getDoc(userRef);
     const data = updatedSnap.data() || {};
 
-    let saveProjectList = {}
+    let saveProjectList = {};
     if(data.length > Object.keys(JSON.parse(projects)).length) {
         saveProjectList = data.projects;
     } else if (projects != null){
         saveProjectList = JSON.parse(projects);
     }
 
+    let setEmail = email ?? data.email ?? defualtValues.email;
+    let setDisplayName = displayName ?? data.displayName ?? defualtValues.displayName;
+    let setCoins = coins ?? data.coins ?? defualtValues.coins;
+    let setProjects = saveProjectList ?? defualtValues.projects;
+
     await setDoc(userRef, {
-        email: email ?? data.email ?? null,
-        displayName: displayName ?? data.displayName ?? "guest",
-        coins: coins ?? data.coins ?? 0,
-        projects: saveProjectList ?? {}
+        email: setEmail,
+        displayName: setDisplayName,
+        coins: setCoins,
+        projects: setProjects
     }, { merge: true });
+}
+
+let mergeProjects = (projectList1, projectList2) => {
+    //projectList2 gets priority over projectList1
+
+    let merged = []
+
+    for (let index = 0; index < projectList1.length; index++) {
+        const element = projectList1[index]; 
+        merged.push(element);
+    }
+
+    for (let index = 0; index < projectList2.length; index++) {
+        const element = projectList2[index];
+        if (element.keys(obj)[0] in merged.keys()) {
+            merged[element] = element;
+        } else {
+            merged.push(element);
+        }
+    }
 }
 
 onAuthStateChanged(auth, async (user) => {
