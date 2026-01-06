@@ -84,6 +84,12 @@ export async function initUserData(user){
     }
 }
 
+let deleteStuff = async (user) => {
+    const userRef = doc(db, "users", user.uid);
+    await setDoc(userRef, {});
+}
+
+
 let defualtValues = {
     email: null,
     displayName: "guest",
@@ -164,6 +170,7 @@ let mergeObjects = (object1, object2) => {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         console.log("User signed in:", user.uid);
+        await deleteStuff(user);
         await initUserData(user);
         window.user = user;
         let user_made = new Event("user_made");
