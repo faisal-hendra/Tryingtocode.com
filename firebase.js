@@ -98,12 +98,8 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
     const updatedSnap = await getDoc(userRef);
     const data = updatedSnap.data() || {};
 
-    let saveProjectList = {};
-    if(data.length > Object.keys(JSON.parse(projects)).length) {
-        saveProjectList = data.projects;
-    } else if (projects != null){
-        saveProjectList = JSON.parse(projects);
-    }
+    const OLD_PROJECTS = data.projects;
+    let saveProjectList = mergeObjects(projects, OLD_PROJECTS);
 
     let setEmail = email ?? data.email ?? defualtValues.email;
     let setDisplayName = displayName ?? data.displayName ?? defualtValues.displayName;
@@ -118,24 +114,51 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
     }, { merge: true });
 }
 
-let mergeProjects = (projectList1, projectList2) => {
+let mergeObjects = (object1, object2) => {
     //projectList2 gets priority over projectList1
+    let merged = {};
 
-    let merged = []
+    let mergeObj = (obj, merge) => {
+        let projKeys = Object.keys(obj);
 
-    for (let index = 0; index < projectList1.length; index++) {
-        const element = projectList1[index]; 
-        merged.push(element);
-    }
-
-    for (let index = 0; index < projectList2.length; index++) {
-        const element = projectList2[index];
-        if (element.keys(obj)[0] in merged.keys()) {
-            merged[element] = element;
-        } else {
-            merged.push(element);
+        for (const key of projKeys) {
+            //projectList1 for loop
+            const element = obj[key];
+            merge[key] = element;
         }
+
+        return merge;
     }
+
+    if(object1 != undefined){
+        merged = mergeObj(object1, merged);
+    }
+    if(object2 != undefined){
+        merged = mergeObj(object2, merged);
+    }
+
+    /*
+    let projKeys1 = Object.keys(object1);
+    let projKeys2 = Object.keys(object2);
+
+    for (const key of projKeys1) {
+        //projectList1 for loop
+        const object = object1[key];
+        merged[key] = object;
+        console.log(object);
+    }
+
+    for (const key of projKeys2) {
+        //projectList2 for loop
+        const object = object2[key];
+        merged[key] = object;
+        console.log(object);
+    }
+    */
+
+    console.log("merged is this now wowww", merged);
+
+    return merged;
 }
 
 onAuthStateChanged(auth, async (user) => {

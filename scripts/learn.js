@@ -108,11 +108,13 @@ let toggleAboveProjects = (index, add) => {
 let saveProject = (this_proj) => {
     const [title, content] = this_proj.split(":");
     let rawProjects = localStorage.getItem("projects");
+    console.log("rawProjects", rawProjects);
     let projects = JSON.parse(rawProjects || "{}");
+    console.log("projects", projects);
     projects[title] = content;
     localStorage.setItem("projects", JSON.stringify(projects));
     if(user && projects !== "{}"){
-        setUserDatapoint(null, null, null, rawProjects);
+        setUserDatapoint(null, null, null, projects);
     }
 };
 
