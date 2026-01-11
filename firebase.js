@@ -173,18 +173,29 @@ let userMade = (user) => {
 
     let code;
     const userRef = doc(db, "users", user.uid);
+
     getDoc(userRef).then((userSnap) => {
-        code = userSnap["code"];
+        console.log(userSnap);
+        console.log("userSnap", userSnap.get("projects"));
+        code = userSnap.get("projects");
+
+        updateProjects.forEach(updateProject => {
+            console.log("stuff and things: ", updateProject[0], updateProject[1], code[updateProject[1]]);
+            updateProject[0](code[updateProject[1]]);
+            //updateProject.codeArea.createText("working......");
+        });
+        updateProjects = [];
     });
 
-    updateProjects.forEach(func => {
-        func(code);
-    });
-}
+}   
 
 export let setupProject = (projectDisplay, projectTitle) => {
     let setProjCode = (code, projectDisplay) => {
-        projectDisplay.codeArea.createText(code);
+        if(code != null) {
+            projectDisplay.codeArea.createText(code);
+            projectDisplay.reward = 0;
+            projectDisplay.completedIcon.classList.remove("hide");
+        }
     }
 
     let setProjCodeFilled = (code) => {
@@ -192,7 +203,7 @@ export let setupProject = (projectDisplay, projectTitle) => {
         setProjCode(code, projectDisplay);
     }    
 
-    updateProjects.push(setProjCodeFilled);
+    updateProjects.push([setProjCodeFilled, projectTitle]);
 }
 
 let anonSign = () => {

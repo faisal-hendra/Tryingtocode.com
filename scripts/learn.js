@@ -196,9 +196,7 @@ let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON, 
 }
 
 let getMainProject = (projects) => {
-    console.log(projects);
     for (const element in projects) {
-        console.log(element);
         if(!(element.code)){
             return element;
         }
@@ -222,11 +220,8 @@ let loadProjectsFunction = async (projectsList, section="projects") => {
         projectList.push(new_project);
     }
     
-    console.log("getting main...");
     const main_ = projectList[ getMainProject(projectList) ];
-    console.log("main is ", main_, main_.index);
     main_.toggleElements(true);
-    console.log("waited");
 }
 
 loadProjectsFunction(loadIndices);

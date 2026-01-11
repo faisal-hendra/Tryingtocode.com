@@ -171,15 +171,13 @@ export class Display {
         ));
     }
 
-    //make small
-    minimize(element=this){
+    minimize(element=this){ //make small
         element.editClass("gone", false);
         element.editClass("mini", true);
         element.editClass("gone-anim-over", false);
     }
 
-    //make totally invisible
-    hide(element=this){
+    hide(element=this){ //make totally invisible
         element.editClass("gone", true);
         element.editClass("mini", true);
     }
