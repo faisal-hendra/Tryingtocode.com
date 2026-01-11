@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
-import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+//import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyABP5ADKcI2zC2ZdQ3pSUkuc1wmwBIbcwo",
@@ -18,8 +17,8 @@ const firebaseConfig = {
 //VALUES
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
+//const analytics = getAnalytics(app);
 
 //Auth Value
 
@@ -209,6 +208,29 @@ let mergeObjects = (object1, object2) => {
 }
 
 
+export let getUserData = async () => {
+    if(typeof user == "undefined"){return null;}
+    const userRef = doc(db, "users", user.uid);
+    const updatedSnap = await getDoc(userRef);
+    return updatedSnap;
+}
+
+export let userDataOnUserLoad = (projectElement, projectTitle) => {
+    if(db == null){
+        db = getFirestore(app);
+    }
+
+    let setProjCode = () => {
+
+    }
+
+    
+    const userRef = doc(db, "users", user.uid);
+    getDoc(userRef).then((userSnap) => {
+        
+    });
+
+}
 
 function anonSign(){
     signInAnonymously(auth).then((id) => {

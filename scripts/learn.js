@@ -1,11 +1,9 @@
 //for use in learn.html
 import { Display } from "./projects.js";
 import "./coin.js";
-import { setUserDatapoint } from "../firebase.js";
+import { setUserDatapoint, getUserData } from "../firebase.js";
 
-console.log("learn is at least going");
-
-let loadIndices = Array.from({length: 50}, (_, i) => [i + 1, "beginner-2"]);
+let loadIndices = Array.from({length: 50}, (_, i) => [i + 1, "projects"]);
 const DEFAULT_REWARD = 5;
 
 const PROJECT_PARENT = document.getElementById('project-parent');
@@ -159,46 +157,17 @@ const loadJSON = async (section="projects") => {
     return json[section];
 };
 
-/*let loadProject = async (this_project, defaultReward=DEFAULT_REWARD, section="projects", projectIndex=0) => {
-    console.log("load");
-    return loadProjectJSON(this_project, section).then(JSON => {
-        const projectParent = document.getElementById('project-parent');
-        var display = new Display(document, projectParent, JSON, projectIndex);
-
-        projects.push(display);
-        display.projectEl.addEventListener('toggleElements', (shouldShow) => {
-            toggleAboveProjects(projectIndex, shouldShow.detail);
-        });
-        display.setupTextarea();
-        let title = document.getElementById("main-content");
-        let code = getProject(JSON.title);
-        if(code){
-            display.reward = 0;
-            display.codeArea.createText(code);
-            display.completedIcon.classList.remove("hide");
-        } /*else if(mainProj){
-            display.reward = defaultReward;
-            mainProj = false;
-            display.toggleElements(true);
-            console.log("main is " + display.title.innerHTML);
-        }/
-        return display;
-    });
-}
-*/
-
-let checkCompletion = (title) => {
+let checkCompletion = (title, userData=null) => {
     console.log("CHECK COMPLETION", window.user);
     if(window.user != null) {
         console.log(window.user.projects);
-    } else if(json !== null){
-        if(json.code){
-
-        }
+    } else if(userData !== null){
+        console.log(userData);
     }
+     console.log(userData);
 }
 
-let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON) => {
+let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON, userData) => {
     let display = new Display(document, PROJECT_PARENT, JSON, projectIndex);
 
     display.projectEl.addEventListener('toggleElements', (shouldShow) => {
@@ -207,9 +176,9 @@ let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON) 
 
     display.setupTextarea();
 
-    //if(code) logic needs to be implemented
+    //if(code) logic needs to be implemented|
     
-    let code = checkCompletion(JSON.title);
+    let code = checkCompletion(JSON.title, userData);
     if(code){
         display.reward = 0;
         display.codeArea.createText(code);
@@ -238,13 +207,14 @@ let getMainProject = (projects) => {
 
 let loadProjectsFunction = async (projectsList, section="projects") => {
     const JSON = await loadJSON(section);
+    let userData = await getUserData();
     let projectIndex = 0;
     let projectList = [];
 
     for (let item of projectsList){
         projectIndex++;
         console.log("JSON is this:", JSON[projectIndex]);
-        let new_project = loadProject(item[0], DEFAULT_REWARD, projectIndex, JSON[projectIndex]);
+        let new_project = loadProject(item[0], DEFAULT_REWARD, projectIndex, JSON[projectIndex], userData);
         let proj_display = new_project;
         console.log(proj_display);
         projectList.push(new_project);
