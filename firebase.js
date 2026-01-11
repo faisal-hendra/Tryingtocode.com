@@ -205,7 +205,7 @@ export let setupProject = (projectDisplay, projectTitle) => {
         if(code == null && firstBlankProject == true){
             console.log("open me please ", projectTitle);
             firstBlankProject = false;
-            projectDisplay.openProject(1);
+            projectDisplay.openProject(0);
         }
     }
 

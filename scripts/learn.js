@@ -95,7 +95,7 @@ window.addEventListener("user_made", () => {
 
 let toggleAboveProjects = (index, add) => {
     console.log("toggle above projects: ", index, add);
-    let aboveProjects = projects.slice(0, index - 1)
+    let aboveProjects = projectDisplays.slice(0, index - 1)
     aboveProjects.forEach(element => {
         console.log("hide");
         if (add.shouldShow === true){
@@ -133,11 +133,12 @@ window.addEventListener('correctCode', (details) => {
 });
 
 let openProjectAtIndex = index => {
-    console.log("open at index", index, projects);
-    if(projects[index]){
-        toggleAboveProjects(index, {shouldShow: true});
-        console.log(projects[index]);
-        projects[index].toggleElements(true);
+    console.log(projectDisplays[index]);
+    console.log("open at index", index, projectDisplays, projectDisplays[index]);
+    if(projectDisplays[index]){
+        toggleAboveProjects(index, {shouldShow: false});
+        console.log(projectDisplays[index]);
+        projectDisplays[index].toggleElements(true);
     }
 }
 
@@ -220,10 +221,11 @@ let loadProjectsFunction = async (projectsList, section="projects") => {
         projectList.push(new_project);
     }
     
-    const main_ = projectList[getMainProject(projectList)];
-    main_.toggleElements(true);
-    return projectsList
+    return projectList;
 }
 
-projects = loadProjectsFunction(loadIndices);
+let projectDisplays;
+loadProjectsFunction(loadIndices).then(projectsList => {
+    projectDisplays = projectsList;
+});
 
