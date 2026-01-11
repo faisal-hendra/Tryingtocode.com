@@ -94,8 +94,10 @@ window.addEventListener("user_made", () => {
 });
 
 let toggleAboveProjects = (index, add) => {
+    console.log("toggle above projects: ", index, add);
     let aboveProjects = projects.slice(0, index - 1)
     aboveProjects.forEach(element => {
+        console.log("hide");
         if (add.shouldShow === true){
             element.hide();
         }else{
@@ -109,12 +111,12 @@ let saveProject = (this_proj) => {
     const [title, content] = this_proj.split(":");
     let rawProjects = localStorage.getItem("projects");
     console.log("rawProjects", rawProjects);
-    let projects = JSON.parse(rawProjects || "{}");
-    console.log("projects", projects);
-    projects[title] = content;
-    localStorage.setItem("projects", JSON.stringify(projects));
-    if(user && projects !== "{}"){
-        setUserDatapoint(null, null, null, projects);
+    let JSONprojects = JSON.parse(rawProjects || "{}");
+    console.log("projects", JSONprojects);
+    JSONprojects[title] = content;
+    localStorage.setItem("projects", JSON.stringify(JSONprojects));
+    if(user && JSONprojects !== "{}"){
+        setUserDatapoint(null, null, null, JSONprojects);
     }
 };
 
@@ -131,6 +133,7 @@ window.addEventListener('correctCode', (details) => {
 });
 
 let openProjectAtIndex = index => {
+    console.log("open at index", index, projects);
     if(projects[index]){
         toggleAboveProjects(index, {shouldShow: true});
         console.log(projects[index]);
@@ -141,6 +144,7 @@ let openProjectAtIndex = index => {
 
 //this allows the next project button to work
 window.addEventListener('changeOpen', (details) => { //details requires relativeIndex (0 for no change), currentIndex (index of currently open project)
+    console.log("change open!!!!!!!");
     let relativeIndex = details.detail.relativeIndex;
     let currentIndex = details.detail.index;
     let newIndex = relativeIndex + currentIndex - 1; //-1 because of indexs starting at 0 vs projects starting at 1
@@ -158,13 +162,11 @@ const loadJSON = async (section="projects") => {
 };
 
 let checkCompletion = (title, userData=null) => {
-    console.log("CHECK COMPLETION", window.user);
     if(window.user != null) {
         console.log(window.user.projects);
     } else if(userData !== null){
         console.log(userData);
     }
-     console.log(userData);
 }
 
 let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON, userData) => {
@@ -213,16 +215,15 @@ let loadProjectsFunction = async (projectsList, section="projects") => {
 
     for (let item of projectsList){
         projectIndex++;
-        console.log("JSON is this:", JSON[projectIndex]);
         let new_project = loadProject(item[0], DEFAULT_REWARD, projectIndex, JSON[projectIndex], userData);
         let proj_display = new_project;
-        console.log(proj_display);
         projectList.push(new_project);
     }
     
-    const main_ = projectList[ getMainProject(projectList) ];
+    const main_ = projectList[getMainProject(projectList)];
     main_.toggleElements(true);
+    return projectsList
 }
 
-loadProjectsFunction(loadIndices);
+projects = loadProjectsFunction(loadIndices);
 

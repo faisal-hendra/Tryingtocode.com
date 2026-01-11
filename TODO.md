@@ -42,3 +42,11 @@ Hey developer! Read these to know what you should fix:
 - Make a footer
 - 7
 - TTC
+
+- fix learn.html reload then coins get deleted (finish project, then reload before coins can get to counter)
+- 5
+- TTC
+
+- Attempt to make it all one page
+- 10
+- not me

@@ -23,7 +23,6 @@ var db = getFirestore(app);
 
 let authStateChangedFunction = async (user) => {
     if (user) {
-        console.log("User signed in:", user.uid);
         await initUserData(user);
         userMade(user);
     } else {
@@ -174,32 +173,43 @@ let userMade = (user) => {
     let code;
     const userRef = doc(db, "users", user.uid);
 
+    let openMain = (mainProject) => {
+
+    }
+
     getDoc(userRef).then((userSnap) => {
         console.log(userSnap);
         console.log("userSnap", userSnap.get("projects"));
         code = userSnap.get("projects");
 
         updateProjects.forEach(updateProject => {
-            console.log("stuff and things: ", updateProject[0], updateProject[1], code[updateProject[1]]);
+            //console.log("stuff and things: ", updateProject[0], updateProject[1], code[updateProject[1]]);
             updateProject[0](code[updateProject[1]]);
-            //updateProject.codeArea.createText("working......");
         });
         updateProjects = [];
     });
 
 }   
 
+let firstBlankProject = true;
+
 export let setupProject = (projectDisplay, projectTitle) => {
+    
+
     let setProjCode = (code, projectDisplay) => {
         if(code != null) {
             projectDisplay.codeArea.createText(code);
             projectDisplay.reward = 0;
             projectDisplay.completedIcon.classList.remove("hide");
         }
+        if(code == null && firstBlankProject == true){
+            console.log("open me please ", projectTitle);
+            firstBlankProject = false;
+            projectDisplay.openProject(1);
+        }
     }
 
     let setProjCodeFilled = (code) => {
-        console.log("projectTitle: ", projectTitle);
         setProjCode(code, projectDisplay);
     }    
 

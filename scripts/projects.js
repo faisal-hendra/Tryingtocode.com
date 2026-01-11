@@ -93,8 +93,8 @@ export class Display {
     }
 
     openProject(relativeIndex=0){ //open the next project: relativeIndex=1
-        if(relativeIndex == 0) {/* do not change index */ return; }
-        
+        //if(relativeIndex == 0) {/* do not change index */ return; }
+        console.log("change project bro");
         var changeOpenProject = new CustomEvent("changeOpen", {detail: {relativeIndex: relativeIndex, index: this.projectIndex}});
         window.dispatchEvent(changeOpenProject);
     }
@@ -135,7 +135,6 @@ export class Display {
         this.title.innerHTML = title;
         this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
         this.output.disabled = true;
-        console.log("my json: ", this.projectJSON, this.projectIndex);
     }
 
     async getInput(){
@@ -159,7 +158,7 @@ export class Display {
 
     toggleElements(value=false){ // false = stop showing this project
         window.currentDisplay = this;
-
+        
         this.editClass("mini", !value);
         this.canRun = value;
         this.rewindButton.disabled = !value;
