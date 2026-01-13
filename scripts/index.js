@@ -1,5 +1,5 @@
 //for use in index.html
-import { SignIn } from "./signin.js";
+import { SignIn } from "./sign-in.js";
 import { signInUp } from '../firebase.js';
 import { getCoin } from "./coin.js";
 import { Toggle } from "./tools.js";

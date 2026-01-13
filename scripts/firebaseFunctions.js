@@ -1,4 +1,7 @@
-/*const functions = require("firebase-functions");
+/*
+NOT WORKING, POTENTIALLY WORK ON LATER.
+
+const functions = require("firebase-functions");
 const { spawn } = require("child_process");
 
 exports.serverRun = functions.https.onRequest((req, res) => {
@@ -22,4 +25,5 @@ exports.serverRun = functions.https.onRequest((req, res) => {
   py.on("close", (exitCode) => {
     res.json({ output, error, exitCode });
   });
-});*/
+});
+*/

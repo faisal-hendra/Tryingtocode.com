@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 //import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 
@@ -189,6 +189,8 @@ let userMade = (user) => {
         updateProjects = [];
     });
 
+    setProject("hello", "world2");
+    printProjects();
 }   
 
 let firstBlankProject = true;
@@ -238,4 +240,26 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     console.error(error);
 });
 
+let setProject = async (title, data, section="defualt", projectId="1") => {
+    const projectRef = doc(db, "projects", user.uid, section, projectId);
+    let obj = {
+        title: title,
+        data: data,
+        lastUpdated: serverTimestamp()
+    };
+    try {
+        await setDoc(projectRef, obj, {merge: true});
+    }catch (error){
+        console.error("oops. That project did not set well.", error);
+    }
+}
 
+let printProjects = async () => {
+    const projectRef = doc(db, "projects", user.uid);
+    try {
+        let projDoc = await getDoc(projectRef);
+        console.log("THIS IS THE DOCUMENT!!!", projDoc);
+    } catch (error) {
+        console.error(error);
+    }
+}
