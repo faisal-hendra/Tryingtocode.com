@@ -253,7 +253,7 @@ export let setProject = async (title, data, section="default", projectId="1") =>
     console.log(`path: /databases/{database}/documents/projects/${user.uid}/${section}/${projectId}`);
     console.groupEnd();
 
-    const projectRef = doc(db, "projects", user.uid, section, projectId);
+    const projectRef = doc(db, "projects", user.uid, section, title);
     let obj = {
         title: title,
         data: data,
@@ -264,6 +264,7 @@ export let setProject = async (title, data, section="default", projectId="1") =>
     }catch (error){
         console.error("oops. That project did not set well.", error);
         console.log(user, user.uid, section, projectId);
+        return error;
     }
 }
 
