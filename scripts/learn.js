@@ -163,11 +163,13 @@ let loadProjectsFunction = async (projectsList, section="projects") => {
 let projectDisplays;
 loadProjectsFunction(LOAD_INDICES).then(projectsList => {
     projectDisplays = projectsList;
+
+    let loaderElement = document.getElementById("loader");
+    if (loaderElement != null){
+        console.log(loaderElement);
+        loaderElement.classList.add("loader-fade");
+        loaderElement.classList.remove("loader");
+    }
 });
 
 
-let loaderElement = document.getElementById("loader");
-if (loaderElement != null){
-    console.log(loaderElement);
-    loaderElement.classList.add("loader-fade");
-}

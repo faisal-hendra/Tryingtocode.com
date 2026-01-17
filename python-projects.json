@@ -333,7 +333,7 @@
         },
         "33": {
             "title": "Lists 4",
-            "code": "list = ['a', 'b', 'c']\n\nfor letter in list:\n ",
+            "code": "letters = ['a', 'b', 'c']\n\nfor letter in letters:\n ",
             "instruction": "Print all the letters in the list",
             "output-includes": "a&&&b&&&c",
             "output-discludes": "*",

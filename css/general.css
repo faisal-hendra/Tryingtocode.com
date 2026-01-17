@@ -302,12 +302,12 @@ p.pixel-alt  {font-size: 1.5rem;}
   transition: all 1s;
   width: 32px; /* Width of one frame */
   height: 32px; /* Height of one frame */
-  background: url('../components/art/load-Sheet.png') no-repeat;
+  background: url('../components/art/load-sheet.png') no-repeat;
 
   --load-size: 128px;
   width: var(--load-size); 
   height: var(--load-size);
-  background-size: calc(var(--load-size) * 7) var(--load-size);
+  background-size: calc(var(--load-size) * 6) var(--load-size);
   
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -319,19 +319,25 @@ p.pixel-alt  {font-size: 1.5rem;}
 
 @keyframes play-sprite {
   from { background-position: 0px; }
-  to { background-position: -800px; } /* Total width of sheet (e.g., 100px * 8 frames) */
+  to { background-position: calc(var(--load-size) * -6); } /* Total width of sheet (e.g., 100px * 8 frames) */
 }
 
 .loader-fade{
-    transition: all 1s;
-    width: 0%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    position: relative;
+    display: flex;
+    transition: all .6s;
     height: 0vh;
     margin-bottom: 0%;
     background: #0000;
 }
 
 .loader-fade > * {
-    transition: all 1s;
+    transition: all .4s;
     width: 1%;
     height: 1%;
     margin: -1%;
