@@ -163,10 +163,10 @@
         "16": {
             "title": "Print 3",
             "code": "x = 1\n\n",
-            "instruction": "print x",
-            "output-includes": "1",
+            "instruction": "print x (don't use ')",
+            "output-includes": "",
             "output-discludes": "*",
-            "code-includes": "x = 1&&&print(x)",
+            "code-includes": "print(x)",
             "code-discludes": "*",
             "failure-shows": "*"
         },

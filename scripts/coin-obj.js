@@ -32,7 +32,7 @@ export class CoinObj{
     }
 
     tick(speed=1){
-        const min_dist = 10;
+        const min_dist = 11;
         this.gravitate(this.go_to, min_dist);
         this.DetectGive(min_dist);
 
@@ -40,7 +40,7 @@ export class CoinObj{
         this.y_pos += this.y_vel * speed;
     }
 
-    gravitate(go_to, drag=1, min_dist=50){
+    gravitate(go_to, drag=2){
         this.absolute_gt = domToCanvas(this.canvas, getAbsolutePosition(go_to)); //position
 
         let x_dist = this.absolute_gt.x - this.x_pos;
@@ -55,9 +55,10 @@ export class CoinObj{
     }
 
     DetectGive(min_dist){ //check if the coin is close enough to give the user
-        if(distance(this.x_pos, this.y_pos, this.absolute_gt.x, this.absolute_gt.y) > min_dist && this.dead !== 0){
+        let closeEnough = distance(this.x_pos, this.y_pos, this.absolute_gt.x, this.absolute_gt.y) > min_dist
+        if(this.dead !== 0 && closeEnough){
             this.DestroyGive(1);
-        } else if(this.dead === 0 && distance(this.x_pos, this.y_pos, this.absolute_gt.x, this.absolute_gt.y) < min_dist){
+        } else if(this.dead === 0 && !closeEnough){
             this.dead = false;
         }
     }

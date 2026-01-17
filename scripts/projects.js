@@ -26,7 +26,7 @@ let htmlGen =
         </div>
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>
-        <div class="project-buttom-buttons">
+        <div class="project-button-buttons">
             <button title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/art/play button 1 - big.png"></img></button>
             <button title="go to next project" alt="next project" name="next-button" class="next-project" id="next-button"><img src="./components/art/arrow - 1.png"></button>
         </div>

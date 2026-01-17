@@ -16,9 +16,8 @@ let canvas = document.getElementById('render-canvas');
 const coinImgSrc = '../components/art/ttc coin icon.png';
 let objects = [];
 
-let draw = (sizeX=30, sizeY=300) => {
-    ctx.clearRect(0, 0, sizeX, sizeY);
-    objects.forEach(element => {
+let drawAll = (sizeX=30, sizeY=300) => {
+    let drawOne = element => {
         element.RenderImage(coinImgSrc);
         element.tick(.1);
         element.gravitate(counter);
@@ -27,8 +26,11 @@ let draw = (sizeX=30, sizeY=300) => {
             objects = objects.filter(e => e !== element);
             changeNumber(1);
         }
-    });
-    window.requestAnimationFrame(draw);
+    }
+
+    ctx.clearRect(0, 0, sizeX, sizeY);
+    objects.forEach(drawOne);
+    window.requestAnimationFrame(drawAll);
 }
 
 if(canvas){
@@ -38,10 +40,8 @@ if(canvas){
         console.log(details);
         getCoin(details.detail.value, counter, title);
     });
-    window.requestAnimationFrame(draw);
+    window.requestAnimationFrame(drawAll);
 }
-
-
 
 export let getCoin = (amm, go_to, startElementPos, startString = '') => {
     for (let index = 0; index < amm; index++) {
