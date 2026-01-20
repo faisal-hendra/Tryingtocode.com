@@ -202,6 +202,7 @@ p.pixel-alt  {font-size: 1.5rem;}
     transition: all .5s cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
     transform: translateY(var(--down));
+    /*animation: nice-button-hover 1.8s steps(60) infinite;*/
 }
 .nice-button:active {
     --size: 10px;
@@ -210,6 +211,11 @@ p.pixel-alt  {font-size: 1.5rem;}
     transition: all .1s cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
     transform: translateY(var(--down));
+}
+@keyframes nice-button-hover {
+  10% { filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000); }
+  50% { filter: drop-shadow(0px calc(var(--size) - var(--down) + 2px) calc(var(--blur) + 2px) #000); } 
+  100% { filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000); }
 }
 
 /*------------------------------------*\

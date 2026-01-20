@@ -25,6 +25,11 @@ let htmlGen =
             </div>
             <img src="./components/art/ttc coin icon.png" class="hide completed-icon" id="completed-icon"></img>
             <p class="project-title" id="project-title">Hello World Project:</p>
+            <!--div class="button">
+                <button class="project-hint-button project-button" title="get hint if stuck">
+                    <img style="width: 50px; height: 50px;" id="hint-img" src="./components/art/rewind icon - stroke.png" class="nice-button">
+                </button>
+            </div-->
         </div>
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>

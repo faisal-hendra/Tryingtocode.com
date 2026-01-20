@@ -237,8 +237,12 @@
 }
 
 .completed-icon {
+    --size: 50px;
     position: relative;
-    padding: 10px;
+    align-self: center;
+    padding-right: 10px;
+    width: var(--size);
+    height: var(--size);
 }
 
 /*buttons*/

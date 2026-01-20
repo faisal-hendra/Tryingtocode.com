@@ -42,8 +42,8 @@
         },
         "4": {
             "title": "Edit 2",
-            "code": "print('hello world')\nprint('hello world)",
-            "instruction": "Fix the second print (the first one is good)",
+            "code": "print('hello world')\n\nprint('hello world)",
+            "instruction": "The first print statement is correct. Fix the second one.",
             "output-includes": "hello world&&&hello world",
             "output-discludes": "*",
             "code-includes": "print('hello world')&&&print('hello world')",
