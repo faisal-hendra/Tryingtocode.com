@@ -113,12 +113,12 @@
 
 .sign-in{
 	position: relative; 
-	padding-inline: 1em;
+	padding-inline: .1rem;
 	padding-top: 0.5em;
 	padding-bottom: 0.7em;
 	transition: width .3s ease-in-out, height .3s ease-in-out;
 	border: rgba(0, 0, 0, 0.281);
-	border-radius: 100px;
+	border-radius: 3rem;
 	border-style: solid;
 	background-color: #000a;
 	display: flex;

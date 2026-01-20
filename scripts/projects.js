@@ -11,15 +11,17 @@ let htmlGen =
 `
     <div id="learn-project" class="project mini main-font">
         <div class="top-bar">
-            <div class="button">
-                <button class="project-close-button project-button" title="close project">
-                    <img style="width: 30px; height: 30px;" id="close-img" src='./components/art/close button 1.png'>
-                </button>
-            </div>
-            <div class="button">
-                <button class="project-restart-button project-button" title="reset code to defualt">
-                    <img style="width: 30px; height: 30px;" id="reset-img" src="./components/art/rewind icon - stroke.png">
-                </button>
+            <div class="close-restart">
+                <div class="button">
+                    <button class="project-close-button project-button" title="close project">
+                        <img style="width: 30px; height: 30px;" id="close-img" src='./components/art/close button 1.png' class="nice-button">
+                    </button>
+                </div>
+                <div class="button">
+                    <button class="project-restart-button project-button" title="reset code to defualt">
+                        <img style="width: 30px; height: 30px;" id="reset-img" src="./components/art/rewind icon - stroke.png" class="nice-button">
+                    </button>
+                </div>
             </div>
             <img src="./components/art/ttc coin icon.png" class="hide completed-icon" id="completed-icon"></img>
             <p class="project-title" id="project-title">Hello World Project:</p>
@@ -259,7 +261,7 @@ function setupRunButton(display){
     display.runButton.addEventListener('click', runButtonAction);
 }
 
-function logDiscrepancy(output, code, json){
+/*function logDiscrepancy(output, code, json){
     let CI = [json["code-includes"], code];
     let CD = [json["code-discludes"], code];
     let OI = [json["output-includes"], output[1]];
@@ -281,3 +283,4 @@ function logDiscrepancy(output, code, json){
     }
 }
 
+*/

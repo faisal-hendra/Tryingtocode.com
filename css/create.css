@@ -8,10 +8,12 @@
 
 *DIVS
 **user-cr-project  . Div holding all the below
-**create-main  . . . Div holding title & create
+**main . . . . . . . Div holding title & code
+**code-container
 
 *TEXT
 **title  . . . . . . User project title
+**code . . . . . . . User project code
 
 **/
 /*------------------------------------*\ 
@@ -19,6 +21,7 @@
 /*------------------------------------*/ 
 :root{
     --text-width: max(30%, 30rem);
+    --line-height: 30px;
 }
 
 /*------------------------------------*\ 
@@ -31,18 +34,39 @@
 }
 
 .create-main {
+    display: flex;
     position: relative;
     flex: content;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    grid-auto-rows: min-content;
+    margin: 0rem;
+    gap: 2rem;
+    padding: 1rem;
+    background: #222;
 }
+
+.create-code-container
 
 /*------------------------------------*\ 
     #TEXT
 /*------------------------------------*/ 
 .create-title {
     width: var(--text-width);
+    height: 25px;
+    font-size: 25px;
+
 }
+
 .create-code {
-    width: var(--text-width);
+    width: 100%;
+    height: calc(var(--line-height) * 10);
+    font-size: large;
+    line-height: 30px;
+}
+
+.create-code, .create-title {
+    resize: none;
 }

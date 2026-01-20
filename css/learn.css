@@ -25,7 +25,9 @@
 *PROJECT-INNER
 **top-bar  . . . . . Holds close and redo button
 **instructions . . . Text at top of project
+**completed-icon . . Coin icon when user succeeds in learning
 **
+**close-restart  . . Div holds close and restart
 **run-code . . . . . Button runs code
 **next-project . . . Navigates to next project
 **button . . . . . . Contains run and next
@@ -234,7 +236,18 @@
     width: 100%;
 }
 
+.completed-icon {
+    position: relative;
+    padding: 10px;
+}
+
 /*buttons*/
+.close-restart {
+    display: flex;
+    flex-direction: row;
+    padding-right: 10px;
+}
+
 .run-code {
     width: fit-content;
     font-size: large;
@@ -257,13 +270,9 @@
     box-sizing: border-box;
 }
 
-.button {
-    padding-right: 20px;
-}
-
 .project-button {
-    /*border: #0000;
-    background-color: #0000;*/
+    border: #0000;
+    background-color: #0000;
     width: 50px; 
     height: 50px;
 }
