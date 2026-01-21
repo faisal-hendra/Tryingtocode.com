@@ -1,4 +1,4 @@
-/*------------------------------------*\
+/*------------------------------------*\,
     #CONTENTS
 \*------------------------------------*/
 /**
@@ -6,6 +6,7 @@
 *GENERAL
 **webkit-scrollbar . scroll
 **big-icon . . . . . icon images
+**body . . . . . . . full background
 
 *TOOLS
 **gone . . . . . . . instantly gone no matter what
@@ -38,6 +39,11 @@
 	background-color: #0000;
 	width: 100%;
 	image-rendering: pixelated;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
 }
 
 /*------------------------------------*\

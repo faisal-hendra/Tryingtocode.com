@@ -211,12 +211,20 @@
     .input-output {
         flex-direction: column !important;
     }
+    .line-numbers {
+        height: calc(var(--code-height) + 40vh);
+    }
     .output {
         /*width: calc(var(--code-width) + var(--label-width)) ;*/
+        margin-top: 40vh;
         width: 100%;
     }
     .codearea {
         width: 100%;
+        height: calc(var(--code-height) + 40vh);
+    }
+    .project{
+        max-height: 900px;
     }
 }
 

@@ -31,9 +31,14 @@
 *DEFAULTS
 **selection  . . . . Change highlight color to yellow
 **scrollbar  . . . . Change defualt side scrollbar
+**button . . . . . . Make sure buttons are good (highlighting)
 
 *LOADING
-**
+**loader . . . . . . Div that places load to right place
+**loader-sprite  . . Actual loading animation
+**loader-fade  . . . Makes load go away when appropriate
+
+*Footer
 
 **/
 
@@ -193,10 +198,11 @@ p.pixel-alt  {font-size: 1.5rem;}
 
 .nice-button {
     transition: all .5s cubic-bezier(.77,.1,.29,.93);
-    filter: drop-shadow(0px 10px 0px #000);
+    filter: drop-shadow(0px 6px 0px #000);
 }
+
 .nice-button:hover {
-    --size: 10px;
+    --size: 6px;
     --down: 3px;
     --blur: 0px;
     transition: all .5s cubic-bezier(.77,.1,.29,.93);
@@ -204,18 +210,31 @@ p.pixel-alt  {font-size: 1.5rem;}
     transform: translateY(var(--down));
     /*animation: nice-button-hover 1.8s steps(60) infinite;*/
 }
+
 .nice-button:active {
-    --size: 10px;
-    --down: 10px;
+    --size: 6px;
+    --down: 6px;
     --blur: 0px;
     transition: all .1s cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
     transform: translateY(var(--down));
 }
+
 @keyframes nice-button-hover {
   10% { filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000); }
   50% { filter: drop-shadow(0px calc(var(--size) - var(--down) + 2px) calc(var(--blur) + 2px) #000); } 
   100% { filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000); }
+}
+
+.glow {
+    filter: drop-shadow(0px 0px 12px white);
+    animation: glowing 1s steps(60) infinite;
+}
+
+@keyframes glowing {
+    10% {filter: drop-shadow(0px 0px 15px white);}
+    50% {filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.747));}
+    10% {filter: drop-shadow(0px 0px 12px white);}
 }
 
 /*------------------------------------*\
@@ -309,6 +328,10 @@ p.pixel-alt  {font-size: 1.5rem;}
     background: rgb(171, 161, 161);
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /*------------------------------------*\
     #LOADING
 \*------------------------------------*/
@@ -372,4 +395,17 @@ p.pixel-alt  {font-size: 1.5rem;}
     color: #0000;
     border-color: #0000;
     opacity: 0;
+}
+
+/*------------------------------------*\
+    #FOOTER
+\*------------------------------------*/
+.footer {
+    position: absolute;
+    background-color: #000;
+    text-align: center;
+    width: 100%;
+    bottom: 0px;
+    right: 0px;
+    z-index: -1;
 }

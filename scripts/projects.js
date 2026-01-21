@@ -90,6 +90,7 @@ export class Display {
 
         this.closeButton.addEventListener('click', closeButtonEvent);
         this.nextButton.addEventListener('click', nextButtonEvent);
+        //this.nextButton.classList.toggle("glow");
         this.rewindButton.addEventListener('click', rewindButtonEvent);
         
         setupRunButton(this);
@@ -236,6 +237,18 @@ function rewardPlayer(display){
     }
 }
 
+let playerCorrect = (passed, display) => {
+    console.log("results: ", passed, output, output[0]);
+    if(passed && output[0]){
+        rewardPlayer(display);
+        display.nextButton.classList.add("glow");
+    }
+    else{
+        //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
+        //logDiscrepancy(output, value, json);
+    }
+}
+
 function setupRunButton(display){
     let runButtonAction = async() => {
         if(!display.canRun){
@@ -251,14 +264,7 @@ function setupRunButton(display){
             console.log(json, output[1]);
             console.log("workd");
             correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
-                console.log("results: ", passed, output, output[0]);
-                if(passed && output[0]){
-                    rewardPlayer(display);
-                }
-                else{
-                    //console.log("user code was " + output + " || But the code should've been " + display.projectJSON["output-includes"]);
-                    //logDiscrepancy(output, value, json);
-                }
+                playerCorrect(passed, display);
             });
         }
     }

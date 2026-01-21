@@ -12,35 +12,27 @@ Hey developer! Read these to know what you should fix:
 ]
 
 - in learn.html, project.js, auto tabbing isn't perfect
-- 8
-- TTC
-
-- in learn.css, title and subtitle aren't properly alligned to the project list
-- 7
-- mostly dean
-
-- js files need to be optimised and cleaned
 - 5
 - TTC
 
+- js files need to be optimised and cleaned & work on tools.js
+- 7
+- TTC
+
 - save system needs to be cleaned up
-- 2
+- 5
 - TTC
 
 - Create creation page, in order to allow users to make their own learning projects. Support saving, publishing, and internal use
 - 9
 - TTC
 
-- Work on tools.js
-- 5
-- TTC
-
 - Make a footer
-- 6
+- 4
 - TTC
 
 - fix learn.html reload then coins get deleted - coins need to be better
-- 5
+- 1
 - TTC
 
 - phones have squished coins??
@@ -54,3 +46,5 @@ Hey developer! Read these to know what you should fix:
 - Projects.js - make Toggle a part of it.
 - 7
 - TTC
+
+- make python-projects.json projects all work

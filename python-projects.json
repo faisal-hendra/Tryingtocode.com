@@ -182,7 +182,7 @@
         },
         "18": {
             "title": "Lists",
-            "code": "animals = ['dog', 'cat']\n\n#hint: lists start at [0]\n\nprint(animals[1])",
+            "code": "animals = ['cat', 'dog']\n\nprint(animals[0])",
             "instruction": "Make the code print dog",
             "output-includes": "dog",
             "output-discludes": "*",
@@ -202,7 +202,7 @@
         },
         "20": {
             "title": "Dictionary 1",
-            "code": "animals = {'dog': 'barks', 'bird': 'chirps'}\n\n#hint: use '' in the []\n\nprint(animals['dog'])",
+            "code": "animals = {'dog': 'barks', 'bird': 'chirps'}\n\n#hint: run the code before making changes\n\nprint(animals['dog'])",
             "instruction": "Make the code print: chirps",
             "output-includes": "chirps",
             "output-discludes": "*",
@@ -363,7 +363,7 @@
         },
         "36": {
             "title": "Class 2",
-            "code": "class dog:\n print('dog made')\n\n#Pete is an instance\nPete = dog()",
+            "code": "class dog:\n print('dog made')\n\nPete = dog()",
             "instruction": "Change Petes name",
             "output-includes": "dog made",
             "output-discludes": "*",
@@ -377,7 +377,7 @@
             "instruction": "Change the code to make a dog",
             "output-includes": "dog made",
             "output-discludes": "*",
-            "code-includes": "=dog()",
+            "code-includes": "class&&&=dog()",
             "code-discludes": "*",
             "failure-shows": "*"
         },

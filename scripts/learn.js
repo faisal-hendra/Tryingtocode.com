@@ -53,6 +53,15 @@ window.addEventListener("user_made", () => {
     setUserDatapoint();
 });
 
+let goToTop = () => {
+    console.error("FIX THIS, make it maintainable, and look at phone when it's sideways... bleck!");
+    if(window.innerWidth < 600){
+        window.scrollTo({top: 160, left: 0, behavior: "smooth"});
+    } else{
+        window.scrollTo({top: 10, left: 0, behavior: "smooth"});     
+    }
+}
+
 let toggleAboveProjects = (index, add) => {
     console.log("toggle above projects: ", index, add);
     let aboveProjects = projectDisplays.slice(0, index - 1)
@@ -63,7 +72,8 @@ let toggleAboveProjects = (index, add) => {
         }else{
             element.minimize();
         }
-    })
+    });
+    goToTop();
 }
 
 // Save or update a project
@@ -94,7 +104,6 @@ let openProjectAtIndex = index => {
         projectDisplays[index].toggleElements(true);
     }
 }
-
 
 //this allows the next project button to work
 window.addEventListener('changeOpen', (details) => { //details requires relativeIndex (0 for no change), currentIndex (index of currently open project)
