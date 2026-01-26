@@ -21,7 +21,9 @@ export async function runUserCode(code){
     if(isAsync){
         code = makeAsync(code);
     }
-    return pyRun(code);
+    let pyrunOutput = await pyRun(code);
+    console.log("GO HERE", pyrunOutput);
+    return pyrunOutput;
 } 
 
 
@@ -112,12 +114,13 @@ async function pyRun(code){
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
         await awaitRunPython(code);
-
+        console.log("it was no error.");
         return [true, output];
 
     }
     catch (error){
         try{
+            console.log("it was no error.");
             return [true, await simplePyRun(code)];
         }
         catch (simpleError){
@@ -153,9 +156,9 @@ async function pyRun(code){
                 }
 
                 relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
-                return [true, relevantLines.join('\n')];
+                return [false, relevantLines.join('\n')];
         }}
-        return [true, "Unknown error - Look around in your code for clues"];
+        return [false, "Unknown error - Look around in your code for clues"];
     }
     console.log("the impossible just happened!!!?")
     return false;

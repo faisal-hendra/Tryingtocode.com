@@ -172,6 +172,8 @@ loadProjectsFunction(LOAD_INDICES).then(projectsList => {
         loaderElement.classList.add("loader-fade");
         loaderElement.classList.remove("loader");
     }
+
+    Prism.highlightAll();
 });
 
 

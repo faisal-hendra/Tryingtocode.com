@@ -25,11 +25,12 @@ let htmlGen =
             </div>
             <img src="./components/art/ttc coin icon.png" class="hide completed-icon" id="completed-icon"></img>
             <p class="project-title" id="project-title">Hello World Project:</p>
-            <!--div class="button">
+            <div class="button project-hint-button">
                 <button class="project-hint-button project-button" title="get hint if stuck">
-                    <img style="width: 50px; height: 50px;" id="hint-img" src="./components/art/rewind icon - stroke.png" class="nice-button">
+                    <img style="width: 50px; height: 50px;" id="hint-img" src="./components/art/hint.png" class="nice-button">
                 </button>
-            </div-->
+            </div>
+            <dialog class="main-font hint-popup hide" open>404</dialog>
         </div>
         <p class="instructions">instructions</p>
         <div class="codeAreaParent"></div>
@@ -87,11 +88,14 @@ export class Display {
         let closeButtonEvent = (e) => {e.stopPropagation(); this.toggleElements(false);}
         let nextButtonEvent = () => {this.openProject(1);}
         let rewindButtonEvent = () => {this.codeArea.createText(this.projectJSON.code);}
+        let hintButtonEvent = () => {this.toggleHint();}
 
         this.closeButton.addEventListener('click', closeButtonEvent);
         this.nextButton.addEventListener('click', nextButtonEvent);
         //this.nextButton.classList.toggle("glow");
         this.rewindButton.addEventListener('click', rewindButtonEvent);
+        this.hintButton.addEventListener('click', hintButtonEvent);
+        this.hintPopup.addEventListener('click', hintButtonEvent);
         
         setupRunButton(this);
     }
@@ -121,7 +125,7 @@ export class Display {
     }
 
     findElements(){
-        const query = (_name_) => {return this.projectEl.querySelector(_name_);}
+        const query = (className) => {return this.projectEl.querySelector(className);}
 
         this.runButton = query('.run-code');
         this.output = query('[name="output"]');
@@ -133,13 +137,20 @@ export class Display {
         this.instructions = query(".instructions");
         this.completedIcon = query(".completed-icon");
         this.nextButton = query(".next-project");
-    }    
+        this.hintPopup = query(".hint-popup");
+        this.hintButton = query(".project-hint-button");
+    }
 
     setAttributes(){
         //let addAmm = this.projectJSON.code.split("\n").length - 1;
         this.codeArea.createText(this.projectJSON.code);
         this.codeArea.editPresses(() => this.updateLineNumbers());
         let title = this.projectJSON.title;
+        if(this.projectJSON.hint != undefined) {
+            this.hintPopup.innerHTML = this.projectJSON.hint;
+        } else {
+            this.hintButton.classList.add("hide"); 
+        }
         this.title.innerHTML = title;
         this.instructions.innerHTML = 'mission: ' + this.projectJSON.instruction;
         this.output.disabled = true;
@@ -219,6 +230,12 @@ export class Display {
         this.lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
         this.lastLineCount = lines;
     }
+
+    toggleHint(element=this.hintPopup){
+        this.hintToggled = !this.hintToggled;
+        console.log("HIDE it!");
+        element.classList.toggle("hide");
+    }
 }
 
 function rewardPlayer(display){
@@ -252,17 +269,21 @@ let playerCorrect = (passed, display) => {
 function setupRunButton(display){
     let runButtonAction = async() => {
         if(!display.canRun){
-            console.log("SHOULDN'T HAVE RUN")
+            console.log("don't run disabled projects (:");
         }
         else{
-            console.log('PAY ATTENTION!', display.canRun, display);
             let value = display.textarea.value;
-            console.log("mark 1");
             let output = await display.displayUserCode(value);
-            console.log('output in project 2: ', output);
+
+            if(!output[0]){
+                //there was an error
+                console.error("player code incorrect");
+                return false;
+            }
+
             let json = display.projectJSON;
             console.log(json, output[1]);
-            console.log("workd");
+            
             correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
                 playerCorrect(passed, display);
             });
@@ -272,7 +293,9 @@ function setupRunButton(display){
     display.runButton.addEventListener('click', runButtonAction);
 }
 
-/*function logDiscrepancy(output, code, json){
+/* //useful log function
+
+function logDiscrepancy(output, code, json){
     let CI = [json["code-includes"], code];
     let CD = [json["code-discludes"], code];
     let OI = [json["output-includes"], output[1]];

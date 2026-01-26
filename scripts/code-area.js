@@ -4,28 +4,63 @@ const AREAHTML =
 <div class="top-bar input-output main-font">
     <div class="code-editor">
         <div class="line-numbers lines"></div>
-        <textarea class="main-font codearea" name="user-code" id="user-code" placeholder="code here..."></textarea>
+        <div class="single-block-grid">
+            <textarea class="main-font codearea" name="user-code" placeholder="code here..." spellcheck="false"></textarea>
+            <pre class="code-highlight" name="pretty-pre"><code class="main-font language-python" name="pretty-code"></code>
+            </pre>
+        </div>
     </div>
     <textarea name="output" id="output" class="lines output main-font">output</textarea>
 </div>
+
 `
 export class CodeArea{
     constructor(document, parent, codeAreaHTML=AREAHTML, lineAmm=1){
+        this.document = document;
+        this.parent = parent;
+        this.codeAreaHTML = codeAreaHTML;
+        this.lineAmm = lineAmm;
+
+        this.setAttributes();
+    }
+
+    setAttributes(){
         let template = document.createElement('template');
 
-        template.innerHTML = codeAreaHTML.trim();
+        template.innerHTML = this.codeAreaHTML.trim();
         this.content = template.content;
         this.projectEl = this.content.firstElementChild;
-        parent.appendChild(this.content);
+        this.parent.appendChild(this.content);
 
         this.textarea = this.projectEl.querySelector('textarea[name=user-code]');
+        this.prettyCode = this.projectEl.querySelector('code[name=pretty-code]');
+        this.prettyPre = this.projectEl.querySelector('pre[name=pretty-pre]');
 
-        this.lineAmm = lineAmm;
+        let matchScrollFilled = () => {this.matchScroll(this.prettyPre, this.textarea);}
+        this.textarea.addEventListener('scroll', matchScrollFilled);
+    }
+
+    matchScroll(result_element, element){
+        // Get and set x and y
+        result_element.scrollTop = element.scrollTop;
+        result_element.scrollLeft = element.scrollLeft;
+    }
+
+    createPrettyCode(prettyCodeElement, content){
+        console.log(prettyCodeElement);
+        prettyCodeElement.textContent = content;
+        Prism.highlightElement(prettyCodeElement);
+
     }
 
     //called by project.js 
     editPresses(call, tab="   "){
+        let prettyCode = this.prettyCode;
+
         this.textarea.addEventListener('keydown', function(event) {
+            let value = this.value;
+            createPrettyCode(prettyCode, value);
+
             if (event.keyCode === 9) { //tab is space instead
                 event.preventDefault();
                 let start = this.selectionStart;
@@ -42,7 +77,14 @@ export class CodeArea{
                     this.value = this.value.substring(0, start) + "\n" + tab + this.value.substring(end);
                 }
             }
+
             call();
+        });
+
+        let createPrettyCode = this.createPrettyCode;
+        this.textarea.addEventListener('input', () => {
+            let value = this.textarea.value
+            createPrettyCode(prettyCode, value);
         });
     }
 
@@ -51,6 +93,9 @@ export class CodeArea{
         for (let index = 0; index < this.lineAmm - 1; index++) {
             this.textarea.value += "\n";
         }
+
+        this.createPrettyCode(this.prettyCode, this.textarea.value);
+
         return this.textarea.value.split("\n").length;
     }
 }

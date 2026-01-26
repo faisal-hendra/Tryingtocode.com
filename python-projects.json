@@ -8,7 +8,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": ""
         },
         "1": {
             "title": "Run 1",
@@ -18,7 +19,8 @@
             "output-discludes": "*",
             "code-includes": "print('you did it!')",
             "code-discludes": "*",
-            "failure-shows": "(that was incorrect)\n\npress the white reload button to reset the code"
+            "failure-shows": "(that was incorrect)\n\npress the white reload button to reset the code",
+            "hint": "Don't edit the code. If you already have, all good, just press the white reload button at the top."
         },
         "2": {
             "title": "Edit 1",
@@ -28,7 +30,8 @@
             "output-discludes": "*",
             "code-includes": "print('you did it!')",
             "code-discludes": "*",
-            "failure-shows": "make sure you have all your spaces and qoutation marks"
+            "failure-shows": "make sure you have all your spaces and qoutation marks",
+            "hint": "You can edit the code (the text on the left)."
         },
         "3": {
             "title": "Run 2",
@@ -38,7 +41,8 @@
             "output-discludes": "**",
             "code-includes": "#",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "Make sure the # is at the very beginning of the line."
         },
         "4": {
             "title": "Edit 2",
@@ -48,7 +52,8 @@
             "output-discludes": "*",
             "code-includes": "print('hello world')&&&print('hello world')",
             "code-discludes": "*",
-            "failure-shows": "(hint: ')"
+            "failure-shows": "",
+            "hint": "' matters"
         },
         "5": {
             "title": "Print 1",
@@ -58,7 +63,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "(check the last lesson)"
+            "failure-shows": "(check the last lesson)",
+            "hint": "Here is an example: print('bye')"
         },
         "6": {
             "title": "Variable 1",
@@ -68,7 +74,8 @@
             "output-discludes": "*",
             "code-includes": "x = 2",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "x equals 1 right now, change that"
         },
         "7": {
             "title": "Print 2",
@@ -78,7 +85,8 @@
             "output-discludes": "*",
             "code-includes": "print(y)&&&y=",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "x is being printed"
         },
         "8": {
             "title": "If then",
@@ -88,7 +96,8 @@
             "output-discludes": "1 is equal to 1",
             "code-includes": "1 ==",
             "code-discludes": "1 == 1",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "where it says 1 == 1, make that 1 == 2"
         },
         "9": {
             "title": "If then 2",
@@ -98,7 +107,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "= is a statement. == is a question."
         },
         "10": {
             "title": "Variable 2",
@@ -108,7 +118,8 @@
             "output-discludes": "*",
             "code-includes": "x = 'bye'",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "x is hello right now"
         },
         "11": {
             "title": "Variable 3",
@@ -118,7 +129,8 @@
             "output-discludes": "*",
             "code-includes": "x =&&&y =",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "x + y = 10"
         },
         "12": {
             "title": "If then 3",
@@ -126,9 +138,10 @@
             "instruction": "Make x and y different",
             "output-includes": "*",
             "output-discludes": "do not print this!",
-            "code-includes": "if(x==y):&&&print('do not print this!')",
+            "code-includes": "if(x==y):&&&print('do not print this!')&&&x=&&&y=",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "x = hello, y = hello, change that."
         },
         "13": {
             "title": "Spot the bug 1",
@@ -138,17 +151,19 @@
             "output-discludes": "*",
             "code-includes": "print('you did it!')",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "is print spelled correctly?"
         },
         "14": {
             "title": "Variable 4",
-            "code": "x = 'Can I '\ny = ' eat an apple?'\n\nprint(y + x)",
+            "code": "x = 'Can I '\ny = 'eat an apple?'\n\nprint(y + x)",
             "instruction": "make it print x + y",
             "output-includes": "*",
             "output-discludes": "*",
             "code-includes": "x + y",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "use x and y in the print statement, in the right order"
         },
         "15": {
             "title": "If then else",
@@ -158,7 +173,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "you only have to change the first line"
         },
         "16": {
             "title": "Print 3",
@@ -168,7 +184,8 @@
             "output-discludes": "*",
             "code-includes": "print(x)",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "if it was y, you could print it like this: print(y)"
         },
         "17": {
             "title": "Import",
@@ -178,7 +195,8 @@
             "output-discludes": "*",
             "code-includes": "random.randint(0, 100)",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "only change line 3"
         },
         "18": {
             "title": "Lists",
@@ -188,7 +206,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "animals[0] is cat because lists are ordered: 0, 1, 2, etc"
         },
         "19": {
             "title": "Lists 2",
@@ -198,7 +217,8 @@
             "output-discludes": "*",
             "code-includes": "print(animals",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "['dog', 'cat', '!change this!']"
         },
         "20": {
             "title": "Dictionary 1",
@@ -208,7 +228,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "animals['dog'] is barks. What is animals['bird']?"
         },
         "21": {
             "title": "If then 4",
@@ -218,17 +239,19 @@
             "output-discludes": "*",
             "code-includes": "animals=[&&&==",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "animals[1] is bird"
         },
         "22": {
             "title": "Lists 3",
-            "code": "#[",
-            "instruction": "Make a list (no #)",
+            "code": "[",
+            "instruction": "Make a list",
             "output-includes": "*",
             "output-discludes": "*",
             "code-includes": "]",
             "code-discludes": "#",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "use '' for words"
         },
         "23": {
             "section": "beginner-2",
@@ -239,7 +262,8 @@
             "output-discludes": "-1&&&7",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "for i in range(5) makes it repeat 5 times"
         },
         "24": {
             "title": "Functions 1",
@@ -249,7 +273,8 @@
             "output-discludes": "you ran the function",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "function_name() (without def or :) runs the function"
         },
         "25": {
             "title": "Functions 2",
@@ -259,7 +284,8 @@
             "output-discludes": "*",
             "code-includes": "for i in range(20)",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "for i in range(10): runs the function 10 times"
         },
         "26": {
             "title": "Functions 3",
@@ -269,7 +295,8 @@
             "output-discludes": "*",
             "code-includes": "def new_name",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "def new_name():"
         },
         "27": {
             "title": "Functions 4",
@@ -279,7 +306,8 @@
             "output-discludes": "*",
             "code-includes": "def",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "After (): make sure there is a space at the beginning of the next line"
         },
         "28": {
             "title": "Functions 5",
@@ -289,7 +317,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "add(3, 4) is equivalant to print(7)"
         },
         "29": {
             "title": "Loops 2",
@@ -299,7 +328,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "for i in range(5, 10) makes it loop from 5 to 9"
         },
         "30": {
             "title": "Loops 3",
@@ -309,37 +339,41 @@
             "output-discludes": "5",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "change: while i < 10:"
         },
         "31": {
             "title": "Append 1",
             "code": "numbers = []\n\nfor i in range(10):\n numbers.append(i)\n\n#edit the print statement below\n\nprint(numbers)",
-            "instruction": "Don't print 3",
+            "instruction": "Only go up to 5",
             "output-includes": "*",
-            "output-discludes": "3",
-            "code-includes": "*",
+            "output-discludes": "6&&&10",
+            "code-includes": "numbers.append",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": ".append() adds an item to a list"
         },
         "32": {
             "title": "Append 2",
-            "code": "list_1 = [1, 2, 3]\n\nlist_2 = [5, 3, 9]\n\nlist_3 = []\nfor num_1 in list_1:\n for num_2 in list_2:\n  list_3.append(num_1 + num_2)\n\nprint(list_3)",
-            "instruction": "Make the code subtract rather than add (num_1 - num_2)",
+            "code": "nums = []\n\nfor num in range(3):\n nums.append(num + 1)\n print(num)\n\nprint(nums)",
+            "instruction": "Make the code subtract rather than add",
             "output-includes": "*",
             "output-discludes": "*",
-            "code-includes": "num_1 - num_2",
+            "code-includes": "num - 1&&&for&&&[",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "num - 1"
         },
         "33": {
             "title": "Lists 4",
-            "code": "letters = ['a', 'b', 'c']\n\nfor letter in letters:\n ",
+            "code": "letters = ['a', 'b', 'c']\n\nfor letter in letters:\n #make sure there is a space\n ",
             "instruction": "Print all the letters in the list",
             "output-includes": "a&&&b&&&c",
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "print(letter)"
         },
         "34": {
             "title": "Class 0",
@@ -349,7 +383,8 @@
             "output-discludes": "*",
             "code-includes": "class dog:&&&pass&&&Pete = dog()",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "don't change anything"
         },
         "35": {
             "title": "Class 1",
@@ -359,7 +394,8 @@
             "output-discludes": "*",
             "code-includes": "dog()&&&class",
             "code-discludes": "Pete",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "only change line 4"
         },
         "36": {
             "title": "Class 2",
@@ -369,7 +405,8 @@
             "output-discludes": "*",
             "code-includes": "dog()&&&class",
             "code-discludes": "Pete",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "same as last time, but look at the output"
         },
         "37": {
             "title": "Class 3",
@@ -379,7 +416,8 @@
             "output-discludes": "*",
             "code-includes": "class&&&=dog()",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "Pete = dog()"
         },
         "38": {
             "title": "Class 4",
@@ -389,7 +427,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "print(name)"
         },
         "39": {
             "title": "Class 5",
@@ -399,7 +438,8 @@
             "output-discludes": "*",
             "code-includes": "animal[1]",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "the second animal is animals[1]"
         },
         "40": {
             "title": "Class 6",
@@ -409,17 +449,19 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "print(Pete.name) and print(Pete.type)"
         },
         "41": {
             "title": "Class 7",
             "code": "class animal:\n def __init__(self, name):\n  self.name = name\n \n def print_name():\n  print(self.name)\n\nPete = animal('Pete')\nPete.print_name()",
             "instruction": "Change the print_name function to print something different",
             "output-includes": "*",
-            "output-discludes": "*",
-            "code-includes": "*",
+            "output-discludes": "Pete",
+            "code-includes": "def print_name():",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "print('something different')"
         },
         "42": {
             "title": "Class 8",
@@ -429,17 +471,19 @@
             "output-discludes": "*",
             "code-includes": "Pete.name",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "replace Pete.type with Pete.name"
         },
         "43": {
             "title": "Class 9",
-            "code": "class animal:\n def __init__(self):\n  ",
+            "code": "class animal:\n def __init__(self):\n   pass\n\n#put instance here:",
             "instruction": "Make an instance of the animal",
             "output-includes": "*",
             "output-discludes": "*",
             "code-includes": "=animal(",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "something = animal()"
         },
         "44": {
             "title": "Class 10",
@@ -449,7 +493,8 @@
             "output-discludes": "*",
             "code-includes": "class",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "class name: pass"
         },
         "45": {
             "title": "Functions 6",
@@ -459,7 +504,8 @@
             "output-discludes": "hello world",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "change literally anything"
         },
         "46": {
             "title": "Functions 7",
@@ -469,7 +515,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": "actually add 'something', not just anything"
         },
         "47": {
             "title": "Functions 8",
@@ -479,7 +526,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": ""
         },
         "48": {
             "title": "Functions 9",
@@ -489,7 +537,8 @@
             "output-discludes": "*",
             "code-includes": "*",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": ""
         },
         "49": {
             "title": "Functions 10",
@@ -499,7 +548,8 @@
             "output-discludes": "*",
             "code-includes": "def&&&():",
             "code-discludes": "*",
-            "failure-shows": "*"
+            "failure-shows": "*",
+            "hint": ""
         },
         "50": {
             "title": "Do It Yourself",

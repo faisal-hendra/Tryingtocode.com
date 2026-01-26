@@ -11,7 +11,23 @@ Hey developer! Read these to know what you should fix:
 
 ]
 
+- fix learn.html reload then coins get deleted - coins need to be better
+- 1
+- TTC
+
+- Make a footer
+- 4
+- TTC
+
+- save system needs to be cleaned up
+- 5
+- TTC
+
 - in learn.html, project.js, auto tabbing isn't perfect
+- 5
+- TTC
+
+- make python-projects.json projects all work
 - 5
 - TTC
 
@@ -19,32 +35,18 @@ Hey developer! Read these to know what you should fix:
 - 7
 - TTC
 
-- save system needs to be cleaned up
-- 5
-- TTC
-
-- Create creation page, in order to allow users to make their own learning projects. Support saving, publishing, and internal use
-- 9
-- TTC
-
-- Make a footer
-- 4
-- TTC
-
-- fix learn.html reload then coins get deleted - coins need to be better
-- 1
+- Projects.js - make Toggle a part of it.
+- 7
 - TTC
 
 - phones have squished coins??
 - 8
 - TTC
 
-- Attempt to make it all one page
-- 10
-- not me
-
-- Projects.js - make Toggle a part of it.
-- 7
+- Create creation page, in order to allow users to make their own learning projects. Support saving, publishing, and internal use
+- 9
 - TTC
 
-- make python-projects.json projects all work
+- Attempt to make it all one page
+- 20
+- not me

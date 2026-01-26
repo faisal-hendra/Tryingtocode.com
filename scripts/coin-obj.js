@@ -41,17 +41,25 @@ export class CoinObj{
     }
 
     gravitate(go_to, drag=2){
+        let defualt_slowdown = 2000; //the lower this is, the thicker the air feels
         this.absolute_gt = domToCanvas(this.canvas, getAbsolutePosition(go_to)); //position
 
         let x_dist = this.absolute_gt.x - this.x_pos;
         let y_dist = this.absolute_gt.y - this.y_pos;
 
+        let applyDrag = (velocity, normalized_vector, slowdown=2000) => {
+            let dragged_vector = (normalized_vector / drag);
+
+            let slowdown_factor = (drag / slowdown);
+            dragged_vector = dragged_vector / (1 + slowdown_factor);
+
+            return velocity + dragged_vector;
+        }
+        
         let normalized_vector = normalizeVector(x_dist, y_dist);
 
-        this.x_vel += normalized_vector[0] / drag;
-        this.y_vel += normalized_vector[1] / drag;
-        this.x_vel /= (1 + (drag / 2000));
-        this.y_vel /= (1 + (drag / 2000));
+        this.x_vel = applyDrag(this.x_vel, normalized_vector[0]);
+        this.y_vel = applyDrag(this.y_vel, normalized_vector[1]);
     }
 
     DetectGive(min_dist){ //check if the coin is close enough to give the user

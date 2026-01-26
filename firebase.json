@@ -3,6 +3,10 @@
     "public": "public",
     "rewrites": [
       {
+        "source": "/index",
+        "destination": "/index.html"
+      },
+      {
         "source": "/learn",
         "destination": "/learn.html"
       },

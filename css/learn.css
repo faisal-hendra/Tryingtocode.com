@@ -71,6 +71,10 @@
     flex: 0 0 100%;
 }
 
+.project.mini #project-title{
+    left: 50% !important;
+}
+
 @media (min-width: 50em) {
     .project.mini {flex: 0 0 31%;}
 }
@@ -156,30 +160,67 @@
 /*------------------------------------*\
     #TEXT-BOXES
 \*------------------------------------*/
-.codearea, .line-numbers, .output, .code-lines {
+.codearea, .line-numbers, .output, .code-lines, .code-highlight {
     background-image: repeating-linear-gradient(
         to bottom,
         #333333,
         #333333 1px,
-        #1a1a1a 1px, 
-        #1a1a1a 30px       
+        #1a1a1a 1px,
+        #1a1a1a 30px
     );
     background-attachment: local;
 }
 
-.codearea {
-    border: none;
+.codearea, .code-highlight {
+    position: relative;
+
+    margin: 0 !important; 
+    padding: 0 !important;
+    border: 0 !important;
     outline: none;
     resize: none;
+
+    
     height: calc(var(--code-height));
     width: var(--code-width);
     min-width: 5px;
-    font-size: large;
-    line-height: 30px;
+    line-height: 30px !important;
     box-sizing: border-box;
+    font-size: 1rem;
+
+    white-space: pre; 
+    overflow: auto;
+}
+
+.codearea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    z-index: 1;
+    -webkit-text-fill-color: transparent !important; 
+    text-shadow: none !important;
+    background-color: #0000;
+    
+    background-image: none;
+}
+
+.code-highlight {
+    white-space: pre;
+    font-weight: 200 !important;
+    z-index: 0;
+    pointer-events: none;
+    padding-top: 3px !important;
+}
+
+.code-highlighting code {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 .line-numbers {
+    --this-color: rgba(255, 255, 255, 0.667);
+
     text-align: center;
     justify-self: unset;
     user-select: none;
@@ -189,6 +230,9 @@
     overflow: hidden; /* hides scrollbar */
     box-sizing: border-box;
     padding-bottom: 5px;
+    margin-right: 2px;
+
+    color: var(--this-color);
 }
 
 .output {
@@ -219,7 +263,7 @@
         margin-top: 40vh;
         width: 100%;
     }
-    .codearea {
+    .codearea, .code-highlight, .single-block-grid {
         width: 100%;
         height: calc(var(--code-height) + 40vh);
     }
@@ -298,6 +342,20 @@
 .run-code-button-img:hover:not(:active) {
     transform: translateY(-1px);
 }
+
+.hint-popup {
+    /*transition: all 1s;*/
+    position: relative;
+    align-self: center;
+    top: 0%;
+    background-color: #000;
+}
+
+.project-hint-button {
+    align-self: right !important;
+    right: 0px !important;
+}
+
 
 /*------------------------------------*\
     #NO-ACTIVE

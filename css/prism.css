@@ -1,0 +1,145 @@
+/* PrismJS 1.30.0
+https://prismjs.com/download#themes=prism-okaidia&languages=markup+clike+javascript+c+csharp+cpp+markup-templating+php+python */
+
+:root {
+    --palette-serika-1: #525146;
+    --palette-serika-2: #d8d6c3;
+    --palette-serika-3: #bfb716;
+    --palette-serika-4: #718F94;
+    --palette-serika-5: #282828;
+
+    --palette-color-highlight-1: #fff41c;
+    --palette-color-highlight-2: #1ce5ff;
+    --palette-color-highlight-3: #8172ff;
+
+    --palette-color-highlight-string: #7bff5b;
+}
+
+code[class*=language-],
+pre[class*=language-] {
+    --tab-size: 4;
+
+    color: #f8f8f2;
+    white-space: pre;
+    word-spacing:   normal;
+    word-break:     normal;
+    word-wrap:      normal;
+    line-height: 1.5;
+
+    -moz-tab-size:  var(--tab-size);
+    -o-tab-size:    var(--tab-size);
+    tab-size:       var(--tab-size);
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none
+}
+
+pre[class*=language-] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border-radius: .3em
+}
+
+/*:not(pre)>code[class*=language-],
+pre[class*=language-] {
+    background: #272822
+}*/
+
+:not(pre)>code[class*=language-] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal
+}
+
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+    color: #8292a2;
+}
+
+.token.punctuation {
+    color: #f8f8f2
+}
+
+.token.namespace {
+    opacity: .7
+}
+
+.token.constant,
+.token.deleted,
+.token.property,
+.token.symbol,
+.token.tag {
+    color: #f92672
+}
+
+.stringError {
+    color: #ff0000;
+}
+
+.token.boolean,
+.token.number {
+    color: #ae81ff;
+    color: var(--palette-color-highlight-1) !important;
+}
+
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
+.token.string {
+    color: #a6e22e;
+    color: var(--palette-color-highlight-string) !important;
+
+}
+
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url,
+.token.variable {
+    color: #f8f8f2
+}
+
+.token.atrule,
+.token.attr-value,
+.token.class-name,
+.token.function {
+    color: #e6db74;
+    color: var(--palette-color-highlight-3) !important;
+}
+
+.token.keyword {
+    color: #66d9ef;
+    color: var(--palette-color-highlight-2) !important;
+}
+
+.token.important,
+.token.regex {
+    color: #fd971f
+}
+
+.token.bold,
+.token.important {
+    font-weight: 700
+}
+
+.token.italic {
+    font-style: italic
+}
+
+.token.entity {
+    cursor: help
+}
+
+/*body{ use this to make sure prism is loading, if required
+    background-color: #66d9ef !important;
+}*/
+
+/*thanks prism (: this is being used for syntax highlighting*/
