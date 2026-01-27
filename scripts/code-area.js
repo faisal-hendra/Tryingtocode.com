@@ -47,7 +47,6 @@ export class CodeArea{
     }
 
     createPrettyCode(prettyCodeElement, content){
-        console.log(prettyCodeElement);
         prettyCodeElement.textContent = content;
         Prism.highlightElement(prettyCodeElement);
 

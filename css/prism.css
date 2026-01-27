@@ -79,6 +79,8 @@ pre[class*=language-] {
 
 .stringError {
     color: #ff0000;
+    /*text-decoration: underline;
+    text-decoration-color: #ff000011;*/
 }
 
 .token.boolean,

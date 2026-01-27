@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-performance.js";
 
 //import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 
@@ -64,7 +65,7 @@ export let signInUp = async (email, password) => {
     catch (error){
         if(error.code === "auth/user-not-found"){
             const new_user = await createEmail(email, password);
-            return new_user
+            return new_user;
         }else {
             // Some other error (wrong password, network, etc.)
             console.error(error);
@@ -81,9 +82,11 @@ export async function initUserData(user){
         return Object.keys(obj).length === 0;
     }
 
-    if (userSnap.exists() && !isEmptyObject(userSnap.data())) {
+    let userEmpty = userSnap.exists() && !isEmptyObject(userSnap.data());
+
+    if (userEmpty) {
         const updatedSnap = await getDoc(userRef);
-        console.log("now coins: ", userSnap.data());
+        
         setUserDatapoint(updatedSnap.data());
     } else{
         const updatedDoc = await setDoc(userRef, {
@@ -109,34 +112,56 @@ let defaultValues = {
 };
 
 export let setUserDatapoint = async (email=null, displayName=null, coins=null, projects=null) => {
+    //This sets the user data to the defualt values above **unless they are nothing** (projects is weird though)
+
     if (!window.user) return console.warn("No user yet");
     
     const userRef = doc(db, "users", window.user.uid);
     const updatedSnap = await getDoc(userRef);
     const data = updatedSnap.data() || {};
 
-    const OLD_PROJECTS = data.projects;
-    let saveProjectList = mergeObjects(OLD_PROJECTS, projects);
+    //all the normal value merges
 
-    let setEmail = email ?? data.email ?? defaultValues.email;
-    let setDisplayName = displayName ?? data.displayName ?? defaultValues.displayName;
-    let setCoins = coins ?? data.coins ?? defaultValues.coins;
-    let setProjects = saveProjectList ?? defaultValues.projects;
+    let getNonEmptyValue = (...values) => {
+        let isEmpty = value => { return value == null; }
+
+        for (let i = 0; i < values.length; i++) {
+            const element = values[i];
+            if(!isEmpty(element)){
+                //PASS ELEMENT HERE
+                return element;
+            }
+        }
+
+        return null;
+    }
+
+    let setEmail = getNonEmptyValue(email, data.email, defaultValues.email);
+    let setDisplayName = getNonEmptyValue(displayName, data.displayName, defaultValues.displayName);
+    let setCoins = getNonEmptyValue(coins, data.coins, defaultValues.coins);
+
+    //project merge
+
+    let mergeProjects = () => {
+        const OLD_PROJECTS = data.projects;
+        let saveProjectList = mergeObjects(OLD_PROJECTS, projects);
+        return getNonEmptyValue(saveProjectList, defaultValues.projects);
+    }
+
+    let setProjects = mergeProjects();
+
+    //setting proper
 
     await setDoc(userRef, {
         email: setEmail,
         displayName: setDisplayName,
         coins: setCoins,
         projects: setProjects
-    }, { merge: true });
-}
-
-export let setUserDatapoint2 = async () => {
-    return error;
+    });
 }
 
 let mergeObjects = (object1, object2) => { //projectList2 gets priority over projectList1
-    if(object1 == null || object2 == null) { return object1 == null ? object2 : object1 }
+    if(object1 == null || object2 == null) { return object1 == null ? object2 : object1 } //return one if the other is null
     
     let merged = {};
 
@@ -160,10 +185,12 @@ let mergeObjects = (object1, object2) => { //projectList2 gets priority over pro
     return merged;
 }
 
-export let getUserData = async () => {
+export let getUserData = async (user=window.user) => {
     if(typeof user == "undefined"){return null;}
+
     const userRef = doc(db, "users", user.uid);
     const updatedSnap = await getDoc(userRef);
+    
     return updatedSnap;
 }
 
@@ -281,3 +308,5 @@ let printProjects = async () => {
         console.error(error);
     }
 }
+
+const perf = getPerformance(app);

@@ -109,7 +109,6 @@ asyncio.run(_SUPERMAIN())
 async function pyRun(code){
     try{
         //I need to await jsInput if an input is required before continuing:
-
         let output = '';
         pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
 
@@ -130,23 +129,19 @@ async function pyRun(code){
                 const lines = error.message.split('\n');
                 const relevantLines = [];
 
-                // Go through lines from bottom up
                 for (let i = lines.length - 1; i >= 0; i--) {
                     let line = lines[i].trim();
                     if (!line) continue;
 
-                    // Skip internal Pyodide files except <exec>
                     if (line.startsWith('File "/lib/python')) continue;
 
-                    // Adjust line numbers for wrapper
                     const match = line.match(/line (\d+)/);
                     if (match) {
                         const originalLine = parseInt(match[1], 10);
-                        const adjustedLine = originalLine - 3; // wrapper lines
+                        const adjustedLine = originalLine - 3;
                         line = line.replace(`line ${originalLine}`, `line ${adjustedLine}`);
                     }
 
-                    // Replace <exec> with <python>
                     line = line.replace(/<exec>/g, "<python>");
 
                     relevantLines.unshift(line);

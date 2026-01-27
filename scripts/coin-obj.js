@@ -20,7 +20,7 @@ export class CoinObj{
         this.x_vel = x_vel;
         this.y_vel = y_vel;
 
-        this.dead = 0;
+        this.collectedCoin = false;
 
         this.canvas = canvas;
         if (canvas) {
@@ -63,17 +63,21 @@ export class CoinObj{
     }
 
     DetectGive(min_dist){ //check if the coin is close enough to give the user
-        let closeEnough = distance(this.x_pos, this.y_pos, this.absolute_gt.x, this.absolute_gt.y) < min_dist
-        let xy_axis_close = (this.x_pos - this.absolute_gt.x) < 0 && (this.y_pos - this.absolute_gt.y) < 0
-        if(this.dead !== 0 && (!closeEnough)){
+        let closeEnough = distance(this.x_pos, this.y_pos, this.absolute_gt.x, this.absolute_gt.y) < min_dist;
+        let xy_axis_close = (this.x_pos - this.absolute_gt.x) < 0 && (this.y_pos - this.absolute_gt.y) < 0;
+
+        let notAlreadyCollected = this.collectedCoin === false;
+        let shouldBeCollected = (closeEnough || xy_axis_close);
+
+        if(notAlreadyCollected && shouldBeCollected){
+            this.collectedCoin = true;
             this.DestroyGive(1);
-        } else if(this.dead === 0 && (closeEnough || xy_axis_close)){
-            this.dead = false;
         }
     }
 
     DestroyGive(amm){
-        this.dead = true;
+        //only have this just in case for the future
+        this.collectedCoin = true;
     }
 
     RenderImage(sprite, frames=1, index=0){

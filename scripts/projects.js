@@ -67,6 +67,7 @@ export class Display {
 
         let toggleEvent = async () => {
             if (this.projectEl.classList.contains('mini')) {
+                this.countTimeOpen();
                 this.toggleElements(true);
             }
         }
@@ -101,7 +102,19 @@ export class Display {
     }
 
     countTimeOpen(){
-        console.warn("make this track user time");
+        let newTime = Date.now();
+
+        let result = null;
+        if(typeof this.timebegan !== 'undefined') {
+            result = newTime - this.timebegan;
+        }
+
+        this.timebegan = Date.now();
+
+        if(result){
+            console.log(result);
+            return result;
+        }
     }
 
     openProject(relativeIndex=0){ //open the next project: relativeIndex=1

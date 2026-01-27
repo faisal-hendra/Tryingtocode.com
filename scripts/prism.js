@@ -1297,7 +1297,7 @@ Prism.languages.python = {
         greedy: !0
     },
     stringError: /*my addition !!!*/{
-        pattern: /("|')(?:\\.|(?!\1)[^\\\r\n])*/,
+        pattern: /("|')(?:\\.|(?!\1)[^\\\r\n])*/, //handles unmatched '
         greedy: true
     },
     function: {

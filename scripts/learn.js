@@ -3,16 +3,16 @@ import { Display } from "./projects.js";
 import "./coin.js";
 import { setUserDatapoint, getUserData, setupProject, deleteUserData } from "../firebase.js";
 
-const LOAD_INDICES = Array.from({length: 50}, (_, i) => [i + 1, "projects"]);
+const LOAD_INDICES = Array.from({length: 33}, (_, i) => [i + 1, "projects"]);
 const DEFAULT_REWARD = 5;
 const PROJECT_PARENT = document.getElementById('project-parent');
 
 //for debug purposes, a function to reset player stats
-window.resetStats = () => {
+window.resetStats = async () => {
     console.log("reseting stats")
     localStorage.setItem("projects", "{}");
     localStorage.setItem("coin", 0);
-    deleteUserData(window.user);
+    await deleteUserData(window.user);
 }
 
 let isBlank = (value, extraBlank=undefined) => {
@@ -29,8 +29,9 @@ let isBlank = (value, extraBlank=undefined) => {
 document.addEventListener("keydown", (event) => {
     if(!event.ctrlKey){ return;}
     if((event.key === 'q' || event.key === 'Q')){
-        window.resetStats();
-        window.location.reload();
+        window.resetStats().then(() => {
+            window.location.reload();
+        });
     }
 });
 
