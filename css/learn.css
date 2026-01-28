@@ -180,7 +180,7 @@
     border: 0 !important;
     outline: none;
     resize: none;
-
+    tab-size: 2;
     
     height: calc(var(--code-height));
     width: var(--code-width);

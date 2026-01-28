@@ -13,11 +13,7 @@ Hey developer! Read these to know what you should fix:
 
 
 - phones have squished coins | help phone support | coins and some icons are blurry
-- 3
-- TTC
-
-- in learn.html, project.js, auto tabbing isn't perfect
-- 4
+- 2
 - TTC
 
 - make input() work https://www.npmjs.com/package/sync-message

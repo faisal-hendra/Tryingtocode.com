@@ -133,19 +133,21 @@ export class SpriteImage{
 
         this.image.src = this.sprite;
 
-        let spriteWidth = this.image.width / frames;
-        let spriteHeight = this.image.height;
-        let frameOffset = spriteWidth * index;
+        this.spriteWidth = this.image.width / frames;
+        this.spriteHeight = this.image.height;
+        this.frameOffset = this.spriteWidth * index;
 
         let destination = [position_x, position_y];
         let size = 10;
         let scaledWidth = (this.ogDemensions[0] / window.innerWidth) * size; 
         let scaledHeight = (this.ogDemensions[1] / window.innerHeight) * size;
 
+        console.log(scaledWidth, scaledHeight, (this.ogDemensions[1] / window.innerHeight))
+
         this.ctx.drawImage(
             this.image,
-            frameOffset, 0,                         // source x, y
-            spriteWidth, spriteHeight,              // source width, height
+            this.frameOffset, 0,                         // source x, y
+            this.spriteWidth, this.spriteHeight,    // source width, height
             destination[0], destination[1],         // destination x, y
             scaledWidth, scaledHeight               // destination width, height
         );

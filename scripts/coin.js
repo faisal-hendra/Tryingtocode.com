@@ -9,7 +9,7 @@ import { getUserData, setUserDatapoint, increaseCoins } from "../firebase.js";
 
 let counter = document.getElementById("coin-counter");
 
-let canvas = document.getElementById('render-canvas');
+let canvas = document.getElementById('learn-screen');
 
 const coinImgSrc = '../components/art/ttc coin icon.png';
 let objects = [];

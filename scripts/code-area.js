@@ -53,27 +53,33 @@ export class CodeArea{
     }
 
     //called by project.js 
-    editPresses(call, tab="   "){
+    editPresses(call, tab="\t"){
         let prettyCode = this.prettyCode;
 
-        this.textarea.addEventListener('keydown', function(event) {
-            let value = this.value;
+        this.textarea.addEventListener('keydown', (event) => {
+            let value = this.textarea.value;
             createPrettyCode(prettyCode, value);
 
-            if (event.keyCode === 9) { //tab is space instead
+            if (event.keyCode === 9) { //tab is tab instead of switch
                 event.preventDefault();
-                let start = this.selectionStart;
-                let end = this.selectionEnd;
-                this.value = this.value.substring(0, start) + tab + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start + tab.length;
+                let start = this.textarea.selectionStart;
+                let end = this.textarea.selectionEnd;
+                this.textarea.value = this.textarea.value.substring(0, start) + tab + this.textarea.value.substring(end);
+                this.textarea.selectionStart = this.textarea.selectionEnd = start + tab.length;
             }
-            if (event.keyCode === 13){ //make (): have an indent next line
-                let end = this.selectionEnd;
-                let end_value = this.value.substring(end - 1, end);
-                if(end_value === ":"){
-                    let start = this.selectionStart;
-                    event.preventDefault();
-                    this.value = this.value.substring(0, start) + "\n" + tab + this.value.substring(end);
+            if (event.keyCode === 13){ //make indents if pressing enter
+                event.preventDefault();
+                //if ctr+enter
+                if(event.ctrlKey){
+                    this.parent.displayUserCode(this.textarea.value);
+                } else{
+                    let autoTabResult = this.autoTab();
+                    let newValue = autoTabResult[0] + autoTabResult[1]
+                    this.textarea.value = newValue;
+                    this.textarea.selectionStart = autoTabResult[0].length;
+                    this.textarea.selectionEnd = autoTabResult[0].length;
+
+                    this.createText(newValue);
                 }
             }
 
@@ -87,6 +93,39 @@ export class CodeArea{
         });
     }
 
+    getCurrentLine(){
+        const text = this.textarea.value;
+        const newLineSplit = text.split("\n");
+
+        const end = this.textarea.selectionEnd;
+
+        let upToSelection = text.substring(0, end)
+        let subjectiveLineAmmount = upToSelection.split("\n").length; //the ammount of new lines before selection
+
+        console.log(subjectiveLineAmmount, newLineSplit);
+        let currentLine = newLineSplit[subjectiveLineAmmount - 1];
+
+        return currentLine;
+    }
+    
+    autoTab(){
+        let text  = this.textarea.value;
+        let start = this.textarea.selectionStart;
+        let end   = this.textarea.selectionEnd
+
+        let tabReg = /^[ \t]+:*|:/
+        let value = this.getCurrentLine();
+
+        let tabamm = match(tabReg, value);
+        console.log('ammount: ', tabamm, value);
+
+        let before = text.substring(0, start) + "\n" + "\t".repeat(tabamm); //everything before selection area
+        this.textarea.selectionStart = before.length;
+        let after = text.substring(end)
+
+        return [before, after];
+    }
+
     createText(value){
         this.textarea.value = value;
         for (let index = 0; index < this.lineAmm - 1; index++) {
@@ -97,4 +136,11 @@ export class CodeArea{
 
         return this.textarea.value.split("\n").length;
     }
+}
+
+let match = (regex, string) => {
+    string = (string || '');
+    let matches = (string.match(regex) || null);
+    if(matches == null) {return 0;}
+    return matches[0].length;
 }

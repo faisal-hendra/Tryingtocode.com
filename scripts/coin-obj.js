@@ -26,6 +26,7 @@ export class CoinObj{
         if (canvas) {
             this.originalCanvasWidth = canvas.width;
             this.originalCanvasHeight = canvas.height;
+            console.log("originals set to: ", this.originalCanvasHeight, this.originalCanvasWidth);
         }
         this.image = new Image();
         this.spriteImage = new SpriteImage(ctx, this.image, sprite);

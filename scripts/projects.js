@@ -188,6 +188,7 @@ export class Display {
         });
     }
 
+
     toggleElements(value=false){ // false = stop showing this project
         window.currentDisplay = this;
         

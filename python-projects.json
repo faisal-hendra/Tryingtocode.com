@@ -90,7 +90,7 @@
         },
         "8": {
             "title": "If then",
-            "code": "if(1 == 1):\n print('1 is equal to 1')",
+            "code": "if(1 == 1):\n\tprint('1 is equal to 1')",
             "instruction": "Make the if statement: if(1 == 2)",
             "output-includes": "*",
             "output-discludes": "1 is equal to 1",
@@ -101,7 +101,7 @@
         },
         "9": {
             "title": "If then 2",
-            "code": "x = 1\n\nif(x == 2):\n print('you did it!')",
+            "code": "x = 1\n\nif(x == 2):\n\tprint('you did it!')",
             "instruction": "Make it print 'you did it!'",
             "output-includes": "you did it!",
             "output-discludes": "*",
@@ -134,7 +134,7 @@
         },
         "12": {
             "title": "If then 3",
-            "code": "x = 'hello'\n\ny = 'hello'\n\nif(x == y):\n print('do not print this!')",
+            "code": "x = 'hello'\n\ny = 'hello'\n\nif(x == y):\n\tprint('do not print this!')",
             "instruction": "Make x and y different",
             "output-includes": "*",
             "output-discludes": "do not print this!",
@@ -167,7 +167,7 @@
         },
         "15": {
             "title": "If then else",
-            "code": "x = 1\n\nif(x == 1):\n print('x is 1')\nelse:\n print('x is not 1')",
+            "code": "x = 1\n\nif(x == 1):\n\tprint('x is 1')\nelse:\n\tprint('x is not 1')",
             "instruction": "Make it print x is not 1",
             "output-includes": "x is not 1",
             "output-discludes": "*",
@@ -233,7 +233,7 @@
         },
         "21": {
             "title": "If then 4",
-            "code": "animals = ['dog', 'bird']\n\n#hint: what is animals[1]?\n\nif(animals[1] == 'dog'):\n print('you did it!')",
+            "code": "animals = ['dog', 'bird']\n\n#hint: what is animals[1]?\n\nif(animals[1] == 'dog'):\n\tprint('you did it!')",
             "instruction": "Make each side of the == the same",
             "output-includes": "you did it!",
             "output-discludes": "*",
@@ -256,7 +256,7 @@
         "23": {
             "section": "beginner-2",
             "title": "Loop 1",
-            "code": "for i in range(5):\n print(i)\n\n",
+            "code": "for i in range(5):\n\tprint(i)\n\n",
             "instruction": "Make it repeat 6 times",
             "output-includes": "0&&&5",
             "output-discludes": "-1&&&7",
@@ -267,7 +267,7 @@
         },
         "24": {
             "title": "Functions 1",
-            "code": "def function_name():\n print('you ran the function')\n\nfunction_name()",
+            "code": "def function_name():\n\tprint('you ran the function')\n\nfunction_name()",
             "instruction": "Don't run the function",
             "output-includes": "*",
             "output-discludes": "you ran the function",
@@ -278,7 +278,7 @@
         },
         "25": {
             "title": "Functions 2",
-            "code": "def function_name():\n print('you ran the function')\n\nfor i in range(10):\n function_name()",
+            "code": "def function_name():\n\tprint('you ran the function')\n\nfor i in range(10):\n\tfunction_name()",
             "instruction": "Run the function 20 times",
             "output-includes": "you ran the function",
             "output-discludes": "*",
@@ -289,7 +289,7 @@
         },
         "26": {
             "title": "Functions 3",
-            "code": "def function_name():\n print('you ran the function')\n\nnew_name()",
+            "code": "def function_name():\n\tprint('you ran the function')\n\nnew_name()",
             "instruction": "Change function_name to be new_name",
             "output-includes": "*",
             "output-discludes": "*",
@@ -300,7 +300,7 @@
         },
         "27": {
             "title": "Functions 4",
-            "code": "#Functions need def. Then a name. Then ():\n\n#def hello():\n ",
+            "code": "#Functions need def. Then a name. Then ():\n\n#def hello():\n\t",
             "instruction": "Make and run a function that prints hello",
             "output-includes": "hello",
             "output-discludes": "*",
@@ -311,7 +311,7 @@
         },
         "28": {
             "title": "Functions 5",
-            "code": "#Functions can take in variables\n\ndef add(number1, number2):\n sum = number1 + number2\n print(sum)\n\nadd(3, 4)",
+            "code": "#Functions can take in variables\n\ndef add(number1, number2):\n\tsum = number1 + number2\n\tprint(sum)\n\nadd(3, 4)",
             "instruction": "Make the code print 10",
             "output-includes": "10",
             "output-discludes": "*",
@@ -322,7 +322,7 @@
         },
         "29": {
             "title": "Loops 2",
-            "code": "for i in range(5, 10):\n print(i)",
+            "code": "for i in range(5, 10):\n\tprint(i)",
             "instruction": "Make the loop go from 10 to 15",
             "output-includes": "10&&&15",
             "output-discludes": "*",
@@ -333,7 +333,7 @@
         },
         "30": {
             "title": "Loops 3",
-            "code": "i = 0\n\nwhile i < 10:\n i = i + 1\n print(i)",
+            "code": "i = 0\n\nwhile i < 10:\n\ti = i + 1\n\tprint(i)",
             "instruction": "Don't print 5",
             "output-includes": "*",
             "output-discludes": "5",
@@ -344,7 +344,7 @@
         },
         "31": {
             "title": "Append 1",
-            "code": "numbers = []\n\nfor i in range(10):\n numbers.append(i)\n\n#edit the print statement below\n\nprint(numbers)",
+            "code": "numbers = []\n\nfor i in range(10):\n\tnumbers.append(i)\n\n#edit the print statement below\n\nprint(numbers)",
             "instruction": "Only go up to 5",
             "output-includes": "*",
             "output-discludes": "6&&&10",
@@ -355,7 +355,7 @@
         },
         "32": {
             "title": "Append 2",
-            "code": "nums = []\n\nfor num in range(3):\n nums.append(num + 1)\n print(num)\n\nprint(nums)",
+            "code": "nums = []\n\nfor num in range(3):\n\tnums.append(num + 1)\n\tprint(num)\n\nprint(nums)",
             "instruction": "Make the code subtract rather than add",
             "output-includes": "*",
             "output-discludes": "*",
@@ -366,7 +366,7 @@
         },
         "33": {
             "title": "Lists 4",
-            "code": "letters = ['a', 'b', 'c']\n\nfor letter in letters:\n #make sure there is a space\n ",
+            "code": "letters = ['a', 'b', 'c']\n\nfor letter in letters:\n\t#make sure there is a space\n\t",
             "instruction": "Print all the letters in the list",
             "output-includes": "a&&&b&&&c",
             "output-discludes": "*",
