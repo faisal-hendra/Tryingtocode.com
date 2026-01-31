@@ -127,6 +127,14 @@ export class CodeArea{
                 changeEnter(event);
                 this.createText(this.textarea.value);
             }
+            //accessability setting for tab switchers:
+            if(event.key === 'Escape'){
+                event.preventDefault();
+                let focusOn = this.project.runButton;
+                console.log(focusOn);
+                focusOn.focus();
+            }
+
             changePairs(event);
 
             call();

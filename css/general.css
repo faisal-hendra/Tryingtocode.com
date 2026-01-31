@@ -288,7 +288,7 @@ p.pixel-alt  {font-size: 1.5rem;}
     transform:scale(.1, 5);
 }
 
-.spin {
+.spin:active {
     animation: spin .2s ease-in-out infinite;
 }
 @keyframes spin {

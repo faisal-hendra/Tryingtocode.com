@@ -32,40 +32,35 @@
 /*------------------------------------*\
     #GENERAL
 \*------------------------------------*/
-::-webkit-scrollbar {
-  display: block;
+body {
+    overflow-x: hidden;
 }
 
 .big-icon{
 	position: relative;
-	background-color: #0000;
+	background: none;
 	width: 100%;
 	image-rendering: pixelated;
-}
-
-body {
-  margin: 0;
 }
 
 /*------------------------------------*\
     #TOOLS
 \*------------------------------------*/
 .gone{
-	display: none !important;
-	padding: 0% !important;
+	display: none;
+	padding: 0%;
 }
 
 .slow-hide{
-	transition: all 1s;
-	padding: 0% !important;
-	size: 0% !important;
-	border-radius: 0px !important;
-	width: 0px !important;
-	height: 0px !important;
+	transition: padding 1s, size 1s;
+	padding: 0%;
+	size: 0%;
+	width: 0px;
+	height: 0px;
 }
 
 .slow-hide > * {
-	display: none !important;
+	display: none;
 }
 
 .lined-background {
@@ -85,6 +80,8 @@ body {
     #WELCOME
 \*------------------------------------*/
 .welcome {
+	--shadow-size: 4px;
+
     display: grid;
 
     grid-template-columns: auto /*auto auto*/;
@@ -92,17 +89,14 @@ body {
 	gap: 10%;
 	padding: 1%;
 
-	flex-direction: column;
-	justify-content: center;
-	flex-wrap: inherit;
 	text-align: center;
 	color: white;
 	font-size: 2em;
 	text-shadow:
-		-4px -4px 0 #000,  
-		 4px -4px 0 #000,
-		-4px  4px 0 #000,
-		 4px  4px 0 #000 ;
+		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
+		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
+		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
+		var(--shadow-size) var(--shadow-size) 0 #000;
 	
 	height: 100vh;
 	width: 100%;
