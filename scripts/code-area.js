@@ -3,14 +3,14 @@ const AREAHTML =
 `
 <div class="top-bar input-output main-font">
     <div class="code-editor">
-        <div class="line-numbers lines"></div>
+        <div class="line-numbers lines code-lines"></div>
         <div class="single-block-grid">
             <textarea class="main-font codearea" name="user-code" placeholder="code here..." spellcheck="false"></textarea>
-            <pre class="code-highlight" name="pretty-pre"><code class="main-font language-python" name="pretty-code"></code>
+            <pre class="code-highlight code-lines" name="pretty-pre"><code class="main-font language-python" name="pretty-code"></code>
             </pre>
         </div>
     </div>
-    <textarea name="output" id="output" class="lines output main-font">output</textarea>
+    <textarea name="output" id="output" class="lines output main-font code-lines">output</textarea>
 </div>
 
 `

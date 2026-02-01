@@ -157,15 +157,8 @@
 /*------------------------------------*\
     #TEXT-BOXES
 \*------------------------------------*/
-.codearea, .line-numbers, .output, .code-lines, .code-highlight {
-    background-image: repeating-linear-gradient(
-        to bottom,
-        #333333,
-        #333333 1px,
-        #1a1a1a 1px,
-        #1a1a1a 30px
-    );
-    background-attachment: local;
+.codearea, .line-numbers, .output, .code-highlight {
+    --line-width: 30px; /*defualt value not required*/
 }
 
 .codearea, .code-highlight {

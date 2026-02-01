@@ -78,7 +78,7 @@
     --sidebar-height: 8rem; /*for vertical screens*/
 
     --pixel-font: 'Press Start 2P';
-    --secondary-font: 'monospace'
+    --secondary-font: 'monospace';
 }
 
 /*------------------------------------*\
@@ -101,7 +101,7 @@ body {
 	left: 0;
 	background-color: var(--palette-serika-1);
     padding-top: 20px;
-	z-index: var(--z-base);
+	z-index: var(--z-overlay);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
 }
 
@@ -109,14 +109,14 @@ body {
     margin-bottom: 0px;
 }
 
-@media screen and (max-width: 50rem) {
+@media (orientation: landscape) {
     .main-content {
         margin-left: var(--sidebar-width);
         padding: 0px;
         z-index: var(--z-base);
     }
 }
-@media screen and (min-width: 50rem) {
+@media(orientation: portrait) {
     .main-content {
         margin-left: var(--sidebar-width);
         padding: 20px;
@@ -152,7 +152,7 @@ body {
     width: 150px;
 }
 
-@media screen and (max-width: 714px) {
+@media (orientation: portrait) {
     .sidebar {
         width: 100%;
         height: var(--sidebar-height);
@@ -302,6 +302,23 @@ p.pixel-alt  {font-size: 1.5rem;}
             translateY(var(--down));}
 }
 
+@property --line-width {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 30px;
+}
+
+.code-lines {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #333333,
+        #333333 1px,
+        #1a1a1a 1px,
+        #1a1a1a var(--line-width)
+    );
+    background-attachment: local;
+}
+
 /*------------------------------------*\
     #DROPDOWN
 \*------------------------------------*/
@@ -334,15 +351,14 @@ p.pixel-alt  {font-size: 1.5rem;}
     image-rendering: pixelated;
 }
 
-@media screen and (max-width: 714px) { /*when screen below width, change to vertical layout*/
+@media (orientation: portrait) { /*when screen below width, change to vertical layout*/
     .dropdown--list {
         flex-direction: row;
         width: auto;
     }
 
     .dropdown--element {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-inline: 10px;
         width: auto;
     }
 
@@ -527,7 +543,7 @@ body {
     }
 }
 
-@media screen and (max-width: 714px) {
+@media (orientation: portrait) {
     .footer-parent{
         position: block;
 

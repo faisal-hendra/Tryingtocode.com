@@ -32,6 +32,19 @@
 /*------------------------------------*\
     #GENERAL
 \*------------------------------------*/
+:root {
+    --space-1: 15vw;
+    --space-2: 4rem;
+    --space-3: 3rem;
+
+	--inner-box-color: #0009;
+
+	--welcome-z-index: 5;
+
+	--image-size-1: 10rem;
+	--image-size-2: 5rem;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -76,242 +89,90 @@ body {
     background-attachment: local;
 }
 
+@property --shadow-size {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 2px;
+}
+
+.text-shadow {
+	text-shadow:
+		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
+		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
+		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
+		var(--shadow-size) var(--shadow-size) 0 #000;
+}
+
 /*------------------------------------*\
     #WELCOME
 \*------------------------------------*/
 .welcome {
 	--shadow-size: 4px;
 
-    display: grid;
-
-    grid-template-columns: auto /*auto auto*/;
-
-	gap: 10%;
-	padding: 1%;
+    display: flex;
 
 	text-align: center;
 	color: white;
 	font-size: 2em;
-	text-shadow:
-		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
-		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
-		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
-		var(--shadow-size) var(--shadow-size) 0 #000;
 	
 	height: 100vh;
-	width: 100%;
-	padding-left: 0;
+
+	z-index: var(--welcome-z-index);
+
+	box-sizing: border-box;
 }
 
-.welcome--title {
-	--shadow-size: 4px;
-
-	text-shadow: 
-		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
-		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
-		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
-		var(--shadow-size) var(--shadow-size) 0 #000;
+.welcome > * {
+	z-index: var(--welcome-z-index);
 }
 
-.welcome--subtitle {
-	--shadow-size: 2px;
-
-	text-shadow: 
-		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
-		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
-		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
-		var(--shadow-size) var(--shadow-size) 0 #000;
-}
-
-.welcome--p {
-	--shadow-size: 2px;
-
-	font-size: small;
-	text-shadow: 
-		calc(-1 * var(--shadow-size)) calc(-1 * var(--shadow-size)) 0 #000,  
-		var(--shadow-size) calc(-1 * var(--shadow-size)) 0 #000,
-		calc(-1 * var(--shadow-size)) var(--shadow-size) 0 #000,
-		var(--shadow-size) var(--shadow-size) 0 #000;
-}
-
-.welcome--side-div {
-	position: relative;
+.welcome--demo {
 	display: flex;
-	flex-direction: row;
-
-	margin: 0%;
-	gap: 5%;
-}
-
-.welcome--learn-div {
-	position: relative;
-	display: flex;
-	width: 40vw;
-	height: 70vh;
-	
-	left: 0;
 	flex-direction: column;
-	padding-top: 0 !important;
+	justify-content: center;
+	align-items: center;
 
-	scrollbar-width: none;
-	-ms-overflow-style: none;
+	box-sizing: border-box;
+	width: max(70%, 400px);
+	margin-inline: var(--space-1);
+
+	background-color: var(--inner-box-color);
 }
 
-.code-highlight::-webkit-scrollbar {
-  	display: none;
+@media (orientation: portrait) {
+	.welcome--demo {
+		margin: 10%;
+	}
 }
 
-.welcome--learn-div--code-div, .welcome--learn-div--output {
-	display: flex;
-	transition: all 1s;
-	--line-size: 8rem;
+.welcome--demo--input {
 
-	height: calc(var(--line-size) * 1 + 2px); /*1 line, plus the two pixels for line seperation*/
-	width: 100%;
+	--width: 50%; /*setting as a variable for extra references later on*/
 
-	left: 0;
+	width: var(--width); 
+	height: var(--line-width); 
+	--line-width:100px;
 
-	border: 10px solid black !important;
-	border-radius: 40px;
-
-	padding: 0%;
-	gap: 0%;
-
-	align-content: center;
 }
 
-.welcome--learn-div--code-div:hover, .welcome--learn-div--output:hover {
-	transition: all 1s;
-	transform: rotate(1deg);
+.welcome--demo--learn {
+	box-sizing: border-box;
 }
 
-.welcome--learn-div--code-div:active, .welcome--learn-div--output:active {
-	transition: all .5s;
-	transform: 	scale3d(110%, 110%, 90%)
-				rotate(1deg);
-	
-	z-index: 10;
-}
-
-.welcome--learn-div--code {
-	display: block;
-
-	font-size: 2vw;
-	padding: auto;
-	
-	margin-top: -1% !important;
-}
-
-.welcome--learn-div--output{
-	height: calc(var(--line-size) * 1 + 2px); /*1 line, plus the two pixels for line seperation*/
-	align-content: center;
-
-	display: block;
-	margin-bottom: 10px;
-}
-
-.welcome--run-code {
+.welcome--demo--learn-button {
 	background-color: #0000;
-	border: none;
+	border-color: #0000;
 
+	width: var(--image-size-1);
+	height: var(--image-size-1);
+}
+
+.welcome--demo--learn-button > * { width: inherit; height: inherit; }
+
+.welcome--demo--arrow {
 	image-rendering: pixelated;
+	width: 10%;
 }
-
-.left-side {
-	display: flex;
-
-	position: relative;
-	left: 0;
-
-	width: 100%;
-	height: 100vh;
-
-	margin-top: 25%;
-}
-
-.right-side {
-	position: relative;
-	right: 0;
-}
-
-.seperator {
-	z-index: -1;
-	gap: 10px;
-	color: #000;
-
-	--glow-color: #aa0a
-	filter: drop-shadow(0 0 10px var(--glow-color))
-          	drop-shadow(0 0 20px var(--glow-color));
-}
-
-#welcome--go-learn {
-	padding-top: 1%;
-	display: flex;
-	align-content: left;
-}
-
-
-#welcome--go-learn--arrow {
-	width: 200px;
-	height: 200px;
-
-	transform: rotate(10deg);
-}
-
-#welcome--go-learn--button {
-	width: 200px;
-	height: 200px;
-	padding-top: 50%;
-}
-
-#welcome--go-learn--button:not(:hover) {
-	transform: rotate(-3deg);
-}
-
-@media screen and (width < 1000px) {
-	.welcome{
-		grid-template-columns: auto;
-		gap: 0;
-		justify-content: left;
-		gap: 0%;
-	}
-
-	.welcome--learn-div--code {
-		font-size: 4vw !important;
-	}
-
-	#welcome--separator {
-		display: flex;
-		transform: rotate(90deg);
-
-		justify-content: left;
-	}
-
-	.left-side {
-		width: 90%;
-		padding-right: 50px;
-	}
-
-	.welcome--learn-div{
-		width: 90%;
-	}
-}
-
-@media (max-width: 712px) {
-    #welcome {
-        font-size: 1em;
-    }
-
-	.welcome--learn-div--code {
-		font-size: 6vw !important;
-	}
-
-	#welcome--separator {
-		display: none;
-	}
-}
-
-
 
 /*------------------------------------*\
     #SIGN IN
@@ -320,7 +181,6 @@ body {
 	position: relative;
 	display: flex;
 	flex-direction: row;
-
 }
 
 .sign-in{
