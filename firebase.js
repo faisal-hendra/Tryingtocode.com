@@ -171,7 +171,13 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
     let setProjects = mergeProjects();
     console.log(setProjects);
 
-    if(!isObjectEmpty(setProjects)) {updatePayload.projects = setProjects;}
+    if(!isObjectEmpty(setProjects)) {
+        updatePayload.projects = setProjects;
+        let keyValuePairs = setProjects.keys(obj).map((key) => [key, obj[key]]);
+        localStorage.setItem("projects", keyValuePairs);
+        console.trace("projects set to: ", keyValuePairs);
+        console.log(window.currentDisplay);
+    }
 
     //setting proper
     await updateDoc(userRef, updatePayload);
@@ -249,8 +255,6 @@ let userMade = (user) => {
     const userRef = doc(db, "users", user.uid);
 
     getDoc(userRef).then((userSnap) => {
-        console.log(userSnap);
-        console.log("userSnap", userSnap.get("projects"));
         code = userSnap.get("projects");
 
         updateProjects.forEach(updateProject => {

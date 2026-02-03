@@ -84,6 +84,7 @@ let saveProject = (this_proj) => {
 
     console.log("SAVING USER PROJECT", JSONprojects);
     if(user && JSONprojects !== "{}"){
+        console.log("save this new project here :", JSONprojects);
         setUserDatapoint(null, null, null, JSONprojects);
     }
 };

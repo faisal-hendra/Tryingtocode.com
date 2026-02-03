@@ -1,8 +1,8 @@
 //for use in index.html
-import { SignIn } from "./sign-in.js";
-import { signInUp } from '../firebase.js';
-import { getCoin } from "./coin.js";
-import { Toggle } from "./tools.js";
+//import { SignIn } from "./sign-in.js";
+//import { signInUp } from '../firebase.js';
+import { getCoin, changeNumber} from "./coin.js";
+//import { Toggle } from "./tools.js";
 //import { runUserCode } from "./pyrun.js";
 
 console.log("work 0");
@@ -29,7 +29,8 @@ let goto = document.getElementById("coin-go-here");
 console.log(goto);
 const counter = document.getElementById("coin-counter");
 let indexGetCoin = (amm) => {
-    getCoin(amm, counter)
+    getCoin(amm, counter);
+    changeNumber(0);
 }
 
 let nice = () => {indexGetCoin(10);}
@@ -53,4 +54,8 @@ runCode.addEventListener("mouseup", async() => {
     //let output = await runUserCode(codeContent)
     let output = [true, "learn code"]
     outputBox.innerHTML = output[1];
+});
+
+window.addEventListener("user_set", async () => {
+    console.log(window.user.uid);
 });

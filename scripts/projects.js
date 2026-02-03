@@ -111,8 +111,6 @@ export class Display {
                 makeProjectsGone();
 
                 this.minimize({mini: false, gone: false});
-
-                window.currentDisplay = element;
             }
         }
 
@@ -149,9 +147,7 @@ export class Display {
 
     initButtons(){
         let closeButtonEvent = (e) => {e.stopPropagation(); this.toggleOtherProjects(); this.minimize({mini: true, gone: false});}
-        let nextButtonEvent = (e) => {
-            e.stopPropagation(); this.openProject(1);
-        }
+        let nextButtonEvent = (e) => {e.stopPropagation(); this.openProject(1);}
         let rewindButtonEvent = () => {this.codeArea.createText(this.projectJSON.code);}
         let hintButtonEvent = () => {this.toggleHint();}
 

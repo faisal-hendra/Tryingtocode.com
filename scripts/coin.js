@@ -26,8 +26,7 @@ let getUserCoins = async () => {
 }
 
 let printCoins = async () => {
-    let coins = await getUserCoins()
-    console.log("USER COINS = ", coins);
+    let coins = await getUserCoins();
 }
 printCoins();
 
@@ -61,7 +60,7 @@ if(canvas){
 
     window.addEventListener('correctCode', (details) => {
         let startElement = window.currentDisplay.output;
-        getCoin(details.detail.value, counter, startElement);
+        getCoin(details.detail.value, counter/*, startElement*/);
         changeNumber(details.detail.value);
     });
 
@@ -158,5 +157,6 @@ let initDisplay = async () => {
 }
 
 window.addEventListener("user_set", async () => {
+    console.log(window.user.uid);
     await initDisplay();
 });
