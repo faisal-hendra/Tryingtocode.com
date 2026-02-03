@@ -60,6 +60,10 @@
     margin: 0;
     border: 0;
     overflow: hidden;
+
+    user-select: none;
+    -moz-user-select: none;
+    
 }
 
 /*project mini*/

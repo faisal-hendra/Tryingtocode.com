@@ -47,8 +47,6 @@ var correctCode = new CustomEvent("correctCode", {
     }
 });
 
-console.log("loaded project.js");
-
 export class Display {
     constructor(document, parent, projectJSON, projectIndex=0, htmlString = htmlGen, 
         textareaSize = 1, startToggled=false, code=null) { 
@@ -79,43 +77,52 @@ export class Display {
     }
 
     toggleOtherProjects(details = {index: this.projectIndex, toIndex: -1, gone: false, mini: true}){
-        let toggleEvent = new CustomEvent("closeMe", {detail: details});
-        window.dispatchEvent(toggleEvent);
+        let localToggleEvent = new CustomEvent("closeMe", {detail: details});
+        window.dispatchEvent(localToggleEvent);
     }
 
     openOtherProject(details = {openIndex: 0}){
-        let toggleEvent = new CustomEvent("openMe", {detail: details});
-        window.dispatchEvent(toggleEvent);
+        let localToggleEvent = new CustomEvent("openMe", {detail: details});
+        window.dispatchEvent(localToggleEvent);
     }
 
-    initializeMinimizationFeatures(){
+    toggleEvent(element) {
+
         //close others down
+
         let makeProjectsGone = () => {
+            console.log("for myself I'm going from ", -1, " to ", this.projectIndex);
             this.toggleOtherProjects({index: this.projectIndex, toIndex: -1, gone: true, mini: true})
         }
 
         let minimizeBelowCurrentDisplay = () => {
             if(typeof window.currentDisplay !== "undefined"){
                 this.toggleOtherProjects({index: window.currentDisplay.projectIndex, toIndex: this.projectIndex, gone: false, mini: true});
-
+                console.log("this is the message I sent out for current display since current display is lazy....");
+                console.log("from all displays from ", window.currentDisplay.projectIndex, " to ", this.projectIndex, " and they are mini now.");
                 window.currentDisplay.minimize({mini: true, gone: false});
             }
         }
 
         //open me up
-        let toggleEvent = (element) => {
-            if (element.projectEl.classList.contains('mini') || element.projectEl.classList.contains('gone')) {
-                element.countTimeOpen();
 
-                minimizeBelowCurrentDisplay();
-                makeProjectsGone();
+        if (element.projectEl.classList.contains('mini') || element.projectEl.classList.contains('gone')) {
+            element.countTimeOpen();
 
-                this.minimize({mini: false, gone: false});
-            }
+            minimizeBelowCurrentDisplay();
+            makeProjectsGone();
+
+            this.minimize({mini: false, gone: false});
+        
+            console.log("set current display");
+            window.currentDisplay = this;
         }
 
-        let toggleMe = () => {toggleEvent(this);}
+    }
 
+    initializeMinimizationFeatures(){
+
+        let toggleMe = () => {this.toggleEvent(this);}
         this.projectEl.addEventListener('click', toggleMe);
 
         //open others up
@@ -123,10 +130,8 @@ export class Display {
             let detail = data.detail;
 
             if(this.projectIndex == detail.openIndex){
-                toggleEvent(this);
+                this.toggleEvent(this);
             }
-
-            window.currentDisplay = this;
         });
 
 
@@ -139,7 +144,7 @@ export class Display {
             let withinRange = detail.index > myIndex && myIndex > detail.toIndex;
 
             if(withinRange) {
-                console.trace(detail, " is index and mine is: ", this.projectIndex);
+                //console.trace(detail, " is index and mine is: ", this.projectIndex);
                 this.minimize({mini: detail.mini, gone: detail.gone});
             }
         })
@@ -179,10 +184,14 @@ export class Display {
 
     openProject(relativeIndex=0){ //open the next project: relativeIndex=1
         //if(relativeIndex == 0) {/* do not change index */ return; }
-        console.log("change project bro");
         this.openOtherProject({openIndex: this.projectIndex + relativeIndex});
         var changeOpenProject = new CustomEvent("closeMe", {detail: {index: this.projectIndex, toIndex: -1, gone: true, mini: false}});
         window.dispatchEvent(changeOpenProject);
+
+        if(relativeIndex == 0) {
+            console.log("set current display");
+            window.currentDisplay = this;
+        }
     }
 
     createElements(document, parent, htmlString){
@@ -261,6 +270,8 @@ export class Display {
             if(values.mini || values.gone){
                 //project should be disabled..
                 this.canRun = false;
+
+                this.toggleHint(this.hintPopup, true);
             } else {
                 //the project is totally open...
                 this.canRun = true;
@@ -319,9 +330,7 @@ export class Display {
 }
 
 function rewardPlayer(display){
-    console.log("reward, ", display.reward);
     if(display.reward !== 0 && display.reward !== null){
-        console.log("reward 2");
         correctCode = new CustomEvent("correctCode", {
             detail: {
                 value: (display.reward !== undefined) ? display.reward : 5

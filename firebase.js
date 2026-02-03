@@ -173,9 +173,9 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
 
     if(!isObjectEmpty(setProjects)) {
         updatePayload.projects = setProjects;
-        let keyValuePairs = setProjects.keys(obj).map((key) => [key, obj[key]]);
-        localStorage.setItem("projects", keyValuePairs);
-        console.trace("projects set to: ", keyValuePairs);
+        let localPayload = JSON.stringify(setProjects)
+        localStorage.setItem("projects", localPayload);
+        console.trace("local: ", localPayload);
         console.log(window.currentDisplay);
     }
 

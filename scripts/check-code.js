@@ -51,7 +51,6 @@ export let checkInclusion = (parts, whole) => {
 
     if(whole === '**') { /* any */ 
         if (parts == ""){
-            console.log('this is true if it has nothing');
             return null;
         }
         return false;
@@ -67,7 +66,6 @@ export let checkInclusion = (parts, whole) => {
     for (let index = 0; index < splitWhole.length; index++) {
         const element = splitWhole[index];
         pass = false;
-        console.log(skips, parts);
         for(let part = 0; part < allParts.length; part++){
             if (skips.includes(part)){
                 continue;
@@ -78,7 +76,6 @@ export let checkInclusion = (parts, whole) => {
                 currentPart != ""
             )
             {
-                console.log(skips, currentPart);
                 pass = true;
                 skips.push(part);
                 break;
@@ -86,7 +83,6 @@ export let checkInclusion = (parts, whole) => {
         }
         if(pass == false){ break;}
     }
-    console.log("passed ", pass);
     return pass;
 }
 
