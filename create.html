@@ -13,66 +13,19 @@
     <link rel="stylesheet" href="./css/prism.css">
 
     <script src="./scripts/create.js" type="module"></script>
+    <script src="./scripts/web-elements/create-custom-elements.js" type="module"></script>
+    <script src="./scripts/firebase-backend/firebase.js" type="module"></script>
     <script src="./scripts/general.js" type="module"></script>
     <script src="./scripts/prism.js"></script>
+    <script src="./scripts/web-elements/sidebar.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="sidebar">
-        <a href="index.html" title="Home"  class="logo" id="home-icon">
-            <img src="components/art/ttc coin icon.png" alt="Coin logo">
-        </a>
-        <button id="dropdown-button" class="toggle-dropdown">
-            <img class="toggle-dropdown--img" src="components/art/yellow - toggle arrow up.png" alt="" id="toggle-button" >
-        </button>
-        <div class="dropdown">
-            <ul class="dropdown--list">
-                <li class="dropdown--element"><a href="index.html" title="Home">
-                    <img class="dropdown--image" src="components/art/clean icon - 9.png" alt="House Icon">
-                </a></li>
-                <li class="dropdown--element"><a href="learn.html" title="Learn">
-                    <img class="dropdown--image" src="components/art/clean icon - 10.png" alt="blue book with L on it">
-                </a></li>
-                <!--li><a href="store.html" title="Test">
-                    <img src="components/art/bottle.png" alt="bottle with blue liquid">
-                    <img src="components/art/store icon 4.png" alt="store icon">
-                </a></li-->
-            </ul>
-        </div>
-        <p id="coin-counter" class="main-font">10</p>
-    </div>
+    <ttc-sidebar></ttc-sidebar>
 
     <div class="main-content main-font">
-        <div class="create-align">
-            <div class="create" id="create-page-holder">
-                <!--button class="main-font" id="change-setting">change setting</button-->
-
-                <div class="user-create-project main-font">
-                    <div class="create-main">
-                        <textarea class="main-font code-lines create-title" name="title" id="create-title" placeholder="title"></textarea>
-                        <div class="create-code-container">
-                            <!--div class="code-lines">1</div-->
-                            <textarea class="main-font code-lines create-code" name="defualt code" id="create-code" placeholder="defualt code"></textarea>
-                        </div>
-                    </div>
-                    <div class="advanced-toggle">extra</div>
-                    <div class="correct-measures">
-                        <textarea class="main-font code-lines create-measure" name="" id="" placeholder="output includes"></textarea>
-                        <textarea class="main-font code-lines create-measure" name="" id="" placeholder="code includes"></textarea>
-                        <textarea class="main-font code-lines create-measure" name="" id="" placeholder="output discludes"></textarea>
-                        <textarea class="main-font code-lines create-measure" name="" id="" placeholder="code discludes"></textarea>
-                    </div>
-                </div>
-                
-                <button id="submit-button">submit</button>
-                <p id="create-output">output</p>
-            </div>
-            <div class="test">
-                <div id="project-parent" class="project-parent"></div>
-            </div>
-        </div>
-        
+        <ttc-create-project ex="1">404</ttc-create-project>
     </div>
     
 </body>

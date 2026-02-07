@@ -19,8 +19,9 @@
 
     <script src="./scripts/index.js" type="module"></script>
     <script src="./scripts/general.js" type="module"></script>
-    <script src="./firebase.js" type="module" defer></script>
-    <script src="./scripts/footer.js"></script>
+    <script src="./scripts/firebase-backend/firebase.js" type="module" defer></script>
+    <script src="./scripts/web-elements/footer.js"></script>
+    <script src="./scripts/web-elements/sidebar.js"></script>
     <script src="./scripts/prism.js"></script>
 
     <script type="application/ld+json">{
@@ -52,29 +53,8 @@
     <canvas class="js-screen" id="learn-screen">
         <!--shows coins-->
     </canvas>
-    <div class="sidebar">
-        <a href="" title="Home"  class="logo" id="home-icon" draggable="false">
-            <img src="components/art/ttc coin icon.png" alt="Coin logo" class="nice-button">
-        </a>
-        <button id="dropdown-button" class="toggle-dropdown" draggable="false">
-            <img class="toggle-dropdown--img nice-button" src="components/art/yellow - toggle arrow up.png" alt="" id="toggle-button">
-        </button>
-        <div class="dropdown">
-            <ul class="dropdown--list">
-                <li class="dropdown--element"><a href="" title="Home">
-                    <img class="dropdown--image nice-button" src="components/art/clean icon - 9.png" alt="House Icon" draggable="false">
-                </a></li>
-                <li class="dropdown--element"><a href="learn" title="Learn">
-                    <img class="dropdown--image nice-button dark-glow" src="components/art/clean icon - 10.png" alt="blue book with L on it" draggable="false">
-                </a></li>
-                <!--li><a href="store/" title="Test">
-                    <img src="components/art/bottle.png" alt="bottle with blue liquid">
-                    <img src="components/art/store icon 4.png" alt="store icon">
-                </a></li-->
-            </ul>
-        </div>
-        <p id="coin-counter" class="main-font">10</p>
-    </div>
+    
+    <ttc-sidebar></ttc-sidebar>
 
     <div class="main-content main-font">
         <div id="welcome" class="welcome">

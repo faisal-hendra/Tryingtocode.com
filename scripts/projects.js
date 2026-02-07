@@ -1,9 +1,10 @@
 //for use as a rect for editable projects
 
-import { runUserCode } from "./pyrun.js";
-import { CodeArea } from "./code-area.js";
-import { isCorrectCode } from  "./check-code.js";
+import { runUserCode } from "./user-code/pyrun.js";
+import { CodeArea } from "./user-code/code-area.js";
+import { isCorrectCode } from  "./user-code/check-code.js";
 import { Toggle } from "./tools.js";
+import { scrollToTop } from "./learn.js";
 
 //general use
 
@@ -250,6 +251,8 @@ export class Display {
         
             console.log("set current display");
             window.currentDisplay = this;
+            
+            scrollToTop();
         }
 
     }

@@ -1,7 +1,7 @@
 //for use in index.html
 //import { SignIn } from "./sign-in.js";
 //import { signInUp } from '../firebase.js';
-import { getCoin, changeNumber} from "./coin.js";
+import { getCoin, changeNumber} from "./coin/coin.js";
 //import { Toggle } from "./tools.js";
 //import { runUserCode } from "./pyrun.js";
 

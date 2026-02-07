@@ -7,7 +7,7 @@
  * 
  */
 
-import { SpriteImage } from "./tools.js";
+import { SpriteImage } from "../tools.js";
 
 export class CoinObj{
     constructor(go_to=null, x_pos=0, y_pos=0, x_vel=0, y_vel=0, canvas=null, ctx=null, sprite=null){

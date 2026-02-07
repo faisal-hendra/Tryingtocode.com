@@ -14,37 +14,15 @@
     <script src="./scripts/learn.js" type="module"></script>
     <script src="./scripts/general.js" type="module"></script>
     <script>window.Prism = { manual: true };</script>
+    <script src="./scripts/firebase-backend/firebase.js" type="module" defer></script>
     <script src="./scripts/prism.js"></script>
-    <script src="./scripts/footer.js"></script>
+    <script src="./scripts/web-elements/footer.js"></script>
+    <script src="./scripts/web-elements/sidebar.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!--Font import-->
 </head>
 <body>
-    <div class="sidebar">
-        <a href="index" title="Home"  class="logo" id="home-icon">
-            <img src="components/art/ttc coin icon.png" alt="Coin logo" class="nice-button">
-        </a>
-        <button id="dropdown-button" class="toggle-dropdown">
-            <img class="toggle-dropdown--img nice-button" src="components/art/yellow - toggle arrow up.png" alt="" id="toggle-button" >
-        </button>
-        <div class="dropdown">
-            <ul class="dropdown--list">
-                <li class="dropdown--element"><a href="index" title="Home">
-                    <img class="dropdown--image nice-button" src="components/art/clean icon - 9.png" alt="home">
-                </a></li>
-                <li class="dropdown--element"><a href="learn" title="Learn">
-                    <img class="dropdown--image nice-button" src="components/art/clean icon - 10.png" alt="learn">
-                </a></li>
-                <!--li class="dropdown--element"><a href="store" title="Shop">
-                    <img class="dropdown--image" src="components/art/store icon 4.png" alt="Shop">
-                </a></li-->
-                <li class="dropdown--element"><a href="create" title="Learn">
-                    <img class="dropdown--image nice-button" src="components/art/plus2.png" alt="create">
-                </a></li>
-            </ul>
-        </div>
-        <p id="coin-counter" class="main-font">10</p>
-    </div>
+    <ttc-sidebar></ttc-sidebar>
     <div class="main-content main-font" id="main-content">
         <div style="position: relative;">
             <div id="loader" class="loader">

@@ -1,7 +1,9 @@
 //for use in learn.html
 import { Display } from "./projects.js";
-import "./coin.js";
-import { setUserDatapoint, getUserData, setupProject, deleteUserData } from "../firebase.js";
+import "./coin/coin.js";
+import { setUserDatapoint, getUserData, setupProject, deleteUserData } from "./firebase-backend/firebase.js";
+import { findProject, findProjects } from "./firebase-backend/firebaseProjects.js";
+import './firebase-backend/firebaseProjects.js';
 
 const LOAD_INDICES = Array.from({length: 34}, (_, i) => [i + 1, "projects"]);
 const DEFAULT_REWARD = 5;
@@ -48,28 +50,35 @@ function setStat(name, priorityValue, otherValue, defaultValue=""){
     localStorage.setItem(name, priority); //THIS IS THE FINAL DECISION
 }
 
+const doSomethingWithProject = (projects) => {
+    console.log("here it is");
+
+    projects.forEach(doc => {
+        console.log(doc.id, " => ", doc.data());
+    }) ;
+
+    console.log("projects = ", projects);
+}
+
 window.addEventListener("user_set", async () => {
     const user = window.user;
     setStat("projects", user.projects || "{}");
+
+    //console.log(window.user.uid);
+    /*findProject({section: "defualt", title: "default-1"}).then(() => 
+        {
+            doSomethingWithProject(resolve);
+        }
+    );*/
 });
 
-let goToTop = () => {
+export let scrollToTop = () => {
     console.warn("FIX THIS, make it maintainable, and look at phone when it's sideways... bleck!");
     if(window.innerWidth < 600){
         window.scrollTo({top: 160, left: 0, behavior: "smooth"});
     } else{
         window.scrollTo({top: 10, left: 0, behavior: "smooth"});     
     }
-}
-
-let toggleProject = (element) => {
-    //***
-}
-
-let toggleAboveProjects = (index) => {
-    //***
-
-    goToTop();
 }
 
 // Save or update a project

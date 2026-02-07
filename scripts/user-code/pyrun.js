@@ -29,14 +29,23 @@ let awaitRunPython = async (python) => {
     //run
     var data = new Promise((resolve, reject) => {
         worker.postMessage({ cmd: "awaitPyrun", python: python });
+        let output = ""
 
         worker.onmessage = async (message) => {
+            console.log("I tried to send it back...", message);
+
             if (message.data.cmd === "input") {
                 await getInput(message.data.promptText || "");
                 return;
             }
 
-            resolve([true, message.data]);
+            if(message.data.cmd === "stdout") {
+                console.log("I got something here", message.data.text);
+                output += message.data.text;
+                return;
+            }
+
+            resolve([true, output]);
         } 
 
         worker.onerror = (error) => reject([false, error]);
@@ -88,8 +97,7 @@ const getInput = async (promptText = "", currentDisplay=window.currentDisplay) =
 
     let input = await currentDisplay.getInput();
     
-
-    await sendInputToWorker(userInput);
+    await sendInputToWorker(input);
 
     interruptBuffer[0];
     return input;

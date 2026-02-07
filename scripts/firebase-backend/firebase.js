@@ -1,10 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, signInAnonymously, createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import { getPerformance } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-performance.js";
-
-//import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyABP5ADKcI2zC2ZdQ3pSUkuc1wmwBIbcwo",
@@ -17,8 +11,32 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+window.app = app;
+
+import { getAuth, signInAnonymously, createUserWithEmailAndPassword,  
+    signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { getPerformance } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-performance.js";
+//import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.0.1/firebase/app-check";
+//import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+
+
+
+
+
+/*const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('YOUR_SITE_KEY'),
+  isTokenAutoRefreshEnabled: true
+});
+*/
+
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+window.db = db;
+
+
+//console.log("db: ", window.db);
 
 //const analytics = getAnalytics(app);
 
@@ -38,7 +56,7 @@ let authStateChangedFunction = async (user) => {
         userMade(user);
     } else {
         console.log("User signed out? Or error with user.");
-        let newUser = await anonSign();
+        /*let newUser = */anonSign();
     }
 }
 
@@ -169,7 +187,7 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
     
     if (!window.user) return console.warn("No user yet");
 
-    console.log("saving...");
+    //console.log("saving...");
     
     const userRef = doc(db, "users", window.user.uid);
     const updatedSnap = await getDoc(userRef);
@@ -227,12 +245,12 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
 
     if(projects == null) return;
 
-    console.log("the payload got: ", updatePayload);
+    /*console.log("the payload got: ", updatePayload);
 
-    console.log("the reason it is bad? ", projects, setProjects, isObjectEmpty(setProjects));
+    console.log("the reason it is bad? ", projects, setProjects, isObjectEmpty(setProjects));*/
 
     let d = await getUserData();
-    console.log(d);
+    //console.log(d);
     
 }
 
@@ -336,7 +354,7 @@ export let setupProject = (projectDisplay, projectTitle) => {
 let anonSign = () => {
     signInAnonymously(auth).then((userCredential) => {
         console.log("Signed in anonymously, ");
-        console.alert("id passed in is: ", userCredential);
+        console.warn("id passed in is: ", userCredential);
 
         let user = auth.currentUser;
         //user = userCredential.user;
@@ -357,34 +375,6 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     console.error(error);
 });
 
-export let setProject = async (title, data, section="default", projectId="1") => {
-    let user = window.user ?? anonSign();
-    console.group("--SET PROJECT--");
-    console.log(title, data, section, projectId);
-    console.log("user");
-    console.log("Checking Auth before Write:", {
-        currentUser: auth.currentUser,
-        isAnonymous: auth.currentUser?.isAnonymous,
-        uid: auth.currentUser?.uid
-    });
-    console.log(`path: (database)/projects/${user.uid}/${section}/${projectId}`);
-    console.groupEnd();
-
-    const projectRef = doc(db, "projects", user.uid, section, title);
-    let obj = {
-        title: title,
-        data: data,
-        lastUpdated: serverTimestamp()
-    };
-    try {
-        await setDoc(projectRef, obj, {merge: true});
-    }catch (error){
-        console.error("oops. That project did not set well.", error);
-        console.log(user, user.uid, section, projectId);
-        return error;
-    }
-}
-
 let printProjects = async () => {
     
     if (!window.user || !window.user.uid) {
@@ -395,7 +385,6 @@ let printProjects = async () => {
     const projectRef = doc(db, "projects", window.user.uid);
     try {
         let projDoc = await getDoc(projectRef);
-        console.log("THIS IS THE DOCUMENT!!!", projDoc);
     } catch (error) {
         console.error(error);
     }

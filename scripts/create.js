@@ -1,4 +1,4 @@
-import {setProject} from '../firebase.js';
+import {setProject} from './firebase-backend/firebaseProjects.js';
 
 let submitButton = document.getElementById("submit-button");
 let title = document.getElementById("create-title");
@@ -10,6 +10,7 @@ console.log("hello");
 submitButton.addEventListener("click", () => {
     console.log("got create");
     console.log(title.value, code.value);
-    let projectOutput = setProject(title.value, code.value);
+
+    let projectOutput = setProject({title: title.value, data: code.value});
     output.value = projectOutput;
 });

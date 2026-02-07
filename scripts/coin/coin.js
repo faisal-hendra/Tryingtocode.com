@@ -1,5 +1,5 @@
 import { CoinObj } from "./coin-obj.js";
-import { getUserData, setUserDatapoint, increaseCoins } from "../firebase.js";
+import { getUserData, setUserDatapoint, increaseCoins } from "../firebase-backend/firebase.js";
 
 /**
  * This script is meant to tell the canvas to draw coins
@@ -157,6 +157,5 @@ let initDisplay = async () => {
 }
 
 window.addEventListener("user_set", async () => {
-    console.log(window.user.uid);
     await initDisplay();
 });

@@ -23,14 +23,22 @@ let runPython = async (python) => {
     });
 
     let output = '';
-    pyodide.setStdout({batched: (str) => {output += str.endsWith("\n") ? str : str + "\n";}});
+    const decoder = new TextDecoder();
+    pyodide.setStdout({
+        write: (buf) => {
+            const str = decoder.decode(buf);
+            output += str;
+            postMessage({ cmd: "stdout", text: str });
+            console.log("got stuff here though");
+            return buf.length;
+        }
+    });
     await pyodide.runPythonAsync(python, { globals: NAMESPACE });
 
     return output;
 }
 
 const onmessage = async (message) => {
-    console.log("doing anything! ", message);
 
     if (message.data.cmd === "setInterruptBuffer") {
         pyodide.setInterruptBuffer(message.data.interruptBuffer);

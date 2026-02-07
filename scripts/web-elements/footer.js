@@ -4,7 +4,9 @@ class TTCFooter extends HTMLElement {
     }
     connectedCallback(){
         this.render();
-        console.log("rendered successfully.");
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(`Attribute ${name} has changed.`);
     }
     render(){
         const copywrite = this.getAttribute("copywrite");
@@ -17,7 +19,7 @@ class TTCFooter extends HTMLElement {
                     <div class="column">
                         <p>about</p>
                         <a href="mailto:${mailTo}" class="footer--link">${mailTo}</a>
-                        <a href="${legalSRCs}" class="footer--link">legal</a>
+                        <a href="${legalSRCs}" class="footer--link">Terms of Service</a>
                     </div>
                     <div class="column">
                         <p>catagories</p>
@@ -27,6 +29,7 @@ class TTCFooter extends HTMLElement {
                     </div>
                     <div class="column">
                         <p>help and support</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1BB1V3JilTZPJEPQw0S8nTMsf9Vjfb_i_PX2aoeiEIOMEZg/viewform?usp=dialog" class="footer--link">ask for change</a>
                         <a href="https://youtu.be/dQw4w9WgXcQ" class="footer--link">help</a>
                     </div>
                     <div class="column">
