@@ -102,6 +102,7 @@ export class SimpleToggle{
             this.parentImage = this.parent.querySelector('img');
         }
         this.hide();
+        this.hasImages = (typeof this.images !== "undefined") && (this.images.length !== 0);
     }
     hide(){
         if(this.elements.length == 0){
@@ -114,7 +115,7 @@ export class SimpleToggle{
             elem.classList.add("hide");
         });
         
-        if(this.images.length > 0){
+        if(this.hasImages){
             this.parentImage.src = this.images[1];
         }
     }
@@ -128,7 +129,7 @@ export class SimpleToggle{
         this.elements.forEach(elem => {
             elem.classList.remove("hide");
         });
-        if(this.images.length > 0){
+        if(this.hasImages){
             this.parentImage.src = this.images[0];
         }
     }

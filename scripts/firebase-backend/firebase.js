@@ -18,7 +18,7 @@ import { getAuth, signInAnonymously, createUserWithEmailAndPassword,
 import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-performance.js";
 //import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.0.1/firebase/app-check";
-//import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
 
 
@@ -38,7 +38,9 @@ window.db = db;
 
 //console.log("db: ", window.db);
 
-//const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
+logEvent(analytics, 'page loaded');
+console.log(analytics);
 
 let setWindowUser = (toThis) => {
     if(toThis == null) {return null;}
@@ -256,6 +258,8 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
 
 export let increaseCoins = async (byAmmount=5) => {
     if (!window.user) return console.warn("No user yet");
+
+    logEvent(analytics, "coins given");
 
     const userRef = doc(db, "users", window.user.uid);
 

@@ -1,0 +1,7 @@
+User-agent: *
+User-agent: Googlebot
+User-agent: Googlebot-mobile
+User-agent: bingbot
+Allow: /index
+Allow: /learn
+

@@ -7,7 +7,8 @@
 **root . . . . . . . General Variables
 
 *DIVS
-**user-cr-project  . Div holding all the below
+**create-page-holder Holding everything in create page
+**user-cr-project  . Holding all the below
 **main . . . . . . . Div holding title & code
 **code-container . . Div holding defualt code
 
@@ -27,9 +28,20 @@
 /*------------------------------------*\ 
     #DIVS
 /*------------------------------------*/ 
+@media (orientation: landscape) {
+    #create-page-holder {
+        width: 50%;
+    }
+}
+@media (orientation: portrait) {
+    #create-page-holder {
+        width: 100%;
+    }
+}
+
 .user-create-project {
     position: relative;
-    width: max(100%, );
+    width: 100%;
     height: 100%;
 }
 
@@ -43,16 +55,14 @@
     
     flex-direction: column;
     justify-content: center;
-    width: calc(100% - var(--sidebar-width));
+    align-items: center;
     grid-auto-rows: min-content;
+
+    width: calc(100% - var(--sidebar-width));
     margin: 0rem;
     gap: 2rem;
     padding: 1rem;
     background: #222;
-}
-
-#create-page-holder {
-    width: 50%;
 }
 
 .create-code-container {
@@ -75,9 +85,17 @@
 /*------------------------------------*\ 
     #TEXT
 /*------------------------------------*/ 
-.create-title {
+.create-title, .create-mission {
     width: var(--text-width);
+    resize: none;
     height: 25px;
+    
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+.create-title {
     font-size: 25px;
 }
 
@@ -99,14 +117,14 @@
 
 
 
-.advanced--toggle {
+.advanced--toggle, .submit-button {
     background-color: #0000;
     border-radius: 0;
     border-style: none;
     size: 64px;
 }
 
-.advanced--toggle--image {
+.advanced--toggle--image, .submit-button--image {
     --size: 64px;
 
     image-rendering: pixelated;

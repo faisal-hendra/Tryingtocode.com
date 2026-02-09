@@ -19,10 +19,13 @@ class TTCSidebar extends HTMLElement {
     <div class="dropdown">
         <ul class="dropdown--list">
             <li class="dropdown--element"><a href="index" title="Home">
-                <img class="dropdown--image nice-button" src="components/art/clean icon - 9.png" alt="House Icon" draggable="false">
+                <img class="dropdown--image nice-button" src="components/art/clean icon - 9.png" alt="Home" draggable="false">
             </a></li>
             <li class="dropdown--element"><a href="learn" title="Learn">
-                <img class="dropdown--image nice-button dark-glow" src="components/art/clean icon - 10.png" alt="blue book with L on it" draggable="false">
+                <img class="dropdown--image nice-button dark-glow" src="components/art/clean icon - 10.png" alt="Learn" draggable="false">
+            </a></li>
+            <li class="dropdown--element"><a href="create.html" title="Create">
+                <img class="dropdown--image nice-button dark-glow" src="components/art/hammer icon.png" alt="Create" draggable="false">
             </a></li>
         </ul>
     </div>

@@ -319,6 +319,11 @@ p.pixel-alt  {font-size: 1.5rem;}
     background-attachment: local;
 }
 
+.error-message {
+    color: red;
+    font-style: italic;
+}
+
 /*------------------------------------*\
     #DROPDOWN
 \*------------------------------------*/
@@ -520,11 +525,17 @@ body {
     box-sizing: border-box;
 }
 
-.footer--link {
+.footer--list-element {
     margin: 10px;
     gap: 10px;
+    list-style-type: none;
+
+}
+
+.footer--link {
     color: #fcff699d !important;
 }
+
 
 
 .footer .row {

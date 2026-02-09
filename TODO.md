@@ -11,6 +11,10 @@ Hey developer! Read these to know what you should fix:
 
 ]
 
+- make create better
+- 1
+- TTC
+
 - make curriculum lists
 - 4
 - TTC
