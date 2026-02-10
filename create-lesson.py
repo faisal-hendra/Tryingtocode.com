@@ -1,3 +1,5 @@
+# this file was made with AI, don't trust it, remake it later
+
 import json
 import os
 

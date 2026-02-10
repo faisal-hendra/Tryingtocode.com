@@ -11,6 +11,7 @@ class TTCFooter extends HTMLElement {
     render(){
         const copywrite = this.getAttribute("copywrite");
         const legalSRCs = this.getAttribute("legal-src");
+        const privacyPolicy = this.getAttribute("privacy-src");
         const mailTo = this.getAttribute("mail-to");
 
         this.innerHTML = `
@@ -21,6 +22,7 @@ class TTCFooter extends HTMLElement {
                         <li class="footer--list-element"><a href="about.html" class="footer--link">about page</a></li>
                         <li class="footer--list-element"><a href="mailto:${mailTo}" class="footer--link">${mailTo}</a></li>
                         <li class="footer--list-element"><a href="${legalSRCs}" class="footer--link">Terms of Service</a></li>
+                        <li class="footer--list-element"><a href="${privacyPolicy}" class="footer--link">Privacy Policy</a></li>
                     </div>
                     <div class="column">
                         <p>catagories</p>

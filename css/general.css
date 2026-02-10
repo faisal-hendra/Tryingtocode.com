@@ -5,6 +5,7 @@
 
 *SETTINGS
 **root . . . . . . . Globally available variables
+**grecaptcha . . . . No showing captcha
 
 *GENERIC
 **body . . . . . . . Sets Page Attributes
@@ -79,6 +80,10 @@
 
     --pixel-font: 'Press Start 2P';
     --secondary-font: 'monospace';
+}
+
+.grecaptcha-badge { 
+    visibility: hidden !important;
 }
 
 /*------------------------------------*\

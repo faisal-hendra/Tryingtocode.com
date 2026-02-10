@@ -13,28 +13,32 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 window.app = app;
 
+try {
+    const appCheck = initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider("6LdQ-WUsAAAAAOpmabw66DZ63svdPZTj9c6YJyPm"),
+        isTokenAutoRefreshEnabled: true
+    });
+    console.log(appCheck);
+}
+catch (error) {
+    console.error("app check not working: ", error);
+}
+
+
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword,  
     signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-performance.js";
-//import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.0.1/firebase/app-check";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app-check.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
 
 
 
-
-/*const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('YOUR_SITE_KEY'),
-  isTokenAutoRefreshEnabled: true
-});
-*/
-
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 window.db = db;
-
 
 //console.log("db: ", window.db);
 

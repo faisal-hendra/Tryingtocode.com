@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+	function isUser(userId){
+  	return userId != null && request.auth.uid == userId;
+  }
+  
+  match /databases/{database}/documents{
+    match /projects/{userId}/{section}/{projectId} {
+      allow update: if
+        (request.auth != null && 
+        (request.time - resource.data.lastUpdated) > duration.value(5, 's') &&
+        request.resource.data.lastUpdated == request.time &&
+        isUser(userId));
+
+      allow create: if 
+       (request.auth != null &&
+        request.resource.data.lastUpdated == request.time &&
+        isUser(userId));
+
+      allow delete: if isUser(userId);
+
+      allow read: if isUser(userId);
+    }
+
+    match /users/{userId} {
+      allow read, write: if isUser(userId);
+    }
+    
+    match /projects/{userId} {
+    	allow read: if isUser(userId);
+    }
+    
+    match /official-projects {
+    	allow read: if true;
+    }
+  }
+}

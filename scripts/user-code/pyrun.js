@@ -1,35 +1,25 @@
 window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/';
 
-let interruptBuffer = new Uint8Array(new SharedArrayBuffer(1));
+let interruptBuffer;
 
-let inputBuffer = new SharedArrayBuffer(1024);
-let inputReady  = new Int32Array(inputBuffer, 0, 1) //32 bits is 4 bytes
-let inputData   = new Uint8Array(inputBuffer, 4);
+if(crossOriginIsolated) {
+    console.log("good.");
+} else {
+    console.error("please change to cross origin isolated in order to run code better.");
+}
 
 const worker = new Worker(new URL('./pyrun-worker.js', import.meta.url), {type: "module"});
 worker.onerror = (error) => {
     console.error(error);
 }
 
-worker.postMessage({ cmd: "setInterruptBuffer", interruptBuffer });
-worker.postMessage({ cmd: "initInputBuffer", inputBuffer });
-
-worker.postMessage({ cmd: "nothing, this is only here in order to make SURE that the worker has loaded stuff, because otherwise users will have to wait a whilllle" });
-
-function interruptExecution() {
-  // 2 stands for SIGINT.
-  interruptBuffer[0] = 2;
-}
 
 let awaitRunPython = async (python) => {
-    // Create a fresh namespace
-    // Clear interruptBuffer in case it was accidentally left set after previous code completed.
-    interruptBuffer[0] = 0; 
 
     //run
     var data = new Promise((resolve, reject) => {
         worker.postMessage({ cmd: "awaitPyrun", python: python });
-        let output = ""
+        let output = "";
 
         worker.onmessage = async (message) => {
             console.log("I tried to send it back...", message);
@@ -62,8 +52,6 @@ let awaitRunPython = async (python) => {
             result = null;
         }
     }
-    
-    
 
     //allow inputn
     if (currentDisplay !== null) {
@@ -83,7 +71,7 @@ const sendInputToWorker = async (input) => {
     const encoder = new TextEncoder();
     encoder.encodeInto(input, inputData);
     Atomics.store(inputReady, 0, 1);
-    Atomics.notify(inputReady, 0);
+    console.log("workers notified: ", Atomics.notify(inputReady, 0));
 }
 
 const getInput = async (promptText = "", currentDisplay=window.currentDisplay) => {

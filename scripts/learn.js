@@ -81,6 +81,8 @@ export let scrollToTop = () => {
     }
 }
 
+scrollToTop();
+
 // Save or update a project
 let saveProject = (this_proj) => {
     const [title, content] = this_proj.split(":");

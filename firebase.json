@@ -1,32 +1,11 @@
 {
   "hosting": {
     "public": "public",
-    "rewrites": [
-      {
-        "source": "/index",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/learn",
-        "destination": "/learn.html"
-      },
-      {
-        "source": "/store",
-        "destination": "/store.html"
-      },
-      {
-        "source": "/create",
-        "destination": "/create.html"
-      },
-      {
-        "source": "/",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/",
-        "destination": "/index.html"
-      }
-    ] 
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   },
   "functions": [
     {
@@ -42,19 +21,32 @@
       ]
     }
   ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Cross-Origin-Embedder-Policy",
-            "value": "require-corp"
-          },
-          {
-            "key": "Cross-Origin-Opener-Policy",
-            "value": "same-origin"
-          }
-        ]
-      }
-    ]
+  "headers": [
+    {
+      "source": "**",
+      "headers": [
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "require-corp"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        }
+      ]
+    }
+  ],
+  "firestore": {
+    "database": "(default)",
+    "location": "nam5",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  },
+  "extensions": {}
 }
