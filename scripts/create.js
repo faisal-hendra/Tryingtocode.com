@@ -1,8 +1,6 @@
-import { setProject } from './firebase-backend/firebaseProjects.js';
-import { SimpleToggle } from './tools.js';
+import { setProject, findProjects } from './firebase-backend/firebaseProjects.js';
+import { SimpleToggle, timeSince } from './tools.js';
 
-// this has to be done since create_project is a custom construct:
-// it is not loaded when the window is, but a few miliseconds after.
 
 class LanguageToggle extends SimpleToggle {
     constructor(parent, elements, imageElements, selectedOption="python"){
@@ -13,17 +11,16 @@ class LanguageToggle extends SimpleToggle {
         this.parent = parent;
 
         this.setupLanguageFunctionality();
-        this.selection = parent.firstChild.src;
     }
-    setupLanguageFunctionality(imageElements){
-        console.log(this.imageElements);
+
+    setupLanguageFunctionality(){
         this.setupElements();
     }
+
     setupElements(){
         if(this.imageElements === undefined) {console.error("O:");}
         for (let index = 0; index < this.imageElements.length; index++) {
             const element = this.imageElements[index];
-            console.log(element.firstChild.src);
             element.addEventListener("click", () => {this.changeSelection(element.firstChild.src)})
         }
 
@@ -31,30 +28,31 @@ class LanguageToggle extends SimpleToggle {
             this.changeSelection(localStorage.getItem("lastCreateLanguage"));
         }
     }
+
     changeSelection(toThis) {
         let parentImage = this.parent.firstChild;
         parentImage.src = toThis;
+
         localStorage.setItem("lastCreateLanguage", toThis);
-        this.getSelection(this.imageToOptionDict, toThis);
+        this.updateSelection(this.imageToOptionDict, toThis);
     }
 
     toggle() {
         super.toggle();
     }
-    getSelection(dict, choice){
+
+    updateSelection(dict, choice){
         const dictKeys = Object.keys(dict);
         for (let index = 0; index < dictKeys.length; index++) {
-            const element = dict[dictKeys[index]];
-            let key = dictKeys[index]
+            let key = dictKeys[index];
+            const element = dict[key];
 
             choice = choice.replaceAll("%20", " ");
-
 
             if(choice.includes(key)){
                 this.selection = element;
             }
         }
-        console.log(this.selection);
     }
 
     get imageToOptionDict(){
@@ -68,33 +66,33 @@ class LanguageToggle extends SimpleToggle {
     } 
 }
 
-window.addEventListener("user_made", () => {
-    console.log("making official data thing");
-    setProject({ owner: "OFFICIAL", data: "it worked", title: "YEAH!", section: "2" });
-})
+// this has to be done since create_project is a custom construct:
+// it is not loaded when the window is, but a few miliseconds after.
 
 window.addEventListener('create_project_set', () => {
 
-    const CREATE_PROJECT =  document.getElementById("create-project-container");
-    let queryCREATE_PROJECT = idname => {return CREATE_PROJECT.querySelector(idname);}
+    const CREATE_PROJECT = document.getElementById("create-project-container");
+    let PROJECT_OUTPUT = CREATE_PROJECT.PROJECT_OUTPUT;
+    console.log(PROJECT_OUTPUT);
 
-    let title =             queryCREATE_PROJECT("#create-title");
-    let code =              queryCREATE_PROJECT("#create-code");
-    let output =            queryCREATE_PROJECT("#create-output");
-    let outputIncludes =    queryCREATE_PROJECT("#measures--output-includes");
-    let codeIncludes =      queryCREATE_PROJECT("#measures--code-includes");
-    let outputDiscludes =   queryCREATE_PROJECT("#measures--output-discludes");
-    let codeDiscludes =     queryCREATE_PROJECT("#measures--code-discludes");
-    let mission =           queryCREATE_PROJECT("#create-mission");
-    let submitButton =      queryCREATE_PROJECT("#submit-button");
-    let errorElement =      queryCREATE_PROJECT("#submit-button-error");
-    //let languageSelector =  queryCREATE_PROJECT("#user-create-project--language-select");
-    let toggleElement =     queryCREATE_PROJECT("#user-create-project--advanced-toggle");
-    let toggledElements =   document.querySelectorAll(".user-create-project--toggled-element");
-    let languageSelectToggle =        queryCREATE_PROJECT("#language-select-toggle");
-    let languageSelectToggleElement = document.querySelectorAll(".language-select-elements");
-    let languageSelectImageElements = document.querySelectorAll(".language-select--image-element");
-    languageSelectImageElements = Array.from(languageSelectImageElements);
+    let section =           CREATE_PROJECT.sectionElement;
+    let title =             CREATE_PROJECT.titleElement;
+    let mission =           CREATE_PROJECT.mission;
+    let codeArea =          CREATE_PROJECT.codeArea;
+    let outputIncludes =    CREATE_PROJECT.outputIncludes;
+    let codeIncludes =      CREATE_PROJECT.codeIncludes;
+    let outputDiscludes =   CREATE_PROJECT.outputDiscludes;
+    let codeDiscludes =     CREATE_PROJECT.codeDiscludes;
+    let submitButton =      CREATE_PROJECT.submitButton;
+    let errorElement =      CREATE_PROJECT.errorElement;
+    let ownerTextbox =      CREATE_PROJECT.ownerElement;
+    let toggleElement =     CREATE_PROJECT.advancedSettingsToggleElement;
+    let toggledElements =   CREATE_PROJECT.advancedSettingsBeingToggled;
+    let languageSelectToggle =          CREATE_PROJECT.languageSelectToggle;
+    let languageSelectToggleElements =  CREATE_PROJECT.languageSelectElementsBeingToggled;
+    let  languageSelectImageElements =  CREATE_PROJECT.languageSelectImageElements;
+/*reset*/languageSelectImageElements =  Array.from(languageSelectImageElements);
+
     
     errorElement.innerHTML = "";
 
@@ -107,7 +105,7 @@ window.addEventListener('create_project_set', () => {
         }
 
         let addError = (element, pushString) => {
-            if(isStringNull(element.value)){
+            if(element == null || isStringNull(element.value)){
                 if(errorCount > 0) {
                     // another has already been made
                     pushString = middle + pushString;
@@ -121,10 +119,9 @@ window.addEventListener('create_project_set', () => {
         addError(title, " -title-");
         addError(mission, " -mission-");
 
-        console.log(messageParts, mission.value, title.value);
-
         return messageParts;
     }
+
 
     let createErrorMessage = ({ start = "must contain ", end = "", middle = " and" } = {}) => {
         let messageParts = getErrorMessageParts({ middle: middle });
@@ -140,17 +137,24 @@ window.addEventListener('create_project_set', () => {
         return errorString;
     }
 
+    let timeSinceLastSubmited = timeSince("submited-project-to-database", 10000);
+
     let submitEvent = () => {
-        
+        timeSinceLastSubmited += timeSince("submited-project-to-database", 0);
+
         let errorMessage = createErrorMessage();
-        debugger;
 
         let codeIncludesValue = codeIncludes.value;
         let codeDiscludesValue = codeDiscludes.value;
         let outputIncludesValue = outputIncludes.value;
         let outputDiscludesValue = outputDiscludes.value;
-
-        let includeDisclude = {codeIncludes: codeIncludesValue, codeDiscludes: codeDiscludesValue, outputIncludes: outputIncludesValue, outputDiscludes: outputDiscludesValue};
+        let includeDisclude = {codeIncludes: codeIncludesValue, 
+                               codeDiscludes: codeDiscludesValue, 
+                               outputIncludes: outputIncludesValue, 
+                               outputDiscludes: outputDiscludesValue};
+        
+        let selectedOwner = ownerTextbox.value ? ownerTextbox.value : window.user.uid;
+        console.log("YO YO YO! LOOK HERE!_", selectedOwner, "_");
 
         console.log(codeIncludes, codeDiscludes, outputIncludes, outputDiscludes);
 
@@ -159,15 +163,32 @@ window.addEventListener('create_project_set', () => {
             errorElement.innerHTML = errorMessage;
         } 
         else{
-            let chosenLanguage = toggleLanguageDropdown.selection ?? "python";
-            console.log(chosenLanguage);
+            if(timeSinceLastSubmited < 0) { return; }
+            timeSinceLastSubmited -= 10000; // only once every 10 seconds
 
-            console.log("got create");
-            console.log(title.value, code.value);
+            let chosenLanguage = toggleLanguageDropdown.selection ?? "python";
 
             errorElement.innerHTML = "";
-            let projectOutput = setProject({ title: title.value, data: code.value, language: chosenLanguage, mission: mission.value, includeDisclude: includeDisclude});
-            output.value = projectOutput;
+            try{
+                let projectOutput = setProject({ section: section.value ?? "default", 
+                                                 title: title.value, 
+                                                 data: codeArea.textarea.value, 
+                                                 language: chosenLanguage, 
+                                                 mission: mission.value, 
+                                                 includeDisclude: includeDisclude, 
+                                                 owner: selectedOwner });
+                
+                projectOutput.then((result) => {
+                    console.log(result);
+                    PROJECT_OUTPUT.value = result;
+
+                    if(result instanceof Error){
+                        errorElement.innerHTML = `problem setting project: ${result}`;
+                    }
+                });
+            } catch {
+                errorElement.innerHTML = "problem setting project";
+            }
         }
 
         
@@ -175,12 +196,49 @@ window.addEventListener('create_project_set', () => {
 
     submitButton.addEventListener("click", submitEvent);
 
-    let toggleAdvancedElements = new SimpleToggle(toggleElement, toggledElements, ["../components/art/advanced settings - 2.png", "../components/art/advanced settings - 1.png"]);
+    let toggleAdvancedElements = new SimpleToggle(toggleElement, 
+                                                [toggledElements], 
+                                                ["../components/art/advanced settings - 2.png", 
+                                                 "../components/art/advanced settings - 1.png"]);
     toggleElement.addEventListener("click", () => {toggleAdvancedElements.toggle();});
 
-    console.log(languageSelectImageElements);
-    let toggleLanguageDropdown = new LanguageToggle(languageSelectToggle, languageSelectToggleElement, languageSelectImageElements);
+    let toggleLanguageDropdown = new LanguageToggle(languageSelectToggle, 
+                                                    languageSelectToggleElements, 
+                                                    languageSelectImageElements);
     languageSelectToggle.addEventListener("click", () => {toggleLanguageDropdown.toggle();})
     
+    var link = true;
+    let linkElementsToOutput = () => {
+        //link multiple elements:
+        let bindElementToValue = (element, bindHandler) => {
+            element.addEventListener("input", () => {
+                if(!link) { return; }
+                bindHandler();
+            });
+        }
+
+        //1. title
+        bindElementToValue(title, () => {
+            PROJECT_OUTPUT.projectTitle.innerHTML = title.value || "title";
+        });
+
+        //2. mission
+        bindElementToValue(mission, () => {
+            PROJECT_OUTPUT.mission.innerHTML = mission.value || "mission";
+        });
+
+        //3. code
+        bindElementToValue(codeArea, () => {
+            PROJECT_OUTPUT.code.value = codeArea.textarea.value || "";
+            PROJECT_OUTPUT.updateCode();
+        });
+    }
+
+    linkElementsToOutput();
+
+    const linkUnlink = PROJECT_OUTPUT.linkUnlink;
+    linkUnlink.addEventListener("click", () => {
+        link = !link;
+    });
 }
 );

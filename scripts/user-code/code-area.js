@@ -10,7 +10,7 @@ const AREAHTML =
             </pre>
         </div>
     </div>
-    <textarea name="output" class="lines output main-font code-lines proj-child">output</textarea>
+    <textarea name="output" class="lines output output-mid main-font code-lines proj-child">output</textarea>
 </div>
 
 `

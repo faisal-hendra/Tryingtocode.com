@@ -72,7 +72,7 @@ const getInput = async (promptText = "", currentDisplay=null) => {
     Atomics.wait(interruptBuffer, 0, 1);
 }
 
-let cleanUpError = (error) => {
+let cleanUpError = (error, extraMessage="ERROR! If you need extra help, press the yellow i button above.\n\n") => {
     console.log("Error running py code: ", error);
 
     if (error instanceof Error && typeof error.message === "string") {
@@ -100,8 +100,7 @@ let cleanUpError = (error) => {
             if (/^\w+Error:/.test(line) || /^\w+Warning:/.test(line)) break;
         }
 
-        relevantLines.unshift("ERROR! Think carefully, here is a clue:\n\n");
-        console.log(relevantLines);
+        relevantLines.unshift(extraMessage);
         return relevantLines.join('\n');
     }
 }

@@ -18,7 +18,6 @@ try {
         provider: new ReCaptchaV3Provider("6LdQ-WUsAAAAAOpmabw66DZ63svdPZTj9c6YJyPm"),
         isTokenAutoRefreshEnabled: true
     });
-    console.log(appCheck);
 }
 catch (error) {
     console.error("app check not working: ", error);
@@ -47,8 +46,6 @@ const analytics = getAnalytics(app);
 logEvent(analytics, 'page loaded');
 window.logEvent = (log, data={}) => {console.log("loging", log, data); logEvent(analytics, log, data);};
 
-console.log(analytics);
-
 let setWindowUser = (toThis) => {
     if(toThis == null) {return null;}
 
@@ -61,9 +58,12 @@ let setWindowUser = (toThis) => {
 
 let authStateChangedFunction = async (user) => {
     if (user) {
-        let newUserData = await initUserData(user)
-        setWindowUser(newUserData);
-        userMade(user);
+        try{
+            let newUserData = await initUserData(user)
+            userMade(user);
+        } catch (error) {
+            console.error(error);
+        }
     } else {
         console.log("User signed out? Or error with user.");
         /*let newUser = */anonSign();
@@ -330,6 +330,7 @@ let userMade = (user) => {
     getDoc(userRef).then((userSnap) => {
         code = userSnap.get("projects");
 
+        console.log(updateProjects);
         updateProjects.forEach(updateProject => {
             //console.log("stuff and things: ", updateProject[0], updateProject[1], code[updateProject[1]]);
             updateProject[0](code[updateProject[1]]);

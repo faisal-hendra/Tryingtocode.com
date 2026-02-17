@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/prism.css">
 
+    <script src="./scripts/tools.js" type="module"></script>
     <script src="./scripts/create.js" type="module"></script>
-    <script src="./scripts/web-elements/create-custom-elements.js" type="module"></script>
     <script src="./scripts/firebase-backend/firebase.js" type="module"></script>
     <script src="./scripts/general.js" type="module"></script>
     <script src="./scripts/prism.js"></script>
+    <script src="./scripts/web-elements/create-view-database-projects.js" type="module"></script>
+    <script src="./scripts/web-elements/create-project-output.js" type="module"></script>
+    <script src="./scripts/web-elements/create-custom-elements.js" type="module"></script>
     <script src="./scripts/web-elements/sidebar.js"></script>
     <script src="./scripts/web-elements/footer.js"></script>
     <script src="./scripts/web-elements/typeable-code.js"></script>
@@ -28,7 +31,7 @@
     <ttc-sidebar></ttc-sidebar>
 
     <div class="main-content main-font">
-        <ttc-create-project ex="1">404</ttc-create-project>
+        <ttc-create-project ex="1" id="create-project-container">404</ttc-create-project>
     </div>
     
     <div class="footer-parent">

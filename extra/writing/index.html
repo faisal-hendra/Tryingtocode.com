@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed writing</title>
+
+    <script src="script.js" type="module"></script>
+    <script src="../../scripts/tools.js" type="module"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div style="flex-direction: column; display: flex;">
+        <p id="total-time">Total time left:</p>
+        <input type="number" name="default-total-time" id="default-total-time" placeholder="starting total time" value="60"></input>
+        <p id="edit-time">Edit time left:</p>
+        <input type="number" name="default-edit-time" id="default-edit-time" placeholder="starting edit time" value="10"></input>
+        <p id="time-time">Temp time left:</p>
+        <input type="number" name="default-time-time" id="default-time-time" placeholder="starting temp time" value="2"></input>
+    </div>
+    <div style="display: flex; justify-content: center; height: max(90vh, 500px);">
+        <textarea placeholder="press enter" style="width: 50vw; height: 100%;" name="write" id="speed-write-textarea"></textarea>
+    </div>
+    <button id="append-full-write-textarea">></button>
+    <textarea style="width: 50vw; height: max(90vh, 500px);" name="full-text" id="full-write-textarea"></textarea>
+    
+    <p style="bottom: 0px; position: absolute;" class="absolute">no data from this page ever leaves your device.</p>
+    <button style="bottom: 0px; position: absolute;" id="recover-old" class="absolute">recover old text</button>
+    <button style="bottom: 0px; position: absolute; right: 0px;" id="delete-old" class="absolute">delete old text</button-->
+</body>
+</html>

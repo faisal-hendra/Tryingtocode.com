@@ -288,7 +288,7 @@ export class Display {
     }
 
     async displayUserCode(code){
-        this.output.value = "";
+        this.output.value = "...";
         let result = await runUserCode(code);
         this.output.value = result[1];
         return result;
@@ -306,24 +306,33 @@ export class Display {
         this.codeArea.updateLineNumbers();
     }
 
-
     toggleHint(element=this.hintPopup, toThis=undefined) {
         this.hintToggled = !this.hintToggled;
         element.classList.toggle("hide", toThis);
     }
 
     async evaluateUserCode(){
+        let decision = (success) => {
+            console.log(success, success && success !== null)
+
+            this.output.classList.toggle("output-mid", (success === null));
+            this.output.classList.toggle("output-correct", success && success !== null);
+            this.output.classList.toggle("output-incorrect", !success && success !== null);
+        }
+        decision(null);
+
         let value = this.textarea.value;
         let output = await this.displayUserCode(value);
 
         if(!output[0]){
-            console.error("player code incorrect");
+            decision(false);
             return false;
         }
 
         let json = this.projectJSON;
 
         correctCode = isCorrectCode(value, json, output[1]).then((passed) => {
+            if(passed) {decision(true);}
             playerCorrect(passed, this);
         });
     }

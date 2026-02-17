@@ -1,0 +1,42 @@
+body {
+    color: #e8fc7c;
+    background-color: #0c2723;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+    font-size: 20px;
+}
+
+@media (orientation: portrait) {
+    body {
+        flex-direction: column;
+    }
+    .absolute{
+        bottom: 0px; 
+        position: sticky !important;
+    }
+
+    textarea{
+        width: 95vw !important;
+    }
+    
+}
+
+textarea, input {
+    background-color: #0c2723;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    color: #e8fc7c;
+    font-size: 20px;
+    border-color: #ee5555c0;
+}
+
+button {
+    color: #e8fc7c;
+    background-color: #091413;
+}
+

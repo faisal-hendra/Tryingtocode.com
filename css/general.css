@@ -80,6 +80,9 @@
 
     --pixel-font: 'Press Start 2P';
     --secondary-font: 'monospace';
+
+    --nice-button-speed: .25s;
+    --nice-button-active: .1s;
 }
 
 .grecaptcha-badge { 
@@ -239,7 +242,7 @@ p.pixel-alt  {font-size: 1.5rem;}
 }
 
 .nice-button {
-    transition: all .5s cubic-bezier(.77,.1,.29,.93);
+    transition: all var(--nice-button-speed) cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px 6px 0px #000);
     -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
     filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
@@ -257,7 +260,7 @@ p.pixel-alt  {font-size: 1.5rem;}
     --size: 6px;
     --down: 3px;
     --blur: 0px;
-    transition: all .5s cubic-bezier(.77,.1,.29,.93);
+    transition: all var(--nice-button-speed) cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
     transform: translateY(var(--down));
 }
@@ -266,7 +269,7 @@ p.pixel-alt  {font-size: 1.5rem;}
     --size: 6px;
     --down: 6px;
     --blur: 0px;
-    transition: all .1s cubic-bezier(.77,.1,.29,.93);
+    transition: all var(--nice-button-speed-active) cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
     transform: translateY(var(--down));
 }
@@ -334,12 +337,15 @@ p.pixel-alt  {font-size: 1.5rem;}
 }
 
 .code-lines {
+    --bg-color-lines: #333333;
+    --bg-color-main: #1a1a1a;
+
     background-image: repeating-linear-gradient(
         to bottom,
-        #333333,
-        #333333 1px,
-        #1a1a1a 1px,
-        #1a1a1a var(--line-width)
+        var(--bg-color-lines),
+        var(--bg-color-lines) 1px,
+        var(--bg-color-main) 1px,
+        var(--bg-color-main) var(--line-width)
     );
     background-attachment: local;
 }

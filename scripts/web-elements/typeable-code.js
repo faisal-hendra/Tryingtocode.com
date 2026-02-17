@@ -15,6 +15,8 @@ class TTCTypeableCode extends HTMLElement {
     render(){
         const placeholder_text = this.getAttribute("placeholder") ?? "code here...";
         const language = this.getAttribute("language") ?? "python";
+        const codeText = this.getAttribute("code-text") ?? "";
+        this.readonly = this.getAttribute("readonly") ?? false;
 
         this.style = `
         .code-editor {
@@ -22,45 +24,51 @@ class TTCTypeableCode extends HTMLElement {
 
             flex-direction: row;
         }
-        
-        
         `;
 
         this.innerHTML = `
 <div class="code-editor">
-    <div class="line-numbers lines code-lines proj-child"></div>
+    <div data-js-tag="side-numbers" class="line-numbers lines code-lines proj-child"></div>
     <div class="single-block-grid proj-child">
-        <textarea class="main-font codearea proj-child" name="user-code" placeholder="${placeholder_text}" spellcheck="false"></textarea>
-        <pre class="code-highlight code-lines proj-child" name="pretty-pre"><code class="main-font language-${language}" name="pretty-code"></code>
+        <textarea data-js-tag="user-code-section" class="main-font codearea proj-child" name="user-code" placeholder="${placeholder_text}" spellcheck="false">${codeText}</textarea>
+        <pre data-js-tag="pretty-code--pre" class="code-highlight code-lines proj-child main-font" name="pretty-pre"><code data-js-tag="pretty-code" class="language-${language}" name="code-editor--pretty-code">${codeText}</code>
         </pre>
     </div>
 </div>
         ` ;
         console.log("rendered");
         
+        this.initValues();
+
+        this.initFunctionality();
+        
+    }
+
+    initValues(){
         this.content = this.content;
         this.projectEl = this.firstElementChild
         let projectEl = this.projectEl;
-        
-        this.textarea = projectEl.querySelector('textarea[name=user-code]');
-        this.prettyCode = projectEl.querySelector('code[name=pretty-code]');
-        this.prettyPre = projectEl.querySelector('pre[name=pretty-pre]');
-        this.lineNumbers = projectEl.querySelector(".line-numbers");
+        let queryME = (dataTag) => { return projectEl.querySelector(`[data-js-tag="${dataTag}"]`);}
+        this.textarea = queryME("user-code-section");
+        this.prettyCode = queryME("pretty-code--pre");
+        this.prettyPre = queryME("pretty-code");
+        this.lineNumbers = queryME("side-numbers");
+    }
 
-        let matchScrollFilled = () => {this.matchScroll(this.prettyPre, this.textarea);}
+    initFunctionality(){
+        this.textarea.readOnly = this.readonly;
+
+        let matchScrollFilled = () => {this.matchScroll(this.prettyPre, this.textarea); this.matchScroll(this.prettyPre, this.lineNumbers);}
         this.textarea.addEventListener('scroll', matchScrollFilled);
         
         let genCode = () => {this.createPrettyCode(this.prettyCode, this.textarea.value);}
 
-        this.textarea.addEventListener('input', () => {this.editPresses(() => {this.updateLineNumbers();}); genCode();});
+        this.editPresses(() => {this.updateLineNumbers(); genCode();});
 
         this.updateLineNumbers();
-
-        
     }
 
     matchScroll(result_element, element){
-        console.log("matching");
         // Get and set x and y
         result_element.scrollTop = element.scrollTop;
         result_element.scrollLeft = element.scrollLeft;
@@ -99,10 +107,11 @@ class TTCTypeableCode extends HTMLElement {
 
         const end = this.textarea.selectionEnd;
 
-        let upToSelection = text.substring(0, end)
+        let upToSelection = text.substring(0, end);
         let subjectiveLineAmmount = upToSelection.split("\n").length; //the ammount of new lines before selection
 
         let currentLine = newLineSplit[subjectiveLineAmmount - 1];
+        console.log(currentLine);
 
         return currentLine;
     }
@@ -125,7 +134,7 @@ class TTCTypeableCode extends HTMLElement {
         let changeEnter = (event) => {
             event.preventDefault();
             //if ctr+enter
-            if(event.ctrlKey){
+            /*if(event.ctrlKey){
                 //if ctr+sht+enter
                 if(event.shiftKey){
                     this.project.openProject(1);
@@ -134,15 +143,17 @@ class TTCTypeableCode extends HTMLElement {
                     //run code if just ctr+enter
                     console.log(this.project.displayUserCode);
                     this.project.evaluateUserCode();
-                }
-            } else{
+                }*/
+            //} else{
                 //just do normal boring enter stuff
+                console.log("before auto tab:", this.textarea.value);
                 let autoTabResult = this.autoTab();
                 let newValue = autoTabResult[0] + autoTabResult[1]
                 this.textarea.value = newValue;
                 this.textarea.selectionStart = autoTabResult[0].length;
                 this.textarea.selectionEnd = autoTabResult[0].length;
-            }
+                console.log("after auto tab:", this.textarea.value);
+            //}
         }
 
         let changeTab = (event) => {
@@ -151,7 +162,7 @@ class TTCTypeableCode extends HTMLElement {
             this.textarea.value = appendToTextarea(tab);
             this.textarea.selectionStart = this.textarea.selectionEnd = start + tab.length;
 
-            this.createPrettyCode(this.prettyCode, this.textarea.value);
+            //this.createPrettyCode(this.prettyCode, this.textarea.value);
         }
 
         let isPair = (string) => {
@@ -180,7 +191,7 @@ class TTCTypeableCode extends HTMLElement {
                 this.textarea.selectionStart = this.textarea.selectionEnd = start + 1;
 
                 //this.createText(this.textarea.value);
-                this.createPrettyCode(this.prettyCode, this.textarea.value);
+                //this.createPrettyCode(this.prettyCode, this.textarea.value);
             }
         }
 
@@ -191,10 +202,11 @@ class TTCTypeableCode extends HTMLElement {
                 changeTab(event);
                 this.createText(this.textarea.value);
             }
+
             if (event.key === 'Enter'){ //make indents if pressing enter
                 changeEnter(event);
-                this.createPrettyCode(this.prettyCode, this.textarea.value);
             }
+
             //accessability setting for tab switchers:
             if(event.key === 'Escape'){
                 event.preventDefault();
@@ -202,9 +214,9 @@ class TTCTypeableCode extends HTMLElement {
                 console.log(focusOn);
                 focusOn.focus();
             }
+
             if(event.key === "Backspace"){
                 if(isPair(getCharacter(-1)[0])){
-                    console.log(isPair(getCharacter(-1)), getCharacter(1))
                     if(isPair(getCharacter(-1))[1] == getCharacter(1)){
                         this.textarea.selectionStart -= 1;
                         this.textarea.selectionEnd += 1;

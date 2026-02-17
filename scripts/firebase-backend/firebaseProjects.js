@@ -5,16 +5,18 @@ from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js"
 
 const database_name = "projects";
 
-export let setProject = async ({ owner = window.user, title="default", data="print('hello world')", section="default", language="py", includeDisclude={} } = {}) => {
+export let setProject = async ({ owner = window.user, title="default", data="print('hello world')", section="default", language="py", includeDisclude={}, mission="" } = {}) => {
     if(typeof owner === "undefined") { console.error("tried proj w/out owner"); return null; }
 
     const characterLimit = 10000;
     const characterAmm = (title.length + data.length + section.length + language.length);
     if(characterAmm > characterLimit) {console.error("character limit exceeded: ", characterAmm); return;}
 
+    console.log(section);
     const projectRef = doc(window.db, database_name, owner, section, title);
     let obj = {
         title: title,
+        mission: mission,
         data: data,
         lastUpdated: serverTimestamp(),
         language: language,
@@ -32,10 +34,12 @@ export let setProject = async ({ owner = window.user, title="default", data="pri
 }
 
 
-export let findProjects = async ({ section = "default" } = {}) => {
+export let findProjects = async ({ section = "default", owner = window.user.uid } = {}) => {
     console.log("finding projects");
     let projectLimit = 10;
-    let owner = window.user.uid;
+
+    let projects = [];
+    console.log(owner);
 
     try{
         const projectQuery = query(
@@ -46,13 +50,16 @@ export let findProjects = async ({ section = "default" } = {}) => {
 
         documentsSnapshot.forEach(element => {
             console.log(element.data());
+            projects.push(element.data());
         });
 
         console.log(documentsSnapshot);
     } catch (error) {
         console.error(error);
+        return null;
     }
     
+    return projects;
 }
 
 export let findProject = async ({ section = "default", title = "default-1" } = {}) => {
@@ -67,11 +74,7 @@ export let findProject = async ({ section = "default", title = "default-1" } = {
 }
 
 window.addEventListener("user_set", () => {
-    console.log("finding project");
-    console.log("db: ", window.db);
-    console.log("user: ", window.user.uid);
-
-    setProject  ({ section: "default", title: "defualt-2", data: "#nothing to see here" });
+    //setProject  ({ section: "default", title: "defualt-2", data: "#nothing to see here" });
     //findProject ({ section: "default", title: "default-1" });
-    findProjects({ section: "default" });
+    //findProjects({ section: "default" });
 });

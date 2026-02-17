@@ -1,3 +1,36 @@
+//to make a button go through a series of images when pressed
+export class ImageButton {
+    constructor(button, images){
+        this.button = button;
+        console.log(button);
+        this.buttonImage = button.firstChild;
+        this.images = images;
+        this.currentImage = 0;
+
+        this.initializeButtonLogic();
+    }
+
+    initializeButtonLogic(){
+        // nothing yet.
+    }
+
+    changeImage(toImage=null){
+        if(toImage) {
+            this.buttonImage.src = toImage; 
+        }
+        else {
+            this.currentImage = ((this.currentImage + 1) % this.images.length);
+            this.buttonImage.src = this.images[this.currentImage];
+        }
+    }
+
+    changeOnClick(){
+        this.button.addEventListener("click", () => {
+            this.changeImage();
+        });
+    }
+}
+
 //used for things such as sign in toggle button, and sidebar toggle
 export class Toggle{
     constructor(toggleButton, effectedElements, primaryClass, secondaryClass=null, transitionedElement=null, animatedElement=null){
@@ -174,5 +207,25 @@ export class SpriteImage{
             destination[0], destination[1],         // destination x, y
             scaledWidth, scaledHeight               // destination width, height
         );
+    }
+}
+
+let timeSinceEvents = {};
+export let timeSince = (eventName="something", valueWhenNeverDoneBefore=null) => {
+    if(typeof eventName !== "string") { return "ERR_NAME, only strings allowed as event names"; }
+
+    let date = new Date();
+    let timeNow = date.getTime();
+    let lastTimeOfEvent = timeSinceEvents[eventName];
+
+    let setEventTime = () => { timeSinceEvents[eventName] = timeNow; }
+
+    if(typeof lastTimeOfEvent !== "undefined") {
+        let timeSinceChosenEvent = timeNow - lastTimeOfEvent;
+        setEventTime();
+        return timeSinceChosenEvent;
+    } else {
+        setEventTime();
+        return valueWhenNeverDoneBefore;
     }
 }

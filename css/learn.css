@@ -62,7 +62,7 @@
 
 @property --transition-speed {
     syntax: "<time>";
-    initial-value: .1s;
+    initial-value: .4s;
     inherits: true;
 }
 
@@ -236,6 +236,12 @@
     opacity: 1 !important;
 }
 
+.show-when-mini:not(.gone).hide {
+    display: flex;
+    opacity: .05;
+
+}
+
 .show-when-mini:not(.hide):not(.gone) {
     visibility: visible;
     display: flex;
@@ -362,16 +368,33 @@
     user-select: none;
     height: var(--code-height);
     width: max(30vw, 5em);
-    padding-left: 10px;
+    padding-left: 10px !important;
     overflow-y: auto;
     box-sizing: border-box;
     white-space: pre-wrap; /* Preserve whitespace and wrap as needed */
     word-wrap: break-word; /* Break long words to fit within the container */
     font-size: large;
     line-height: 30px;
+    margin-left: 2px;
     
     resize: none;
     border: none;
+
+    --bg-color-main: #1b1b1b !important;
+}
+
+.output-correct {
+    color: rgb(16, 255, 56) !important;
+    --bg-color-main: #1d201e !important;
+}
+
+.output-mid {
+    color: rgb(145, 143, 10) !important;
+}
+
+.output-incorrect {
+    color: rgb(255, 35, 35) !important;
+    --bg-color-main: #201d1d !important;
 }
 
 @media (orientation: portrait) { /*when the screen is small, put output under instead of to the right*/

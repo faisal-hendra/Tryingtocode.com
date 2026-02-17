@@ -102,6 +102,18 @@
     justify-content: center;
 }
 
+ttc-create-project-output{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+@media (orientation: landscape) {
+    ttc-create-project-output{
+        padding-left: 200px;
+    }
+}
+
 /*------------------------------------*\ 
     #TEXT
 /*------------------------------------*/ 
@@ -164,7 +176,7 @@
     background: none;
 }
 
-.language-select-elements {
+.language-toggled-elements {
     display: flex;
 }
 

@@ -187,3 +187,7 @@ loadProjectsFunction(LOAD_INDICES).then(projectsList => {
 });
 
 
+console.error("for all yall devs out there looking through the log and thinking to yourself: what is this? why is this? this hurts my head! why do you have so many logs in production?");
+console.error("it's allllll good I'll fix it later 👍");
+console.error("and if you're just a user in here, bro, get off. Someone prolly trying to scam you or smth");
+console.error("thanks for coming over and trying my website out btw");
