@@ -1329,6 +1329,6 @@ Prism.languages.python = {
     punctuation: /[{}[\];(),.:]/
 }, Prism.languages.python["string-interpolation"].inside.interpolation.inside.rest = Prism.languages.python, Prism.languages.py = Prism.languages.python;
 
-console.log("prism working");
 
 //thanks prism (: this is being used for syntax highlighting
+console.log("To all developers: shoutout to Prism! They are awesome for syntax highlighting!");

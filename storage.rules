@@ -1,12 +1,59 @@
 rules_version = '2';
 
-// Craft rules based on data in your Firestore database
-// allow write: if firestore.get(
-//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if false;
-    }
+service cloud.firestore {
+
+	function isAuthenticated() {
+  	return request.auth != null;
   }
+
+	function isUser(userId){
+  	return userId != "OFFICIAL" && userId != null && request.auth.uid == userId;
+  }
+  
+  match /databases/{database}/documents{
+  	
+    function isAdmin(userId){
+    	let result = get(/databases/$(database)/documents/roles/admins).data[userId];
+      return result == "true";
+    }
+    
+    function timeIsAcceptable(resourceTime, minTime){
+    	let difference = request.time - resourceTime;
+      return difference > duration.value(minTime, 's');
+    }
+  
+    match /projects/OFFICIAL/{section}/{projectId} {
+    	allow write: if isAuthenticated() &&
+      								isAdmin(request.auth.uid);
+      allow read: if isAuthenticated();
+    }
+    
+    match /projects/{userId}/{section}/{projectId} {
+      allow update: if
+        (isAuthenticated() && 
+        timeIsAcceptable(resource.data.lastUpdated, 5) &&
+        request.resource.data.lastUpdated == request.time &&
+        isUser(userId));
+
+      allow create: if 
+       (request.auth != null &&
+        request.resource.data.lastUpdated == request.time &&
+        isUser(userId));
+
+      allow delete: if isUser(userId);
+
+      allow read: if isUser(userId);
+    }
+
+    match /users/{userId} {
+      allow read, write: if isUser(userId);
+    }
+    
+    match /projects/{userId} {
+    	allow read: if isUser(userId);
+    }
+    
+  }
+  
+  
 }

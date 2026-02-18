@@ -25,6 +25,16 @@ export class CodeArea{
         this.setAttributes();
     }
 
+    setupTextarea(){
+        this.textarea.addEventListener('input', () => this.updateLineNumbers());
+
+        this.textarea.addEventListener('scroll', () => {
+            this.lineNumbers.scrollTop = this.textarea.scrollTop;
+        });
+        
+        this.updateLineNumbers();
+    }
+
     setAttributes(){
         let template = document.createElement('template');
 
@@ -193,6 +203,8 @@ export class CodeArea{
         return currentLine;
     }
     
+    
+
     autoTab(){
         let text  = this.textarea.value;
         let start = this.textarea.selectionStart;

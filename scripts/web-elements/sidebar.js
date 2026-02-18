@@ -25,7 +25,7 @@ class TTCSidebar extends HTMLElement {
                 <img class="dropdown--image nice-button dark-glow" src="components/art/clean icon - 10.png" alt="Learn" draggable="false">
             </a></li>
             <li class="dropdown--element"><a href="create.html" title="Create">
-                <img class="dropdown--image nice-button dark-glow" src="components/art/hammer icon.png" alt="Create" draggable="false">
+                <img class="dropdown--image nice-button dark-glow rotate-45" src="components/art/clean icon - hammer.png" alt="Create" draggable="false">
             </a></li>
         </ul>
     </div>

@@ -148,9 +148,7 @@ let loadProject = (project, defualtReward=DEFAULT_REWARD, projectIndex=0, JSON, 
     let display = new Display(document, PROJECT_PARENT, JSON, projectIndex);
     setupProject(display, display.title.innerHTML);
 
-    display.setupTextarea();
-
-    //if(code) logic needs to be implemented|
+    display.codeArea.setupTextarea();
 
     return display;
 }

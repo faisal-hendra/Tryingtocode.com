@@ -5,7 +5,15 @@ from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js"
 
 const database_name = "projects";
 
-export let setProject = async ({ owner = window.user, title="default", data="print('hello world')", section="default", language="py", includeDisclude={}, mission="" } = {}) => {
+export let setProject = async ({ owner = window.user, 
+                                 title="default", 
+                                 data="print('hello world')", 
+                                 section="default", 
+                                 language="py", 
+                                 includeDisclude={}, 
+                                 mission="",
+                                 priority=0 } = {}) => 
+{
     if(typeof owner === "undefined") { console.error("tried proj w/out owner"); return null; }
 
     const characterLimit = 10000;
@@ -20,7 +28,8 @@ export let setProject = async ({ owner = window.user, title="default", data="pri
         data: data,
         lastUpdated: serverTimestamp(),
         language: language,
-        includeDisclude: includeDisclude
+        includeDisclude: includeDisclude,
+        priority: priority
     };
 
     try {

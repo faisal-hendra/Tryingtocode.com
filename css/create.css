@@ -26,6 +26,14 @@
 **advanced--.--image 
 **submit-button--img 
 
+*ICON
+**
+**
+**
+
+*BUTTON
+**link-button
+
 **/
 /*------------------------------------*\ 
     #SETTINGS
@@ -68,7 +76,7 @@
     align-items: center;
     grid-auto-rows: min-content;
 
-    width: calc(100% - var(--sidebar-width));
+    width: var(--half-width);
     margin: 0rem;
     gap: 2rem;
     padding: 1rem;
@@ -106,11 +114,32 @@ ttc-create-project-output{
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    /*width: calc(50% - var(--sidebar-width) / 2);*/
+    width: 100%;
+    height: 100%;
 }
 
+.codearea, .code-highlight, .single-block-grid {
+    width: 100% !important;
+}
+
+
 @media (orientation: landscape) {
-    ttc-create-project-output{
-        padding-left: 200px;
+    .row{
+        display: flex;
+        flex-direction: row !important;
+        overflow: hidden;
+    }
+    :root{
+        --half-width: calc(50% - var(--sidebar-width) / 2);
+    }
+}
+ 
+@media (orientation: portrait) {
+    :root{
+        --half-width: calc(100%);
     }
 }
 
@@ -144,7 +173,13 @@ ttc-create-project-output{
 }
 
 #create-output {
-    width: 50%;
+    width: var(--half-width);
+}
+
+
+.code-lines{
+    -webkit-appearance: none;
+    appearance: textfield;
 }
 
 /*------------------------------------*\ 
@@ -193,4 +228,17 @@ ttc-create-project-output{
 .unsupported {
     opacity: .5;
     background-color: #9114;
+}
+
+/*------------------------------------*\ 
+    #BUTTON
+/*------------------------------------*/ 
+.link-button {
+    background: none;
+    border: none;
+}
+
+.database-button {
+    border: 3px solid #000;
+    background-color: #282828;
 }

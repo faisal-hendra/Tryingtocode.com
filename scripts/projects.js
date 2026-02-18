@@ -11,7 +11,7 @@ import { scrollToTop } from "./learn.js";
 let htmlGen = 
 `
     <div id="learn-project" class="project mini main-font">
-        <div class="top-bar proj-child show-when-mini">
+        <div class="top-bar proj-child show-when-mini" style="cursor: pointer;">
             <div class="close-restart">
                 <div class="button">
                     <button class="project-close-button project-button" title="close project">
@@ -24,7 +24,7 @@ let htmlGen =
                     </button>
                 </div>
             </div>
-            <img src="./components/art/ttc coin icon.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
+            <img draggable="false" src="./components/art/ttc coin icon.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
             <p class="project-title show-when-mini" name="project-title">Hello World Project:</p>
             <div class="button project-hint-button">
                 <button class="project-hint-button project-button" title="get hint if stuck">
@@ -292,18 +292,6 @@ export class Display {
         let result = await runUserCode(code);
         this.output.value = result[1];
         return result;
-    }
-
-    setupTextarea(){
-        console.error("move this to codearea");
-
-        this.textarea.addEventListener('input', () => this.codeArea.updateLineNumbers());
-
-        this.textarea.addEventListener('scroll', () => {
-            this.lineNumbers.scrollTop = this.textarea.scrollTop;
-        });
-        
-        this.codeArea.updateLineNumbers();
     }
 
     toggleHint(element=this.hintPopup, toThis=undefined) {

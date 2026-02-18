@@ -12,6 +12,8 @@ let editTime = document.getElementById("edit-time");
 let timeTime = document.getElementById("time-time");
 let totalTime = document.getElementById("total-time");
 
+textArea.style.color = "#ada2a2";
+
 let activeTextarea = false;
 const failure_message = "failure, you didn't write fast enough";
 let defualtMaxTime = 2;
@@ -24,6 +26,11 @@ let timeSinceLastTyped = timeSince("textareaTyped");
 
 let checkTimeInterval;
 let resetAmm = 0;
+
+textArea.addEventListener("copy", (event) => {
+    if(activeTextarea){ event.preventDefault(); }
+});
+textArea.addEventListener('dragstart', (e) => {if(activeTextarea){ e.preventDefault(); }});
 
 let resetTextarea = () => {
     if(activeTextarea) { return null; }
@@ -38,6 +45,7 @@ let resetTextarea = () => {
     defaultMaxTimeInput.style.display = "block";
     defaultEditTimeInput.style.display = "block";
     defaultTotalTimeInput.style.display = "block";
+    textArea.style.color = "#fff";
 
     textArea.placeholder = "press enter again";
     textArea.value = "";
@@ -45,6 +53,8 @@ let resetTextarea = () => {
     if(resetAmm < 2) { return "not ready yet"; }
     
     resetAmm = 0;
+
+    textArea.style.color = "#e8fc7c";
 
     activeTextarea = true;
     textArea.value = "";
@@ -55,6 +65,7 @@ let resetTextarea = () => {
 
     checkTimeInterval = setInterval(checkTime, 1000);
 }
+
 
 let succeeded = () => {
     activeTextarea = false;
@@ -85,7 +96,7 @@ let checkTime = () => {
     let deltaTime = timeSince("textareaTyped");
 
     timeSinceLastTyped += deltaTime;
-    totalTimeLeft -= deltaTime / 1000;
+    //totalTimeLeft -= deltaTime / 1000;
 
     if(timeSinceLastTyped > maxTime * 1000){
         editTimeLeft -= deltaTime / 1000;

@@ -78,6 +78,7 @@ window.addEventListener('create_project_set', () => {
     let section =           CREATE_PROJECT.sectionElement;
     let title =             CREATE_PROJECT.titleElement;
     let mission =           CREATE_PROJECT.mission;
+    let priority =          CREATE_PROJECT.priorityElement;
     let codeArea =          CREATE_PROJECT.codeArea;
     let outputIncludes =    CREATE_PROJECT.outputIncludes;
     let codeIncludes =      CREATE_PROJECT.codeIncludes;
@@ -164,7 +165,7 @@ window.addEventListener('create_project_set', () => {
         } 
         else{
             if(timeSinceLastSubmited < 0) { return; }
-            timeSinceLastSubmited -= 10000; // only once every 10 seconds
+            timeSinceLastSubmited = -10000; // only once every 10 seconds
 
             let chosenLanguage = toggleLanguageDropdown.selection ?? "python";
 
@@ -176,7 +177,8 @@ window.addEventListener('create_project_set', () => {
                                                  language: chosenLanguage, 
                                                  mission: mission.value, 
                                                  includeDisclude: includeDisclude, 
-                                                 owner: selectedOwner });
+                                                 owner: selectedOwner,
+                                                 priority: priority.value });
                 
                 projectOutput.then((result) => {
                     console.log(result);

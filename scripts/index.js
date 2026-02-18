@@ -5,8 +5,6 @@ import { getCoin, changeNumber} from "./coin/coin.js";
 //import { Toggle } from "./tools.js";
 //import { runUserCode } from "./pyrun.js";
 
-console.log("work 0");
-
 let print = text => {console.log(text);}
 
 /*let signInParent = document.getElementById("sign-in-holder");
@@ -25,8 +23,7 @@ signIn.submit.addEventListener("click", (e) => {
     }
 });*/
 
-let goto = document.getElementById("coin-go-here");
-console.log(goto);
+//let goto = document.getElementById("coin-go-here");
 const counter = document.getElementById("coin-counter");
 let indexGetCoin = (amm) => {
     getCoin(amm, counter);

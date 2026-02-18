@@ -242,18 +242,18 @@ p.pixel-alt  {font-size: 1.5rem;}
 }
 
 .nice-button {
-    transition: all var(--nice-button-speed) cubic-bezier(.77,.1,.29,.93);
-    filter: drop-shadow(0px 6px 0px #000);
-    -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-    filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-}
-
-.nice-button {
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+
+    transition: all var(--nice-button-speed) cubic-bezier(.77,.1,.29,.93);
+    filter: drop-shadow(0px 6px 0px #000);
+    -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+    filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+
+    transform: rotate(var(--nice-button-rotation));
 }
 
 .nice-button:hover {
@@ -262,7 +262,18 @@ p.pixel-alt  {font-size: 1.5rem;}
     --blur: 0px;
     transition: all var(--nice-button-speed) cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
-    transform: translateY(var(--down));
+    transform: translateY(var(--down))
+               rotate(var(--nice-button-rotation));
+}
+
+@property --nice-button-rotation{
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.rotate-45 {
+    --nice-button-rotation: -0deg;
 }
 
 .nice-button:active {
@@ -271,7 +282,8 @@ p.pixel-alt  {font-size: 1.5rem;}
     --blur: 0px;
     transition: all var(--nice-button-speed-active) cubic-bezier(.77,.1,.29,.93);
     filter: drop-shadow(0px calc(var(--size) - var(--down)) var(--blur) #000);
-    transform: translateY(var(--down));
+    transform: translateY(var(--down))
+               rotate(var(--nice-button-rotation));
 }
 
 @keyframes nice-button-hover {
@@ -354,6 +366,7 @@ p.pixel-alt  {font-size: 1.5rem;}
     color: red;
     font-style: italic;
 }
+
 
 /*------------------------------------*\
     #DROPDOWN

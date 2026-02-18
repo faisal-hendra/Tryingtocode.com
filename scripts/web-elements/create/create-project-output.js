@@ -11,14 +11,8 @@ class TTCCreateProjectOutput extends HTMLElement {
         const typingDisabled = this.getAttribute("typing-disabled") ?? "true";
         const codeText = this.getAttribute("codeText") ?? "";
 
-        this.style = `
-        .column-elements{
-            color: blue;
-        }
-        `
 
         this.innerHTML = `
-<p>PREVIEW:</p>
 <div id="learn-project" class="project main-font">
         <div class="column-elements">
             <div class="top-bar proj-child show-when-mini">
@@ -33,7 +27,7 @@ class TTCCreateProjectOutput extends HTMLElement {
                             <img style="width: 30px; height: 30px;" name="reset-img" src="./components/art/reload - 3.png" class="nice-button">
                         </button>
                     </div>
-                    <p class="project-title show-when-mini" name="project-title">Hello World Project:</p>
+                    <p class="project-title show-when-mini" name="project-title">title</p>
                     <div class="button project-hint-button">
                         <button class="project-hint-button project-button" title="get hint if stuck">
                             <img style="width: 50px; height: 50px;" name="hint-img" src="./components/art/clue - 5.png" class="nice-button">
@@ -42,9 +36,9 @@ class TTCCreateProjectOutput extends HTMLElement {
                 </div>
                 <dialog class="main-font hint-popup hide" open>404</dialog>
             </div>  
-            <p class="instructions proj-child" name="project-mission">instructions</p> 
+            <p class="instructions proj-child" name="project-mission">mission</p> 
+            <button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/art/link-unlink -1.png"></img></button>
             <div>
-                <button name="link-unlink-toggle"><img src="../components/art/link-unlink -1.png"></img></button>
                 <ttc-typeable-code name="ttc-typeable-code" readonly="true" language=${language} typing-disabled=${typingDisabled} code-text=${codeText}><ttc-typeable-code>
             </div>   
         </div>

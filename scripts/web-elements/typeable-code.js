@@ -21,7 +21,6 @@ class TTCTypeableCode extends HTMLElement {
         this.style = `
         .code-editor {
             display: flex;
-
             flex-direction: row;
         }
         `;
