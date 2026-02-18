@@ -30,6 +30,8 @@ class advancedSettings extends HTMLElement{
                 <textarea class="main-font code-lines usercode-measure--textarea" data-js-tag="measure-code-discludes" name="measures--code-discludes" placeholder="code discludes">*</textarea>
             </div>
 
+            <textarea class="main-font code-lines" data-js-tag="hint-section" name="hint-section" placeholder="hint"></textarea>
+
             <p>do not change these values:</p>
             <input type="password" data-js-tag="owner-section" name="owner-section" type="text" placeholder="Owner" class="code-lines main-font" required minlength="4">
             <input type="number" data-js-tag="priority-section" class="main-font code-lines" name="priority-within-section" placeholder="priority"></input>

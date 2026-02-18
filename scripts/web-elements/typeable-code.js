@@ -1,3 +1,5 @@
+import { runUserCode } from "../user-code/pyrun.js";
+
 let match = (regex, string) => {
     string = (string || '');
     let matches = (string.match(regex) || null);
@@ -18,34 +20,32 @@ class TTCTypeableCode extends HTMLElement {
         const codeText = this.getAttribute("code-text") ?? "";
         this.readonly = this.getAttribute("readonly") ?? false;
 
-        this.style = `
+        /*this.style = `
         .code-editor {
             display: flex;
             flex-direction: row;
         }
-        `;
+        `;*/
 
         this.innerHTML = `
-<div class="code-editor">
-    <div data-js-tag="side-numbers" class="line-numbers lines code-lines proj-child"></div>
-    <div class="single-block-grid proj-child">
-        <textarea data-js-tag="user-code-section" class="main-font codearea proj-child" name="user-code" placeholder="${placeholder_text}" spellcheck="false">${codeText}</textarea>
-        <pre data-js-tag="pretty-code--pre" class="code-highlight code-lines proj-child main-font" name="pretty-pre"><code data-js-tag="pretty-code" class="language-${language}" name="code-editor--pretty-code">${codeText}</code>
-        </pre>
-    </div>
-</div>
+                    <div data-js-tag="container-for-closeable"></div>
+                    <div data-js-tag="container-for-hintable"></div>
+                    <div data-js-tag="editor-container" class="code-editor">
+                        <div data-js-tag="side-numbers" class="line-numbers lines code-lines proj-child"></div>
+                        <div class="single-block-grid proj-child">
+                            <textarea data-js-tag="user-code-section" class="main-font codearea proj-child" name="user-code" placeholder="${placeholder_text}" spellcheck="false">${codeText}</textarea>
+                            <pre data-js-tag="pretty-code--pre" class="code-highlight code-lines proj-child main-font" name="pretty-pre"><code data-js-tag="pretty-code" class="language-${language}" name="code-editor--pretty-code">${codeText}</code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div data-js-tag="container-for-runnable"></div>
         ` ;
-        console.log("rendered");
-        
         this.initValues();
-
         this.initFunctionality();
-        
     }
 
     initValues(){
-        this.content = this.content;
-        this.projectEl = this.firstElementChild
+        this.projectEl = this.querySelector("[data-js-tag='editor-container']");
         let projectEl = this.projectEl;
         let queryME = (dataTag) => { return projectEl.querySelector(`[data-js-tag="${dataTag}"]`);}
         this.textarea = queryME("user-code-section");
@@ -110,7 +110,6 @@ class TTCTypeableCode extends HTMLElement {
         let subjectiveLineAmmount = upToSelection.split("\n").length; //the ammount of new lines before selection
 
         let currentLine = newLineSplit[subjectiveLineAmmount - 1];
-        console.log(currentLine);
 
         return currentLine;
     }
@@ -145,13 +144,11 @@ class TTCTypeableCode extends HTMLElement {
                 }*/
             //} else{
                 //just do normal boring enter stuff
-                console.log("before auto tab:", this.textarea.value);
                 let autoTabResult = this.autoTab();
                 let newValue = autoTabResult[0] + autoTabResult[1]
                 this.textarea.value = newValue;
                 this.textarea.selectionStart = autoTabResult[0].length;
                 this.textarea.selectionEnd = autoTabResult[0].length;
-                console.log("after auto tab:", this.textarea.value);
             //}
         }
 
@@ -186,7 +183,6 @@ class TTCTypeableCode extends HTMLElement {
                 
                 this.textarea.value = appendToTextarea(event.key + pairs[event.key]);
                 //this.textarea.selectionEnd -= 2;
-                console.log(pairs[event.key]);
                 this.textarea.selectionStart = this.textarea.selectionEnd = start + 1;
 
                 //this.createText(this.textarea.value);
@@ -210,7 +206,6 @@ class TTCTypeableCode extends HTMLElement {
             if(event.key === 'Escape'){
                 event.preventDefault();
                 let focusOn = this.project.runButton;
-                console.log(focusOn);
                 focusOn.focus();
             }
 
@@ -239,3 +234,109 @@ class TTCTypeableCode extends HTMLElement {
 
 
 customElements.define("ttc-typeable-code", TTCTypeableCode);
+
+
+export class TTCComplexTypeableCode extends TTCTypeableCode {
+    constructor(){
+        super();
+    }
+
+    complexRender(){
+        this.render();
+        
+        this.runnable = this.getAttribute("runnable") ?? false;
+        this.closeable = this.getAttribute("closeable") ?? false;
+        this.hintable = this.getAttribute("hintable") ?? false;
+        this.linkable = this.getAttribute("linkable") ?? false;
+        this.nextProjButton = this.getAttribute("nextProjButton") ?? "gone"; // not implemented
+
+        if(this.runnable || this.closeable || this.hintable || this.linkable) {
+            this.initComplexValues();
+
+            if(this.runnable) { this.editToRunnable(); }
+            if(this.closeable){ this.editToCloseable(); }
+            if(this.hintable) { this.editToHintable(); }
+            if(this.linkable) { this.editToLinkable(); }
+        }
+
+    }
+
+    initComplexValues(){
+        this.runnableContainer = this.querySelector("[data-js-tag='container-for-runnable']");
+        this.closeableContainer = this.querySelector("[data-js-tag='container-for-closeable']");
+        this.hintableContainer = this.querySelector("[data-js-tag='container-for-hintable']");
+
+        this.outputHeight = this.getAttribute("output-height") ?? null;
+    }
+
+    editToRunnable(){
+        this.codeOutput = "";
+        let nextProjectClass = "";
+        if(!this.runnableContainer && !this.nextProjButton) { nextProjectClass = "gone"; }
+
+        this.addedRunnableHTML = `
+        <div class="project-button-buttons proj-child">
+            <button js-data-tag="run-button" title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/art/play button 1 - big.png"></img></button>
+            <button title="go to next project" alt="next project" name="next-button" class="next-project ${nextProjectClass}" name="next-button"><img src="./components/art/arrow - 1.png"></button>
+        </div>
+        <textarea js-data-tag="output-section" name="output" class="lines output output-mid main-font code-lines proj-child">output</textarea>
+        ` ;
+        this.runnableContainer.insertAdjacentHTML("afterbegin", this.addedRunnableHTML);
+
+        this.outputArea = this.querySelector("[js-data-tag='output-section']");
+        this.runButton = this.querySelector("[js-data-tag='run-button']");
+        this.runButton.addEventListener("click", async() => {
+            this.codeOutput = await runUserCode(this.textarea.value);
+            this.outputArea.value = this.codeOutput[1];
+        });
+
+        if(this.outputHeight){
+            this.outputArea.style.height = this.outputHeight;
+        }
+        this.outputArea.readOnly = this.readonly;
+    }
+
+    editToCloseable(){
+        this.addedCloseableHTML = `
+        <div class="top-bar proj-child show-when-mini">
+            <div class="close-restart">
+                <div class="button">
+                    <button class="project-close-button project-button" title="close project">
+                        <img style="width: 30px; height: 30px;" name="close-img" src='./components/art/x.png' class="nice-button">
+                    </button>
+                </div>
+                <div class="button">
+                    <button class="project-restart-button project-button" title="reset code to defualt">
+                        <img style="width: 30px; height: 30px;" name="reset-img" src="./components/art/reload - 3.png" class="nice-button">
+                    </button>
+                </div>
+                <p class="project-title show-when-mini" name="project-title">title</p>
+                <div class="button project-hint-button">
+                    <button class="project-hint-button project-button" title="get hint if stuck">
+                        <img style="width: 50px; height: 50px;" name="hint-img" src="./components/art/clue - 5.png" class="nice-button">
+                    </button>
+                </div>
+            </div>
+            <dialog class="main-font hint-popup hide" open>404</dialog>
+        </div>  
+        <p class="instructions proj-child" name="project-mission">mission</p> 
+        `;
+        this.closeableContainer.insertAdjacentHTML("afterbegin", this.addedCloseableHTML);
+        this.projectTitle = this.querySelector("[name='project-title']");
+        this.mission = this.querySelector("[name='project-mission']");
+    }
+
+    editToHintable(){
+        
+    }
+
+    editToLinkable(){
+        this.addedHintableHTML = `
+            <button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/art/link-unlink -1.png"></img></button>
+        `;
+
+        this.hintableContainer.insertAdjacentHTML("afterbegin", this.addedHintableHTML);
+    }
+}
+
+customElements.define("ttc-complex-typeable-code", TTCComplexTypeableCode);

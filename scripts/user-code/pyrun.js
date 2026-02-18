@@ -80,9 +80,11 @@ let awaitRunPython = async (python) => {
     }
 
     //allow inputn
-    if (currentDisplay !== null) {
-        
-        //pyodide.globals.set("input", getInputFilled);
+    if(typeof currentDisplay !== "undefined"){
+        if (currentDisplay !== null) {
+            
+            //pyodide.globals.set("input", getInputFilled);
+        }
     }
 
     console.log("waiting...", data);

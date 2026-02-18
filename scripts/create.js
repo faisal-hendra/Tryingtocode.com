@@ -221,6 +221,7 @@ window.addEventListener('create_project_set', () => {
 
         //1. title
         bindElementToValue(title, () => {
+            console.log(PROJECT_OUTPUT.projectTitle);
             PROJECT_OUTPUT.projectTitle.innerHTML = title.value || "title";
         });
 

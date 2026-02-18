@@ -1,3 +1,5 @@
+import {TTCComplexTypeableCode} from "../typeable-code.js";
+
 class TTCCreateProjectOutput extends HTMLElement {
     constructor(){
         super();
@@ -15,7 +17,7 @@ class TTCCreateProjectOutput extends HTMLElement {
         this.innerHTML = `
 <div id="learn-project" class="project main-font">
         <div class="column-elements">
-            <div class="top-bar proj-child show-when-mini">
+            <!--div class="top-bar proj-child show-when-mini">
                 <div class="close-restart">
                     <div class="button">
                         <button class="project-close-button project-button" title="close project">
@@ -36,11 +38,14 @@ class TTCCreateProjectOutput extends HTMLElement {
                 </div>
                 <dialog class="main-font hint-popup hide" open>404</dialog>
             </div>  
-            <p class="instructions proj-child" name="project-mission">mission</p> 
-            <button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/art/link-unlink -1.png"></img></button>
-            <div>
+            <p class="instructions proj-child" name="project-mission">mission</p--> 
+            <!--button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/art/link-unlink -1.png"></img></button-->
+            <!--div>
                 <ttc-typeable-code name="ttc-typeable-code" readonly="true" language=${language} typing-disabled=${typingDisabled} code-text=${codeText}><ttc-typeable-code>
-            </div>   
+            </div-->   
+            <div>
+                <ttc-complex-typeable-code closeable="true" output-height="35px" runnable="true" readonly="false" linkable="true"></ttc-complex-typeable-code>
+            </div>
         </div>
     </div>
 </div>
@@ -51,10 +56,11 @@ class TTCCreateProjectOutput extends HTMLElement {
 
     initValues(){
         this.languageElement = this.querySelector("[name='code-editor--pretty-code']");
-        this.projectTitle = this.querySelector("[name='project-title']");
-        this.mission = this.querySelector("[name='project-mission']");
-        this.typeableCodeElement = this.querySelector("[name='ttc-typeable-code']");
+        this.typeableCodeElement = this.querySelector("ttc-complex-typeable-code");
+        this.typeableCodeElement.complexRender();
         this.code = this.typeableCodeElement.textarea;
+        this.projectTitle = this.typeableCodeElement.projectTitle;
+        this.mission = this.typeableCodeElement.mission ;
         this.prettyCode = this.typeableCodeElement.prettyCode;
         this.linkUnlink = this.querySelector("[name='link-unlink-toggle']");
         

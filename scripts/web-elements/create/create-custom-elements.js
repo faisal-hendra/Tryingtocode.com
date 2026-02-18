@@ -34,8 +34,6 @@ class TTCCreateProject extends HTMLElement {
             </div>
 
             <ttc-create-advanced-settings data-js-tag="advanced-settings"></ttc-create-advanced-settings>
-
-            
         </div>
         
     </div>
@@ -74,6 +72,7 @@ class TTCCreateProject extends HTMLElement {
         console.log(this.titleElement);
         this.mission =          queryME('mission-section');
         this.codeArea =         queryME("create-code");
+        console.log("usuing code area: ", this.codeArea);
         this.ownerElement =     queryME("owner-section");
         this.submitButton =     queryME("submit-button");
         this.errorElement =     queryME("error-text");
@@ -87,11 +86,11 @@ class TTCCreateProject extends HTMLElement {
         this.createOutput = this.querySelector("ttc-create-project-output");
         this.linkButton = this.createOutput.querySelector("[name='link-unlink-toggle']");
 
-        this.advancedSettingsToggleElement =     queryME("advanced-toggle");
-        this.advancedSettingsBeingToggled =      queryME("settings-toggled-element");
-        this.languageSelectToggle =              queryME("language-select-toggle");
+        this.advancedSettingsToggleElement =      queryME("advanced-toggle");
+        this.advancedSettingsBeingToggled =       queryME("settings-toggled-element");
+        this.languageSelectToggle =               queryME("language-select-toggle");
         this.languageSelectElementsBeingToggled = this.querySelectorAll(".language-toggled-elements");
-        this.languageSelectImageElements =       this.querySelectorAll(".language-select--image-element");
+        this.languageSelectImageElements =        this.querySelectorAll(".language-select--image-element");
 
         this.priorityElement =  this.ADVANCED_SETTINGS.priorityElement;
     }

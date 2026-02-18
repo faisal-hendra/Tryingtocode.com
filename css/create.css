@@ -182,6 +182,10 @@ ttc-create-project-output{
     appearance: textfield;
 }
 
+.output {
+    width: 100%;
+}
+
 /*------------------------------------*\ 
     #TOGGLE
 /*------------------------------------*/ 
