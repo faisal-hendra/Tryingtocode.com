@@ -1,0 +1,113 @@
+/*------------------------------------*\
+    #CONTENTS
+\*------------------------------------*/
+/**
+
+*TOOLS
+**gone . . . . . . . Instantly hide element
+**slow-hide . . . .  Gradually collapse element size
+
+*SIGN IN
+**si-section . . . . Container for sign-in area
+**sign-in . . . . .  Main sign-in box
+**si-title . . . . . Title text for sign-in
+**si-button-flexbox  Layout container for sign-in buttons
+**si-submit . . . .  Submit button styling
+**si-input . . . . . Input field styling
+**si-output  . . . . Output / feedback text
+**sign-in-holder . . Outer container holding sign-in module
+**si-button-image .  Image button used for all sign-in.html
+
+**/
+
+/*------------------------------------*\
+    #TOOLS
+\*------------------------------------*/
+.gone{
+	display: none;
+	padding: 0%;
+}
+
+.slow-hide{
+	transition: padding 1s, size 1s;
+	padding: 0%;
+	size: 0%;
+	width: 0px;
+	height: 0px;
+}
+
+.slow-hide > * {
+	display: none;
+}
+
+/*------------------------------------*\
+    #SIGN IN
+\*------------------------------------*/
+.si-section {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+}
+
+.sign-in, .settings{
+	position: relative; 
+	padding-inline: .1rem;
+	padding-top: 0.5em;
+	padding-bottom: 0.7em;
+	transition: width .3s ease-in-out, height .3s ease-in-out;
+	border: rgba(0, 0, 0, 0.281);
+	border-radius: 3rem;
+	border-style: solid;
+	background-color: #000a;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 40vw;
+	height: 30vh;
+}
+
+.si-title{
+	position: relative;
+	left: 0%;
+	font-size: 2em;
+	text-align: center;
+}
+
+.si-button-flexbox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.si-submit{
+	width: 100px;
+	line-height: 0.9em;
+}
+
+.si-submit,
+.si-input,
+.si-output {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 1.5em;
+	text-align: center;
+	margin: 0.5rem 0.5rem; /* uniform spacing */
+	font-size: 0.8em;
+	line-height: 0.9em;
+}
+
+.sign-in-holder{
+    display: flex;
+}
+
+
+
+.si-button-image {
+	image-rendering: pixelated;
+	width: 100px;
+	height: 100px;
+}

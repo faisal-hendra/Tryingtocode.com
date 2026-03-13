@@ -5,7 +5,7 @@ export class CodeArea{
         this.language = language;
         this.AREAHTML = 
         `
-        <ttc-complex-typeable-code closeable="true" hintable="true" runnable="true" language="${this.language}"></ttc-complex-typeable-code>
+        <ttc-complex-typeable-code closeable="true" hintable="true" runnable="true" language="${this.language}" class="show-when-mini"></ttc-complex-typeable-code>
         `;
         let codeAreaHTML = this.AREAHTML;
 

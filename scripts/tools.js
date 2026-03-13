@@ -1,5 +1,3 @@
-import { exp } from "firebase/firestore/pipelines";
-
 //to make a button go through a series of images when pressed
 export class ImageButton {
     constructor(button, images){
@@ -169,7 +167,11 @@ export class SimpleToggle{
         }
     }
     toggle(){
-        this.hidden ? this.show() : this.hide()
+        this.hidden ? this.show() : this.hide();
+    }
+    setupToggle(){
+        let toggle = () => {this.toggle();};
+        this.parent.addEventListener('click', toggle);
     }
 }
 

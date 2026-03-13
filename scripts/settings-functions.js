@@ -18,6 +18,10 @@ export let changeSetting = (setting, value) => {
     })
 }
 
+export let fontChange = (toFont) => {
+    console.log(toFont);
+}
+
 /*var isPixel = true;
 export let updateSettings = (document) => {
     isPixel = !isPixel;

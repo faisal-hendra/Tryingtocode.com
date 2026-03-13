@@ -25,6 +25,7 @@ class TTCViewDataProjects extends HTMLElement {
         this.maxAmmountPerMinute = 20;
         this.timeSinceLastDone = 0;
         this.owner;
+        this.section = "default";
         this.databaseProjectButtonDropdown = this.querySelector("[data-js-tag='database-project-dropdown']"); 
         //rough fix \/
         this.createProject = this.parentElement;
@@ -48,14 +49,17 @@ class TTCViewDataProjects extends HTMLElement {
 
             thisPriority = parseInt(thisPriority, 10);
 
-            let thisIndex = 0;
+            let thisIndex = inList.length;
             inList.forEach(priority => {
                 priority.priority = parseInt(priority.priority, 10);
 
                 console.log(priority.priority, " is other < me is: ", thisPriority, priority.priority < thisPriority, thisIndex);
-                if(priority.priority < thisPriority && priority.priority !== ""){
-                    thisIndex += 1;
-                } else if(priority.priority > thisPriority){
+                let priorityValid = priority.priority !== "";
+                let mineIsLesser = priority.priority < thisPriority
+                let mineIsGreater = priority.priority > thisPriority;
+                if(mineIsLesser && priorityValid){
+                    //thisIndex += 1;
+                } else if(mineIsGreater){
                     thisIndex -= 1;
                 }
             });
@@ -63,6 +67,7 @@ class TTCViewDataProjects extends HTMLElement {
             return thisIndex;
         }
 
+        console.log(options);
         options.forEach(option => {
             //if the priority is highest, push
             console.log(option.title);
@@ -75,6 +80,7 @@ class TTCViewDataProjects extends HTMLElement {
 
     async loadOptions(){
         if(typeof this.owner !== "string") { console.error(" owner not set: thou shalt set thine owner ");}
+        if(typeof this.section !== "string") { console.error(" section not set: thou shalt set thine section ");}
 
         let canLoadOptions = (this.timeSinceLastDone > (60000 / this.maxAmmountPerMinute)) ? true : false;
         if(!canLoadOptions) {
@@ -82,7 +88,7 @@ class TTCViewDataProjects extends HTMLElement {
             return null;
         }
 
-        this.projects = await findProjects({ owner: this.owner });
+        this.projects = await findProjects({ owner: this.owner, section: this.section });
         this.projects = this.orderOptionsFromPriority(this.projects);
         this.timeSinceLastDone = 0;
         this.showButtons();
@@ -112,7 +118,12 @@ class TTCViewDataProjects extends HTMLElement {
             databaseProjectButtonDropdown.appendChild(newButton);
 
             newButton.addEventListener("click", () => {
-                this.createProject.loadDatabaseProject(project.title, project.mission, project.data);
+                this.createProject.loadDatabaseProject({
+                    title: project.title, 
+                    mission: project.mission, 
+                    data: project.data, 
+                    includeDisclude: project.includeDisclude
+                });
             });
 
             projectButtons.push(newButton);

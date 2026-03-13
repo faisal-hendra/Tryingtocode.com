@@ -243,17 +243,6 @@
             "hint": "animals[1] is bird"
         },
         "22": {
-            "title": "Lists 3",
-            "code": "[",
-            "instruction": "Make a list",
-            "output-includes": "*",
-            "output-discludes": "*",
-            "code-includes": "]",
-            "code-discludes": "#",
-            "failure-shows": "*",
-            "hint": "use '' for words"
-        },
-        "23": {
             "section": "beginner-2",
             "title": "Loop 1",
             "code": "for i in range(5):\n\tprint(i)\n\n",
@@ -265,7 +254,7 @@
             "failure-shows": "*",
             "hint": "for i in range(5) makes it repeat 5 times"
         },
-        "24": {
+        "23": {
             "title": "Functions 1",
             "code": "def function_name():\n\tprint('you ran the function')\n\nfunction_name()",
             "instruction": "Don't run the function",
@@ -276,7 +265,7 @@
             "failure-shows": "*",
             "hint": "function_name() (without def or :) runs the function"
         },
-        "25": {
+        "24": {
             "title": "Functions 2",
             "code": "def function_name():\n\tprint('you ran the function')\n\nfor i in range(10):\n\tfunction_name()",
             "instruction": "Run the function 20 times",
@@ -287,7 +276,7 @@
             "failure-shows": "*",
             "hint": "for i in range(10): runs the function 10 times"
         },
-        "26": {
+        "25": {
             "title": "Functions 3",
             "code": "def function_name():\n\tprint('you ran the function')\n\nnew_name()",
             "instruction": "Change function_name to be new_name",
@@ -298,7 +287,7 @@
             "failure-shows": "*",
             "hint": "def new_name():"
         },
-        "27": {
+        "26": {
             "title": "Functions 4",
             "code": "#Functions need def. Then a name. Then ():\n\n#def hello():\n\t",
             "instruction": "Make and run a function that prints hello",
@@ -309,7 +298,7 @@
             "failure-shows": "*",
             "hint": "After (): make sure there is a space at the beginning of the next line"
         },
-        "28": {
+        "27": {
             "title": "Functions 5",
             "code": "#Functions can take in variables\n\ndef add(number1, number2):\n\tsum = number1 + number2\n\tprint(sum)\n\nadd(3, 4)",
             "instruction": "Make the code print 10",
@@ -320,7 +309,7 @@
             "failure-shows": "*",
             "hint": "add(3, 4) is equivalant to print(7)"
         },
-        "29": {
+        "28": {
             "title": "Loops 2",
             "code": "for i in range(5, 10):\n\tprint(i)",
             "instruction": "Make the loop go from 10 to 15",
@@ -331,7 +320,7 @@
             "failure-shows": "*",
             "hint": "for i in range(5, 10) makes it loop from 5 to 9"
         },
-        "30": {
+        "29": {
             "title": "Loops 3",
             "code": "i = 0\n\nwhile i < 10:\n\ti = i + 1\n\tprint(i)",
             "instruction": "Don't print 5",
@@ -342,7 +331,7 @@
             "failure-shows": "*",
             "hint": "change: while i < 10:"
         },
-        "31": {
+        "30": {
             "title": "Append 1",
             "code": "numbers = []\n\nfor i in range(10):\n\tnumbers.append(i)\n\n#edit the print statement below\n\nprint(numbers)",
             "instruction": "Only go up to 5",
@@ -353,7 +342,7 @@
             "failure-shows": "*",
             "hint": ".append() adds an item to a list"
         },
-        "32": {
+        "31": {
             "title": "Append 2",
             "code": "nums = []\n\nfor num in range(3):\n\tnums.append(num + 1)\n\tprint(num)\n\nprint(nums)",
             "instruction": "Make the code subtract rather than add",
@@ -364,8 +353,8 @@
             "failure-shows": "*",
             "hint": "num - 1"
         },
-        "33": {
-            "title": "Lists 4",
+        "32": {
+            "title": "Lists 3",
             "code": "x = [3, 5, 2, 1, 4]\n\nprint(x[0])",
             "instruction": "print the last item in the list (4)",
             "output-includes": "4",
@@ -375,7 +364,7 @@
             "failure-shows": "*",
             "hint": "don't change x at all"
         },
-        "34": {
+        "33": {
             "title": "Final",
             "code": "x = [3, 5, 2, 1, 4]\n\nfor x_number in x:\n\tprint(x_number)\n\ny = [8, 10, 7, 6, 9]\n\nfor y_number in y:\n\tprint(\"something here?\")",
             "instruction": "print every number in y",

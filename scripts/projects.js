@@ -34,7 +34,7 @@ let htmlGen =
             <dialog class="main-font hint-popup hide" open>404</dialog>
         </div-->
         <!--p class="instructions proj-child">instructions</p-->
-        <div class="codeAreaParent proj-child"></div>
+        <div class="codeAreaParent proj-child show-when-mini"></div>
         <div class="project-button-buttons proj-child">
             <!--button title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/art/play button 1 - big.png"></img></button>
             <button title="go to next project" alt="next project" name="next-button" class="next-project" name="next-button"><img src="./components/art/arrow - 1.png"></button-->

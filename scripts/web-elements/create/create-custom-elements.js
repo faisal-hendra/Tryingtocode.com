@@ -95,32 +95,78 @@ class TTCCreateProject extends HTMLElement {
         this.canRun = true;
 
         this.PROJECT_OUTPUT.project = this;
+
+        this.initViewButtons();
+    }
+
+    initViewButtons(){
+        let checkLocalStorage = (value) => {
+            try{
+                let localStorageValue = localStorage.getItem(value);
+                return localStorageValue;
+            } catch {
+                return "";
+            }
+        }
+        this.ownerElement.value   = checkLocalStorage("create_userinput_owner");
+        this.sectionElement.value = checkLocalStorage("create_userinput_section");
+        this.updateViewButton({
+            newName: this.ownerElement.value, 
+            dataElement: "owner", 
+            localStorageName: "create_userinput_owner"
+        });
+        this.updateViewButton({
+            newName: this.sectionElement.value,
+            dataElement: "section",
+            localStorageName: "create_userinput_section"
+        });
+    }
+
+    updateViewButton({newName = "", dataElement = null, localStorageName = ""} = {}){
+        this.VIEW_DATA[dataElement] = newName;
+        localStorage.setItem(localStorageName, newName);
+        console.log("change", newName);
     }
 
     setupViewButton(){
         //add changing owner
         //add changing section
-        this.ownerElement.addEventListener("input", (input) => {
-            this.VIEW_DATA.owner = this.ownerElement.value;
-            console.log(this.ownerElement);
-            console.log(this.ownerElement.value);
+        this.ownerElement.addEventListener("input", () => {
+            this.updateViewButton({   
+                newName: this.ownerElement.value, 
+                dataElement: this.VIEW_DATA.owner, 
+                localStorageName: "create_userinput_owner"
+            });
+        });
+        this.sectionElement.addEventListener("input", () => {
+            this.updateViewButton({
+                newName: this.sectionElement.value,
+                dataElement: this.VIEW_DATA.section,
+                localStorageName: "create_userinput_section"
+            });
         });
     }
 
     setupLinkButton(){
-
         this.linkButtonImageSwapper = new ImageButton(this.linkButton, ["../components/art/link-unlink -1.png", "../components/art/link-unlink -2.png"]);
         this.linkButtonImageSwapper.changeOnClick();
     }
 
+    setIncludeDisclude({outputIncludes = "*", codeIncludes = "*", outputDiscludes = "*", codeDiscludes = "*"} = {}) {
+        this.outputIncludes.value = outputIncludes;
+        this.codeIncludes.value = codeIncludes;
+        this.outputDiscludes.value = outputDiscludes;
+        this.codeDiscludes.value = codeDiscludes;
+    }
 
-    loadDatabaseProject(title, mission, data){
+    loadDatabaseProject({title = "", mission = "", data = "", includeDisclude = {}} = {}){
         console.log(this.titleElement);
         console.log(title, mission, data, this.titleElement, this.mission, this.codeArea);
 
         this.titleElement.value = title;
         this.mission.value = mission;
         this.codeArea.textarea.value = data;
+        this.setIncludeDisclude(includeDisclude);
     }
 
 }

@@ -5,7 +5,7 @@ import { setUserDatapoint, getUserData, setupProject, deleteUserData } from "./f
 import { findProject, findProjects } from "./firebase-backend/firebaseProjects.js";
 import './firebase-backend/firebaseProjects.js';
 
-const LOAD_INDICES = Array.from({length: 34}, (_, i) => [i + 1, "projects"]);
+const LOAD_INDICES = Array.from({length: 33}, (_, i) => [i + 1, "projects"]);
 const DEFAULT_REWARD = 5;
 const PROJECT_PARENT = document.getElementById('project-parent');
 

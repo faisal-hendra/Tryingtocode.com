@@ -23,10 +23,15 @@ import { getPerformance } from "https://www.gstatic.com/firebasejs/12.8.0/fireba
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
 
-
-
 const auth = getAuth(app);
 window.auth = auth;
+
+setPersistence(auth, browserLocalPersistence).then(() => {
+    console.log("Persistence set to local");
+}).catch((error) => {
+    console.error(error);
+});
+
 const db = getFirestore(app);
 window.db = db;
 
@@ -38,6 +43,7 @@ try {
 }
 catch (error) {
     console.error("app check not working: ", error);
+    console.error("common fixes: 1. go to proper tryingtocode.com domain 2. sign in 3. if still not working, contact support");
 }
 
 
@@ -49,30 +55,47 @@ logEvent(analytics, 'page loaded');
 window.logEvent = (log, data={}) => {console.log("loging", log, data); logEvent(analytics, log, data);};
 
 let setWindowUser = (toThis) => {
-    if(toThis == null) {return null;}
+    if(toThis == null) {console.error("toThis invalid: ", toThis); return null;}
 
     window.user = toThis;
 
     let user_set = new Event("user_set");
     window.dispatchEvent(user_set);
+    console.error("remove in production");
     console.log(window.user.uid);
 }
 
 let authStateChangedFunction = async (user) => {
-    if (user) {
+    if (user || auth.currentUser) {
+        if(!user) { user = auth.currentUser; } 
         try{
-            let newUserData = await initUserData(user)
+            await initUserData(user);
             userMade(user);
         } catch (error) {
             console.error(error);
         }
     } else {
         console.log("User signed out? Or error with user.");
-        /*let newUser = */anonSign();
+        anonSign();
     }
 }
 
-onAuthStateChanged(auth, authStateChangedFunction);
+let startAuth = async (user) => {
+    await auth.authStateReady();
+    await authStateChangedFunction(user);
+    console.log("user is ready!");
+}
+
+startAuth();
+
+onAuthStateChanged(auth, (user) => {
+    if(user) {
+        authStateChangedFunction(user);
+    }
+    else{
+        console.error("no user!");
+    }
+});
 
 export let createEmail =  async(email, password) => {
     return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
@@ -383,11 +406,6 @@ let anonSign = () => {
     });
 }
 
-setPersistence(auth, browserLocalPersistence).then(() => {
-    console.log("Persistence set to local");
-}).catch((error) => {
-    console.error(error);
-});
 
 let printProjects = async () => {
     

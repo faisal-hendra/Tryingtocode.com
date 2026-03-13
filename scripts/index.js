@@ -7,7 +7,7 @@ import { Toggle } from "./tools.js";
 
 let signInParent = document.getElementById("sign-in-holder");
 let toggleSigninup = document.getElementById("toggle-signinup");
-let signIn = new SignIn(document, signInParent);
+let signIn = new SignIn(signInParent);
 let toggle = new Toggle(toggleSigninup, signInParent, "slow-hide", "sign-in");
 toggle.addEvent(toggle.toggleEventFilled, signIn.exit);
 

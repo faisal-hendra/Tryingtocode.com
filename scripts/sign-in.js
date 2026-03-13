@@ -20,7 +20,7 @@ const htmlGen =
 `
 
 export class SignIn{
-    constructor(document, parent, HTML=htmlGen){
+    constructor(parent, HTML=htmlGen){
         let template = document.createElement('template');
 
         console.log(HTML.trim());

@@ -29,7 +29,7 @@ class TTCTypeableCode extends HTMLElement {
         `;*/
 
         this.innerHTML = `
-                    <div data-js-tag="container-for-closeable"></div>
+                    <div class="show-when-mini" data-js-tag="container-for-closeable"></div>
                     <div data-js-tag="container-for-hintable"></div>
                     <div data-js-tag="editor-container" class="code-editor input-output">
                         <div class="actual-input-code" style="display: flex; flex-direction: row !important;">
@@ -57,6 +57,7 @@ class TTCTypeableCode extends HTMLElement {
         this.prettyPre = queryME("pretty-code");
         this.lineNumbers = queryME("side-numbers");
         this.specialEnter = false;
+        //this.classList.add("show-when-mini");
     }
 
     initFunctionality(){
@@ -336,7 +337,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
     editToCloseable(){
         this.addedCloseableHTML = `
         <div class="top-bar proj-child show-when-mini">
-            <div class="close-restart">
+            <div class="close-restart show-when-mini">
                 <div class="button">
                     <button class="project-close-button project-button" title="close project">
                         <img style="width: 30px; height: 30px;" name="close-img" src='./components/art/x.png' class="nice-button">
@@ -352,7 +353,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
                 <div data-js-tag="hintable-container"></div>
             </div>
             <dialog data-js-tag='hint-popup' class="main-font hint-popup hide" open>404</dialog>
-        </div>  
+        </div>
         <p class="instructions proj-child" name="project-mission">mission</p> 
         `;
         this.closeableContainer.insertAdjacentHTML("afterbegin", this.addedCloseableHTML);

@@ -11,16 +11,16 @@ Hey developer! Read these to know what you should fix:
 
 ]
 
-- make create better
-- 1
-- TTC
-
 - make curriculum lists
-- 4
+- 2
 - TTC
 
 - make a focus button that rewards users for focusing
-- 6
+- 3
+- TTC
+
+- make sign in .html work nicely
+- 3
 - TTC
 
 - js files need to be optimised and cleaned | make sure to work on tools.js
@@ -32,6 +32,14 @@ Hey developer! Read these to know what you should fix:
 - TTC
 
 - save system needs to be cleaned up
+- 8
+- TTC
+
+- organize images and rename to be clearer
+- 8
+- TTC
+
+- make create better
 - 8
 - TTC
 

@@ -27,6 +27,9 @@ class TTCSidebar extends HTMLElement {
             <li class="dropdown--element"><a href="create.html" title="Create">
                 <img class="dropdown--image nice-button dark-glow rotate-45" src="components/art/clean icon - hammer.png" alt="Create" draggable="false">
             </a></li>
+            <li class="dropdown--element"><a href="signin.html" title="Create">
+                SI
+            </a></li>
         </ul>
     </div>
     <p id="coin-counter" class="main-font">404</p>
