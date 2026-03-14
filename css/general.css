@@ -210,7 +210,8 @@ li, ul {
     z-index: var(--z-overlay);
 }
 
-.main-font, .pixel-font {
+/*.main-font, .pixel-font */
+.pixel-1 {
     font-family: var(--pixel-font), var(--secondary-font);
     font-weight: 200;
     color: white;
@@ -221,7 +222,8 @@ li, ul {
         1px  1px 0 #000;
 }
 
-.pixel-alt, .arial-font {
+/*.pixel-alt, .arial-font, */
+.arial-1 {
     font-family: monospace;
     font-weight: 500;
     color: white;
@@ -232,8 +234,8 @@ li, ul {
         1px  1px 0 #000;
 }
 
-h1.pixel-alt {font-size: 3rem;}
-p.pixel-alt  {font-size: 1.5rem;}
+h1.pixel-1 {font-size: 3rem;}
+p.pixel-1  {font-size: 1.5rem;}
 
 
 .js-screen{

@@ -15,8 +15,8 @@ class TTCSettings extends HTMLElement {
                 <div class="settings">
                     <button data-js-tag='toggle-font-button' class="nice-button no-bg-button main-font">dropdown font</button>
                     <div data-js-tag="font-choice">
-                        <button class="nice-button no-bg-button pixel-font" data-font="pixel1">default pixel font</button>
-                        <button class="nice-button no-bg-button arial-font" data-font="arial1">default arial font</button>
+                        <button class="nice-button no-bg-button pixel-1" data-font="pixel1">default pixel font</button>
+                        <button class="nice-button no-bg-button arial-1" data-font="arial1">default arial font</button>
                     </div>
 
                     <br></br>
@@ -27,8 +27,8 @@ class TTCSettings extends HTMLElement {
 
                     <button data-js-tag='toggle-theme-button' class="nice-button no-bg-button main-font">dropdown theme</button>
                     <div data-js-tag="theme-choice">
-                        <button class="nice-button no-bg-button pixel-font">default coin theme</button>
-                        <button class="nice-button no-bg-button pixel-font">comming soon...</button>
+                        <button class="nice-button no-bg-button main-font">default coin theme</button>
+                        <button class="nice-button no-bg-button main-font">comming soon...</button>
                     </div>
                 </div>
             </div>
@@ -69,10 +69,11 @@ class TTCSettings extends HTMLElement {
         this.setupFontSetting();
     }
 
+
     setupFontSetting(){
         this.toggleButtons = this.fontChoices.childNodes;
         this.toggleButtons.forEach(toggleButton => {
-            toggleButton.addEventListener("click", changeFont(toggleButton.getAttribute("data-font")));
+            toggleButton.addEventListener("click", () => {fontChange(toggleButton.getAttribute("data-font"));});
         });
     }
 }
