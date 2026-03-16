@@ -21,8 +21,9 @@
     <script src="./scripts/general.js" type="module"></script>
     <script src="./scripts/firebase-backend/firebase.js" type="module" defer></script>
     <script src="./scripts/web-elements/footer.js"></script>
-    <script src="./scripts/web-elements/sidebar.js"></script>
+    <script src="./scripts/web-elements/sidebar.js" type="module" defer></script>
     <script src="./scripts/prism.js"></script>
+    <script src="./scripts/settings-functions.js" type="module" defer></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -41,29 +42,32 @@
             flex-direction: column;
         }
 
-        section {
+        section, h1 {
             width: 50%;
+            align-self: center;
+            justify-self: center;
+            margin-bottom: 70px;
         }
     </style>
 
     <div class="main-content main-font">
         <h1>Hey! I'm Trying to Code.</h1>
-
+        <br></br>
         <section name="intro">
             <h2>Why I made this...</h2>
             <p>I've been coding for 5 years, and along the way it was a struggle. </p>
             <p>I thought there might be a better way to start people into <a href="#clarifications">actual code</a>.</p>
             <p>I've been testing this site for a little while and I think it's working.</p>
-            <p>- - - - - - - - - -</p>
+            
         </section>
         <section name="plan">
             <h2>Here is my plan:</h2>
             <p>- keep the base features free forever</p>
+            <p>- allow users the option to not sign up</p>
             <p>- listen to user feedback</p>
-            <p>- allow users to not sign up</p>
             <p>- focus on specific audiences: (total beginners) (teachers)</p>
             <p>- be simplistic and fun</p>
-            <p>- - - - - - - - - -</p>
+            
         </section>
         <section name="now">
             <h2>Where I'm at now.</h2>
@@ -72,17 +76,18 @@
             <p>It is a demo, and if enough people show interest, I will continue working on it.</p>
             <p>This website belongs to me right now, however I am thinking about making it open source,</p>
             <p>if you feel strongly about that, let me know!</p>
-            <p>- - - - - - - - - -</p>
+            
         </section>
         <section name="users">
             <h2>What can you do?</h2>
             <p>Try the website, tell me what should be better, and share it with anyone who might benifit from it.</p>
             <p>Thank you for being here!</p>
-            <p>- - - - - - - - - -</p>
+            
         </section>
-        <section>
+
+        <!--section>
             <h2></h2>
-        </section>
+        </section-->
 
         <section name="clarifications">
             <h2>Clarifications:</h2>
@@ -90,7 +95,6 @@
             <p>Although I understand the use of block coding, and its versitility,</p>
             <p>I had a mental block going from scratch to actual code. </p>
             <p>Maybe others have that too.</p>
-            <p>- - - - - - - - - -</p>
         </section>
         
         <p>This about me page is under development... (as is the rest of the website, but whateverrrrr)</p>

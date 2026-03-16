@@ -111,12 +111,13 @@ export class Toggle{
     }
 }
 
+//ai code, refactor later:
 let ensureArray = (variable) => {
   if (Array.isArray(variable)) {
-    // Variable is already an array, return it as is
+    //Variable is already an array, return it as is
     return variable;
   } else {
-    // Variable is not an array, wrap it in one
+    //Variable is not an array, wrap it in one
     return [variable];
   }
 }

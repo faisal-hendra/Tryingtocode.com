@@ -326,11 +326,8 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
     }
 
     async runCode(){
-        console.log("ran code");
         this.codeOutput = await runUserCode(this.textarea.value);
-        console.log("ran code");
         this.outputArea.value = this.codeOutput[1];
-        console.log("ran code");
         this.project.evaluateUserCode(this.codeOutput);
     }
 
@@ -349,7 +346,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
                     </button>
                 </div>
                 <img draggable="false" src="./components/art/ttc coin icon.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
-                <p class="project-title show-when-mini" name="project-title">title</p>
+                <p style="font-size: 1.3rem;" class="project-title show-when-mini" name="project-title">title</p>
                 <div data-js-tag="hintable-container"></div>
             </div>
             <dialog data-js-tag='hint-popup' class="main-font hint-popup hide" open>404</dialog>

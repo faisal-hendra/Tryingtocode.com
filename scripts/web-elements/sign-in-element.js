@@ -58,11 +58,31 @@ class TTCSignIn extends HTMLElement {
         this.mainToggle.setupToggle();
 
         this.setupSigninUp();
+        this.setupCloseButton();
     }
     
     setupSigninUp(){
+        let signInUpEvent = () => {
+            try{
+                let user = this.user.value;
+                let password = this.password.value;
+                console.log("attempting signinup event. ", user, password);
+                signInUp(user, password);
+            } catch (error) {
+                console.error(error);
+            }
+        };
         this.submit.addEventListener("click", () => {
-            
+            signInUpEvent();
+        });
+    }
+
+    setupCloseButton(){
+        let closeEvent = () => {
+            this.mainToggle.hide();
+        };
+        this.exit.addEventListener("click", () => {
+            closeEvent();
         });
     }
 }

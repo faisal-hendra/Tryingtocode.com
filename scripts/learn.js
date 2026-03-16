@@ -4,6 +4,7 @@ import "./coin/coin.js";
 import { setUserDatapoint, getUserData, setupProject, deleteUserData } from "./firebase-backend/firebase.js";
 import { findProject, findProjects } from "./firebase-backend/firebaseProjects.js";
 import './firebase-backend/firebaseProjects.js';
+import { applySettings } from "./settings-functions.js";
 
 const LOAD_INDICES = Array.from({length: 33}, (_, i) => [i + 1, "projects"]);
 const DEFAULT_REWARD = 5;
@@ -13,7 +14,7 @@ const PROJECT_PARENT = document.getElementById('project-parent');
 window.resetStats = async () => {
     console.log("reseting stats")
     localStorage.setItem("projects", "{}");
-    localStorage.setItem("coin", 0);
+    localStorage.setItem("coin", 0);n
     await deleteUserData(window.user);
 }
 
@@ -90,9 +91,6 @@ export let scrollToTop = () => {
     } else {
         setScroll();
     }
-    
-
-    
 }
 
 scrollToTop();
@@ -180,6 +178,7 @@ loadProjectsFunction(LOAD_INDICES).then(projectsList => {
     }
 
     Prism.highlightAll();
+    applySettings();
 });
 
 

@@ -1,30 +1,30 @@
 //for use in index.html
-import { SignIn } from "./sign-in.js";
-import { signInUp } from './firebase-backend/firebase.js';
+//import { SignIn } from "./sign-in.js";
+//import { signInUp } from './firebase-backend/firebase.js';
 import { getCoin, changeNumber} from "./coin/coin.js";
 import { Toggle } from "./tools.js";
 //import { runUserCode } from "./pyrun.js";
 
-let signInParent = document.getElementById("sign-in-holder");
-let toggleSigninup = document.getElementById("toggle-signinup");
-let signIn = new SignIn(signInParent);
-let toggle = new Toggle(toggleSigninup, signInParent, "slow-hide", "sign-in");
-toggle.addEvent(toggle.toggleEventFilled, signIn.exit);
+//let signInParent = document.getElementById("sign-in-holder");
+//let toggleSigninup = document.getElementById("toggle-signinup");
+//let signIn = new SignIn(signInParent);
+//let toggle = new Toggle(toggleSigninup, signInParent, "slow-hide", "sign-in");
+//toggle.addEvent(toggle.toggleEventFilled, signIn.exit);
 
 const PROJECT_PARENT = document.getElementById("project-parent");
 
 //signIn.toggleButton(toggleSigninup);
-signIn.submit.addEventListener("click", (e) => {
+/*signIn.submit.addEventListener("click", (e) => {
     e.preventDefault();
     if(signIn.password.value != null){
         signInUp(signIn.user.value, signIn.password.value);
     }
-});
+});*/
 
 //let goto = document.getElementById("coin-go-here");
-const counter = document.getElementById("coin-counter");
+const sidebarElement = document.querySelector("ttc-sidebar");
 let indexGetCoin = (amm) => {
-    getCoin(amm, counter);
+    getCoin(amm, sidebarElement.coinCounter);
     changeNumber(0);
 }
 
@@ -51,6 +51,6 @@ runCode.addEventListener("mouseup", async() => {
     outputBox.innerHTML = output[1];
 });
 
-window.addEventListener("user_set", async () => {
+/*window.addEventListener("user_set", async () => {
     console.log(window.user.uid);
-});
+});*/

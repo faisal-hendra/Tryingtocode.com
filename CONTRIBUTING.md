@@ -1,5 +1,7 @@
 # CONVENTIONS
 
+(if you wish to change anything here, or need clarifications, contact me)
+
 ## General
 
 If you see something in the codebase that technically fits
@@ -34,7 +36,8 @@ Minor Tweaks:
 https://www.w3schools.com/html/html5_syntax.asp
 
 But:
-- Avoid non-temporary comments.
+- Avoid comments.
+- If making a reusable component, create a custom html component using js customElements.define.
 
 ## CSS 
 
@@ -42,10 +45,10 @@ But:
 https://cssguidelin.es/
 
 But: 
-- don't indent children, keep everything on the main line, it looks nicer.
+- don't indent children with tabs, keep everything on the main line or 1 tab out.
 - don't use Sass (may change if needed)
 - alignment is not neccisary
-- keep whitespace to 1 or 2 in a row, not the 5 reccomended between sections
+- keep whitespace to 2 in a row, not the 5 recommended between sections
 
 As opposed to other languages, be plentiful with comments (still within reason though).
 
@@ -54,9 +57,9 @@ As opposed to other languages, be plentiful with comments (still within reason t
 https://www.w3schools.com/js/js_conventions.asp
 
 But:
-- always use () => instead of function (if you must use function for [this] functionality, use // comments)
-- keep a header at the top with a simple explanation of code (right below exports?)
-- use tab
+- always use () => instead of function (if you must use function for [this] functionality, use comments to explain why)
+- keep a header at the top with a simple explanation of code (right below exports)
+- use tab, not spaces.
 - short objects avoided unless 2 or less properties
 - use camelCase besides CONST_VARIABLES
 
@@ -70,4 +73,5 @@ WhiteSpace:
 See README NDA and Ownership
 
 # What next
+
 TODO + Read the codebase + Ask instructor

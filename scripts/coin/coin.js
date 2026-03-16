@@ -7,7 +7,11 @@ import { getUserData, setUserDatapoint, increaseCoins } from "../firebase-backen
  */
 
 
-let counter = document.getElementById("coin-counter");
+//let counter = document.getElementById("coin-counter");
+const sidebarElement = document.querySelector("ttc-sidebar");
+console.log("sidebar is ", sidebarElement);
+const counter = document.querySelector("[data-js-tag='sidebar-coin-counter']");
+console.log("");
 
 let canvas = document.getElementById('learn-screen');
 
@@ -40,6 +44,7 @@ let drawAll = (sizeX=300, sizeY=300) => {
     ctx.canvas.height = window.innerHeight;
 
     let drawOne = element => {
+        let counter = sidebarElement.coinCounter;
         element.RenderImage(coinImgSrc);
         element.tick(.3);
         element.gravitate(counter);
@@ -60,7 +65,7 @@ if(canvas){
 
     window.addEventListener('correctCode', (details) => {
         let startElement = window.currentDisplay.output;
-        getCoin(details.detail.value, counter/*, startElement*/);
+        getCoin(details.detail.value, sidebarElement.coinCounter/*, startElement*/);
         changeNumber(details.detail.value);
     });
 
@@ -114,11 +119,16 @@ export let getCoin = (amm, go_to, startElementPos=null, startString = '') => {
 }
 
 let updateDisplayNumber = (updatedNumber, startString) => {
-    let currentCoins = updatedNumber;
+    try{
+        sidebarElement.updateDisplayNumber(updatedNumber, startString);
+    } catch (error) {
+        console.log("no sidebar element yet. ", error);
+    }
+    /*let currentCoins = updatedNumber;
 
     if (counter != null){
         counter.innerHTML = startString + currentCoins;
-    }
+    }*/
 }
 
 let subtractString = (a, b) => {
@@ -129,7 +139,7 @@ let subtractString = (a, b) => {
 }
 
 let incrimentDisplayNumber = (amm=1, startString='') => {
-    let currentCoins = parseInt(subtractString(counter.innerHTML, startString));
+    let currentCoins = parseInt(subtractString(sidebarElement.coinCounter.innerHTML, startString));
     let newCoins = currentCoins + amm;
 
     updateDisplayNumber(newCoins, startString);

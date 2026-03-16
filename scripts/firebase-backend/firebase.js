@@ -17,7 +17,7 @@ window.app = app;
 
 
 import { getAuth, signInAnonymously, createUserWithEmailAndPassword,  
-    signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+    signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence, signOut } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-performance.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
@@ -26,10 +26,24 @@ import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.8.
 const auth = getAuth(app);
 window.auth = auth;
 
+let setAnon = false;
+
 setPersistence(auth, browserLocalPersistence).then(() => {
-    console.log("Persistence set to local");
+    if(setAnon){
+        anonSign();
+    }
 }).catch((error) => {
     console.error(error);
+    //if there is no user, and there has been a problem setting persistance, this may solve that.
+    if(setAnon){
+        try{
+            anonSign().then(() => {
+                setPersistence(auth, browserLocalPersistence);
+            });
+        } catch (error) {
+            console.error("attempted to set persistance with a new anon user. Error: ", error);
+        }
+    }
 });
 
 const db = getFirestore(app);
@@ -61,8 +75,8 @@ let setWindowUser = (toThis) => {
 
     let user_set = new Event("user_set");
     window.dispatchEvent(user_set);
-    console.error("remove in production");
-    console.log(window.user.uid);
+    /*console.error("remove in production");
+    console.log(window.user.uid);*/
 }
 
 let authStateChangedFunction = async (user) => {
@@ -75,9 +89,19 @@ let authStateChangedFunction = async (user) => {
             console.error(error);
         }
     } else {
+        setAnon = true;
         console.log("User signed out? Or error with user.");
-        anonSign();
+        //anonSign();
     }
+}
+
+let signUserOut = async () => { 
+    signOut(auth).then(async () => {
+        await anonSign();
+        console.log("made user anon");
+    }).catch((error) => {
+        console.error(error);
+    });
 }
 
 let startAuth = async (user) => {
@@ -98,6 +122,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export let createEmail =  async(email, password) => {
+    console.log("trying to sign up with ", email, password);
     return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
         let user = userCredential.user;
         alert("creating account...");
@@ -112,6 +137,7 @@ export let createEmail =  async(email, password) => {
 
 let signIn = async (email, password) => {
     try {
+        console.log("trying to sign in with ", email, password);
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         return userCredential.user; // return the actual user
     } catch (error) {
@@ -126,7 +152,8 @@ export let signInUp = async (email, password) => {
         return user;
     }
     catch (error){
-        if(error.code === "auth/user-not-found"){
+        console.log(error.code);
+        if(error.code === "auth/user-not-found" || error.code == "auth/invalid-credential"){
             const new_user = await createEmail(email, password);
             return new_user;
         }else {
@@ -271,7 +298,6 @@ export let setUserDatapoint = async (email=null, displayName=null, coins=null, p
         updatePayload.projects = setProjects;
         let localPayload = JSON.stringify(setProjects)
         localStorage.setItem("projects", localPayload);
-        console.trace("local: ", localPayload);
         console.log(window.currentDisplay);
     }
 
@@ -298,6 +324,17 @@ export let increaseCoins = async (byAmmount=5) => {
 
     let updatePayload = { coins: increment(byAmmount) };
     console.log('PAYLOAD: ', updatePayload);
+
+    /*let incrementLocalCoins = (amm) => {
+        let currentCoins = localStorage.getItem("coin");
+        currentCoins = Math.round(currentCoins);
+        localStorage.setItem('coin', currentCoins + amm);
+    }
+    try{
+        incrementLocalCoins(byAmmount);
+    } catch (error){
+        console.log(error);
+    }*/
 
     await updateDoc(userRef, updatePayload);
 }
@@ -388,8 +425,11 @@ export let setupProject = (projectDisplay, projectTitle) => {
     updateProjects.push([setProjCodeFilled, projectTitle]);
 }
 
-let anonSign = () => {
-    signInAnonymously(auth).then((userCredential) => {
+let anonSign = async () => {
+    console.log(window.user);
+    if(typeof window.user !== "undefined") { console.error("user already exists, why you doing this?"); throw "uh oh, don't do that"; }
+
+    await signInAnonymously(auth).then((userCredential) => {
         console.log("Signed in anonymously, ");
         console.warn("id passed in is: ", userCredential);
 
@@ -404,6 +444,8 @@ let anonSign = () => {
     .catch((error) => {
         console.error(error);
     });
+
+    return;
 }
 
 

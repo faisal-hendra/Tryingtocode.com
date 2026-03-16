@@ -1,5 +1,6 @@
 import { timeSince } from "../../tools.js";
 import { findProjects } from "../../firebase-backend/firebaseProjects.js";
+import { applySettings } from "../../settings-functions.js";
 
 class TTCViewDataProjects extends HTMLElement {
     constructor(){
@@ -29,6 +30,8 @@ class TTCViewDataProjects extends HTMLElement {
         this.databaseProjectButtonDropdown = this.querySelector("[data-js-tag='database-project-dropdown']"); 
         //rough fix \/
         this.createProject = this.parentElement;
+        
+        applySettings();
     }
 
     initButton(){
@@ -130,6 +133,7 @@ class TTCViewDataProjects extends HTMLElement {
         });
 
         this.projectButtons = projectButtons;
+        applySettings();
     }
 }
 

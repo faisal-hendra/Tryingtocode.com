@@ -3,8 +3,20 @@ console.log("readddy for settings rider sir");
 const localStorageSettingsString = "user_settings";
 
 const DEFAULT_SETTINGS = {
-    "font": "main-font",
+    "font": "pixel1",
 };
+
+    console.error("change element here:");
+try{
+    const TTC_SETTINGS_ELEMENT = document.querySelector("[js-data-tag='settings-holder']").parentElement;
+    const FONT_TO_ELEMENT = {
+        "pixel1": TTC_SETTINGS_ELEMENT
+    };
+} catch {
+    console.log("Insuffecient elements. You are likely in a non settings page.");
+    console.log("If you are in a settings page, please contact@tryingtocode.com");
+}
+
 
 //FIX THIS LATER!
 let playerSettings = {
@@ -34,7 +46,8 @@ export let fontChange = (toFont) => {
             element.classList.toggle("pixel-alt", true);
         }
 
-    });*/
+    });
+    */
 }
 
 
@@ -61,25 +74,60 @@ export let editSetting = (newSettings = { /* supported settings: font, theme */ 
     });
     let settingsObjectString = JSON.stringify(settingsObject);
     localStorage.setItem(localStorageSettingsString, settingsObjectString);
+
+    applySettings();
+}
+
+export let setDefault = (key) => {
+    //editSetting( { [key]: DEFAULT_SETTINGS[key] } );
 }
 
 export let applySettings = () => {
     let settingsObject = getSettingsObject();
-
+    let fontOptions = {
+        "pixel1": "pixel-1",
+        "arial1": "arial-1",
+        "monospace1": "monospace-1"
+    }
 
     let applyFont = () => {
         document.querySelectorAll('*').forEach(element => {
             if(!element.classList.contains("main-font")){ return; }
 
+            let oneFontSelected = false;
+            let fontKeys = Object.keys(fontOptions);
+
+            let setFont = (fontValue, toggle) => {
+                element.classList.toggle(fontValue, toggle);
+                if(toggle) { oneFontSelected = true; }
+            }
+
+            for (let fontIndex = 0; fontIndex < fontKeys.length; fontIndex++) {
+                let fontKey = fontKeys[fontIndex];
+                let fontValue = fontOptions[fontKey];
+
+                let isKey = settingsObject["font"] == fontValue;
+                if (isKey){
+                    setFont(fontValue, true);
+                }
+                else{
+                    setFont(fontValue, false);
+                }
+            }
+            
+            if(!oneFontSelected) {
+                setDefault("font");
+            }
+
             element.classList.toggle("pixel-1", settingsObject["font"] == "pixel1");
             element.classList.toggle("arial-1", settingsObject["font"] == "arial1");
+            element.classList.toggle("monospace-1", settingsObject["font"] == "monospace1");
         });
     }
 
     applyFont();
 }
 
-applySettings();
 requestAnimationFrame(applySettings);
 
 /*var isPixel = true;
