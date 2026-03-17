@@ -9,6 +9,7 @@ class TTCSignIn extends HTMLElement {
         this.render();
     }
     render(){
+        this.hideIconWhenOpen = this.getAttribute("hide-icon-when-open") ?? false;
 
         this.innerHTML = `
             <div data-js-tag="sign-in-holder" class="sign-in-holder"></div>

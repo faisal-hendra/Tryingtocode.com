@@ -100,11 +100,11 @@
 	line-height: 0.9em;
 }
 
-.sign-in-holder, .settings-holder{
+ttc-sign-in, ttc-settings, .welcome--sign-in{
     display: flex;
 	justify-content: center;
 	align-items: center;
-
+	flex-direction: row;
 }
 
 

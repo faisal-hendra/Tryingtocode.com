@@ -521,7 +521,8 @@ body {
   transition: all 1s;
   width: 32px;
   height: 32px;
-  background: url('../components/art/load-sheet.png') no-repeat;
+  --theme: url("../components/visuals/icons/load-animation/pixel-1.png");
+  background: no-repeat var(--theme);
 
   --load-size: 128px;
   width: var(--load-size); 

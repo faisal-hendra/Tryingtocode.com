@@ -9,8 +9,16 @@ class TTCSettings extends HTMLElement {
         this.render();
     }
     render(){
+        this.hideIconWhenOpen = this.getAttribute("hide-icon-when-open") ?? false;
+        this.theme = window.theme;
+        this.iconPath = "../../components/visuals/icons";
 
         this.innerHTML = `
+            <div data-js-tag="settings-toggle">
+                <button class="nice-button no-bg-button" data-js-tag="settings-toggle-button">
+                    <img class="si-button-image" src="${this.iconPath}/settings/cog/${this.theme}.png" alt="settings">
+                </button>
+            </div>
             <div data-js-tag="settings-holder">
                 <div class="settings">
                     <button data-js-tag='toggle-font-button' class="nice-button no-bg-button main-font">dropdown font</button>
@@ -30,12 +38,13 @@ class TTCSettings extends HTMLElement {
                         <button class="nice-button no-bg-button main-font">default coin theme</button>
                         <button class="nice-button no-bg-button main-font">comming soon...</button>
                     </div>
+
+                    <br></br>
+
+                    <button data-js-tag="exit-button" class="si-exit main-font">
+                        <img style="width: 30px; height: 30px;" data-js-tag="close-img" src="${this.iconPath}/project/close/${this.theme}.png">
+                    </button>
                 </div>
-            </div>
-            <div data-js-tag="settings-toggle">
-                <button class="nice-button no-bg-button" data-js-tag="settings-toggle-button">
-                    <img class="si-button-image" src="../../components/art/settings - 1.png" alt="settings">
-                </button>
             </div>
         `;
 
@@ -53,6 +62,8 @@ class TTCSettings extends HTMLElement {
         this.fontChoices = this.holderElement.querySelector("[data-js-tag='font-choice']");
         this.themeToggleButton = this.holderElement.querySelector("[data-js-tag='toggle-theme-button'");
         this.themeChoices = this.holderElement.querySelector("[data-js-tag='theme-choice']");
+
+        this.exitButton = this.querySelector("[data-js-tag='exit-button']");
     }
 
     setupElements(){
@@ -65,6 +76,10 @@ class TTCSettings extends HTMLElement {
 
         this.themeToggle = new SimpleToggle(this.themeToggleButton, [this.themeChoices]);
         this.themeToggle.setupToggle();
+
+        this.exitButton.addEventListener("click", () => {
+            this.mainToggle.hide();
+        });
 
         this.setupFontSetting();
     }

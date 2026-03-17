@@ -1,7 +1,7 @@
 //for use in ALL HTML FILES
 //import { SimpleToggle } from "./tools.js";
 //import { Toggle } from "./tools.js";
-
+//import "./init-settings.js"
 
 /*let dropdown = new Collapsable( document.getElementById("dropdown-button"), 
                                 Array.from(document.getElementsByClassName("dropdown")), 
@@ -9,6 +9,11 @@
                                     'components/art/yellow - toggle arrow up.png']
                                 );
 */
+
+let loading = document.querySelector(".loader-sprite");
+if(typeof loading !== "undefined"){
+    loading.style.setProperty("--theme", `url("../components/visuals/icons/lod-animation/${window.theme}.png")`);
+}
 
 /*let dropdownButton = document.getElementById("dropdown-button");
 let dropdownElements = Array.from(document.getElementsByClassName("dropdown"));

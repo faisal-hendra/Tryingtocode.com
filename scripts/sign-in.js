@@ -1,3 +1,5 @@
+//depreciated script, to be destroyed
+
 const htmlGen =  
 `
 <div id="sign-in">

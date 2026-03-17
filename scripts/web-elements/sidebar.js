@@ -13,25 +13,26 @@ class TTCSidebar extends HTMLElement {
         this.render();
     }
     render(){
-
+        this.theme = window.theme ?? "pixel-1";
+        this.iconPath = "components/visuals/icons/sidebar";
         this.innerHTML = `
 <div class="sidebar">  
     <a href="index" title="Home"  class="logo" id="home-icon" draggable="false">
-        <img src="components/art/ttc coin icon.png" alt="Coin logo" class="nice-button">
+        <img src="components/visuals/logos/coin/${this.theme}.png" alt="Coin logo" class="nice-button">
     </a>
     <button data-js-tag='dropdown-button' class="toggle-dropdown" draggable="false">
-        <img class="toggle-dropdown--img nice-button" src="components/art/yellow - toggle arrow up.png" alt="" id="toggle-button">
+        <img class="toggle-dropdown--img nice-button" src="${this.iconPath}/toggle-arrow/${this.theme}/frame-2.png" alt="" id="toggle-button">
     </button>
     <div class="dropdown">
         <ul class="dropdown--list">
             <li class="dropdown--element"><a href="index" title="Home">
-                <img class="dropdown--image nice-button" src="components/art/clean icon - 9.png" alt="Home" draggable="false">
+                <img class="dropdown--image nice-button" src="${this.iconPath}/home/${this.theme}.png" alt="Home" draggable="false">
             </a></li>
             <li class="dropdown--element"><a href="learn" title="Learn">
-                <img class="dropdown--image nice-button dark-glow" src="components/art/clean icon - 10.png" alt="Learn" draggable="false">
+                <img class="dropdown--image nice-button dark-glow" src="${this.iconPath}/learn/${this.theme}.png" alt="Learn" draggable="false">
             </a></li>
             <li class="dropdown--element"><a href="create.html" title="Create">
-                <img class="dropdown--image nice-button dark-glow rotate-45" src="components/art/clean icon - hammer.png" alt="Create" draggable="false">
+                <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/create/${this.theme}.png" alt="Create" draggable="false">
             </a></li>
             <li class="dropdown--element"><a href="signin.html" title="Create">
                 SI

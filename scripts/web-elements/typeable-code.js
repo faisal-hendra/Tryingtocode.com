@@ -298,8 +298,8 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
         `;
         this.addedRunnableHTML = `
         <div class="project-button-buttons proj-child">
-            <button js-data-tag="run-button" title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/art/play button 1 - big.png"></img></button>
-            <button title="go to next project" alt="next project" name="next-button" class="next-project ${nextProjectClass}" name="next-button"><img src="./components/art/arrow - 1.png"></button>
+            <button js-data-tag="run-button" title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/visuals/icons/project/run-code/${window.theme}.png"></img></button>
+            <button title="go to next project" alt="next project" name="next-button" class="next-project ${nextProjectClass}" name="next-button"><img src="./components/visuals/icons/project/next-project/${window.theme}.png"></button>
         </div>
         ` ;
         this.runnableContainer.insertAdjacentHTML("afterbegin", this.addedRunnableHTML);
@@ -337,15 +337,15 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
             <div class="close-restart show-when-mini">
                 <div class="button">
                     <button class="project-close-button project-button" title="close project">
-                        <img style="width: 30px; height: 30px;" name="close-img" src='./components/art/x.png' class="nice-button">
+                        <img style="width: 30px; height: 30px;" name="close-img" src='./components/visuals/icons/project/close/${window.theme}.png' class="nice-button">
                     </button>
                 </div>
                 <div class="button">
                     <button class="project-restart-button project-button" title="reset code to defualt">
-                        <img style="width: 30px; height: 30px;" name="reset-img" src="./components/art/reload - 3.png" class="nice-button">
+                        <img style="width: 30px; height: 30px;" name="reset-img" src="./components/visuals/icons/project/reload/${window.theme}.png" class="nice-button">
                     </button>
                 </div>
-                <img draggable="false" src="./components/art/ttc coin icon.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
+                <img draggable="false" src="./components/visuals/icons/project/coin-collected-indicator/${window.theme}.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
                 <p style="font-size: 1.3rem;" class="project-title show-when-mini" name="project-title">title</p>
                 <div data-js-tag="hintable-container"></div>
             </div>
@@ -366,7 +366,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
         this.addedHintableHTML = `
             <div class="button project-hint-button">
                 <button data-js-tag="hint-toggle-button" class="project-hint-button project-button" title="get hint if stuck">
-                    <img style="width: 50px; height: 50px;" name="hint-img" src="./components/art/clue - 5.png" class="nice-button">
+                    <img style="width: 50px; height: 50px;" name="hint-img" src="./components/visuals/icons/project/hint/${window.theme}.png" class="nice-button">
                 </button>
             </div>
         `;
@@ -390,7 +390,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
 
     editToLinkable(){
         this.addedLinkableHTML = `
-            <button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/art/link-unlink -1.png"></img></button>
+            <button class="nice-button link-button" name="link-unlink-toggle"><img class="link-button--image" src="../components/visuals/icons/project/link/${window.theme}.png"></img></button>
         `;
 
         this.linkableContainer.insertAdjacentHTML("afterbegin", this.addedLinkableHTML);
