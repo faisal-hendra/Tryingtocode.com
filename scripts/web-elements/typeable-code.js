@@ -36,7 +36,7 @@ class TTCTypeableCode extends HTMLElement {
                             <div data-js-tag="side-numbers" class="line-numbers lines code-lines proj-child"></div>
                             <div class="single-block-grid proj-child">
                                 <textarea data-js-tag="user-code-section" class="main-font codearea proj-child" name="user-code" placeholder="${placeholder_text}" spellcheck="false">${codeText}</textarea>
-                                <pre data-js-tag="pretty-code--pre" class="language-${language} code-highlight code-lines proj-child main-font" name="pretty-pre"><code data-js-tag="pretty-code" class="language-${language}" name="code-editor--pretty-code">${codeText}</code>
+                                <pre data-js-tag="pretty-code--pre" class="language-${language} code-highlight code-lines proj-child main-font" name="pretty-pre"><code data-js-tag="pretty-code" class="language-${language}" name="code-editor--pretty-code" aria-hidden="true">${codeText}</code>
                                 </pre>
                             </div>
                         </div>
@@ -63,7 +63,9 @@ class TTCTypeableCode extends HTMLElement {
     initFunctionality(){
         this.textarea.readOnly = this.readonly;
 
-        let matchScrollFilled = () => {this.matchScroll(this.prettyPre, this.textarea); this.matchScroll(this.prettyPre, this.lineNumbers);}
+        //let matchScrollFilled = () => {this.matchScroll(this.prettyPre, this.textarea); this.matchScroll(this.prettyPre, this.lineNumbers);}
+        //let matchScrollFilled = () => {this.matchScroll(this.lineNumbers, this.textarea); this.matchScroll(this.prettyCode, this.textarea);}
+        let matchScrollFilled = () => {this.matchScroll(this.prettyCode, this.textarea); this.matchScroll(this.lineNumbers, this.prettyCode);}
         this.textarea.addEventListener('scroll', matchScrollFilled);
         
         let updateEverything = () => {
@@ -72,7 +74,8 @@ class TTCTypeableCode extends HTMLElement {
         }
         this.editPresses(updateEverything);
 
-        this.updateLineNumbers();
+        window.requestAnimationFrame(() => {this.updateLineNumbers();});
+        
     }
 
     matchScroll(result_element, element){
@@ -223,6 +226,7 @@ class TTCTypeableCode extends HTMLElement {
                 event.preventDefault();
                 let focusOn = this.project.runButton;
                 focusOn.focus();
+
             }
 
             if(event.key === "Backspace"){
@@ -233,9 +237,24 @@ class TTCTypeableCode extends HTMLElement {
                         appendToTextarea("");
                     }
                 }
+
+                //make sure that the last line isn't empty
+                console.log("value is _", value[value.length-1], "_", value[value.length-1] == "\n");
+                if(value[value.length-1] == "\n"){
+                    this.prettyCode.value += " ";
+                }
             }
 
             changePairs(event);
+
+            //make sure that the last line isn't empty
+            console.log(value[value.length-1] == "\n");
+            if(value[value.length-1] == "\n"){
+                //this.textarea.value += " ";
+                let text = this.textarea.value;
+                text += "::::";
+                this.createPrettyCode(undefined, text);
+            }
 
             if(event.defaultPrevented){
                 call();
@@ -247,6 +266,7 @@ class TTCTypeableCode extends HTMLElement {
             call();
         });
     }
+    
 }
 
 

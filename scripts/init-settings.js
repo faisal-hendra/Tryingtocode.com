@@ -15,7 +15,8 @@ let changeLocalSetting = (setting, value) => {
 
 changeLocalSetting("theme", "pixel-1");
 
-let updateFromLocalTheme = () => {
+//the way to read this name is: update the theme from local storage
+let updateThemeFromLocal = () => {
     let settings = localStorage.getItem("user_settings");
     let settingsObject = JSON.parse(settings);
 
@@ -24,5 +25,18 @@ let updateFromLocalTheme = () => {
     window.theme = theme;
 }
 
-updateFromLocalTheme();
+updateThemeFromLocal();
 console.log(window.theme);
+
+let updateXPFromLocal = () => {
+    let settings = localStorage.getItem("user_settings");
+    let settingsObject = JSON.parse(settings);
+
+    let xp = settingsObject["xp"] ?? "0";
+    xp = Math.round(xp);
+
+    window.xp = xp;
+}
+
+updateXPFromLocal();
+console.log(window.level);

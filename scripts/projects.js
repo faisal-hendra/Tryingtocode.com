@@ -310,11 +310,13 @@ export class Display {
             this.output.classList.toggle("output-incorrect", !success && success !== null);
         }
         decision(null);
+        window.addXP(-.001);
 
         let value = this.textarea.value;
 
         if(!output[0]){
             decision(false);
+            window.addXP(-.01);
             return false;
         }
 
@@ -330,6 +332,7 @@ export class Display {
         if(passed){
             rewardPlayer(this);
             this.nextButton.classList.add("glow");
+            window.addXP(.2);
         }
         else{
             //console.log("user code was " + output + " || But the code should've been " + this.projectJSON["output-includes"]);

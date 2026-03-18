@@ -4,6 +4,8 @@ const localStorageSettingsString = "user_settings";
 
 const DEFAULT_SETTINGS = {
     "font": "pixel1",
+    "xp": "0",
+    "theme": "pixel-1"
 };
 
     console.error("change element here:");
@@ -66,7 +68,7 @@ let initSettingsObject = () => {
 
 initSettingsObject();
 
-export let editSetting = (newSettings = { /* supported settings: font, theme */ }) => {
+export let editSetting = (newSettings = { /* supported settings: font, theme, xp  */ }) => {
     let settingsObject = getSettingsObject();
     console.log(newSettings, settingsObject);
     Object.keys(newSettings).forEach(newSettingsKey => {
@@ -76,6 +78,18 @@ export let editSetting = (newSettings = { /* supported settings: font, theme */ 
     localStorage.setItem(localStorageSettingsString, settingsObjectString);
 
     applySettings();
+}
+
+export let incrementSetting = (incrementSetting, byAmmount=1) => {
+    let settingsObject = getSettingsObject();
+    let currentValue = settingsObject[incrementSetting];
+    let newValue = byAmmount;
+    if(typeof Math.round(currentValue) === "number"){
+        newValue += Math.round(currentValue);
+    } else{ console.error("not a number!"); }
+
+    console.log("set value to ", newValue);
+    editSetting({ [incrementSetting]: newValue });
 }
 
 export let setDefault = (key) => {
@@ -139,6 +153,9 @@ console.log("settings initialised.");
 requestAnimationFrame(applySettings);
 window.applySettings = () => { applySettings(); };
 
+window.addXP = (amm=1) => { incrementSetting("xp", amm); }
+window.addXP();
+
 /*var isPixel = true;
 export let updateSettings = (document) => {
     isPixel = !isPixel;
@@ -157,4 +174,34 @@ let updateSettingsButton = document.getElementById("change-setting");
 let filledSettings = () => {updateSettings(playerSettings[0]);}
 updateSettingsButton.addEventListener("click", filledSettings);
  */
+
+
+
+let hatePixelartButton = document.getElementById("hate-pixel-art-button");
+let likePixelartButton = document.getElementById("like-pixel-art-button");
+
+console.log(typeof hatePixelartButton, hatePixelartButton);
+if(hatePixelartButton != null) { 
+    let detectPixelart = () => {
+        let isPixelart = getSettingsObject()["font"] == "pixel1";
+        hatePixelartButton.classList.toggle("hide", isPixelart);
+        likePixelartButton.classList.toggle("hide", !isPixelart);
+        return isPixelart;
+    }
+    let togglePixelart = () => {
+        let isPixelart = detectPixelart();
+        let newFont = isPixelart ? "arial1" : "pixel1" ;
+        fontChange(newFont);
+    }
+    hatePixelartButton.addEventListener("click", () => {
+        togglePixelart();
+    });
+    likePixelartButton.addEventListener("click", () => {
+        togglePixelart();
+    });
+    detectPixelart();
+    //weird fix, got a bad smell, probably a better way to make this:
+    hatePixelartButton.classList.toggle("hide");
+    likePixelartButton.classList.toggle("hide");
+}
 
