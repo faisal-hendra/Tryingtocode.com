@@ -25,6 +25,8 @@ class TTCSettings extends HTMLElement {
                     <div data-js-tag="font-choice">
                         <button class="nice-button no-bg-button pixel-1" data-font="pixel1">default pixel font</button>
                         <button class="nice-button no-bg-button arial-1" data-font="arial1">default arial font</button>
+                        <button class="nice-button no-bg-button courier-new-1" data-font="couriernew1">default courier font</button>
+                        <button class="nice-button no-bg-button cursive-1" data-font="cursive1">default cursive font</button>
                     </div>
 
                     <br></br>
@@ -41,7 +43,7 @@ class TTCSettings extends HTMLElement {
 
                     <br></br>
 
-                    <button data-js-tag="exit-button" class="si-exit main-font">
+                    <button data-js-tag="exit-button" class="si-exit main-font nice-button no-bg-button">
                         <img style="width: 30px; height: 30px;" data-js-tag="close-img" src="${this.iconPath}/project/close/${this.theme}.png" draggable="false"></img>
                     </button>
                 </div>

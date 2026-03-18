@@ -87,7 +87,9 @@ export let applySettings = () => {
     let fontOptions = {
         "pixel1": "pixel-1",
         "arial1": "arial-1",
-        "monospace1": "monospace-1"
+        "monospace1": "monospace-1",
+        "couriernew1": "courier-new-1",
+        "cursive1": "cursive-1"
     }
 
     let applyFont = () => {
@@ -125,6 +127,8 @@ export let applySettings = () => {
             element.classList.toggle("pixel-1", settingsObject["font"] == "pixel1");
             element.classList.toggle("arial-1", settingsObject["font"] == "arial1");
             element.classList.toggle("monospace-1", settingsObject["font"] == "monospace1");
+            element.classList.toggle("courier-new-1", settingsObject["font"] == "couriernew1");
+            element.classList.toggle("cursive-1", settingsObject["font"] == "cursive1");
         });
     }
 

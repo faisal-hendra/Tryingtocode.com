@@ -29,7 +29,7 @@ class TTCSignIn extends HTMLElement {
                                 </div>
                             </form>
                             <div class="si-button-flexbox">
-                                <button data-js-tag="exit-button" class="si-exit main-font">
+                                <button data-js-tag="exit-button" class="si-exit main-font nice-button no-bg-button">
                                     <img style="width: 30px; height: 30px;" data-js-tag="close-img" src='./components/visuals/icons/project/close/${window.theme}.png'>
                                 </button>
                                 <button data-js-tag="submit-button" class="si-submit main-font">Submit</button>

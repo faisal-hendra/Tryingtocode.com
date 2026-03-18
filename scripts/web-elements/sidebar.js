@@ -13,6 +13,8 @@ class TTCSidebar extends HTMLElement {
         this.render();
     }
     render(){
+        this.startClosed = this.getAttribute("start-closed") ?? false;
+
         this.theme = window.theme ?? "pixel-1";
         this.iconPath = "components/visuals/icons/sidebar";
         this.innerHTML = `
@@ -77,7 +79,7 @@ class TTCSidebar extends HTMLElement {
         this.imageButton.changeOnClick();
         //this.mainDropdown.
 
-        this.toggleSidebar = new Toggle(this.toggleSidebarButton, [this.toggleThisPartOfSidebar], "hide", undefined, undefined, undefined, false);
+        this.toggleSidebar = new Toggle(this.toggleSidebarButton, [this.toggleThisPartOfSidebar], "hide", undefined, undefined, undefined, this.startClosed);
         this.toggleSidebarImageButton = new ImageButton(this.toggleSidebarButton, this.toggleSidebarArt, 1);
         this.toggleSidebarImageButton.changeOnClick();
         //this.toggleSidebar.show();

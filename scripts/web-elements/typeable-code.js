@@ -298,8 +298,8 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
         `;
         this.addedRunnableHTML = `
         <div class="project-button-buttons proj-child">
-            <button js-data-tag="run-button" title="run code" name="run-button" class="run-code"><img class="run-code-button-img" src="./components/visuals/icons/project/run-code/${window.theme}.png"></img></button>
-            <button title="go to next project" alt="next project" name="next-button" class="next-project ${nextProjectClass}" name="next-button"><img src="./components/visuals/icons/project/next-project/${window.theme}.png"></button>
+            <button js-data-tag="run-button" title="run code" name="run-button" class="run-code"><img class="run-code-button-img big-image" src="./components/visuals/icons/project/run-code/${window.theme}.png"></img></button>
+            <button title="go to next project" alt="next project" name="next-button" class="next-project ${nextProjectClass} pixel-img" name="next-button"><img src="./components/visuals/icons/project/next-project/${window.theme}.png"></button>
         </div>
         ` ;
         this.runnableContainer.insertAdjacentHTML("afterbegin", this.addedRunnableHTML);
@@ -345,7 +345,7 @@ export class TTCComplexTypeableCode extends TTCTypeableCode {
                         <img style="width: 30px; height: 30px;" name="reset-img" src="./components/visuals/icons/project/reload/${window.theme}.png" class="nice-button">
                     </button>
                 </div>
-                <img draggable="false" src="./components/visuals/icons/project/coin-collected-indicator/${window.theme}.png" class="hide completed-icon show-when-mini" name="completed-icon"></img>
+                <img draggable="false" src="./components/visuals/icons/project/coin-collected-indicator/${window.theme}.png" class="hide completed-icon show-when-mini pixel-img" name="completed-icon"></img>
                 <p style="font-size: 1.3rem;" class="project-title show-when-mini" name="project-title">title</p>
                 <div data-js-tag="hintable-container"></div>
             </div>
