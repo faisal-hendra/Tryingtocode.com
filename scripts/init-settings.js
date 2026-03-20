@@ -26,9 +26,8 @@ let changeLocalSetting = (setting, value) => {
 
 //changeLocalSetting("theme", "pixel-1");
 //changeLocalSetting("image-extension", ".png");
-
-changeLocalSetting("theme", "vector-1");
-changeLocalSetting("image-extension", ".svg");
+//changeLocalSetting("theme", "vector-1");
+//changeLocalSetting("image-extension", ".svg");
 
 let updateThemeFromLocal = () => {
     let theme = getLocalSetting("theme") ?? "pixel-1";

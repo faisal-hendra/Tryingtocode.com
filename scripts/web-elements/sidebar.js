@@ -61,8 +61,8 @@ class TTCSidebar extends HTMLElement {
         this.coinCounter = this.querySelector("[data-js-tag='sidebar-coin-counter']");
         this.dropdownButton = this.querySelector("[data-js-tag='dropdown-button']");
         this.dropdownElements = Array.from(this.getElementsByClassName("dropdown"));
-        this.toggleArt = [`${this.iconPath}/toggle-arrow/${this.theme}/frame-2${this.imageExtension}`, 
-                          `${this.iconPath}/toggle-arrow/${this.theme}/frame-1${this.imageExtension}`];
+        this.toggleArt = [`${this.iconPath}/toggle-arrow/${this.theme}/frame-1${this.imageExtension}`, 
+                          `${this.iconPath}/toggle-arrow/${this.theme}/frame-2${this.imageExtension}`];
 
         this.toggleThisPartOfSidebar = this.querySelector("[data-js-tag='toggle-this-part-of-sidebar']")
         this.toggleSidebarContainer = this.querySelector("[data-js-tag='toggle-sidebar']");
