@@ -207,7 +207,16 @@ class TTCTypeableCode extends HTMLElement {
             }
         }
 
-        
+        let assureLastLineFilled = (value) => {
+            //make sure that the last line isn't empty
+            console.log(value[value.length-1] == "\n");
+            if(value[value.length-1] == "\n"){
+                //this.textarea.value += " ";
+                let text = this.textarea.value;
+                text += " ";
+                this.createPrettyCode(undefined, text);
+            }
+        }
 
         this.textarea.addEventListener('keydown', (event) => {
             let value = this.textarea.value;
@@ -247,23 +256,19 @@ class TTCTypeableCode extends HTMLElement {
 
             changePairs(event);
 
-            //make sure that the last line isn't empty
-            console.log(value[value.length-1] == "\n");
-            if(value[value.length-1] == "\n"){
-                //this.textarea.value += " ";
-                let text = this.textarea.value;
-                text += "::::";
-                this.createPrettyCode(undefined, text);
-            }
-
             if(event.defaultPrevented){
                 call();
             }
+
+            assureLastLineFilled(value);
         });
 
         this.textarea.addEventListener('input', (input) => {
             //input happens after keydown
             call();
+
+            let value = this.textarea.value;
+            assureLastLineFilled(value);
         });
     }
     

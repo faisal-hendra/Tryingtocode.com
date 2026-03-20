@@ -76,7 +76,7 @@ window.addEventListener("user_set", async () => {
 export let scrollToTop = () => {
     console.warn("FIX THIS, make it maintainable, and look at phone when it's sideways... bleck!");
 
-    let setScroll = () => {
+    let defaultSetScroll = () => {
         if(window.innerWidth < 600){
             window.scrollTo({top: 160, left: 0, behavior: "smooth"});
         } else{
@@ -84,16 +84,24 @@ export let scrollToTop = () => {
         }
     }
 
+    let scrollToCurrentDisplay = () => {
+        window.currentDisplay.projectEl.scrollIntoView({behavior: "smooth", top: 0});
+    }
+
     if(typeof window.currentDisplay !== "undefined"){
         //window.currentDisplay.projectEl.scrollIntoView({ behavior: "smooth", top: 100 });
         //window.scrollTo({top: window.currentDisplay.projectEl.getBoundingClientRect().top, left: 0, behavior: "smooth"});
-        setScroll();
+        window.requestAnimationFrame(scrollToCurrentDisplay);
+        //scrollToCurrentDisplay();
     } else {
-        setScroll();
+        //use default behaviour if need be
+        defaultSetScroll();
     }
 }
-
-scrollToTop();
+/*
+let scroll = window.confirm("can we scroll to top?");
+let prompt = window.prompt("say something...", "what");
+if(scroll) {*/scrollToTop();
 
 try {
     let backToTopButton = document.getElementById("main--back-to-top-button");

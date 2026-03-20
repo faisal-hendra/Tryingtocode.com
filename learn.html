@@ -24,32 +24,35 @@
     <link as="font" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!--Font import-->
 </head>
 <body>
-    <ttc-sidebar></ttc-sidebar>
-    <div class="main-content main-font" id="main-content">
-        <div style="position: relative;">
-            <div id="loader" class="loader">
-                <div class="spinner"></div>
-                <p style="white-space: nowrap" class="main-font">fetching resources...</p>
-                <div class="loader-sprite"></div>
+    <div class="row-container">
+        <ttc-sidebar></ttc-sidebar>
+        <div class="main-content main-font" id="main-content">
+            <div style="position: relative;">
+                <div id="loader" class="loader">
+                    <div class="spinner"></div>
+                    <p style="white-space: nowrap" class="main-font">fetching resources...</p>
+                    <div class="loader-sprite"></div>
+                </div>
+            </div>
+
+            <!--button id="main--back-to-top-button" class="sticky nice-button main-font back-to-top-button">top</button-->
+            
+            <!--button class="main-font" id="change-setting">change setting</button-->
+            <header>
+                <h1 class="main-title main-font" id="main-title">Project Based Learning</h1>
+                <p class="main-font">For total beginners.</p>
+            </header>
+            <canvas class="js-screen" id="learn-screen">
+                <!--shows coins-->
+            </canvas>
+            <div id="project-parent" autocapitalize="off">
+                <!-- projects insert here -->
+            </div>
+            <div class="footer-parent">
+                <ttc-footer copywrite="tryingtocode" mail-to="contact@tryingtocode.com" legal-src="./legal.html" privacy-src="/privacy-policy.html"></ttc-footer>
             </div>
         </div>
-
-        <!--button id="main--back-to-top-button" class="sticky nice-button main-font back-to-top-button">top</button-->
-        
-        <!--button class="main-font" id="change-setting">change setting</button-->
-        <header>
-            <h1 class="main-title main-font" id="main-title">Project Based Learning</h1>
-            <p class="main-font">For total beginners.</p>
-        </header>
-        <canvas class="js-screen" id="learn-screen">
-            <!--shows coins-->
-        </canvas>
-        <div id="project-parent" autocapitalize="off">
-            <!-- projects insert here -->
-        </div>
-        <div class="footer-parent">
-            <ttc-footer copywrite="tryingtocode" mail-to="contact@tryingtocode.com" legal-src="./legal.html" privacy-src="/privacy-policy.html"></ttc-footer>
-        </div>
     </div>
+    
 </body>
 </html>

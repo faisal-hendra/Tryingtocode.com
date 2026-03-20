@@ -62,6 +62,11 @@ export class Display {
         this.initializeDisplay();
     }
 
+    makeMeCurrentDisplay(){
+        window.currentDisplay = this;
+        this.checkIfNoobInterval = setInterval(this.checkIfNoob, 500);
+    }
+
     initializeDisplay(){
         this.findElements(); 
 
@@ -74,6 +79,8 @@ export class Display {
         this.setAttributes();
 
         this.reward = 5;
+        this.xpReward = .4;
+        this.xpPunishment = -.1;
     }
 
     findElements(){
@@ -140,6 +147,27 @@ export class Display {
         //setupRunButton(this);
     }
 
+    checkIfNoob(){
+        if(this != window.currentDisplay){return;}
+
+        let inexperienced = (threshold=10) => {
+            if(window.xp < threshold) {
+                // not a person who has already gotten past a few projects
+                console.log("maybe is a noob.");
+                console.log("but let's see if they actually need help.");
+            } 
+        }
+        //most users leave after around 2 minutes, so don't go longer than that
+        let inNeedOfHelp = (timeLimit=40 /**in seconds */) => {
+            let newTime = Date.now();
+            result = newTime - this.timebegan;
+            timescale = 1000; //seconds
+            if(result / timescale > timeLimit);
+        }
+        console.log("needs help?", inexperienced(), inNeedOfHelp());
+
+    }
+
     countTimeOpen(){
         console.log("I, ", this.projectIndex, " am closing.");
         let newTime = Date.now();
@@ -175,7 +203,7 @@ export class Display {
         window.dispatchEvent(changeOpenProject);
 
         if(relativeIndex == 0) {
-            window.currentDisplay = this;
+            this.makeMeCurrentDisplay();
         }
     }
 
@@ -268,9 +296,12 @@ export class Display {
             this.minimize({mini: false, gone: false});
         
             console.log("set current display");
-            window.currentDisplay = this;
-            
-            scrollToTop();
+            this.makeMeCurrentDisplay();
+
+            //must wait to scroll, else it won't take up the full screen space and 
+            //window won't understand where to scroll to.
+            const timeToScroll = 310;
+            setTimeout(scrollToTop, timeToScroll);
         }
 
     }
@@ -301,6 +332,27 @@ export class Display {
         element.classList.toggle("hide", toThis);
     }
 
+    addXP(result){
+        let alreadyPassed = this.reward == 0;
+        console.log("add xp?");
+        console.log(alreadyPassed, result);
+        if(!alreadyPassed) { 
+            switch (result) {
+                case true:
+                    window.addXP(this.xpReward);
+                    this.xpReward = -.001;
+                    break;
+                case false:
+                    window.addXP(this.xpPunishment);
+                    this.xpPunishment = -.01;
+                    break;
+                default:
+                    window.addXP(-.01);
+            };
+        }
+        
+    }
+
     async evaluateUserCode(output){
         let decision = (success) => {
             console.log(success, success && success !== null)
@@ -308,15 +360,16 @@ export class Display {
             this.output.classList.toggle("output-mid", (success === null));
             this.output.classList.toggle("output-correct", success && success !== null);
             this.output.classList.toggle("output-incorrect", !success && success !== null);
+            
+            if(success !== null){ this.addXP(success); }
+            
         }
         decision(null);
-        window.addXP(-.001);
 
         let value = this.textarea.value;
 
         if(!output[0]){
             decision(false);
-            window.addXP(-.01);
             return false;
         }
 
@@ -326,13 +379,13 @@ export class Display {
             if(passed) {decision(true);}
             this.playerCorrect(passed);
         });
+
     }
     
     playerCorrect(passed){
         if(passed){
             rewardPlayer(this);
             this.nextButton.classList.add("glow");
-            window.addXP(.2);
         }
         else{
             //console.log("user code was " + output + " || But the code should've been " + this.projectJSON["output-includes"]);

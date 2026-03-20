@@ -53,61 +53,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas class="js-screen" id="learn-screen">
-        <!--shows coins-->
-    </canvas>
-    
-    <ttc-sidebar></ttc-sidebar>
+    <div class="row-container">
+        <canvas class="js-screen" id="learn-screen">
+            <!--shows coins-->
+        </canvas>
+        
+        <ttc-sidebar></ttc-sidebar>
 
-    <div class="main-content main-font">
-        <div id="welcome" class="welcome">
-            <div class="welcome--demo">
-                <div class="code-lines welcome--demo--input" id="welcome--demo--input">
-                    <pre class="code-highlight" name="pretty-pre"><code class="main-font language-python welcome--demo--input--text" name="pretty-code" id="code-content">print('learn code')</code></pre>
-                </div>
-
-                <style>.row-container{display: flex; flex-direction: row; justify-content: center;}</style>
-
-                <div class="row-container">
-                    <button class="run-code welcome--demo--output-button nice-button" id="welcome--demo--output-button"><img class="welcome--demo--output-img" src="./components/visuals/icons/project/run-code/pixel-1.png" alt="run code" draggable="false"></button>
-                    <div class="code-lines welcome--demo--output">
-                        <div class="welcome--demo--output--text" id="welcome--demo--output--text"></div>
+        <div class="main-content main-font">
+            <div id="welcome" class="welcome">
+                <div class="welcome--demo">
+                    <div class="code-lines welcome--demo--input" id="welcome--demo--input">
+                        <pre class="code-highlight" name="pretty-pre"><code class="main-font language-python welcome--demo--input--text" name="pretty-code" id="code-content">print('learn code')</code></pre>
                     </div>
+
+                    <style>.row-container{display: flex; flex-direction: row; justify-content: center;}</style>
+
+                    <div class="row-container">
+                        <button class="run-code welcome--demo--output-button nice-button" id="welcome--demo--output-button"><img class="welcome--demo--output-img" src="./components/visuals/icons/project/run-code/pixel-1.png" alt="run code" draggable="false"></button>
+                        <div class="code-lines welcome--demo--output">
+                            <div class="welcome--demo--output--text" id="welcome--demo--output--text"></div>
+                        </div>
+                    </div>
+
+                    <div class="row-container">
+                        <img class="welcome--demo--arrow welcome-img" src="./components/visuals/icons/arrow/pixel-1.png" alt="-->" draggable="false">
+                        <script>let arrowEl = document.querySelector(".welcome--demo--arrow"); arrowEl.src = `./components/visuals/icons/arrow/${window.theme}.png`;</script>
+                        <a href="learn" title="Learn" class="welcome--demo--learn">
+                            <style>.pad-top-30{padding-top: 30px;}</style>
+                            <button class="welcome--demo--learn-button pad-top-30" draggable="false"><img class="nice-button welcome-img" src="./components/visuals/icons/sidebar/learn/pixel-1.png" alt="learn"></button>
+                        </a>
+                    </div>
+                    
                 </div>
 
-                <div class="row-container">
-                    <img class="welcome--demo--arrow welcome-img" src="./components/visuals/icons/arrow/pixel-1.png" alt="-->" draggable="false">
-                    <script>let arrowEl = document.querySelector(".welcome--demo--arrow"); arrowEl.src = `./components/visuals/icons/arrow/${window.theme}.png`;</script>
-                    <a href="learn" title="Learn" class="welcome--demo--learn">
-                        <style>.pad-top-30{padding-top: 30px;}</style>
-                        <button class="welcome--demo--learn-button pad-top-30" draggable="false"><img class="nice-button welcome-img" src="./components/visuals/icons/sidebar/learn/pixel-1.png" alt="learn"></button>
-                    </a>
-                </div>
-                
             </div>
 
-        </div>
+            <div class="row-container" style="justify-content: space-around;">
+                <p class="welcome--p">(by the way, it's free)</p>
+                <button class="nice-button no-bg-button arial-1" id="hate-pixel-art-button">I hate pixel art</button>
+                <button class="nice-button no-bg-button hide pixel-1" id="like-pixel-art-button">I like pixel art</button>
+            </div>
 
-        <div class="row-container" style="justify-content: space-around;">
-            <p class="welcome--p">(by the way, it's free)</p>
-            <button class="nice-button no-bg-button" id="hate-pixel-art-button">I hate pixel art</button>
-            <button class="nice-button no-bg-button hide" id="like-pixel-art-button">I like pixel art</button>
-        </div>
+            <!--div class="welcome--sign-in">
+                <a href="#signin" title="Learn">
+                    <button class="welcome--demo--learn" id="toggle-signinup"><img class="nice-button" src="./components/art/profile - 4.png" alt=""></button>
+                </a>
+                <div id="sign-in-holder"></div>
+            </div-->
 
-        <!--div class="welcome--sign-in">
-            <a href="#signin" title="Learn">
-                <button class="welcome--demo--learn" id="toggle-signinup"><img class="nice-button" src="./components/art/profile - 4.png" alt=""></button>
-            </a>
-            <div id="sign-in-holder"></div>
-        </div-->
-
-        <div class="footer-parent">
-            <ttc-footer copywrite="tryingtocode" mail-to="contact@tryingtocode.com" legal-src="./legal.html" privacy-src="/privacy-policy.html"></ttc-footer>
-        </div>
+            <div class="footer-parent">
+                <ttc-footer copywrite="tryingtocode" mail-to="contact@tryingtocode.com" legal-src="./legal.html" privacy-src="/privacy-policy.html"></ttc-footer>
+            </div>
+        </div> 
+    
     </div> 
-    
-    
-    
-    
 </body>
 </html>

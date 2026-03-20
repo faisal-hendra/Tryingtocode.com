@@ -18,38 +18,38 @@ class TTCSidebar extends HTMLElement {
         this.theme = window.theme ?? "pixel-1";
         this.iconPath = "components/visuals/icons/sidebar";
         this.innerHTML = `
-<div>  
     <div data-js-tag="toggle-this-part-of-sidebar" class="sidebar">
-        <a href="index" title="Home"  class="logo" id="home-icon" draggable="false">
-            <img src="components/visuals/logos/coin/${this.theme}.png" alt="Coin logo" class="nice-button">
-        </a>
-        <button data-js-tag='dropdown-button' class="toggle-dropdown" draggable="false">
-            <img class="toggle-dropdown--img nice-button" src="${this.iconPath}/toggle-arrow/${this.theme}/frame-2.png" alt="" id="toggle-button">
-        </button>
-        <div class="dropdown">
-            <ul class="dropdown--list">
-                <li class="dropdown--element"><a href="index" title="Home">
-                    <img class="dropdown--image nice-button" src="${this.iconPath}/home/${this.theme}.png" alt="Home" draggable="false">
-                </a></li>
-                <li class="dropdown--element"><a href="learn" title="Learn">
-                    <img class="dropdown--image nice-button dark-glow" src="${this.iconPath}/learn/${this.theme}.png" alt="Learn" draggable="false">
-                </a></li>
-                <li class="dropdown--element"><a href="create.html" title="Create">
-                    <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/create/${this.theme}.png" alt="Create" draggable="false">
-                </a></li>
-                <li class="dropdown--element"><a href="signin.html" title="Create">
-                    <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/sign-in/${this.theme}.png" alt="Create" draggable="false">
-                </a></li>
-            </ul>
+        <div class="sidebar-element">
+            <a href="index" title="Home" class="logo side" id="home-icon" draggable="false">
+                <img src="components/visuals/logos/coin/${this.theme}.png" alt="Coin logo" class="nice-button">
+            </a>
+            <button data-js-tag='dropdown-button' class="toggle-dropdown" draggable="false">
+                <img class="toggle-dropdown--img nice-button" src="${this.iconPath}/toggle-arrow/${this.theme}/frame-2.png" alt="" id="toggle-button">
+            </button>
+            <div class="dropdown">
+                <ul class="dropdown--list">
+                    <li class="dropdown--element"><a href="index" title="Home">
+                        <img class="dropdown--image nice-button" src="${this.iconPath}/home/${this.theme}.png" alt="Home" draggable="false">
+                    </a></li>
+                    <li class="dropdown--element"><a href="learn" title="Learn">
+                        <img class="dropdown--image nice-button dark-glow" src="${this.iconPath}/learn/${this.theme}.png" alt="Learn" draggable="false">
+                    </a></li>
+                    <li class="dropdown--element"><a href="create.html" title="Create">
+                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/create/${this.theme}.png" alt="Create" draggable="false">
+                    </a></li>
+                    <li class="dropdown--element"><a href="signin.html" title="Create">
+                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/sign-in/${this.theme}.png" alt="Create" draggable="false">
+                    </a></li>
+                </ul>
+            </div>
+            <h2 class="main-font" data-js-tag='sidebar-coin-counter'>404</h2>
+            <div class="toggle-sidebar bottom-sidebar" data-js-tag="toggle-sidebar">
+                <button class="nice-button no-bg-button" data-js-tag="togle-sidebar-button">
+                    <img src="${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1.png" draggable="false"></img>
+                </button>
+            </div>
         </div>
-        <h2 class="main-font" data-js-tag='sidebar-coin-counter'>404</h2>
     </div>
-    <div class="toggle-sidebar" data-js-tag="toggle-sidebar">
-        <button class="nice-button no-bg-button" data-js-tag="togle-sidebar-button">
-            <img src="${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1.png" draggable="false"></img>
-        </button>
-    </div>
-</div>
     `;
         this.findElements();
         this.setupFunctionality();

@@ -107,18 +107,28 @@ body {
     align-items: center;
     flex-wrap: wrap;
 	width: var(--sidebar-width);
-	position: relative;
-	top: 0;
+	/*position: relative;*/
+    top: 0 !important;
 	left: 0;
 	background-color: var(--palette-serika-1);
     padding-top: 20px;
+    margin-right: 10px;
 	z-index: var(--z-overlay);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
 }
 
 @media (orientation: landscape) {
     .sidebar {
-	    height: 100vh;
+        min-height: 100vh;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .sidebar-element{
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        align-items: center;
+        top: 0;
     }
 }
 
@@ -126,16 +136,25 @@ body {
     .sidebar{
         height: 10vh;
         width: 100vw;
+        flex-direction: row;
+    }
+    .sidebar-element{
+        display: flex;
+        flex-direction: row;
+        position: sticky;
+        align-items: center;
+        top: 0;
     }
 }
 
 .main-content {
     margin-bottom: 0px;
+    width: 100%;
 }
 
 @media (orientation: landscape) {
     .main-content {
-        margin-left: var(--sidebar-width);
+        /*margin-left: var(--sidebar-width);*/
         padding: 0px;
         z-index: var(--z-base);
     }
@@ -184,7 +203,6 @@ body {
         padding-left: 20px;
     }   
 
-    /*remove margin when sidebar gone*/
     .main-content {
         left: 0;
         position: absolute;
@@ -192,7 +210,6 @@ body {
         padding-inline: 0;
         width: 100%;
         gap: 0;
-        margin-top: 8rem; /* Same as the height of the sidebar */
     }
 }
 
@@ -438,9 +455,12 @@ p.pixel-1  {font-size: 1.5rem;}
 }
 
 ttc-sidebar{
+    bottom: 0;
     display: flex;
-    position: fixed;
+    position: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 100vh;
 }
 
 .big-image{
@@ -455,6 +475,40 @@ ttc-sidebar{
 .pixel-img{
     image-rendering: pixelated;
 }
+
+@media (orientation: landscape) {
+    .row-container {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media (orientation: portrait) {
+    .row-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.toggle-sidebar{
+    max-width: 100px;
+}
+
+
+@media (orientation: landscape) {
+    .bottom-sidebar{
+        margin-top: 60vh;
+        bottom: 0;
+    }
+}
+
+@media (orientation: portrait) {
+    .bottom-sidebar{
+        margin-left: 60vw;
+        bottom: 0;
+    }
+}
+
 
 /*------------------------------------*\
     #DROPDOWN

@@ -13,7 +13,7 @@ let changeLocalSetting = (setting, value) => {
     localStorage.setItem("user_settings", updatedSettings);
 }
 
-changeLocalSetting("theme", "pixel-1");
+changeLocalSetting("theme", "pixel-1"); //should be pixel-1 temporarily
 
 //the way to read this name is: update the theme from local storage
 let updateThemeFromLocal = () => {

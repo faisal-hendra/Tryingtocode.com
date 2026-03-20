@@ -25,7 +25,7 @@ class TTCFooter extends HTMLElement {
                         <li class="footer--list-element"><a href="${privacyPolicy}" class="footer--link">Privacy Policy</a></li>
                     </div>
                     <div class="column">
-                        <p>catagories</p>
+                        <p>pages</p>
                         <li class="footer--list-element"><a href="learn" class="footer--link">learn</a></li>
                         <li class="footer--list-element"><a href="/" class="footer--link">home</a></li>
                         <!--a href="create" class="footer--link">create</a-->
