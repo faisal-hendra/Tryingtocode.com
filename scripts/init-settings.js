@@ -1,14 +1,27 @@
 //this script is a very simple script to be run before anything else
 //it grabs local settings, and puts them in window for use by other scripts
 
+let initSettingsObject = () => {
+    let startObject = {};
+    let startSettings = JSON.stringify(startObject);
+    localStorage.setItem("user_settings", startSettings);
+}
+
 let getSettingsObject = () => {
     let settings = localStorage.getItem("user_settings");
+
+    if(settings === null) { //in case user just got here
+        initSettingsObject(); 
+        settings = localStorage.getItem("user_settings");
+    }
+
     let settingsObject = JSON.parse(settings);
     return settingsObject;
 }
 
 let getLocalSetting = (settingsName) => {
     let settingsObject = getSettingsObject();
+    if (!(settingsName in settingsObject)) { return null; }
     let getSetting = settingsObject[settingsName];
     return getSetting;
 }

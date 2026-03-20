@@ -1,3 +1,5 @@
+import { exp } from "firebase/firestore/pipelines";
+
 console.log("readddy for settings rider sir");
 
 const localStorageSettingsString = "user_settings";
@@ -32,6 +34,10 @@ export let changeSetting = (setting, value) => {
             playerSettings[setting] = value;
         }
     })
+}
+
+export let themeChange = (toTheme) => {
+    editSetting({ theme: toTheme });
 }
 
 export let fontChange = (toFont) => {
@@ -77,7 +83,7 @@ export let editSetting = (newSettings = { /* supported settings: font, theme, xp
     let settingsObjectString = JSON.stringify(settingsObject);
     localStorage.setItem(localStorageSettingsString, settingsObjectString);
 
-    applySettings();
+    //applySettings();
 }
 
 export let incrementSetting = (incrementSetting, byAmmount=1) => {
@@ -192,6 +198,8 @@ if(hatePixelartButton != null) {
         let isPixelart = detectPixelart();
         let newFont = isPixelart ? "arial1" : "pixel1" ;
         fontChange(newFont);
+        let newTheme = isPixelart ? "vector-1" : "pixel-1";
+        themeChange(newTheme)
     }
     hatePixelartButton.addEventListener("click", () => {
         togglePixelart();
