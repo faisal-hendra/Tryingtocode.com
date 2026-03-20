@@ -53,7 +53,6 @@ class TTCSidebar extends HTMLElement {
     `;
         this.findElements();
         this.setupFunctionality();
-        this.initCoinNumber();
         if(typeof window.applySettings !== "undefined"){ window.applySettings(); }
     }
 
@@ -83,6 +82,8 @@ class TTCSidebar extends HTMLElement {
         this.toggleSidebarImageButton = new ImageButton(this.toggleSidebarButton, this.toggleSidebarArt, 1);
         this.toggleSidebarImageButton.changeOnClick();
         //this.toggleSidebar.show();
+        this.initCoinNumber();
+        this.initHiddenSidebar();
     }
 
     initCoinNumber(){
@@ -102,6 +103,12 @@ class TTCSidebar extends HTMLElement {
         }
         this.coinCounter.innerHTML = localCoin;
         console.log("changing number: ", localCoin, this.coinCounter, this.coinCounter.value);
+    }
+
+    initHiddenSidebar(){
+        this.hiddenSidebarHTML = `
+            <div></div>
+        `;
     }
 
     updateDisplayNumber(updatedNumber, startString) {
