@@ -16,36 +16,37 @@ class TTCSidebar extends HTMLElement {
         this.startClosed = this.getAttribute("start-closed") ?? false;
 
         this.theme = window.theme ?? "pixel-1";
+        this.imageExtension = window.imageExtension ?? ".png"; 
         this.iconPath = "components/visuals/icons/sidebar";
         this.innerHTML = `
     <div data-js-tag="toggle-this-part-of-sidebar" class="sidebar">
         <div class="sidebar-element">
             <a href="index" title="Home" class="logo side" id="home-icon" draggable="false">
-                <img src="components/visuals/logos/coin/${this.theme}.png" alt="Coin logo" class="nice-button">
+                <img src="components/visuals/logos/coin/${this.theme}${this.imageExtension}" alt="Coin logo" class="nice-button">
             </a>
             <button data-js-tag='dropdown-button' class="toggle-dropdown" draggable="false">
-                <img class="toggle-dropdown--img nice-button" src="${this.iconPath}/toggle-arrow/${this.theme}/frame-2.png" alt="" id="toggle-button">
+                <img class="toggle-dropdown--img nice-button" src="${this.iconPath}/toggle-arrow/${this.theme}/frame-2${this.imageExtension}" alt="" id="toggle-button">
             </button>
             <div class="dropdown">
                 <ul class="dropdown--list">
                     <li class="dropdown--element"><a href="index" title="Home">
-                        <img class="dropdown--image nice-button" src="${this.iconPath}/home/${this.theme}.png" alt="Home" draggable="false">
+                        <img class="dropdown--image nice-button" src="${this.iconPath}/home/${this.theme}${this.imageExtension}" alt="Home" draggable="false">
                     </a></li>
                     <li class="dropdown--element"><a href="learn" title="Learn">
-                        <img class="dropdown--image nice-button dark-glow" src="${this.iconPath}/learn/${this.theme}.png" alt="Learn" draggable="false">
+                        <img class="dropdown--image nice-button dark-glow" src="${this.iconPath}/learn/${this.theme}${this.imageExtension}" alt="Learn" draggable="false">
                     </a></li>
                     <li class="dropdown--element"><a href="create.html" title="Create">
-                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/create/${this.theme}.png" alt="Create" draggable="false">
+                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/create/${this.theme}${this.imageExtension}" alt="Create" draggable="false">
                     </a></li>
                     <li class="dropdown--element"><a href="signin.html" title="Create">
-                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/sign-in/${this.theme}.png" alt="Create" draggable="false">
+                        <img class="dropdown--image nice-button dark-glow rotate-45" src="${this.iconPath}/sign-in/${this.theme}${this.imageExtension}" alt="Create" draggable="false">
                     </a></li>
                 </ul>
             </div>
             <h2 class="main-font" data-js-tag='sidebar-coin-counter'>404</h2>
             <div class="toggle-sidebar bottom-sidebar" data-js-tag="toggle-sidebar">
                 <button class="nice-button no-bg-button" data-js-tag="togle-sidebar-button">
-                    <img src="${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1.png" draggable="false"></img>
+                    <img src="${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1${this.imageExtension}" draggable="false"></img>
                 </button>
             </div>
         </div>
@@ -67,8 +68,8 @@ class TTCSidebar extends HTMLElement {
         this.toggleSidebarContainer = this.querySelector("[data-js-tag='toggle-sidebar']");
         this.toggleSidebarButton = this.toggleSidebarContainer.querySelector("[data-js-tag='togle-sidebar-button']");
         this.toggleSidebarArt = [
-            `${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1.png`,
-            `${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-2.png` 
+            `${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-1${this.imageExtension}`,
+            `${this.iconPath}/toggle-sidebar-arrow/${this.theme}/frame-2${this.imageExtension}` 
         ]
     }
 
