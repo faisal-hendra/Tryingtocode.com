@@ -15,7 +15,7 @@ console.log("");
 
 let canvas = document.getElementById('learn-screen');
 
-const coinImgSrc = '../components/art/ttc coin icon.png';
+const coinImgSrc = `../components/visuals/sprites/coin/${window.theme}${window.imageExtension}`;
 let objects = [];
 
 let localCoinCount = parseInt(localStorage.getItem("coin")) || 0;
